@@ -1,5 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import colors from "../../colors";
 
 const StyledGobalStyle = createGlobalStyle`
 *, 
@@ -13,13 +14,15 @@ const StyledGobalStyle = createGlobalStyle`
 body{
     overflow-x: hidden;
     font-family: 'Questrial', sans-serif;
-    color: #000000;
+    color: ${colors.secondary};
 }
 
 html{
     scroll-behavior: smooth;  
     -webkit-overflow-scrolling: touch;
 }
+
+
 `
 
 function GlobalStyle() {
