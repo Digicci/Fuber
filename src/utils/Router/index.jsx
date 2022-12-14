@@ -1,6 +1,8 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider, Routes } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Routes from "./Routes";
 import Error from "../../components/Error";
+import Home from "../../pages/Home";
 
 function Router() {
     
@@ -10,7 +12,10 @@ function Router() {
             element: <Routes />,
             errorElement: <Error />,
             children: [
-
+                {
+                    path: "/",
+                    element: <Home/>
+                }
             ]
         }
     ])
