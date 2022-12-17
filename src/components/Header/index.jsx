@@ -79,10 +79,10 @@ function Header({toggle}) {
                         Devenir partenaire
                     </StyledLink>
                     <StyledNavGroup>
-                        <StyledLink $disappearance>
+                        <StyledLink to="/signup" $disappearance>
                             Inscription
                         </StyledLink>
-                        <StyledLink $isFullLink $disappearance>
+                        <StyledLink to="/login" $isFullLink $disappearance>
                             Connexion
                         </StyledLink>
                         <StyledLink $phone onClick={toggle} >

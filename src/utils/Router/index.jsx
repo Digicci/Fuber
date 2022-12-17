@@ -4,6 +4,8 @@ import Routes from "./Routes";
 import Error from "../../components/Error";
 import PrivateRoute from "./privateRoute";
 import Home from "../../pages/Home";
+import Signup from "../../pages/Signup";
+import Login from "../../pages/Login";
 
 function Router() {
     
@@ -23,7 +25,11 @@ function Router() {
                 },
                 {
                     path: "/login",
-                    element: <Home/>
+                    element: <Login/>
+                },
+                {
+                    path: "/signup",
+                    element: <Signup/>
                 }
             ]
         }
