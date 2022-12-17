@@ -92,4 +92,105 @@ export const StyledLink = styled(Link)`
         }
         `
     }
+    ${(props) => 
+        props.$loginSignup &&
+        `color : ${colors.secondary};
+        font-size: .85rem;
+        font-weight: 600;
+        &:hover{
+            text-decoration: underline;
+        }
+        `
+    }
+`
+
+ export const StyledContainerLogin = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 40px -12px 48px;
+    ${(props) => 
+        props.$entete &&
+        `
+        align-items: center;
+        h2{
+            font-size:1.8rem;
+            font-weight: 600;
+            margin-bottom: .5rem;
+        }
+        p{
+            font-size: .9rem;
+            font-weight: 200;
+        }`
+    }
+    
+`
+export const StyledForm = styled.form`
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+`
+export const StyledContainerInput = styled.div`
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    ${(props) => 
+        props.$icon &&
+        `width: 10%;
+        
+        i{
+            cursor:pointer;
+        }
+        `
+    }
+`
+export const StyledInput = styled.input`
+    width: 60%;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    border: 1px solid #e0dfdd;
+    border-radius: 5px;
+    padding: .4rem .6rem;
+    margin: .5rem;
+    @media (max-width: 992px){
+        width: 100%;
+    }
+    ${(props) => 
+        props.$submit &&
+        `background: #eeeeee;
+        color: ${colors.secondary};
+        justify-content:center;
+        text-align: center;
+        border:1px solid #e0dfdd;
+        border-raduis: 5px;
+        &:hover{
+            background: #e2e2e2 !important;
+        }
+        `
+    }
+    ${(props) => 
+        props.$connecter &&
+        `background: ${colors.secondary};
+        color: ${colors.primary};`
+    }
+`
+export const StyledObliger = styled.p`
+    font-size: .8rem;
+    color: rgb(246, 10, 10);
+    margin: 0 5rem;
+    diplay: flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+`
+
+export const StyledAccountSign = styled.div`
+    text-align: center;
+    margin 2rem 0 1rem;
 `

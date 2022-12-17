@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../../colors";
 // import logo from '../../assets/logo.webp';
-import { StyledLink } from "../../utils/Atoms";
+// import { StyledLink } from "../../utils/Atoms";
 
 
 const StyledNavResponsive = styled.div`
