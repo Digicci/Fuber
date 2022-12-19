@@ -62,7 +62,7 @@ function Signup() {
         e.preventDefault()
         const data = validateForm()
         if(data){
-            axios.post('http://localhost:8000/api/user/signup').then((reponse) =>{
+            axios.post('http://localhost:8000/api/user/signup', data).then((reponse) =>{
                 if(reponse.data){
                     setUser({
                         nom:'',
