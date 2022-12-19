@@ -3,6 +3,8 @@ import styled from "styled-components";
 // import colors from "../../colors";
 import { StyledContainerLogin, StyledForm, StyledContainerInput, StyledInput, StyledObliger, StyledAccountSign, StyledLink } from "../../utils/Atoms";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const StyledError = styled.span`
     color: red;
@@ -21,6 +23,7 @@ function Signup() {
         mdp:'',
         confirmMdp:'',
     })
+
 
     function handleChange(e,field){
         const state = {...user}
@@ -62,7 +65,8 @@ function Signup() {
         e.preventDefault()
         const data = validateForm()
         if(data){
-            axios.post('http://localhost:8000/api/user/signup').then((reponse) =>{
+            toast.promise(
+                axios.post('http://localhost:8000/api/user/signup', data).then((reponse) =>{
                 if(reponse.data){
                     setUser({
                         nom:'',
@@ -73,7 +77,16 @@ function Signup() {
                         confirmMdp:'',
                     })
                 }
-            })
+            }),{
+                pending: 'envoie en cour',
+                success: 'compte crée',
+                error: {
+                    render({data}){
+                        return data.message
+                    }
+                }
+            }
+            )
         }
     }
 
@@ -141,6 +154,7 @@ function Signup() {
                     </StyledLink>
                 </StyledAccountSign>
             </StyledContainerLogin>
+            <ToastContainer/>
         </>
     )
 }
