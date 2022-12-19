@@ -67,6 +67,7 @@ function Signup() {
         if(data){
             toast.promise(
                 axios.post('http://localhost:8000/api/user/signup', data).then((reponse) =>{
+
                 if(reponse.data){
                     setUser({
                         nom:'',
