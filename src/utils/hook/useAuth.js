@@ -1,9 +1,9 @@
 import React,{ useContext, createContext, useState } from 'react';
-import axios from "axios";
+import { useAxios } from "./useAxios";
 
 
 const authContext = createContext();
-const apiPath = "http://localhost:8000/api/user";
+const basePath = "user";
 
 
 
@@ -20,6 +20,7 @@ export const useAuth = () => {
 
 function useProvideAuth() {
     const [user, setUser] = useState(null);
+    const axios = useAxios();
 
     const signin = (credential, mdp) => {
         let data
@@ -34,7 +35,7 @@ function useProvideAuth() {
                 mdp
             }
         }
-        return axios.post(`${apiPath}/login`, data)
+        return axios.post(`${basePath}/login`, data)
     };
 
     const isConnected = () => {
