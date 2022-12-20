@@ -205,7 +205,7 @@ export const StyledObliger = styled.p`
     font-size: .8rem;
     color: rgb(246, 10, 10);
     margin: 0 5rem;
-    diplay: flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align:center;
@@ -213,5 +213,5 @@ export const StyledObliger = styled.p`
 
 export const StyledAccountSign = styled.div`
     text-align: center;
-    margin 2rem 0 1rem;
+    margin: 2rem 0 1rem;
 `
