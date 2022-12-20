@@ -1,7 +1,16 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 // import colors from "../../colors";
-import { StyledContainerLogin, StyledForm, StyledContainerInput, StyledInput, StyledObliger, StyledAccountSign, StyledLink } from "../../utils/Atoms";
+import { useNavigate } from "react-router-dom";
+import {
+    StyledContainerLogin,
+    StyledForm,
+    StyledContainerInput,
+    StyledInput,
+    StyledObliger,
+    StyledAccountSign,
+    StyledLink
+} from "../../utils/Atoms";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -13,7 +22,11 @@ const StyledError = styled.span`
 
 function Signup() {
 
-    const [error, setError] = useState('') 
+    const [error, setError] = useState('')
+
+    const navigate = useNavigate()
+
+    const toastTimer = 5000
 
     const [user, setUser] = useState({
         nom: '',
@@ -62,12 +75,11 @@ function Signup() {
     }
 
     function onSubmit(e){
+        const toastId = toast.loading('Envoi en cours', { autoClose: false })
         e.preventDefault()
         const data = validateForm()
         if(data){
-            toast.promise(
-                axios.post('http://localhost:8000/api/user/signup', data).then((reponse) =>{
-
+            axios.post('http://localhost:8000/api/user/signup', data).then((reponse) =>{
                 if(reponse.data){
                     setUser({
                         nom:'',
@@ -77,17 +89,36 @@ function Signup() {
                         mdp:'',
                         confirmMdp:'',
                     })
+                    setError('')
+                    toast.update(toastId, {
+                        render: 'Inscription réussi',
+                        type: toast.TYPE.SUCCESS,
+                        autoClose: toastTimer,
+                        isLoading: false,
+                        icon: '👌'
+                    })
+                    setTimeout(() => {
+                        navigate('/login', { replace: true })
+                    }, toastTimer);
                 }
-            }),{
-                pending: 'envoie en cour',
-                success: 'compte crée',
-                error: {
-                    render({data}){
-                        return data.message
-                    }
-                }
-            }
-            )
+            }).catch((error) => {
+                toast.update(toastId, {
+                    render: error.response.data,
+                    type: "error",
+                    autoClose: 5000,
+                    isLoading: false,
+                    icon: '🤔',
+                    className: 'rotateY animated'
+                })
+                setUser({
+                    nom:'',
+                    prenom:'',
+                    tel:'',
+                    email:'',
+                    mdp:'',
+                    confirmMdp:'',
+                })
+            })
         }
     }
 

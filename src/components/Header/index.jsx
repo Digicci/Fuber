@@ -3,9 +3,7 @@ import styled from "styled-components";
 import colors from "../../colors";
 import { StyledLink } from "../../utils/Atoms";
 import Logo from '../../assets/logo.webp';
-
-
-
+import { useAuth } from "../../utils/hook/useAuth";
 
 
 const HeaderWrapper = styled.header`
@@ -62,6 +60,7 @@ const StyledNavGroup = styled.div`
 `
 function Header({toggle}) {
     
+    const {user, signout, isConnected} = useAuth()
 
     return(
         <>
@@ -79,14 +78,27 @@ function Header({toggle}) {
                         Devenir partenaire
                     </StyledLink>
                     <StyledNavGroup>
-                        <StyledLink to="/signup" $disappearance>
-                            Inscription
-                        </StyledLink>
-                        <StyledLink to="/login" $isFullLink $disappearance>
-                            Connexion
-                        </StyledLink>
+                        {isConnected() ? (
+                            <>
+                                <StyledLink to="/user" $disappearance>
+                                    {user?.nom}, {user?.prenom}
+                                </StyledLink>
+                                <StyledLink to="/login" $isFullLink $disappearance onClick={signout}>
+                                    Déconnexion
+                                </StyledLink>
+                            </>
+                        ) : (
+                            <>
+                                <StyledLink to="/signup" $disappearance>
+                                Inscription
+                                </StyledLink>
+                                <StyledLink to="/login" $isFullLink $disappearance>
+                                Connexion
+                                </StyledLink>
+                            </>
+                        )}
                         <StyledLink $phone onClick={toggle} >
-                            <i class="ph-user"></i>
+                            <i className="ph-user"></i>
                         </StyledLink>
                     </StyledNavGroup>
                 </StyledNav>
