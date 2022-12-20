@@ -5,13 +5,16 @@ import { StyledLink } from "../../utils/Atoms";
 import Logo from '../../assets/logofooter.webp'
 
 const FooterWrapper = styled.footer`
+    position: sticky;
+    top: 100vh;
+    bottom: 0;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
     align-items:flex-end;
     background: ${colors.secondary};
     padding: 2rem 3rem ;
-    margin: 3rem 0 !important ;
+    margin: 3rem 0 0 0 !important ;
     @media (max-width: 992px){
         flex-direction: column;
         align-items: center;

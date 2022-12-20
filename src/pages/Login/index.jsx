@@ -42,10 +42,11 @@ function Login(){
             })
         } else {
             const toastId = toast.loading('Connexion en cours...', { autoClose: false, position: 'top-right' })
-           auth.signin(user.credential, user.mdp).then(res => {
+            auth.signin(user.credential, user.mdp).then(res => {
                 if (res.data) {
+                    console.log(res.data)
                     toast.update(toastId, {
-                        render: 'Connexion réussie',
+                        render: `Connexion réussie, vous allez être redirigé.`,
                         type: 'success',
                         autoClose: 5000,
                         isLoading: false,

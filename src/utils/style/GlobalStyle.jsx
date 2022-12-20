@@ -17,6 +17,11 @@ body{
     color: ${colors.secondary};
 }
 
+#root{
+    width: 100%;
+    height: 100vh;
+}
+
 html{
     scroll-behavior: smooth;  
     -webkit-overflow-scrolling: touch;
