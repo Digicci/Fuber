@@ -102,6 +102,27 @@ export const StyledLink = styled(Link)`
         }
         `
     }
+    ${(props) => 
+        props.$isShadowLink && 
+        `background : ${colors.fourth};
+        padding: .5rem 1.3rem;
+        border-radius: 10px;
+        `
+    }
+    ${(props) =>
+        props.$xxl && 
+        `font-size : 1.2rem;
+        text-align:center;
+        padding: 1rem 0;
+        `
+    }
+    ${(props) => 
+        props.$navVertical &&
+        `font-size: 1rem;
+        padding: 1rem 0;
+        margin-bottom: .5rem; 
+        `
+    }
 `
 
  export const StyledContainerLogin = styled.div`
