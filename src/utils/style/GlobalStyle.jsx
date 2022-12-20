@@ -22,6 +22,23 @@ html{
     -webkit-overflow-scrolling: touch;
 }
 
+.rotateY{
+    transform: rotateY(360deg);
+    transition: transform 1s;
+}
+
+.animated{
+    animation: animated 1s;
+}
+
+@keyframes animated{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+}
 
 `
 
