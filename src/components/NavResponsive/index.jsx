@@ -4,6 +4,7 @@ import colors from "../../colors";
 import logo from '../../assets/logo.webp';
 import { StyledLink } from "../../utils/Atoms";
 import { useAuth } from "../../utils/hook/useAuth";
+import avatar from '../../assets/profile.webp';
 
 
 const StyledNavResponsive = styled.div`
@@ -51,6 +52,7 @@ const StyledContainer = styled.div`
 const StyledConnectionWrap = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: center;
     gap: 10px;
     border-bottom: solid ${colors.secondary} 1px;
     padding-bottom: 2rem;
@@ -69,6 +71,31 @@ const ImgNav = styled.img`
     width: 150px;
 `
 
+const AvatarWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+`
+
+const AvatarIconWrapper = styled.div`
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 2px 4px 2px ${colors.shade};
+`
+
+const Avatar = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+`
+
 function NavResponsive({isOpen, toggle}){
     
     const {user, signout, isConnected} = useAuth()
@@ -83,9 +110,15 @@ function NavResponsive({isOpen, toggle}){
                     {isConnected() ? (
                             <>
                                 <StyledConnectionWrap>
-                                    <StyledLink to="/user" $disappearance>
-                                        {user?.nom}, {user?.prenom}
-                                    </StyledLink>
+                                    <AvatarWrapper>
+                                        <AvatarIconWrapper>
+                                            <Avatar src={avatar} alt="avatar" />
+                                        </AvatarIconWrapper>
+                                        <StyledLink to="/user" $xxl $disappearance>
+                                            {user?.nom}, {user?.prenom}
+                                        </StyledLink>
+                                    </AvatarWrapper>
+
                                     <StyledLink to="/login" $isFullLink $disappearance $xxl onClick={signout}>
                                         Déconnexion
                                     </StyledLink>
