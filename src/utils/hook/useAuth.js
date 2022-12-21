@@ -38,6 +38,10 @@ function useProvideAuth() {
         return axios.post(`${basePath}/login`, data)
     };
 
+    const signup = (data) => {
+        return axios.post(`${basePath}/signup`, data)
+    }
+
     const isConnected = () => {
         return user !== null;
     }
@@ -52,6 +56,7 @@ function useProvideAuth() {
         user,
         setUser,
         signin,
+        signup,
         signout,
         isConnected
     };

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 // import colors from "../../colors";
 import { useNavigate } from "react-router-dom";
@@ -12,6 +12,8 @@ import {
     StyledLink
 } from "../../utils/Atoms";
 import axios from "axios";
+import { useAxios } from "../../utils/hook/useAxios";
+import { useAuth } from "../../utils/hook/useAuth";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -26,7 +28,7 @@ function Signup() {
 
     const navigate = useNavigate()
 
-    const toastTimer = 5000
+    const toastTimer = 2000
 
     const [user, setUser] = useState({
         nom: '',
@@ -36,6 +38,15 @@ function Signup() {
         mdp:'',
         confirmMdp:'',
     })
+    const auth = useAuth()
+
+    const axios = useAxios()
+
+    useEffect(() => {
+        axios.get('security/csrf/form').then((res) => {
+            console.log(res.data)
+        })
+    }, [])
 
 
     function handleChange(e,field){
@@ -79,7 +90,7 @@ function Signup() {
         e.preventDefault()
         const data = validateForm()
         if(data){
-            axios.post('http://localhost:8000/api/user/signup', data).then((reponse) =>{
+            auth.signup(data).then((reponse) =>{
                 if(reponse.data){
                     setUser({
                         nom:'',
