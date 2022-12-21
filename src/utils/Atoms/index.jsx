@@ -39,7 +39,6 @@ export const StyledLink = styled(Link)`
         `background: ${colors.secondary};
         color: ${colors.primary};
         padding: .5rem 1.3rem;
-        border-radius: 10px;
         -webkit-transition: .3s;
         -moz-transition: .3s;
         transition: .3s;
@@ -47,6 +46,13 @@ export const StyledLink = styled(Link)`
             background: rgba(0,0,0,0.825);
         }
         `
+    }
+    ${(props) =>
+        props.$navLink &&
+        `border-radius: 10px;
+        @media (max-width: 768px){
+            border-radius: 0;
+        }`
     }
     ${(props) =>
         props.$phone &&
@@ -106,7 +112,6 @@ export const StyledLink = styled(Link)`
         props.$isShadowLink && 
         `background : ${colors.fourth};
         padding: .5rem 1.3rem;
-        border-radius: 10px;
         `
     }
     ${(props) =>
