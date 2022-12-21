@@ -57,6 +57,9 @@ const StyledConnectionWrap = styled.div`
     border-bottom: solid ${colors.secondary} 1px;
     padding-bottom: 2rem;
     margin-bottom: 2rem;
+    @media (max-width: 768px){
+        gap: 0;
+    }
 `
 const LogoNav = styled.div`
     width: 100%;
@@ -114,12 +117,12 @@ function NavResponsive({isOpen, toggle}){
                                         <AvatarIconWrapper>
                                             <Avatar src={avatar} alt="avatar" />
                                         </AvatarIconWrapper>
-                                        <StyledLink to="/user" $xxl $disappearance>
+                                        <StyledLink to="/user" $xxl>
                                             {user?.nom}, {user?.prenom}
                                         </StyledLink>
                                     </AvatarWrapper>
 
-                                    <StyledLink to="/login" $isFullLink $disappearance $xxl onClick={signout}>
+                                    <StyledLink to="/login" $isFullLink $navLink $xxl onClick={signout}>
                                         Déconnexion
                                     </StyledLink>
                                     <StyledLink $navVertical>
@@ -142,10 +145,10 @@ function NavResponsive({isOpen, toggle}){
                         ) : (
                             <>
                                <StyledConnectionWrap>
-                                <StyledLink to="/signup" $isShadowLink $disappearance $xxl>
+                                <StyledLink to="/signup" $isShadowLink $navLink $xxl>
                                     Inscription
                                     </StyledLink>
-                                    <StyledLink to="/login" $isFullLink $disappearance $xxl>
+                                    <StyledLink to="/login" $isFullLink $navLink $xxl>
                                     Connexion
                                 </StyledLink>
                                </StyledConnectionWrap>

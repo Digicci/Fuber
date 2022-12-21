@@ -83,7 +83,7 @@ function Header({toggle}) {
                                 <StyledLink to="/user" $disappearance>
                                     {user?.nom}, {user?.prenom}
                                 </StyledLink>
-                                <StyledLink to="/login" $isFullLink $disappearance onClick={signout}>
+                                <StyledLink to="/login" $isFullLink $navLink $disappearance onClick={signout}>
                                     Déconnexion
                                 </StyledLink>
                             </>
@@ -92,7 +92,7 @@ function Header({toggle}) {
                                 <StyledLink to="/signup" $disappearance>
                                 Inscription
                                 </StyledLink>
-                                <StyledLink to="/login" $isFullLink $disappearance>
+                                <StyledLink to="/login" $isFullLink $navLink $disappearance>
                                 Connexion
                                 </StyledLink>
                             </>
