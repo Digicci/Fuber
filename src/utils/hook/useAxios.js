@@ -1,4 +1,5 @@
 import React,{ useContext, createContext } from 'react';
+import { useCsrf } from "./useCsrf";
 import axios from "axios";
 
 const axiosContext = createContext();
@@ -15,8 +16,12 @@ export const useAxios = () => {
 
 function useProvideAxios() {
 
+    const csrf = useCsrf();
+
     const setHeader = () => {
         axios.defaults.headers.common['Authorization'] = localStorage.getItem("token") ? `Bearer ${localStorage.getItem("token")}` : null;
+        axios.defaults.headers.post['X-CSRF-TOKEN'] = csrf.token;
+        axios.defaults.withCredentials = true;
     }
 
     const get = (path, config) => {
