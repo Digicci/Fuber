@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
     StyledContainerLogin,
@@ -11,6 +11,7 @@ import {
 } from "../../utils/Atoms";
 import { ToastContainer, toast } from "react-toastify";
 import { useAuth } from "../../utils/hook/useAuth";
+import { useCsrf } from "../../utils/hook/useCsrf";
 
 function Login(){
 
@@ -21,6 +22,15 @@ function Login(){
         mdp:'',
     })
 
+    const toastTimer = 2000
+
+    const csrf = useCsrf()
+    //get csrf token
+    useEffect(() => {
+        csrf.getCsrfToken()
+    }, [])
+
+    //handle change of input
     const handleChange = (e,field) => {
         const state = {...user}
         if (field === "credential") {
@@ -31,9 +41,12 @@ function Login(){
         setUser(state)
     }
 
+    //handle submit of form
     const handleSubmit = (e) => {
         e.preventDefault()
+        //check if credential is present
         if(user.credential === '' || user.mdp === ''){
+            //if not present, display error toast
             toast('Merci de compléter tout les champs obligatoire', {
                 type: 'error',
                 autoClose: 5000,
@@ -41,32 +54,47 @@ function Login(){
                 icon: '🤔'
             })
         } else {
+            //if present, send request to server, before make a toast
             const toastId = toast.loading('Connexion en cours...', { autoClose: false, position: 'top-right' })
-            auth.signin(user.credential, user.mdp).then(res => {
+            auth.signin(user.credential, user.mdp, csrf.token).then(res => {
                 if (res.data) {
-                    console.log(res.data)
                     toast.update(toastId, {
                         render: `Connexion réussie, vous allez être redirigé.`,
                         type: 'success',
-                        autoClose: 5000,
+                        autoClose: toastTimer,
                         isLoading: false,
-                        icon: '👌'
+                        icon: '👌',
+                        className: 'rotateY animated'
                     })
                     localStorage.setItem('token', res.data.token)
                     localStorage.setItem('user', JSON.stringify(res.data.user))
                     auth.setUser(res.data.user)
                     setTimeout(() => {
                         navigate('/', { replace: true })
-                    }, 5000);
+                    }, toastTimer);
                 }
             }).catch(err => {
-                toast.update(toastId, {
-                    render: err.response.data,
-                    type: 'error',
-                    autoClose: 5000,
-                    isLoading: false,
-                    icon: '🤔'
-                })
+                if (err.response.data.includes('CSRF')) {
+                    toast.update(toastId, {
+                        render: 'Une erreur est survenue, verifiez votre connexion internet.',
+                        type: 'error',
+                        autoClose: 5000,
+                        isLoading: false,
+                        icon: '🤔',
+                        className: 'rotateY animated'
+                    })
+                } else {
+                    toast.update(toastId, {
+                        render: err.response.data,
+                        type: 'error',
+                        autoClose: 5000,
+                        isLoading: false,
+                        icon: '🤔',
+                        className: 'rotateY animated'
+                    })
+                }
+                localStorage.clear()
+                csrf.getCsrfToken()
             })
         }
     }
