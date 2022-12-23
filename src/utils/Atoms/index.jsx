@@ -128,6 +128,13 @@ export const StyledLink = styled(Link)`
         margin-bottom: .5rem; 
         `
     }
+    ${(props) =>
+        props.$linkDriver &&
+        `margin: 0 .5rem;
+        width: 250px;
+        border-radius: 5px;
+        `
+    }
 `
 
  export const StyledContainerLogin = styled.div`
