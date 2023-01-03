@@ -7,6 +7,7 @@ import secondStep from "../../assets/secondstep.webp";
 import thirdStep from "../../assets/thirdstep.webp";
 import driver from "../../assets/driver.webp"
 import { StyledLink } from "../../utils/Atoms";
+import { useTranslation } from 'react-i18next';
 
 const ContainerWrapper = styled.div`
   width: 100%;
@@ -222,20 +223,20 @@ const ContainerStep = styled.div`
 `
 
 function Home() {
-
+  const {t, i18n} = useTranslation('translation', {keyPrefix: 'home'});
   return(
     <>
       <ContainerWrapper $cover>
         <RowWrapper $direction>
           <h2>
-            Votre chauffeur taxi, à portée de main.
+            {t('welcome')}
           </h2>
           <Form>
             <DivInput>
-              <Input type="text" placeholder="Lieux de prise en charge"></Input>
+              <Input type="text" placeholder={t('premises')}></Input>
             </DivInput>
             <DivInput>
-              <Input type="text" placeholder="Destination"></Input>
+              <Input type="text" placeholder={t('destination')}></Input>
             </DivInput>
             <Button type="submit">
               <i class="ph-magnifying-glass"></i>
@@ -245,7 +246,7 @@ function Home() {
       </ContainerWrapper>
       <ContainerWrapper>
         <CCM>
-          <h4> Comment ça marche</h4>
+          <h4>{t('how it works')}</h4>
         </CCM>
         <CCM>
           <ContainerStep>
@@ -255,8 +256,8 @@ function Home() {
                 <SpanStep>1</SpanStep>
               </DivImg>
               <DivText>
-                <Ptext>Indiquez la position</Ptext>
-                <Ptext $child2>Saisissez votre adresse de départ et votre adresse d'arrivé.</Ptext>
+                <Ptext>{t('position')}</Ptext>
+                <Ptext $child2>{t('position description')}</Ptext>
               </DivText>
             </div>
             <div style={{marginRight:'15rem'}}>
@@ -265,8 +266,8 @@ function Home() {
                 <SpanStep>2</SpanStep>
               </DivImg>
               <DivText>
-                <Ptext>Sélectionner le chauffeur</Ptext>
-                <Ptext $child2>Parcourez la liste des chauffeurs,et selectionnez le.</Ptext>
+                <Ptext>{t('to select')}</Ptext>
+                <Ptext $child2>{t('select description')}</Ptext>
               </DivText>
             </div>
             <div style={{marginRight:'15rem'}}>
@@ -275,8 +276,8 @@ function Home() {
                 <SpanStep>3</SpanStep>
               </DivImg>
               <DivText>
-                <Ptext>Confirmer votre course</Ptext>
-                <Ptext $child2>Une fois la course faite, vous recevrez une confirmation. Et voila, votre chauffeur sera en route !</Ptext>
+                <Ptext>{t('race')}</Ptext>
+                <Ptext $child2>{t('race description')}</Ptext>
               </DivText>
             </div>
           </ContainerStep>
@@ -284,7 +285,7 @@ function Home() {
       </ContainerWrapper>
       <ContainerWrapper>
         <CCM>
-          <h4>Vous souhaitez augmenter votre visibilité ?</h4>
+          <h4>{t('visibility')}</h4>
         </CCM>
         <CCM $border>
           <ContainerStep>
@@ -292,15 +293,15 @@ function Home() {
               <CcmImg $driverImg src={driver} alt="Driver"/>
             </DivImg>
             <DivText $textDriver>
-              <h5>Inscrivez vous autant que chauffeur ou en tant que gérant de flotte</h5>
-              <Ptext $pDriver>Donnez-nous plus de détails en accédant au formulaire en cliquant sur le lien en dessous, et nous vous contacterons le plus rapidement possible.</Ptext>
+              <h5>{t('signup driver')}</h5>
+              <Ptext $pDriver>{t('signup driver description')}</Ptext>
               <StyledLink to="/">
-                <Button $buttonDriver>S'inscrire</Button>
+                <Button $buttonDriver>{t('signup to driver')}</Button>
               </StyledLink>
-              <h5 className="partenaire">Déja partenaire ?</h5>
-              <Ptext $pDriver>Connectez-vous et profitez de votre espace.</Ptext>
+              <h5 className="partenaire">{t('partner')}</h5>
+              <Ptext $pDriver>{t('partner description')}</Ptext>
               <StyledLink to="/">
-                <Button $connecterDriver>Se connecter</Button>
+                <Button $connecterDriver>{t('login partner')}</Button>
               </StyledLink>
             </DivText>
           </ContainerStep>

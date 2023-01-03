@@ -4,6 +4,7 @@ import colors from "../../colors";
 import { StyledLink } from "../../utils/Atoms";
 import Logo from '../../assets/logo.webp';
 import { useAuth } from "../../utils/hook/useAuth";
+import { useTranslation } from 'react-i18next';
 
 
 const HeaderWrapper = styled.header`
@@ -59,6 +60,8 @@ const StyledNavGroup = styled.div`
     }
 `
 function Header({toggle}) {
+
+    const {t, i18n} = useTranslation('translation', {keyPrefix: 'header'});
     
     const {user, signout, isConnected} = useAuth()
 
@@ -72,10 +75,10 @@ function Header({toggle}) {
                 </HeaderLogo>
                 <StyledNav>
                     <StyledLink $underline $disappearance>
-                        Commandez une course
+                        {t('race')}
                     </StyledLink>
                     <StyledLink $underline $disappearance>
-                        Devenir partenaire
+                        {t('partner')}
                     </StyledLink>
                     <StyledNavGroup>
                         {isConnected() ? (
@@ -84,16 +87,16 @@ function Header({toggle}) {
                                     {user?.nom}, {user?.prenom}
                                 </StyledLink>
                                 <StyledLink to="/login" $isFullLink $navLink $disappearance onClick={signout}>
-                                    Déconnexion
+                                    {t('logout')}
                                 </StyledLink>
                             </>
                         ) : (
                             <>
                                 <StyledLink to="/signup" $disappearance>
-                                Inscription
+                                    {t('signup')}
                                 </StyledLink>
                                 <StyledLink to="/login" $isFullLink $navLink $disappearance>
-                                Connexion
+                                    {t('login')}
                                 </StyledLink>
                             </>
                         )}

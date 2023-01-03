@@ -1,0 +1,83 @@
+{
+    "home": {
+        "welcome": "Your driver just in your hand.",
+        "premises": "Lieux de prise en charge",
+        "destination": "Destination",
+        "how it works": "Comment ça marche",
+        "position": "Indiquez la position",
+        "position description": "Saisissez votre adresse de départ et votre adresse d'arrivé.",
+        "to select": "Sélectionner le chauffeur",
+        "select description": "Parcourez la liste des chauffeurs,et selectionnez le.",
+        "race": "Confirmer votre course",
+        "race description": "Une fois la course faite, vous recevrez une confirmation. Et voila, votre chauffeur sera en route !",
+        "visibility": "Vous souhaitez augmenter votre visibilité ?",
+        "signup driver": "Inscrivez vous autant que chauffeur ou en tant que gérant de flotte",
+        "signup driver description": "Donnez-nous plus de détails en accédant au formulaire en cliquant sur le lien en dessous, et nous vous contacterons le plus rapidement possible.",
+        "signup to driver": "S'inscrire",
+        "partner": "Déja partenaire ?",
+        "partner description":"Connectez-vous et profitez de votre espace.",
+        "login partner": "Se connecter"
+    },
+
+    "login": {
+        "toast info error login": "Merci de compléter tout les champs obligatoire",
+        "toast loader login": "Connexion en cours...",
+        "toast update login": "Connexion réussie, vous allez être redirigé.",
+        "toast update error login": "Une erreur est survenue, verifiez votre connexion internet.",
+        "login": "Connexion",
+        "login description" : "Entrez vos détails pour se connecter",
+        "email": "E-mail ou numéro de téléphone",
+        "password": "Mot de passe",
+        "forgot password": "Mot de passe oublié ?",
+        "not account": "Pas de compte ? S'inscrire."
+    },
+
+    "signup": {
+
+        "error confirmMdp": "Les mots de passe ne sont pas identique",
+        "error validate" : "Merci de compléter tout les champs obligatoire",
+        "loading submit" : "Envoie en cours",
+        "update success" : "Inscription réussie",
+        "signup" : "Inscription",
+        "signup description": "Entrez vos details pour s'incrire.",
+        "last name": "Nom *",
+        "first name" : "Prénom *",
+        "phone number": "Numéro téléphone *",
+        "email": "E-mail *",
+        "password": "Mot de passe *",
+        "confirmMdp": "Confirmer mot de passe *",
+        "obligate": "* Champs obligatoire",
+        "member": "Dèja inscrit ? Se connecter"
+
+    },
+
+    "error": {
+
+        "error": " Oups, cette page n'existe pas."
+    },
+
+    "footer": {
+
+        "race": "Commandez une course",
+        "partner": "Devenir partenaire",
+        "contact": "Contact",
+        "about" : "A propos",
+        "terms of use": "Condition d'utilisation",
+        "f.a.q": "F.A.Q"
+
+    },
+
+    "header": {
+
+        "race": "Commandez une course",
+        "partner": "Devenir partenaire",
+        "signup" : "Inscription",
+        "login": "Connexion",
+        "logout": "Déconnexion",
+        "my races" : "Mes courses",
+        "wallet" : "Wallet",
+        "settings": "Parametres du profil",
+        "help" : "Aide"
+
+    }
+}

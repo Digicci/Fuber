@@ -15,6 +15,7 @@ import {useAuth} from "../../utils/hook/useAuth";
 import {useCsrf} from "../../utils/hook/useCsrf";
 import {ToastContainer, toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useTranslation } from 'react-i18next';
 
 const StyledError = styled.span`
   color: red;
@@ -22,6 +23,8 @@ const StyledError = styled.span`
 `
 
 function Signup() {
+
+    const {t, i18n} = useTranslation('translation', {keyPrefix: 'signup'});
 
     const csrf = useCsrf()
 
@@ -54,7 +57,7 @@ function Signup() {
 
     function verif() {
         if (user.mdp !== user.confirmMdp) {
-            setError('Les mots de passe ne sont pas identique')
+            setError(t('error confirmMdp'))
             return false
         } else {
             setError('')
@@ -65,7 +68,7 @@ function Signup() {
     function validateForm() {
         for (const [key, field] of Object.entries(user)) {
             if (field === '') {
-                setError('Merci de compléter tout les champs obligatoire')
+                setError(t('error validate'))
                 return false
             }
         }
@@ -84,7 +87,7 @@ function Signup() {
     }
 
     function onSubmit(e) {
-        const toastId = toast.loading('Envoi en cours', {autoClose: false})
+        const toastId = toast.loading(t('loading submit'), {autoClose: false})
         e.preventDefault()
         const data = validateForm()
         if (data) {
@@ -100,7 +103,7 @@ function Signup() {
                     })
                     setError('')
                     toast.update(toastId, {
-                        render: 'Inscription réussi',
+                        render: t('update success'),
                         type: toast.TYPE.SUCCESS,
                         autoClose: toastTimer,
                         isLoading: false,
@@ -136,8 +139,8 @@ function Signup() {
         <>
             <StyledContainerLogin>
                 <StyledContainerLogin $entete>
-                    <h2>Inscription</h2>
-                    <p>Entrez vos details pour s'incrire.</p>
+                    <h2>{t('signup')}</h2>
+                    <p>{t('signup description')}</p>
                 </StyledContainerLogin>
                 <StyledForm onSubmit={(e) => {
                     onSubmit(e)
@@ -145,7 +148,7 @@ function Signup() {
                     <StyledContainerInput>
                         <StyledInput
                             type="text"
-                            placeholder="Nom *"
+                            placeholder={t('last name')}
                             onChange={(e) => {
                                 handleChange(e, 'nom')
                             }}
@@ -155,7 +158,7 @@ function Signup() {
 
                         <StyledInput
                             type="text"
-                            placeholder="Prénom *"
+                            placeholder={t('first name')}
                             onChange={(e) => {
                                 handleChange(e, 'prenom')
                             }}
@@ -164,7 +167,7 @@ function Signup() {
                         />
                         <StyledInput
                             type="tel"
-                            placeholder="Numéro téléphone *"
+                            placeholder={t('phone number')}
                             onChange={(e) => {
                                 handleChange(e, 'tel')
                             }}
@@ -173,7 +176,7 @@ function Signup() {
                         />
                         <StyledInput
                             type="email"
-                            placeholder="E-mail *"
+                            placeholder={t('email')}
                             onChange={(e) => {
                                 handleChange(e, 'email')
                             }}
@@ -182,7 +185,7 @@ function Signup() {
                         />
                         <StyledInput
                             type="password"
-                            placeholder="Mot de passe *"
+                            placeholder={t('password')}
                             onChange={(e) => {
                                 handleChange(e, 'mdp')
                             }}
@@ -191,7 +194,7 @@ function Signup() {
                         />
                         <StyledInput
                             type="password"
-                            placeholder="Confirmer mot de passe *"
+                            placeholder={t('confirmMdp')}
                             onChange={(e) => {
                                 handleChange(e, 'confirmMdp')
                             }}
@@ -200,15 +203,15 @@ function Signup() {
                             required
                         />
                         <StyledError>{error}</StyledError>
-                        <StyledInput $submit type="submit" value="S'inscrire"/>
+                        <StyledInput $submit type="submit" value={t('signup')}/>
                     </StyledContainerInput>
                 </StyledForm>
                 <StyledObliger>
-                    * Champs obligatoire
+                    {t('obligate')}
                 </StyledObliger>
                 <StyledAccountSign>
                     <StyledLink to="/login" $loginSignup>
-                        Dèja inscrit ? Se connecter
+                        {t('member')}
                     </StyledLink>
                 </StyledAccountSign>
             </StyledContainerLogin>
