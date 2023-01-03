@@ -12,8 +12,12 @@ import {
 import { ToastContainer, toast } from "react-toastify";
 import { useAuth } from "../../utils/hook/useAuth";
 import { useCsrf } from "../../utils/hook/useCsrf";
+import { useTranslation } from 'react-i18next';
 
 function Login(){
+
+    const {t, i18n} = useTranslation('translation', {keyPrefix: 'login'});
+    
 
     const auth = useAuth()
     const navigate = useNavigate()
@@ -47,7 +51,7 @@ function Login(){
         //check if credential is present
         if(user.credential === '' || user.mdp === ''){
             //if not present, display error toast
-            toast('Merci de compléter tout les champs obligatoire', {
+            toast(t('toast info error login'), {
                 type: 'error',
                 autoClose: 5000,
                 position: 'top-right',
@@ -55,11 +59,11 @@ function Login(){
             })
         } else {
             //if present, send request to server, before make a toast
-            const toastId = toast.loading('Connexion en cours...', { autoClose: false, position: 'top-right' })
+            const toastId = toast.loading(t('toast loader login'), { autoClose: false, position: 'top-right' })
             auth.signin(user.credential, user.mdp, csrf.token).then(res => {
                 if (res.data) {
                     toast.update(toastId, {
-                        render: `Connexion réussie, vous allez être redirigé.`,
+                        render: t('toast update login'),
                         type: 'success',
                         autoClose: toastTimer,
                         isLoading: false,
@@ -76,7 +80,7 @@ function Login(){
             }).catch(err => {
                 if (err.response.data.includes('CSRF')) {
                     toast.update(toastId, {
-                        render: 'Une erreur est survenue, verifiez votre connexion internet.',
+                        render: t('toats update error login'),
                         type: 'error',
                         autoClose: 5000,
                         isLoading: false,
@@ -104,8 +108,8 @@ function Login(){
             <ToastContainer />
             <StyledContainerLogin>
                 <StyledContainerLogin $entete>
-                    <h2>Connexion</h2>
-                    <p>Entrez vos détails pour se connecter</p>
+                    <h2>{t('login')}</h2>
+                    <p>{t('login description')}</p>
                 </StyledContainerLogin>
                 <StyledForm onSubmit={(e) => { handleSubmit(e) }}>
                     <StyledContainerInput>
@@ -113,26 +117,26 @@ function Login(){
                             type="text"
                             onChange={ (e) => handleChange(e, 'credential') }
                             value={user.credential}
-                            placeholder="E-mail ou numéro de téléphone"
+                            placeholder={t('email')}
                             required
                         ></StyledInput>
                         <StyledInput
                             type="password"
                             onChange={ (e) => handleChange(e, 'mdp') }
                             value={user.mdp}
-                            placeholder="Mot de passe"
+                            placeholder={t('password')}
                             required
                         >
                         </StyledInput>
-                        <StyledInput $submit $connecter type="submit" value="Se connecter"></StyledInput>
+                        <StyledInput $submit $connecter type="submit" value={t('login')}></StyledInput> 
                     </StyledContainerInput>
                 </StyledForm>
                 <StyledObliger>
-                    Mot de passe oublié ?
+                    {t('forgot password')}
                 </StyledObliger>
                 <StyledAccountSign>
                     <StyledLink to="/signup" $loginSignup>
-                        Pas de compte ? S'inscrire.
+                        {t('not account')}
                     </StyledLink>
                 </StyledAccountSign>
             </StyledContainerLogin>

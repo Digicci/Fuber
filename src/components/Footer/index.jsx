@@ -3,6 +3,7 @@ import styled from "styled-components";
 import colors from "../../colors";
 import { StyledLink } from "../../utils/Atoms";
 import Logo from '../../assets/logofooter.webp'
+import { useTranslation } from 'react-i18next';
 
 const FooterWrapper = styled.footer`
     position: sticky;
@@ -37,7 +38,7 @@ const ContainerIcon = styled.div`
 `
 const ContainerLink = styled.div`
     display: flex;
-    flex-direction column;
+    flex-direction: column;
     margin: 0 0 .5rem 15rem;
     @media (max-width:1024px){
         margin: 0 0 .5rem 0
@@ -65,6 +66,8 @@ const Copyright = styled.div`
 
 function Footer() {
 
+    const {t, i18n} = useTranslation('translation', {keyPrefix: 'footer'});
+
     return (
         <>
         <FooterWrapper>
@@ -74,34 +77,34 @@ function Footer() {
                 </StyledLink>
                 <ContainerIcon>
                     <StyledLink $icon>
-                        <i class="ph-instagram-logo"></i>
+                        <i className="ph-instagram-logo"></i>
                     </StyledLink>
                     <StyledLink $icon>
-                        <i class="ph-facebook-logo"></i>
+                        <i className="ph-facebook-logo"></i>
                     </StyledLink>
                 </ContainerIcon>
             </ContainerLogo>
             <ContainerWrapper>
                 <ContainerLink>
                     <StyledLink $footerLink>
-                        Commandez une course
+                        {t('race')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        Devenir partenaire
+                        {t('partner')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        Contact
+                        {t('contact')}
                     </StyledLink>
                 </ContainerLink>
                 <ContainerLink>
                     <StyledLink $footerLink>
-                        A propos
+                        {t('about')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        Condition d'utilisation
+                        {t('terms of use')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        F.A.Q
+                        {t('f.a.q')}
                     </StyledLink>
                 </ContainerLink>
             </ContainerWrapper>

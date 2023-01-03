@@ -5,6 +5,7 @@ import logo from '../../assets/logo.webp';
 import { StyledLink } from "../../utils/Atoms";
 import { useAuth } from "../../utils/hook/useAuth";
 import avatar from '../../assets/profile.webp';
+import { useTranslation } from 'react-i18next';
 
 
 const StyledNavResponsive = styled.div`
@@ -100,6 +101,8 @@ const Avatar = styled.img`
 `
 
 function NavResponsive({isOpen, toggle}){
+
+    const {t, i18n} = useTranslation('translation', {keyPrefix: 'header'});
     
     const {user, signout, isConnected} = useAuth()
 
@@ -108,7 +111,7 @@ function NavResponsive({isOpen, toggle}){
             <StyledNavResponsive isOpen={isOpen} onClick={toggle}>
                 <StyledContainer>
                     <StyledClose>
-                        <i class="ph-x closemenu"></i>
+                        <i className="ph-x closemenu"></i>
                     </StyledClose>
                     {isConnected() ? (
                             <>
@@ -123,43 +126,43 @@ function NavResponsive({isOpen, toggle}){
                                     </AvatarWrapper>
 
                                     <StyledLink to="/login" $isFullLink $navLink $xxl onClick={signout}>
-                                        Déconnexion
+                                        {t('logout')}
                                     </StyledLink>
                                     <StyledLink $navVertical>
-                                        Mes course
+                                        {t('my races')}
                                     </StyledLink>
                                     <StyledLink $navVertical>
-                                        Wallet
+                                        {t('wallet')}
                                     </StyledLink>
                                     <StyledLink $navVertical>
-                                        Parametres du profil
+                                        {t('settings')}
                                     </StyledLink>
                                 </StyledConnectionWrap>
                                 <StyledLink to='' $navVertical>
-                                    Commandez une course
+                                    {t('race')}
                                 </StyledLink>
                                 <StyledLink $navVertical>
-                                    Devenir partenaire
+                                    {t('partner')}
                                 </StyledLink>
                             </>
                         ) : (
                             <>
                                <StyledConnectionWrap>
                                 <StyledLink to="/signup" $isShadowLink $navLink $xxl>
-                                    Inscription
+                                    {t('signup')}
                                     </StyledLink>
                                     <StyledLink to="/login" $isFullLink $navLink $xxl>
-                                    Connexion
+                                    {t('login')}
                                 </StyledLink>
                                </StyledConnectionWrap>
                                <StyledLink to='/login' $navVertical>
-                                    Commandez une course
+                                    {t('race')}
                                 </StyledLink>
                                 <StyledLink $navVertical>
-                                    Devenir partenaire
+                                    {t('partner')}
                                 </StyledLink>
                                 <StyledLink $navVertical>
-                                    Aide
+                                    {t('help')}
                                 </StyledLink>
                             </>
                     )}
