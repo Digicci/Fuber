@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import colors from "../../colors";
 import logo from '../../assets/logo.webp';
-import { StyledLink } from "../../utils/Atoms";
+import {
+     StyledLink,
+     AvatarWrapper,
+     AvatarIconWrapper,
+     Avatar
+} from "../../utils/Atoms";
 import { useAuth } from "../../utils/hook/useAuth";
 import avatar from '../../assets/profile.webp';
 import { useTranslation } from 'react-i18next';
@@ -75,30 +80,7 @@ const ImgNav = styled.img`
     width: 150px;
 `
 
-const AvatarWrapper = styled.div`
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: space-evenly;
-    gap: 10px;
-`
 
-const AvatarIconWrapper = styled.div`
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 1px 2px 4px 2px ${colors.shade};
-`
-
-const Avatar = styled.img`
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-`
 
 function NavResponsive({isOpen, toggle}){
 
@@ -134,7 +116,7 @@ function NavResponsive({isOpen, toggle}){
                                     <StyledLink $navVertical>
                                         {t('wallet')}
                                     </StyledLink>
-                                    <StyledLink $navVertical>
+                                    <StyledLink to='/profile' $navVertical>
                                         {t('settings')}
                                     </StyledLink>
                                 </StyledConnectionWrap>

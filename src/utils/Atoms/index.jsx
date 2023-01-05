@@ -135,7 +135,41 @@ export const StyledLink = styled(Link)`
         border-radius: 5px;
         `
     }
+    ${(props) =>
+        props.$linkProfile &&
+        `font-size: 1.05rem;
+        
+        padding 1rem 0;
+        height: 50px;
+
+        :active{
+            border-left: 4px solid ${colors.secondary};
+            background: ${colors.fourth};
+        }
+        :hover{
+            background: ${colors.fourth};
+        }
+        `
+    }
+    ${(props) =>
+        props.$logoutProfil &&
+        `width : 120px;
+        color: red;
+        background: ${colors.fourth};
+        padding: .7rem .8rem;
+        cursor: pointer;
+        margin: 0;
+        `
+    }
+    ${(props) =>
+        props.$userProfil &&
+        `
+        margin: 0;
+        `
+    }
+    
 `
+// styled for Login and Signup
 
  export const StyledContainerLogin = styled.div`
     display: flex;
@@ -226,4 +260,38 @@ export const StyledObliger = styled.p`
 export const StyledAccountSign = styled.div`
     text-align: center;
     margin: 2rem 0 1rem;
+`
+// styled Profile
+
+export const AvatarWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 10px;
+    ${(props) =>
+        props.$profile &&
+        `align-items: flex-start `
+    }
+`
+
+export const AvatarIconWrapper = styled.div`
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 1px 2px 4px 2px ${colors.shade};
+    ${(props) =>
+        props.$avatarProfile &&
+        `margin: 1rem 0 0 .5rem;`
+    }
+`
+
+export const Avatar = styled.img`
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 `

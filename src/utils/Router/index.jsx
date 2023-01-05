@@ -6,6 +6,7 @@ import PrivateRoute from "./privateRoute";
 import Home from "../../pages/Home";
 import Signup from "../../pages/Signup";
 import Login from "../../pages/Login";
+import Profile from "../../pages/Profile"
 
 function Router() {
     
@@ -30,6 +31,10 @@ function Router() {
                 {
                     path: "/signup",
                     element: <Signup/>
+                },
+                {
+                    path: "/profile",
+                    element: <Profile />
                 }
             ]
         }
