@@ -1,9 +1,10 @@
 import React from "react";
 import { Route, Navigate } from "react-router-dom";
+import { useAuth } from "../../hook/useAuth";
 
 const PrivateRoute = ({component, ...other}) => {
-    const token = localStorage.getItem("token") ?? null;// Get token from cookies here
-    if (!token) {
+    const auth = useAuth()
+    if (!auth.isConnected()) {
         return <Navigate to="/login" />
     }
     return (
