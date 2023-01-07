@@ -1,9 +1,11 @@
 import React,{ useContext, createContext, useState } from 'react';
 import { useAxios } from "./useAxios";
+import { useNavigate } from "react-router-dom";
 
 
 const authContext = createContext();
 const basePath = "user";
+
 
 
 
@@ -21,6 +23,7 @@ export const useAuth = () => {
 function useProvideAuth() {
     const [user, setUser] = useState(null);
     const axios = useAxios();
+    const navigate = useNavigate();
 
     const signin = (credential, mdp, token) => {
         let data
@@ -49,10 +52,14 @@ function useProvideAuth() {
     }
 
     const signout = () => {
-        setUser(null);
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        localStorage.clear();
+        axios.get(`${basePath}/logout`, { withCredentials: true }).then((res) => {
+            localStorage.removeItem("token");
+            localStorage.clear();
+            setUser(null);
+            navigate("/login", { replace: true });
+        }).catch((err) => {
+            console.log(err)
+        })
     };
 
     return {

@@ -70,11 +70,14 @@ function Login(){
                         icon: '👌',
                         className: 'rotateY animated'
                     })
-                    localStorage.setItem('token', res.data.token)
-                    localStorage.setItem('user', JSON.stringify(res.data.user))
-                    auth.setUser(res.data.user)
                     setTimeout(() => {
-                        navigate('/', { replace: true })
+                        const returnFunc = new Promise((resolve, reject) => {
+                            resolve(navigate('/', { replace: true }))
+                        })
+                        returnFunc.then(() => {
+                            localStorage.setItem('token', res.data.token)
+                            auth.setUser(res.data.user)
+                        })
                     }, toastTimer);
                 }
             }).catch(err => {
