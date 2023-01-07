@@ -1,12 +1,14 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
 import Routes from "./Routes";
 import Error from "../../components/Error";
 import PrivateRoute from "./privateRoute";
 import Home from "../../pages/Home";
 import Signup from "../../pages/Signup";
 import Login from "../../pages/Login";
-import Profile from "../../pages/Profile"
+import Profile from "../../pages/Profile";
+import Wallet from "../../pages/Wallet";
+import MyRaces from "../../pages/MyRaces";
 
 function Router() {
     
@@ -21,10 +23,6 @@ function Router() {
                     element: <Home/>
                 },
                 {
-                    path: "/user/:id",
-                    element: <PrivateRoute component={<Home/>} />
-                },
-                {
                     path: "/login",
                     element: <Login/>
                 },
@@ -34,7 +32,21 @@ function Router() {
                 },
                 {
                     path: "/profile",
-                    element: <Profile />
+                    element: <PrivateRoute>
+                                <Profile />
+                            </PrivateRoute>
+                },
+                {
+                    path: "/wallet",
+                    element : <PrivateRoute>
+                                <Wallet/>
+                            </PrivateRoute>
+                },
+                {
+                    path: "/myraces",
+                    element : <PrivateRoute>
+                                <MyRaces/>
+                            </PrivateRoute>
                 }
             ]
         }

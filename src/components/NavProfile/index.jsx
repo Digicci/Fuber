@@ -24,13 +24,13 @@ function NavProfile()
                     <StyledLink $linkProfile>
                         Commandez une course
                     </StyledLink>
-                    <StyledLink $linkProfile>
-                        Mes course
+                    <StyledLink to="/myraces" $linkProfile>
+                        Mes courses
                     </StyledLink>
-                    <StyledLink $linkProfile>
+                    <StyledLink to="/wallet" $linkProfile>
                         Wallet
                     </StyledLink>
-                    <StyledLink $linkProfile>
+                    <StyledLink to="/profile" $linkProfile>
                         Paramètre du profil
                     </StyledLink>
                 </Nav>

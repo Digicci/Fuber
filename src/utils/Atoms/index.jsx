@@ -142,11 +142,11 @@ export const StyledLink = styled(Link)`
         padding 1rem 0;
         height: 50px;
 
-        :active{
+        &:active{
             border-left: 4px solid ${colors.secondary};
             background: ${colors.fourth};
         }
-        :hover{
+        &:hover{
             background: ${colors.fourth};
         }
         `
@@ -167,7 +167,41 @@ export const StyledLink = styled(Link)`
         margin: 0;
         `
     }
-    
+    ${(props) =>
+        props.$deleteWallet &&
+        `width: 12%;
+        height:35px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        background: red;
+        color: ${colors.primary};
+        font-size: .85rem;
+        border-radius:500px;
+        cursor: pointer;
+        `
+    }
+    ${(props) =>
+        props.$addCard && 
+        `
+        height: 50px;
+        border-bottom: 1px solid ${colors.fourth};
+        padding-bottom: 1rem;
+        margin-top: 2rem;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        `
+    }
+    ${(props) => 
+        props.$linkModal &&
+        `font-size: 1.2rem;
+        cursor: pointer;
+        &:hover{
+            color: ${colors.sixth}
+        }
+        `
+    }
 `
 // styled for Login and Signup
 
@@ -198,6 +232,13 @@ export const StyledForm = styled.form`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    ${(props) => 
+        props.$formAddCard &&
+        `width: 100%;
+        height:100%;
+        margin: 1rem 0 0 0;
+        `
+    }
 
 `
 export const StyledContainerInput = styled.div`
@@ -213,6 +254,15 @@ export const StyledContainerInput = styled.div`
         i{
             cursor:pointer;
         }
+        `
+    }
+    ${(props) =>
+        props.$containerFormCard &&
+        `width: 100%;
+        align-items: flex-start;
+
+        justify-content: space-around;
+        margin-bottom: 1.5rem;
         `
     }
 `
@@ -237,7 +287,7 @@ export const StyledInput = styled.input`
         border:1px solid #e0dfdd;
         border-raduis: 5px;
         &:hover{
-            background: #e2e2e2 !important;
+            background: ${colors.shadow}!important;
         }
         `
     }
@@ -245,6 +295,28 @@ export const StyledInput = styled.input`
         props.$connecter &&
         `background: ${colors.secondary};
         color: ${colors.primary};`
+    }
+    ${(props) =>
+        props.$inputAddCard &&
+        `padding: 0.7rem 0.3rem;
+        width: 100%;
+        margin: 0.5rem 0;
+        border: none;
+        background: ${colors.fourth};
+        font-size: .9rem;
+        outline: none;
+        `
+    }
+    ${(props) =>
+        props.$colorAddCard &&
+        `background: ${colors.secondary};
+        color: ${colors.primary};
+        width: 100%;
+        margin: .5rem 0;
+        &:hover {
+            background:${colors.shadow};
+        }
+        `
     }
 `
 export const StyledObliger = styled.p`
@@ -260,6 +332,22 @@ export const StyledObliger = styled.p`
 export const StyledAccountSign = styled.div`
     text-align: center;
     margin: 2rem 0 1rem;
+`
+export const LabelForm = styled.label`
+    font-size: .95rem;
+    margin-bottom: .5rem;
+`
+export const SelectForm = styled.select`
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    padding: 0.7rem 0.3rem;
+    width: 100%;
+    margin: 0.5rem 0;
+    border: none;
+    background: ${colors.fourth};
+    font-size: .9rem;
+    outline: none;
 `
 // styled Profile
 
@@ -294,4 +382,99 @@ export const Avatar = styled.img`
     width: 100%;
     height: 100%;
     object-fit: cover;
+`
+
+// Styled personal information
+
+export const ContainerProfile = styled.div`
+    width: 100%;
+    display: flex;
+`
+export const ContainerInfo = styled.div`
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    margin: 2.5rem 0 ;
+`
+export const TitlePage = styled.h2`
+    font-size: 1.65rem;
+    font-weight:600;
+    display: flex;
+`
+ export const Number = styled.p`
+    font-size: 1.15rem;
+    margin: 1rem 0 1rem;
+`
+ export const Label = styled.p`
+    margin-top: 1rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+`
+
+// Modal
+
+export const StyledClose = styled.div`
+    text-align: end;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    padding-right: 1rem;
+    font-size: 1.7rem;
+    font-weight: 600;
+    cursor: pointer;
+`
+export const StyledContainer = styled.div`
+    width: 33%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background : ${colors.primary};
+    justify-content: flex-start;
+    ${(props) => 
+        props.$modalHeight &&
+        `height: 70%;`
+    }
+    @media (max-width: 425px){
+        width:80%;
+    }
+    @media (min-width: 1440px){
+        width: 22%;
+        ${(props) =>
+            props.$modalHeight &&
+            `width: 40%;`
+        }
+    }
+`
+export const StyledModal = styled.div`
+    position : fixed;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(38,38,38,0.8);
+    transform: translateX(4000px);
+    z-index: 200;
+    ${(props) => 
+        props.isOpen &&
+        `transform : translateX(0);
+        `
+    }
+    ${(props) => 
+        props.$modalPayment &&
+        `justify-content: center;`
+    }
+`
+export const ContainerModal = styled.div`
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    padding: 1rem;
+    ${(props) =>
+        props.$containerMyRaces &&
+        `width: 30%;
+        
+        `
+    }
 `

@@ -3,8 +3,10 @@ const colors = {
     secondary : '#000000',
     thirdly : '#333333',
     fourth : '#eeeeee',
-    fifth : 'e2e2e2',
+    fifth : '#e2e2e2',
+    sixth: '#8ec6a1f2',
     shade: 'rgba(0,0,0,0.2)',
+    shadow: 'rgba(0, 0, 0, 0.825)'
 }
 
 export default colors
