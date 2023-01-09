@@ -84,7 +84,7 @@ function Header({toggle}) {
                         {isConnected() ? (
                             <>
                                 <StyledLink to="/user" $disappearance>
-                                    {user?.nom}, {user?.prenom}
+                                    {user?.nom} {user?.prenom}
                                 </StyledLink>
                                 <StyledLink to="/login" $isFullLink $navLink $disappearance onClick={signout}>
                                     {t('logout')}
