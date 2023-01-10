@@ -10,10 +10,11 @@ import {
     ButtonRaceFinish
 } from "../../utils/Atoms";
 import Van from "../../assets/van.webp";
-import Hybride from "../../assets/hybride.webp"
+import Hybride from "../../assets/hybride.webp";
+import Confort from "../../assets/confort.webp";
 
 
-function AddMyRace(){
+function OldRaces(){
 
     return(
         <>
@@ -25,7 +26,7 @@ function AddMyRace(){
                     Courses en cours
                 </RaceInProgress>
                 <DivRace>
-                    <RaceImg src={Hybride} alt="hybrid car"/>
+                    <RaceImg src={Confort} alt="hybrid car"/>
                     <InfoRace>
                         <h4>Comfort Hybride par Prenom N.</h4>
                         <h5>Numero du chauffeur</h5>
@@ -35,8 +36,8 @@ function AddMyRace(){
                         <h5>Date / heure</h5>
                     </InfoRace>
                     <DivButton>
-                        <ButtonRaceFinish>
-                            Course terminer
+                        <ButtonRaceFinish $noteRace>
+                            Notez la course
                         </ButtonRaceFinish>
                     </DivButton>
                 </DivRace>
@@ -44,4 +45,4 @@ function AddMyRace(){
         </>
     )
 }
-export default AddMyRace
+export default OldRaces

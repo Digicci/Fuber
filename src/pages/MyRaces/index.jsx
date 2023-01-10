@@ -9,11 +9,10 @@ import {
     StyledLink
 } from "../../utils/Atoms";
 import colors from "../../colors";
+import AddMyRace from "../../components/AddMyRaces";
+import OldRaces from "../../components/OldRaces";
 
-const MyRaceH3 = styled.h3`
-    font-size: 1.15rem;
-    font-weight: 600;
-`
+
 
 function MyRaces(){
 
@@ -39,7 +38,7 @@ function MyRaces(){
                             Anciennes Course
                         </StyledLink>
                     </ContainerModal>
-                    {myRace ? (<MyRaceH3>mes courses</MyRaceH3>) : (<MyRaceH3> ancienne courses</MyRaceH3>) }
+                    {myRace ? (<AddMyRace/>) : (<OldRaces/>) }
                 </ContainerInfo>
             </ContainerProfile>
         </>

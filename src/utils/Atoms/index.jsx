@@ -72,7 +72,7 @@ export const StyledLink = styled(Link)`
         }`
     }
     ${(props) => 
-        props.$disappearance &&
+        props.$disappear &&
         `@media (max-width: 992px){
             display: none;
         }`
@@ -377,6 +377,32 @@ export const SelectForm = styled.select`
     font-size: .9rem;
     outline: none;
 `
+export const ButtonLogout = styled.button`
+    background: ${colors.secondary};
+    color: ${colors.primary};
+    padding: .5rem 1.3rem;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    transition: .3s;
+    &:hover{
+        background: rgba(0,0,0,0.825);
+    }
+    ${(props) => 
+        props.$buttonRadius &&
+        `border-radius: 10px;
+        @media (max-width: 768px){
+            border-radius: 0;
+        }
+        `
+    }
+    ${(props) =>
+        props.$logoutDissapear &&
+        `@media (max-width: 992px){
+            display: none;
+        }
+        `
+    }
+`
 // styled Profile
 
 export const AvatarWrapper = styled.div`
@@ -503,6 +529,67 @@ export const ContainerModal = styled.div`
         props.$containerMyRaces &&
         `width: 25%;
         padding: 1rem 0;
+        `
+    }
+`
+
+//MyRaces
+export const MyRaceH3 = styled.h3`
+    font-size: 1.15rem;
+    font-weight: 600;
+`
+export const ContainerMyRaces = styled.div`
+    width: 70%;
+    margin: 3rem 0 0 0;
+    padding: 1rem 0;
+`
+export const RaceInProgress = styled.h3`
+    margin: 2rem 0 3rem 0;
+    font-size:1.55rem;
+    color: ${colors.sixth};
+    text-decoration: underline;
+    font-weight: 200;
+`
+export const DivRace = styled.div`
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid ${colors.fifth};
+`
+export const RaceImg = styled.img`
+    width: 20%;
+`
+export const InfoRace = styled.div`
+    width: 45%;
+    padding: 0 1rem;
+    h4{
+        font-size: 1.15rem;
+        font-weight: 600;
+        margin: 0 0 .5rem;
+    }
+    h5{
+        font-size: .9rem;
+        font-weight: 100;
+        padding: .5rem;
+    }
+`
+export const DivButton = styled.div`
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`
+export const ButtonRaceFinish= styled.div`
+    width: 60%;
+    background: ${colors.sixth};
+    color: ${colors.primary};
+    border-radius: 10px;
+    font-size: 1.05rem;
+    padding: .6rem .9rem;
+    text-align: center;
+    ${(props) =>
+        props.$noteRace &&
+        `background: ${colors.fourth};
+        color:${colors.secondary};
         `
     }
 `

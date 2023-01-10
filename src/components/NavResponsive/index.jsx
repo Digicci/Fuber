@@ -9,7 +9,8 @@ import {
      Avatar,
      StyledModal,
      StyledContainer,
-     StyledClose
+     StyledClose,
+     ButtonLogout
 } from "../../utils/Atoms";
 import { useAuth } from "../../utils/hook/useAuth";
 import avatar from '../../assets/profile.webp';
@@ -70,9 +71,9 @@ function NavResponsive({isOpen, toggle}){
                                         </StyledLink>
                                     </AvatarWrapper>
 
-                                    <StyledLink to="/login" $isFullLink $navLink $xxl onClick={signout}>
+                                    <ButtonLogout onClick={signout}>
                                         {t('logout')}
-                                    </StyledLink>
+                                    </ButtonLogout>
                                     <StyledLink to="myraces" $navVertical>
                                         {t('my races')}
                                     </StyledLink>
