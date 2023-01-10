@@ -204,15 +204,31 @@ export const StyledLink = styled(Link)`
     }
     ${(props) =>
         props.$buttonMyRaces &&
-        `background: ${colors.sixth};
-        color: ${colors.primary};
+        `background: ${colors.primary};
+        color: ${colors.secondary};
         justify-content:center;
         border: 1px solid transparent;
         text-align: center;
         border-radius: 25px;
         padding: 1rem;
         margin: 0;
-        font-size: .95rem;`
+        font-size: .95rem;
+        &:hover{
+            background: ${colors.sixth};
+            color: ${colors.primary};
+        }`
+    }
+    ${(props) =>
+        props.$buttonMyRacesSelected &&
+            `background: ${colors.sixth};
+            color: ${colors.primary};
+            justify-content:center;
+            border: 1px solid transparent;
+            text-align: center;
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 0;
+            font-size: .95rem;`
     }
     ${(props) =>
         props.$buttonOldRaces &&
@@ -229,6 +245,18 @@ export const StyledLink = styled(Link)`
             background:${colors.secondary};
             color: ${colors.primary};
         }`
+    }
+    ${(props) =>
+        props.$buttonOldRacesSelected &&
+            `background:${colors.secondary};
+            color: ${colors.primary};
+            justify-content:center;
+            border: 1px solid transparent;
+            text-align: center;
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 0;
+            font-size: .95rem;`
     }
 `
 // styled for Login and Signup

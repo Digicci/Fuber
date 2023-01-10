@@ -31,7 +31,7 @@ function MyRaces(){
                         Mes courses
                     </TitlePage>
                     <ContainerModal $containerMyRaces>
-                        <StyledLink $buttonMyRaces onClick={() => {toggleMyRace(true)}}>
+                        <StyledLink $buttonMyRacesSelected={myRace} $buttonMyRaces={!myRace} onClick={() => {toggleMyRace(true)}}>
                             Mes courses
                         </StyledLink>
                         <StyledLink $buttonOldRaces onClick={() => {toggleMyRace(false)}}>
