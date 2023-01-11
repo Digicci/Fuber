@@ -30,7 +30,7 @@ function Profil()
     return(
         <>
             <ContainerProfile>
-                <NavProfile/>
+                <NavProfile activePage='profile'/>
                 <ContainerInfo>
                     <TitlePage>
                         Paramètres du profil

@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import colors from "../../colors";
-import { StyledLink } from "../../utils/Atoms";
+import { 
+    StyledLink,
+    ButtonLogout 
+} from "../../utils/Atoms";
 import Logo from '../../assets/logo.webp';
 import { useAuth } from "../../utils/hook/useAuth";
 import { useTranslation } from 'react-i18next';
@@ -74,28 +77,28 @@ function Header({toggle}) {
                     </StyledLink>
                 </HeaderLogo>
                 <StyledNav>
-                    <StyledLink $underline $disappearance>
+                    <StyledLink $underline $disappear>
                         {t('race')}
                     </StyledLink>
-                    <StyledLink $underline $disappearance>
+                    <StyledLink $underline $disappear>
                         {t('partner')}
                     </StyledLink>
                     <StyledNavGroup>
                         {isConnected() ? (
                             <>
-                                <StyledLink to="/user" $disappearance>
+                                <StyledLink to="/profile" $disappear>
                                     {user?.nom} {user?.prenom}
                                 </StyledLink>
-                                <StyledLink to="/login" $isFullLink $navLink $disappearance onClick={signout}>
+                                <ButtonLogout $buttonRadius onClick={signout}>
                                     {t('logout')}
-                                </StyledLink>
+                                </ButtonLogout>
                             </>
                         ) : (
                             <>
-                                <StyledLink to="/signup" $disappearance>
+                                <StyledLink to="/signup" $disappear>
                                     {t('signup')}
                                 </StyledLink>
-                                <StyledLink to="/login" $isFullLink $navLink $disappearance>
+                                <StyledLink to="/login" $isFullLink $navLink $disappear>
                                     {t('login')}
                                 </StyledLink>
                             </>
