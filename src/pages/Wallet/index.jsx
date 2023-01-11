@@ -60,7 +60,7 @@ function Wallet(){
     return(
         <>
             <ContainerProfile>
-                <NavProfile/>
+                <NavProfile activePage='wallet'/>
                 <ContainerInfo>
                     <TitlePage>
                         Wallet

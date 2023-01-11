@@ -86,7 +86,7 @@ function Header({toggle}) {
                     <StyledNavGroup>
                         {isConnected() ? (
                             <>
-                                <StyledLink to="/user" $disappear>
+                                <StyledLink to="/profile" $disappear>
                                     {user?.nom} {user?.prenom}
                                 </StyledLink>
                                 <ButtonLogout $buttonRadius onClick={signout}>

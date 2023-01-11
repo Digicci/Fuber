@@ -6,7 +6,8 @@ import {
     ContainerInfo,
     TitlePage,
     ContainerModal,
-    StyledLink
+    StyledLink,
+    ButtonRace
 } from "../../utils/Atoms";
 import colors from "../../colors";
 import AddMyRace from "../../components/AddMyRaces";
@@ -16,29 +17,29 @@ import OldRaces from "../../components/OldRaces";
 
 function MyRaces(){
 
-    const [myRace, setMyRace] = useState(true)
+    const [races, setRaces] = useState(true)
 
     const toggleMyRace = (state) => {
-        setMyRace(state)
+        setRaces(state)
     }
 
     return (
         <>
             <ContainerProfile>
-                <NavProfile />
+                <NavProfile activePage='myraces' />
                 <ContainerInfo>
                     <TitlePage>
                         Mes courses
                     </TitlePage>
                     <ContainerModal $containerMyRaces>
-                        <StyledLink $buttonMyRacesSelected={myRace} $buttonMyRaces={!myRace} onClick={() => {toggleMyRace(true)}}>
+                        <ButtonRace $buttonMyRacesSelected={races} $buttonMyRaces={!races} onClick={() => {toggleMyRace(true)}}>
                             Mes courses
-                        </StyledLink>
-                        <StyledLink $buttonOldRaces onClick={() => {toggleMyRace(false)}}>
+                        </ButtonRace>
+                        <ButtonRace $buttonOldRacesSelected={!races} $buttonOldRaces={races} onClick={() => {toggleMyRace(false)}}>
                             Anciennes Course
-                        </StyledLink>
+                        </ButtonRace>
                     </ContainerModal>
-                    {myRace ? (<AddMyRace/>) : (<OldRaces/>) }
+                    {races ? (<AddMyRace/>) : (<OldRaces/>) }
                 </ContainerInfo>
             </ContainerProfile>
         </>

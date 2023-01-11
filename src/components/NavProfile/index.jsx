@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { StyledLink } from "../../utils/Atoms";
 
@@ -14,23 +14,24 @@ const Nav = styled.div`
     flex-direction: column;
 `
 
-function NavProfile()
+function NavProfile({activePage})
 {
+    
 
     return(
         <>
             <ContainerNav>
                 <Nav>
-                    <StyledLink $linkProfile>
+                    <StyledLink $linkProfile >
                         Commandez une course
                     </StyledLink>
-                    <StyledLink to="/myraces" $linkProfile>
+                    <StyledLink to="/myraces" $linkProfile $linkProfileSelected={activePage === 'myraces' && true} >
                         Mes courses
                     </StyledLink>
-                    <StyledLink to="/wallet" $linkProfile>
+                    <StyledLink to="/wallet" $linkProfile $linkProfileSelected={activePage === 'wallet' && true}>
                         Wallet
                     </StyledLink>
-                    <StyledLink to="/profile" $linkProfile>
+                    <StyledLink to="/profile" $linkProfile $linkProfileSelected={activePage === 'profile' && true} >
                         Paramètre du profil
                     </StyledLink>
                 </Nav>

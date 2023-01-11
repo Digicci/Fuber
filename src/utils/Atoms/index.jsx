@@ -12,251 +12,197 @@ export const StyledLink = styled(Link)`
     }
     ${(props) =>
         props.$underline && 
-        `position: relative;
-        padding-bottom: .1rem;
-        &:before{
-            content:"";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height:0;
-            border-bottom: 1px solid #000;
-            transition: transform 1.5s cubic-bezier(.19,1,.22,1);
-            transform: scaleX(0);
-            transform-origin: right;
-        }
-        &:hover:before,
-        &:focus:before{
-            transform: scaleX(1);
-            transform-origin: left;
-        }
-        
-        `
+            `position: relative;
+            padding-bottom: .1rem;
+            &:before{
+                content:"";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                height:0;
+                border-bottom: 1px solid #000;
+                transition: transform 1.5s cubic-bezier(.19,1,.22,1);
+                transform: scaleX(0);
+                transform-origin: right;
+            }
+            &:hover:before,
+            &:focus:before{
+                transform: scaleX(1);
+                transform-origin: left;
+            }
+            `
     }
     ${(props) => 
         props.$isFullLink &&
-        `background: ${colors.secondary};
-        color: ${colors.primary};
-        padding: .5rem 1.3rem;
-        -webkit-transition: .3s;
-        -moz-transition: .3s;
-        transition: .3s;
-        &:hover{
-            background: rgba(0,0,0,0.825);
-        }
-        `
+            `background: ${colors.secondary};
+            color: ${colors.primary};
+            padding: .5rem 1.3rem;
+            -webkit-transition: .3s;
+            -moz-transition: .3s;
+            transition: .3s;
+            &:hover{
+                background: rgba(0,0,0,0.825);
+            }
+            `
     }
     ${(props) =>
         props.$navLink &&
-        `border-radius: 10px;
-        @media (max-width: 768px){
-            border-radius: 0;
-        }`
+            `border-radius: 10px;
+            @media (max-width: 768px){
+                border-radius: 0;
+            }`
     }
     ${(props) =>
         props.$phone &&
-        `border-radius: 500px;
-        display: flex;
-        align-items: center;
-        padding: 8px 12px;
-        transition: .3s;
-        font-size: 1.15rem;
-        &:hover{
-            background: ${colors.secondary};
-            color: ${colors.primary};
-        }
-        @media (max-width: 992px){
-            background: ${colors.secondary};
-            color: ${colors.primary};
-        }`
+            `border-radius: 500px;
+            display: flex;
+            align-items: center;
+            padding: 8px 12px;
+            transition: .3s;
+            font-size: 1.15rem;
+            &:hover{
+                background: ${colors.secondary};
+                color: ${colors.primary};
+            }
+            @media (max-width: 992px){
+                background: ${colors.secondary};
+                color: ${colors.primary};
+            }`
     }
     ${(props) => 
         props.$disappear &&
-        `@media (max-width: 992px){
-            display: none;
-        }`
+            `@media (max-width: 992px){
+                display: none;
+            }`
     }
     ${(props) =>
         props.$icon &&
-        `color: ${colors.primary};
-        font-size: 1.7rem;
-        `
+            `color: ${colors.primary};
+            font-size: 1.7rem;
+            `
     }
     ${(props) =>
         props.$footerLink &&
-        `color: ${colors.primary};
-        font-size: .96rem;
-        display: flex;
-        margin-bottom: .5rem;
-        &:hover{
-            text-decoration: underline;
-            color: ${colors.primary};
-        }
-        @media(max-width:1024px){
-            margin-left: 0;
-        }
-        `
+            `color: ${colors.primary};
+            font-size: .96rem;
+            display: flex;
+            margin-bottom: .5rem;
+            &:hover{
+                text-decoration: underline;
+                color: ${colors.primary};
+            }
+            @media(max-width:1024px){
+                margin-left: 0;
+            }
+            `
     }
     ${(props) => 
         props.$loginSignup &&
-        `color : ${colors.secondary};
-        font-size: .85rem;
-        font-weight: 600;
-        &:hover{
-            text-decoration: underline;
-        }
-        `
+            `color : ${colors.secondary};
+            font-size: .85rem;
+            font-weight: 600;
+            &:hover{
+                text-decoration: underline;
+            }
+            `
     }
     ${(props) => 
         props.$isShadowLink && 
-        `background : ${colors.fourth};
-        padding: .5rem 1.3rem;
-        `
+            `background : ${colors.fourth};
+            padding: .5rem 1.3rem;
+            `
     }
     ${(props) =>
         props.$xxl && 
-        `font-size : 1.2rem;
-        text-align:center;
-        padding: 1rem 0;
-        `
+            `font-size : 1.2rem;
+            text-align:center;
+            padding: 1rem 0;
+            `
     }
     ${(props) => 
         props.$navVertical &&
-        `font-size: 1rem;
-        padding: 1rem 0;
-        margin-bottom: .5rem; 
-        `
+            `font-size: 1rem;
+            padding: 1rem 0;
+            margin-bottom: .5rem; 
+            `
     }
     ${(props) =>
         props.$linkDriver &&
-        `margin: 0 .5rem;
-        width: 250px;
-        border-radius: 5px;
-        `
+            `margin: 0 .5rem;
+            width: 250px;
+            border-radius: 5px;
+            `
     }
     ${(props) =>
         props.$linkProfile &&
-        `font-size: 1.05rem;
-        
-        padding 1rem 0;
-        height: 50px;
-
-        &:active{
+            `font-size: 1.05rem;
+            padding 1rem 0;
+            height: 50px;
+            &:hover{
+                background: ${colors.fourth};
+            }
+        `
+    }
+    ${(props) =>
+        props.$linkProfileSelected &&
+            `font-size: 1.05rem;
+            padding 1rem 0;
+            height: 50px;
             border-left: 4px solid ${colors.secondary};
             background: ${colors.fourth};
-        }
-        &:hover{
-            background: ${colors.fourth};
-        }
-        `
+            `
     }
     ${(props) =>
         props.$logoutProfil &&
-        `width : 120px;
-        color: red;
-        background: ${colors.fourth};
-        padding: .7rem .8rem;
-        cursor: pointer;
-        margin: 0;
-        `
+            `width : 120px;
+            color: red;
+            background: ${colors.fourth};
+            padding: .7rem .8rem;
+            cursor: pointer;
+            margin: 0;
+            `
     }
     ${(props) =>
         props.$userProfil &&
-        `
-        margin: 0;
-        `
+            `
+            margin: 0;
+            `
     }
     ${(props) =>
         props.$deleteWallet &&
-        `width: 12%;
-        height:35px;
-        display:flex;
-        justify-content: center;
-        align-items: center;
-        background: red;
-        color: ${colors.primary};
-        font-size: .85rem;
-        border-radius:500px;
-        cursor: pointer;
-        `
+            `width: 12%;
+            height:35px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            background: red;
+            color: ${colors.primary};
+            font-size: .85rem;
+            border-radius:500px;
+            cursor: pointer;
+            `
     }
     ${(props) =>
         props.$addCard && 
-        `
-        height: 50px;
-        border-bottom: 1px solid ${colors.fourth};
-        padding-bottom: 1rem;
-        margin-top: 2rem;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        `
+            `
+            height: 50px;
+            border-bottom: 1px solid ${colors.fourth};
+            padding-bottom: 1rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            `
     }
     ${(props) => 
         props.$linkModal &&
-        `font-size: 1.2rem;
-        cursor: pointer;
-        &:hover{
-            color: ${colors.sixth}
-        }
-        `
-    }
-    ${(props) =>
-        props.$buttonMyRaces &&
-        `background: ${colors.primary};
-        color: ${colors.secondary};
-        justify-content:center;
-        border: 1px solid transparent;
-        text-align: center;
-        border-radius: 25px;
-        padding: 1rem;
-        margin: 0;
-        font-size: .95rem;
-        &:hover{
-            background: ${colors.sixth};
-            color: ${colors.primary};
-        }`
-    }
-    ${(props) =>
-        props.$buttonMyRacesSelected &&
-            `background: ${colors.sixth};
-            color: ${colors.primary};
-            justify-content:center;
-            border: 1px solid transparent;
-            text-align: center;
-            border-radius: 25px;
-            padding: 1rem;
-            margin: 0;
-            font-size: .95rem;`
-    }
-    ${(props) =>
-        props.$buttonOldRaces &&
-        `background: ${colors.primary};
-        color: ${colors.secondary};
-        justify-content:center;
-        border: 1px solid transparent;
-        text-align: center;
-        border-radius: 25px;
-        padding: 1rem;
-        margin: 0;
-        font-size: .95rem;
-        &:hover{
-            background:${colors.secondary};
-            color: ${colors.primary};
-        }`
-    }
-    ${(props) =>
-        props.$buttonOldRacesSelected &&
-            `background:${colors.secondary};
-            color: ${colors.primary};
-            justify-content:center;
-            border: 1px solid transparent;
-            text-align: center;
-            border-radius: 25px;
-            padding: 1rem;
-            margin: 0;
-            font-size: .95rem;`
+            `font-size: 1.2rem;
+            cursor: pointer;
+            &:hover{
+                color: ${colors.sixth}
+            }
+            `
     }
 `
 // styled for Login and Signup
@@ -290,10 +236,10 @@ export const StyledForm = styled.form`
     align-items: center;
     ${(props) => 
         props.$formAddCard &&
-        `width: 100%;
-        height:100%;
-        margin: 1rem 0 0 0;
-        `
+            `width: 100%;
+            height:100%;
+            margin: 1rem 0 0 0;
+            `
     }
 
 `
@@ -305,21 +251,21 @@ export const StyledContainerInput = styled.div`
     justify-content: center;
     ${(props) => 
         props.$icon &&
-        `width: 10%;
-        
-        i{
-            cursor:pointer;
-        }
-        `
+            `width: 10%;
+            
+            i{
+                cursor:pointer;
+            }
+            `
     }
     ${(props) =>
         props.$containerFormCard &&
-        `width: 100%;
-        align-items: flex-start;
+            `width: 100%;
+            align-items: flex-start;
 
-        justify-content: space-around;
-        margin-bottom: 1.5rem;
-        `
+            justify-content: space-around;
+            margin-bottom: 1.5rem;
+            `
     }
 `
 export const StyledInput = styled.input`
@@ -336,43 +282,43 @@ export const StyledInput = styled.input`
     }
     ${(props) => 
         props.$submit &&
-        `background: #eeeeee;
-        color: ${colors.secondary};
-        justify-content:center;
-        text-align: center;
-        border:1px solid #e0dfdd;
-        border-radius: 5px;
-        &:hover{
-            background: ${colors.shadow}!important;
-        }
-        `
+            `background: #eeeeee;
+            color: ${colors.secondary};
+            justify-content:center;
+            text-align: center;
+            border:1px solid #e0dfdd;
+            border-radius: 5px;
+            &:hover{
+                background: ${colors.shadow}!important;
+            }
+            `
     }
     ${(props) => 
         props.$connecter &&
-        `background: ${colors.secondary};
-        color: ${colors.primary};`
+            `background: ${colors.secondary};
+            color: ${colors.primary};`
     }
     ${(props) =>
         props.$inputAddCard &&
-        `padding: 0.7rem 0.3rem;
-        width: 100%;
-        margin: 0.5rem 0;
-        border: none;
-        background: ${colors.fourth};
-        font-size: .9rem;
-        outline: none;
-        `
+            `padding: 0.7rem 0.3rem;
+            width: 100%;
+            margin: 0.5rem 0;
+            border: none;
+            background: ${colors.fourth};
+            font-size: .9rem;
+            outline: none;
+            `
     }
     ${(props) =>
         props.$colorAddCard &&
-        `background: ${colors.secondary};
-        color: ${colors.primary};
-        width: 100%;
-        margin: .5rem 0;
-        &:hover {
-            background:${colors.shadow};
-        }
-        `
+            `background: ${colors.secondary};
+            color: ${colors.primary};
+            width: 100%;
+            margin: .5rem 0;
+            &:hover {
+                background:${colors.shadow};
+            }
+            `
     }
 `
 export const StyledObliger = styled.p`
@@ -417,18 +363,18 @@ export const ButtonLogout = styled.button`
     }
     ${(props) => 
         props.$buttonRadius &&
-        `border-radius: 10px;
-        @media (max-width: 768px){
-            border-radius: 0;
-        }
-        `
+            `border-radius: 10px;
+            @media (max-width: 768px){
+                border-radius: 0;
+            }
+            `
     }
     ${(props) =>
         props.$logoutDissapear &&
-        `@media (max-width: 992px){
-            display: none;
-        }
-        `
+            `@media (max-width: 992px){
+                display: none;
+            }
+            `
     }
 `
 // styled Profile
@@ -441,7 +387,7 @@ export const AvatarWrapper = styled.div`
     gap: 10px;
     ${(props) =>
         props.$profile &&
-        `align-items: flex-start `
+            `align-items: flex-start `
     }
 `
 
@@ -456,7 +402,7 @@ export const AvatarIconWrapper = styled.div`
     box-shadow: 1px 2px 4px 2px ${colors.shade};
     ${(props) =>
         props.$avatarProfile &&
-        `margin: 1rem 0 0 .5rem;`
+            `margin: 1rem 0 0 .5rem;`
     }
 `
 
@@ -513,7 +459,7 @@ export const StyledContainer = styled.div`
     justify-content: flex-start;
     ${(props) => 
         props.$modalHeight &&
-        `height: 70%;`
+            `height: 70%;`
     }
     @media (max-width: 425px){
         width:80%;
@@ -540,12 +486,11 @@ export const StyledModal = styled.div`
     z-index: 200;
     ${(props) => 
         props.isOpen &&
-        `transform : translateX(0);
-        `
+            `transform : translateX(0);`
     }
     ${(props) => 
         props.$modalPayment &&
-        `justify-content: center;`
+            `justify-content: center;`
     }
 `
 export const ContainerModal = styled.div`
@@ -555,9 +500,9 @@ export const ContainerModal = styled.div`
     padding: 1rem;
     ${(props) =>
         props.$containerMyRaces &&
-        `width: 25%;
-        padding: 1rem 0;
-        `
+            `width: 25%;
+            padding: 1rem 0;
+            `
     }
 `
 
@@ -606,7 +551,7 @@ export const DivButton = styled.div`
     align-items: center;
     justify-content: center;
 `
-export const ButtonRaceFinish= styled.div`
+export const ButtonRaceFinish = styled.div`
     width: 60%;
     background: ${colors.sixth};
     color: ${colors.primary};
@@ -616,8 +561,66 @@ export const ButtonRaceFinish= styled.div`
     text-align: center;
     ${(props) =>
         props.$noteRace &&
-        `background: ${colors.fourth};
-        color:${colors.secondary};
-        `
+            `background: ${colors.fourth};
+            color:${colors.secondary};
+            `
+    }
+`
+export const ButtonRace = styled.button`
+    ${(props) =>
+        props.$buttonMyRaces &&
+            `background: ${colors.primary};
+            color: ${colors.secondary};
+            justify-content:center;
+            border: 1px solid transparent;
+            text-align: center;
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 0;
+            font-size: .95rem;
+            &:hover{
+                background: ${colors.sixth};
+                color: ${colors.primary};
+            }`
+    }
+    ${(props) =>
+        props.$buttonMyRacesSelected &&
+            `background: ${colors.sixth};
+            color: ${colors.primary};
+            justify-content:center;
+            border: 1px solid transparent;
+            text-align: center;
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 0;
+            font-size: .95rem;`
+    }
+    ${(props) =>
+        props.$buttonOldRaces &&
+            `background: ${colors.primary};
+            color: ${colors.secondary};
+            justify-content:center;
+            border: 1px solid transparent;
+            text-align: center;
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 0;
+            font-size: .95rem;
+            &:hover{
+                background:${colors.secondary};
+                color: ${colors.primary};
+            }`
+    }
+    ${(props) =>
+        props.$buttonOldRacesSelected &&
+            `background:${colors.secondary};
+            color: ${colors.primary};
+            justify-content:center;
+            border: 1px solid transparent;
+            text-align: center;
+            border-radius: 25px;
+            padding: 1rem;
+            margin: 0;
+            font-size: .95rem;`
     }
 `
