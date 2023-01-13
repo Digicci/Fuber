@@ -64,7 +64,7 @@ const StyledNavGroup = styled.div`
 `
 function Header({toggle}) {
 
-    const {t, i18n} = useTranslation('translation', {keyPrefix: 'header'});
+    const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
     
     const {user, signout, isConnected} = useAuth()
 
@@ -78,10 +78,10 @@ function Header({toggle}) {
                 </HeaderLogo>
                 <StyledNav>
                     <StyledLink $underline $disappear>
-                        {t('race')}
+                        {t('global.race')}
                     </StyledLink>
                     <StyledLink $underline $disappear>
-                        {t('partner')}
+                        {t('global.partner')}
                     </StyledLink>
                     <StyledNavGroup>
                         {isConnected() ? (
@@ -89,17 +89,17 @@ function Header({toggle}) {
                                 <StyledLink to="/profile" $disappear>
                                     {user?.nom} {user?.prenom}
                                 </StyledLink>
-                                <ButtonLogout $buttonRadius onClick={signout}>
-                                    {t('logout')}
+                                <ButtonLogout $buttonRadius $logoutDisappear onClick={signout}>
+                                    {t('global.logout')}
                                 </ButtonLogout>
                             </>
                         ) : (
                             <>
                                 <StyledLink to="/signup" $disappear>
-                                    {t('signup')}
+                                    {t('global.signup')}
                                 </StyledLink>
                                 <StyledLink to="/login" $isFullLink $navLink $disappear>
-                                    {t('login')}
+                                    {t('global.login')}
                                 </StyledLink>
                             </>
                         )}

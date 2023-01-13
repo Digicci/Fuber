@@ -1,31 +1,101 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import NavProfile from "../../components/NavProfile";
 import {
-    StyledLink,
     AvatarWrapper,
     AvatarIconWrapper,
-    Avatar
-} from "../../utils/Atoms";
-import avatar from '../../assets/profile.webp';
-import { useAuth } from "../../utils/hook/useAuth";
-import {
+    Avatar,
+    StyledInput,
     ContainerProfile,
     ContainerInfo,
     TitlePage,
     Label,
-    Number
-} from "../../utils/Atoms"
+    Number,
+    ProfileLogout,
+    InputUpdate
+} from "../../utils/Atoms";
+import avatar from '../../assets/profile.webp';
+import { useAuth } from "../../utils/hook/useAuth";
+import { useTranslation } from "react-i18next";
+import colors from "../../colors";
 
 const Email = styled.p`
     font-size: 1rem;
     margin: .5rem 0 1rem 0 ;
 `
-
-
+const ButtonUpdate = styled.button`
+    border: none;
+    background: transparent;
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 0 0 .5rem;
+`
+const UserName = styled.p`
+    margin: 0;
+    font-size : 1.2rem;
+    text-align:center;
+    padding: 1rem 0;
+`
+const DivUpdate = styled.div`
+    width: 100%;
+    display: flex;
+`
+const ValideModif = styled.button`
+    background: ${colors.sixth};
+    color: ${colors.primary};
+    padding: .5rem 1.3rem;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    transition: .3s;
+    width:fit-content;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-top:.5rem;
+`
 function Profil()
 {
-    const {user, signout} = useAuth()
+    const {user, signout, setUser} = useAuth()
+    const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
+
+    const [update, setUpdate] = useState({
+        nom:false,
+        num:false,
+        mail:false
+    })
+    const toggleUpdate = (e) => {
+        const field = e.target.attributes.datafield.value
+        let state =  {...update}
+        state[field] = !state[field] 
+        setUpdate(state)
+        const userState = {...userCopy}
+        if(field === 'nom'){
+            userState.prenom = user.prenom
+        }
+        userState[field] = user[field]
+        setUserCopy(userState)
+    }
+    const [userCopy, setUserCopy] = useState({...user})
+
+    const handleChange = (e) => {
+        const field = e.target.name
+        let state = {...userCopy}
+        const value = e.target.value
+        state[field] = value
+        setUserCopy(state)
+    }
+    const updateProfile = () => {
+        setUser(userCopy)
+        setUpdate({
+            nom:false,
+            num:false,
+            mail:false
+        })
+        
+    }
 
     return(
         <>
@@ -33,28 +103,124 @@ function Profil()
                 <NavProfile activePage='profile'/>
                 <ContainerInfo>
                     <TitlePage>
-                        Paramètres du profil
+                        {t('global.settings')}
                     </TitlePage>
                     <AvatarWrapper $profile>
                         <AvatarIconWrapper $avatarProfile>
                         <Avatar src={avatar} alt="avatar" />
                         </AvatarIconWrapper>
-                        <StyledLink to="/user" $xxl $userProfil>
-                            {user?.nom} {user?.prenom}
-                        </StyledLink>
+                        <DivUpdate>
+                            { 
+                                update.nom ? (
+                                    <>
+                                        <InputUpdate
+                                            $updateUser
+                                            type='text'
+                                            placeholder={user.nom}
+                                            name='nom'
+                                            value={userCopy.nom}
+                                            onChange={handleChange}
+                                        />
+                                        <InputUpdate
+                                            $updateUser
+                                            type='text'
+                                            placeholder={user.prenom}
+                                            name='prenom'
+                                            value={userCopy.prenom}
+                                            onChange={handleChange}
+                                        />
+                                        <ButtonUpdate>
+                                            <i className="ph-x" dataField='nom' onClick={toggleUpdate}></i>
+                                        </ButtonUpdate>
+                                    </>
+                                ) : (
+                                    <>
+                                        <UserName>
+                                            {user?.nom} {user?.prenom} 
+                                        </UserName>
+                                        <ButtonUpdate>
+                                            <i className="ph-pencil" dataField='nom' onClick={toggleUpdate}></i>
+                                        </ButtonUpdate>
+                                    </>
+                                )
+                            }
+                            
+                        </DivUpdate>
+                        
                     </AvatarWrapper>
-                    <Number>
-                        {user?.num}
-                    </Number>
+                    <DivUpdate>
+                        {
+                            update.num ? (
+                                <>
+                                    <InputUpdate
+                                        $updateUser
+                                        type='tel'
+                                        placeholder={user.num}
+                                        name='num'
+                                        value={userCopy.num}
+                                        onChange={handleChange}
+                                    />
+                                    <ButtonUpdate>
+                                        <i className="ph-x" dataField='num' onClick={toggleUpdate}></i>
+                                    </ButtonUpdate>
+                                </>
+                                
+                            ) : (
+                                <>
+                                    <Number>
+                                        {user?.num}
+                                    </Number>
+                                    <ButtonUpdate>
+                                        <i className="ph-pencil" dataField='num' onClick={toggleUpdate}></i>
+                                    </ButtonUpdate>
+                                </>
+                                
+                            )
+                        }
+                        
+                    </DivUpdate>
+                    
                     <Label>
-                        Adresse e-mail
+                        {t('profile.email')}
                     </Label>
-                    <Email>
-                        {user?.mail}
-                    </Email>
-                    <StyledLink to="/login"  $navLink $logoutProfil onClick={signout}>
-                        Déconnexion
-                    </StyledLink>
+                    <DivUpdate>
+                        {
+                            update.mail ? (
+                                <>
+                                    <InputUpdate                        
+                                        $updateUser
+                                        type='email'
+                                        placeholder={user.mail}
+                                        name='mail'
+                                        value={userCopy.mail}
+                                        onChange={handleChange}
+                                    />
+                                    <ButtonUpdate>
+                                        <i className="ph-x" dataField='mail' onClick={toggleUpdate}></i>
+                                    </ButtonUpdate>
+                                </>
+                                
+                            ) : (
+                                <>
+                                    <Email>
+                                        {user?.mail}
+                                    </Email>
+                                    <ButtonUpdate>
+                                        <i className="ph-pencil" dataField='mail' onClick={toggleUpdate}></i>
+                                    </ButtonUpdate>
+                                </>
+                                
+                            )
+                        }
+                        
+                    </DivUpdate>
+                    
+                    <ProfileLogout onClick={signout}>
+                        {t('global.logout')}
+                    </ProfileLogout>
+                    {
+                        Object.values(update).includes(true) && <ValideModif onClick={updateProfile}>Validé</ValideModif>
+                    }
                 </ContainerInfo>
             </ContainerProfile>
         </>

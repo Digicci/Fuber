@@ -56,19 +56,12 @@
         "error": " Oups, cette page n'existe pas."
     },
 
-    "footer": {
+    "global": {
 
-        "race": "Commandez une course",
-        "partner": "Devenir partenaire",
         "contact": "Contact",
         "about" : "A propos",
         "terms of use": "Condition d'utilisation",
-        "f.a.q": "F.A.Q"
-
-    },
-
-    "header": {
-
+        "f.a.q": "F.A.Q",
         "race": "Commandez une course",
         "partner": "Devenir partenaire",
         "signup" : "Inscription",
@@ -79,5 +72,12 @@
         "settings": "Parametres du profil",
         "help" : "Aide"
 
+    },
+
+    "myRaces": {
+        "old races":"Anciennes Course"
+    },
+    "profile": {
+        "email":"Adresse e-mail"
     }
 }

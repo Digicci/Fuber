@@ -48,7 +48,7 @@ const ImgNav = styled.img`
 
 function NavResponsive({isOpen, toggle}){
 
-    const {t, i18n} = useTranslation('translation', {keyPrefix: 'header'});
+    const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
     
     const {user, signout, isConnected} = useAuth()
 
@@ -72,43 +72,43 @@ function NavResponsive({isOpen, toggle}){
                                     </AvatarWrapper>
 
                                     <ButtonLogout onClick={signout}>
-                                        {t('logout')}
+                                        {t('global.logout')}
                                     </ButtonLogout>
                                     <StyledLink to="myraces" $navVertical>
-                                        {t('my races')}
+                                        {t('global.my races')}
                                     </StyledLink>
                                     <StyledLink to="/wallet" $navVertical>
-                                        {t('wallet')}
+                                        {t('global.wallet')}
                                     </StyledLink>
                                     <StyledLink to='/profile' $navVertical>
-                                        {t('settings')}
+                                        {t('global.settings')}
                                     </StyledLink>
                                 </StyledConnectionWrap>
                                 <StyledLink to='' $navVertical>
-                                    {t('race')}
+                                    {t('global.race')}
                                 </StyledLink>
                                 <StyledLink $navVertical>
-                                    {t('partner')}
+                                    {t('global.partner')}
                                 </StyledLink>
                             </>
                         ) : (
                             <>
                                <StyledConnectionWrap>
                                 <StyledLink to="/signup" $isShadowLink $navLink $xxl>
-                                    {t('signup')}
+                                    {t('global.signup')}
                                     </StyledLink>
                                     <StyledLink to="/login" $isFullLink $navLink $xxl>
-                                    {t('login')}
+                                    {t('global.login')}
                                 </StyledLink>
                                </StyledConnectionWrap>
                                <StyledLink to='/login' $navVertical>
-                                    {t('race')}
+                                    {t('global.race')}
                                 </StyledLink>
                                 <StyledLink $navVertical>
-                                    {t('partner')}
+                                    {t('global.partner')}
                                 </StyledLink>
                                 <StyledLink $navVertical>
-                                    {t('help')}
+                                    {t('global.help')}
                                 </StyledLink>
                             </>
                     )}

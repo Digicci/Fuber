@@ -65,7 +65,7 @@ const Copyright = styled.div`
 
 function Footer() {
 
-    const {t, i18n} = useTranslation('translation', {keyPrefix: 'footer'});
+    const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
 
     return (
         <>
@@ -86,24 +86,24 @@ function Footer() {
             <ContainerWrapper>
                 <ContainerLink>
                     <StyledLink $footerLink>
-                        {t('race')}
+                        {t('global.race')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        {t('partner')}
+                        {t('global.partner')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        {t('contact')}
+                        {t('global.contact')}
                     </StyledLink>
                 </ContainerLink>
                 <ContainerLink>
                     <StyledLink $footerLink>
-                        {t('about')}
+                        {t('global.about')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        {t('terms of use')}
+                        {t('global.terms of use')}
                     </StyledLink>
                     <StyledLink $footerLink>
-                        {t('f.a.q')}
+                        {t('global.f.a.q')}
                     </StyledLink>
                 </ContainerLink>
             </ContainerWrapper>

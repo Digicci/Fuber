@@ -137,7 +137,7 @@ export const StyledLink = styled(Link)`
     ${(props) =>
         props.$linkProfile &&
             `font-size: 1.05rem;
-            padding 1rem 0;
+            padding 1rem 0 0 .5rem;
             height: 50px;
             &:hover{
                 background: ${colors.fourth};
@@ -147,7 +147,7 @@ export const StyledLink = styled(Link)`
     ${(props) =>
         props.$linkProfileSelected &&
             `font-size: 1.05rem;
-            padding 1rem 0;
+            padding rem 0;
             height: 50px;
             border-left: 4px solid ${colors.secondary};
             background: ${colors.fourth};
@@ -167,20 +167,6 @@ export const StyledLink = styled(Link)`
         props.$userProfil &&
             `
             margin: 0;
-            `
-    }
-    ${(props) =>
-        props.$deleteWallet &&
-            `width: 12%;
-            height:35px;
-            display:flex;
-            justify-content: center;
-            align-items: center;
-            background: red;
-            color: ${colors.primary};
-            font-size: .85rem;
-            border-radius:500px;
-            cursor: pointer;
             `
     }
     ${(props) =>
@@ -321,6 +307,26 @@ export const StyledInput = styled.input`
             `
     }
 `
+export const InputUpdate = styled.input`
+    width: 40%;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+    border: 1px solid #e0dfdd;
+    border-radius: 5px;
+    padding: .4rem .6rem;
+    margin: .5rem;
+    @media (max-width:425px){
+        width: 40%;
+    }
+    @media (min-width:758px){
+        width: 25%;
+    }
+    @media (min-width:1024px){
+        width: 40%;
+    }
+
+`
 export const StyledObliger = styled.p`
     font-size: .8rem;
     color: rgb(246, 10, 10);
@@ -370,12 +376,25 @@ export const ButtonLogout = styled.button`
             `
     }
     ${(props) =>
-        props.$logoutDissapear &&
+        props.$logoutDisappear &&
             `@media (max-width: 992px){
                 display: none;
             }
             `
     }
+`
+export const ProfileLogout = styled.button`
+    background: ${colors.fourth};
+    color: ${colors.red};
+    padding: .5rem 1.3rem;
+    -webkit-transition: .3s;
+    -moz-transition: .3s;
+    transition: .3s;
+    width:fit-content;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 400;
 `
 // styled Profile
 
@@ -417,12 +436,18 @@ export const Avatar = styled.img`
 export const ContainerProfile = styled.div`
     width: 100%;
     display: flex;
+    @media (max-width: 425px){
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 `
 export const ContainerInfo = styled.div`
     width: 70%;
     display: flex;
     flex-direction: column;
     margin: 2.5rem 0 ;
+    
 `
 export const TitlePage = styled.h2`
     font-size: 1.65rem;
@@ -510,11 +535,17 @@ export const ContainerModal = styled.div`
 export const MyRaceH3 = styled.h3`
     font-size: 1.15rem;
     font-weight: 600;
+    @media (max-width:425px){
+        width: 100%;
+    }
 `
 export const ContainerMyRaces = styled.div`
     width: 70%;
     margin: 3rem 0 0 0;
     padding: 1rem 0;
+    @media (max-width:425px){
+        width: 100%;
+    }
 `
 export const RaceInProgress = styled.h3`
     margin: 2rem 0 3rem 0;
@@ -527,9 +558,29 @@ export const DivRace = styled.div`
     width: 100%;
     display: flex;
     border-bottom: 1px solid ${colors.fifth};
+    @media (min-width:768px) {
+        width: 80%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    @media (max-width:425px) {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+    @media (max-width:1024px) {
+        width: 100%;
+    }
 `
 export const RaceImg = styled.img`
     width: 20%;
+    @media (max-width:768px) {
+        width: 40%;
+        margin: 0 0 0 .5rem;
+    }
+    
 `
 export const InfoRace = styled.div`
     width: 45%;
@@ -544,12 +595,18 @@ export const InfoRace = styled.div`
         font-weight: 100;
         padding: .5rem;
     }
+    @media (max-width:768px) {
+        width: 100%;
+    }
 `
 export const DivButton = styled.div`
     width: 35%;
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width:768px) {
+        width: 100%;
+    }
 `
 export const ButtonRaceFinish = styled.div`
     width: 60%;
@@ -564,6 +621,9 @@ export const ButtonRaceFinish = styled.div`
             `background: ${colors.fourth};
             color:${colors.secondary};
             `
+    }
+    @media (max-width:768px) {
+        width: 100%;
     }
 `
 export const ButtonRace = styled.button`
