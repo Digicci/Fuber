@@ -63,14 +63,7 @@
         "contact": "Contact",
         "about" : "A propos",
         "terms of use": "Condition d'utilisation",
-        "f.a.q": "F.A.Q"
-
-    },
-
-    "header": {
-
-        "race": "Commandez une course",
-        "partner": "Devenir partenaire",
+        "f.a.q": "F.A.Q",
         "signup" : "Inscription",
         "login": "Connexion",
         "logout": "Déconnexion",
@@ -79,5 +72,11 @@
         "settings": "Parametres du profil",
         "help" : "Aide"
 
+    },
+    "myRaces": {
+        "old races":"Anciennes Course"
+    },
+    "profile": {
+        "email":"Adresse e-mail"
     }
 }

@@ -223,20 +223,20 @@ const ContainerStep = styled.div`
 `
 
 function Home() {
-  const {t, i18n} = useTranslation('translation', {keyPrefix: 'home'});
+  const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
   return(
     <>
       <ContainerWrapper $cover>
         <RowWrapper $direction>
           <h2>
-            {t('welcome')}
+            {t('home.welcome')}
           </h2>
           <Form>
             <DivInput>
-              <Input type="text" placeholder={t('premises')}></Input>
+              <Input type="text" placeholder={t('home.premises')}></Input>
             </DivInput>
             <DivInput>
-              <Input type="text" placeholder={t('destination')}></Input>
+              <Input type="text" placeholder={t('home.destination')}></Input>
             </DivInput>
             <Button type="submit">
               <i class="ph-magnifying-glass"></i>
@@ -246,7 +246,7 @@ function Home() {
       </ContainerWrapper>
       <ContainerWrapper>
         <CCM>
-          <h4>{t('how it works')}</h4>
+          <h4>{t('home.how it works')}</h4>
         </CCM>
         <CCM>
           <ContainerStep>
@@ -256,8 +256,8 @@ function Home() {
                 <SpanStep>1</SpanStep>
               </DivImg>
               <DivText>
-                <Ptext>{t('position')}</Ptext>
-                <Ptext $child2>{t('position description')}</Ptext>
+                <Ptext>{t('home.position')}</Ptext>
+                <Ptext $child2>{t('home.position description')}</Ptext>
               </DivText>
             </div>
             <div style={{marginRight:'15rem'}}>
@@ -266,8 +266,8 @@ function Home() {
                 <SpanStep>2</SpanStep>
               </DivImg>
               <DivText>
-                <Ptext>{t('to select')}</Ptext>
-                <Ptext $child2>{t('select description')}</Ptext>
+                <Ptext>{t('home.to select')}</Ptext>
+                <Ptext $child2>{t('home.select description')}</Ptext>
               </DivText>
             </div>
             <div style={{marginRight:'15rem'}}>
@@ -276,8 +276,8 @@ function Home() {
                 <SpanStep>3</SpanStep>
               </DivImg>
               <DivText>
-                <Ptext>{t('race')}</Ptext>
-                <Ptext $child2>{t('race description')}</Ptext>
+                <Ptext>{t('home.race')}</Ptext>
+                <Ptext $child2>{t('home.race description')}</Ptext>
               </DivText>
             </div>
           </ContainerStep>
@@ -285,7 +285,7 @@ function Home() {
       </ContainerWrapper>
       <ContainerWrapper>
         <CCM>
-          <h4>{t('visibility')}</h4>
+          <h4>{t('home.visibility')}</h4>
         </CCM>
         <CCM $border>
           <ContainerStep>
@@ -293,15 +293,15 @@ function Home() {
               <CcmImg $driverImg src={driver} alt="Driver"/>
             </DivImg>
             <DivText $textDriver>
-              <h5>{t('signup driver')}</h5>
-              <Ptext $pDriver>{t('signup driver description')}</Ptext>
+              <h5>{t('home.signup driver')}</h5>
+              <Ptext $pDriver>{t('home.signup driver description')}</Ptext>
               <StyledLink to="/">
-                <Button $buttonDriver>{t('signup to driver')}</Button>
+                <Button $buttonDriver>{t('home.signup to driver')}</Button>
               </StyledLink>
-              <h5 className="partenaire">{t('partner')}</h5>
-              <Ptext $pDriver>{t('partner description')}</Ptext>
+              <h5 className="partenaire">{t('home.partner')}</h5>
+              <Ptext $pDriver>{t('home.partner description')}</Ptext>
               <StyledLink to="/">
-                <Button $connecterDriver>{t('login partner')}</Button>
+                <Button $connecterDriver>{t('home.login partner')}</Button>
               </StyledLink>
             </DivText>
           </ContainerStep>
