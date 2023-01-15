@@ -2,21 +2,20 @@ import React, {useState} from "react";
 import styled from "styled-components";
 import NavProfile from "../../components/NavProfile";
 import {
-    AvatarWrapper,
-    AvatarIconWrapper,
     Avatar,
-    StyledInput,
-    ContainerProfile,
+    AvatarIconWrapper,
+    AvatarWrapper,
     ContainerInfo,
-    TitlePage,
+    ContainerProfile,
+    InputUpdate,
     Label,
     Number,
     ProfileLogout,
-    InputUpdate
+    TitlePage
 } from "../../utils/Atoms";
 import avatar from '../../assets/profile.webp';
-import { useAuth } from "../../utils/hook/useAuth";
-import { useTranslation } from "react-i18next";
+import {useAuth} from "../../utils/hook/useAuth";
+import {useTranslation} from "react-i18next";
 import colors from "../../colors";
 
 const Email = styled.p`
@@ -58,7 +57,7 @@ const ValideModif = styled.button`
 `
 function Profil()
 {
-    const {user, signout, setUser} = useAuth()
+    const {user, signout, setUser, updateUser} = useAuth()
     const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
 
     const [update, setUpdate] = useState({
@@ -66,6 +65,9 @@ function Profil()
         num:false,
         mail:false
     })
+
+    const [userCopy, setUserCopy] = useState({...user})
+
     const toggleUpdate = (e) => {
         const field = e.target.attributes.datafield.value
         let state =  {...update}
@@ -78,17 +80,16 @@ function Profil()
         userState[field] = user[field]
         setUserCopy(userState)
     }
-    const [userCopy, setUserCopy] = useState({...user})
 
     const handleChange = (e) => {
         const field = e.target.name
         let state = {...userCopy}
-        const value = e.target.value
-        state[field] = value
+        state[field] = e.target.value
         setUserCopy(state)
     }
     const updateProfile = () => {
         setUser(userCopy)
+        updateUser(userCopy)
         setUpdate({
             nom:false,
             num:false,

@@ -35,9 +35,9 @@ function useProvideAxios() {
         return axios.post(`${apiPath}/${path}`, data)
     };
 
-    const put = (path, data) => {
+    const put = (path, data, config) => {
         setHeader();
-        return axios.put(`${apiPath}/${path}`, data)
+        return axios.put(`${apiPath}/${path}`, data, config)
     };
 
     const del = (path, config) => {
