@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import styled from "styled-components";
 import NavProfile from "../../components/NavProfile";
 import {
@@ -15,7 +15,9 @@ import {
 } from "../../utils/Atoms";
 import avatar from '../../assets/profile.webp';
 import {useAuth} from "../../utils/hook/useAuth";
+import {useCsrf} from "../../utils/hook/useCsrf";
 import {useTranslation} from "react-i18next";
+import { ToastContainer, toast } from "react-toastify";
 import colors from "../../colors";
 
 const Email = styled.p`
@@ -68,6 +70,12 @@ function Profil()
 
     const [userCopy, setUserCopy] = useState({...user})
 
+    const csrf = useCsrf()
+
+    useEffect(() => {
+        csrf.getCsrfToken()
+    }, [])
+
     const toggleUpdate = (e) => {
         const field = e.target.attributes.datafield.value
         let state =  {...update}
@@ -88,19 +96,40 @@ function Profil()
         setUserCopy(state)
     }
     const updateProfile = () => {
-        setUser(userCopy)
-        updateUser(userCopy)
-        setUpdate({
-            nom:false,
-            num:false,
-            mail:false
+        updateUser({...userCopy, _csrf: csrf.token}).then((res) => {
+            setUser(res.data.user)
+            localStorage.setItem('token', res.data.token)
+            setUpdate({
+                nom:false,
+                num:false,
+                mail:false
+            })
+            toast.success(t('global.update success'), {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                icon: '👌',
+            })
+        }).catch((err) => {
+            toast.error(t('global.update error'), {
+                position: "top-right",
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                icon: '🤔'
+            })
         })
+
         
     }
 
     return(
         <>
             <ContainerProfile>
+                <ToastContainer />
                 <NavProfile activePage='profile'/>
                 <ContainerInfo>
                     <TitlePage>

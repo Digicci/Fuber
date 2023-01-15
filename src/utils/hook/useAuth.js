@@ -7,12 +7,13 @@ const authContext = createContext();
 const basePath = "user";
 
 
-const normalizeUser = (user) => {
+const normalizeUserWithCSRF = (user) => {
     return {
         nom: user.nom,
         prenom: user.prenom,
         num: user.num,
-        mail: user.mail
+        mail: user.mail,
+        _csrf: user._csrf
     }
 }
 
@@ -60,7 +61,7 @@ function useProvideAuth() {
     }
 
     const updateUser = (user) => {
-        return axios.put(`${basePath}/update`, normalizeUser(user), { withCredentials: true})
+        return axios.put(`${basePath}/update`, normalizeUserWithCSRF(user), { withCredentials: true})
     }
 
     const signout = () => {
