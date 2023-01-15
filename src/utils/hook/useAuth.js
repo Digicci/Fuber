@@ -7,6 +7,15 @@ const authContext = createContext();
 const basePath = "user";
 
 
+const normalizeUserWithCSRF = (user) => {
+    return {
+        nom: user.nom,
+        prenom: user.prenom,
+        num: user.num,
+        mail: user.mail,
+        _csrf: user._csrf
+    }
+}
 
 
 export function ProvideAuth({ children }) {
@@ -51,6 +60,10 @@ function useProvideAuth() {
         return user !== null;
     }
 
+    const updateUser = (user) => {
+        return axios.put(`${basePath}/update`, normalizeUserWithCSRF(user), { withCredentials: true})
+    }
+
     const signout = () => {
         axios.get(`${basePath}/logout`, { withCredentials: true }).then((res) => {
             localStorage.removeItem("token");
@@ -68,6 +81,7 @@ function useProvideAuth() {
         signin,
         signup,
         signout,
-        isConnected
+        isConnected,
+        updateUser
     };
 }

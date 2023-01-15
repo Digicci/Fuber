@@ -70,8 +70,9 @@
         "my races" : "Mes courses",
         "wallet" : "Wallet",
         "settings": "Parametres du profil",
-        "help" : "Aide"
-
+        "help" : "Aide",
+        "update success": "Mise à jour réussie",
+        "update error": "Enregistrement échoué"
     },
 
     "myRaces": {
