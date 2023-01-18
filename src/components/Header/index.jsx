@@ -19,7 +19,7 @@ const HeaderWrapper = styled.header`
     align-items: center;
     background: ${colors.primary};
     box-shadow: 0px 0px 15px rgb(0 0 0 / 15%);
-    z-index: 10;
+    z-index: 10000;
     height: 70px;
     padding: 0 83px;
     @media (max-width: 992px){
@@ -77,7 +77,7 @@ function Header({toggle}) {
                     </StyledLink>
                 </HeaderLogo>
                 <StyledNav>
-                    <StyledLink $underline $disappear>
+                    <StyledLink to="/order" $underline $disappear>
                         {t('global.race')}
                     </StyledLink>
                     <StyledLink $underline $disappear>

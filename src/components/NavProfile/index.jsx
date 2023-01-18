@@ -70,7 +70,7 @@ function NavProfile({activePage})
             <ContainerNav>
                 <ButtonResponsive onClick={toggleMenu}>{!isOpen ? 'Menu' : 'Fermer'}</ButtonResponsive>
                 <Nav $visible={isOpen && true}>
-                    <StyledLink $linkProfile >
+                    <StyledLink to="/order" $linkProfile >
                         {t('global.race')}
                     </StyledLink>
                     <StyledLink to="/myraces" $linkProfile $linkProfileSelected={activePage === 'myraces' && true} >

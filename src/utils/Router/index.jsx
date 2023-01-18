@@ -9,6 +9,7 @@ import Login from "../../pages/Login";
 import Profile from "../../pages/Profile";
 import Wallet from "../../pages/Wallet";
 import MyRaces from "../../pages/MyRaces";
+import OrderRace from "../../pages/OrderRace";
 
 function Router() {
     
@@ -47,6 +48,10 @@ function Router() {
                     element : <PrivateRoute>
                                 <MyRaces/>
                             </PrivateRoute>
+                },
+                {
+                    path: "/order",
+                    element: <OrderRace/>
                 }
             ]
         }
