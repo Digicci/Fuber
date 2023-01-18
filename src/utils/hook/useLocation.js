@@ -33,6 +33,8 @@ function useProvideLocation() {
 
     const unsetTrack = () => {
         clearTimeout(trackerId)
+        setMap(null)
+        setLocationLoad(true)
     }
 
     const getMap = (id) => {
@@ -54,6 +56,6 @@ function useProvideLocation() {
         map,
         setTrack,
         unsetTrack,
-        getMap
+        getMap,
     }
 }
