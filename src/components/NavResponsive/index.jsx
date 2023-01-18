@@ -54,7 +54,7 @@ function NavResponsive({isOpen, toggle}){
 
     return (
         <>
-            <StyledModal isOpen={isOpen} onClick={toggle}>
+            <StyledModal $isOpen={isOpen} onClick={toggle}>
                 <StyledContainer>
                     <StyledClose>
                         <i className="ph-x closemenu"></i>
@@ -101,7 +101,7 @@ function NavResponsive({isOpen, toggle}){
                                     {t('global.login')}
                                 </StyledLink>
                                </StyledConnectionWrap>
-                               <StyledLink to='/login' $navVertical>
+                               <StyledLink to='/order' $navVertical>
                                     {t('global.race')}
                                 </StyledLink>
                                 <StyledLink $navVertical>

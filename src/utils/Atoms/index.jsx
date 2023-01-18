@@ -486,14 +486,28 @@ export const StyledContainer = styled.div`
         props.$modalHeight &&
             `height: 70%;`
     }
-    @media (max-width: 425px){
-        width:80%;
+    ${(props) => 
+        props.$modalDetails &&
+        `width:30%;`
+    }
+    @media (max-width: 768px){
+        width:40%;
+        height:100%;
+        ${(props) => 
+            props.$modalDetails &&
+            `width:80%;
+            height:auto;`
+        }
     }
     @media (min-width: 1440px){
         width: 22%;
         ${(props) =>
             props.$modalHeight &&
             `width: 40%;`
+        }
+        ${(props) => 
+            props.$modalDetails &&
+            `width:30%;`
         }
     }
 `
@@ -508,9 +522,9 @@ export const StyledModal = styled.div`
     height: 100%;
     background: rgba(38,38,38,0.8);
     transform: translateX(4000px);
-    z-index: 200;
+    z-index: 10000;
     ${(props) => 
-        props.isOpen &&
+        props.$isOpen &&
             `transform : translateX(0);`
     }
     ${(props) => 
@@ -520,16 +534,28 @@ export const StyledModal = styled.div`
 `
 export const ContainerModal = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     margin-top: 1rem;
     padding: 1rem;
     ${(props) =>
         props.$containerMyRaces &&
             `width: 25%;
             padding: 1rem 0;
+            justify-content: space-between;
             `
     }
 `
+ export const TitleModal = styled.h5`
+    text-align: center;
+    font-size: 1.3rem;
+    font-weight: 600;
+    ${(props) =>
+        props.$titleDetails && 
+        `border-bottom: 1px solid ${colors.sixth};
+        padding-bottom: 1rem;`
+    }
+`
+
 
 //MyRaces
 export const MyRaceH3 = styled.h3`
@@ -558,7 +584,7 @@ export const DivRace = styled.div`
     width: 100%;
     display: flex;
     border-bottom: 1px solid ${colors.fifth};
-    @media (min-width:768px) {
+    @media (max-width:768px) {
         width: 80%;
         flex-direction: column;
         align-items: flex-start;
@@ -570,7 +596,7 @@ export const DivRace = styled.div`
         align-items: flex-start;
         justify-content: center;
     }
-    @media (max-width:1024px) {
+    @media (min-width:1024px) {
         width: 100%;
     }
 `
@@ -682,5 +708,26 @@ export const ButtonRace = styled.button`
             padding: 1rem;
             margin: 0;
             font-size: .95rem;`
+    }
+    
+`
+// ORDER
+
+export const ButtonOrder = styled.button`
+    width: 50%;
+    font-size: .9rem;
+    color: ${colors.primary};
+    background: ${colors.secondary};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 10px;
+    padding: .8rem 1rem;
+    margin: 1rem 0 0 0;
+    cursor: pointer;
+    border: none;
+    @media (max-width:768px){
+        width: 100%;
     }
 `

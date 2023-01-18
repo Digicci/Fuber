@@ -1,21 +1,16 @@
 import React, {useState} from "react";
-import styled from "styled-components";
 import {
     StyledContainer,
     StyledClose,
     StyledModal,
     StyledLink,
-    ContainerModal
+    ContainerModal,
+    TitleModal
 } from "../../utils/Atoms";
 import AddCard from "../AddCard";
 import AddPaypal from "../AddPaypal";
 
 
-const TitleModal = styled.h5`
-    text-align: center;
-    font-size: 1.3rem;
-    font-weight: 600;
-`
 
 
 
@@ -30,7 +25,7 @@ function AddPayment({isOpen, toggle}){
     
     return(
         <>
-            <StyledModal $modalPayment isOpen={isOpen} >
+            <StyledModal $modalPayment $isOpen={isOpen} >
                 <StyledContainer $modalHeight>
                     <StyledClose onClick={toggle}>
                         <i className="ph-x closemenu"></i>
