@@ -124,6 +124,34 @@ const ChangeCard = styled.div`
     }
 `
 
+const InputWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+`
+
+const Suggestions = styled.div`
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    position: absolute;
+    background: ${colors.primary};
+    border: 1px solid ${colors.fourth};
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    box-shadow: 0 0 10px 0 ${colors.shade};
+    top: 100%;
+    h3{
+        font-size: 1.25rem;
+    }
+  
+    ${(props) => props.$active && `
+        display: flex;
+    `}
+`
+
 function OrderRace(){
 
     const [isOpen,setIsOpen] = useState(false)
@@ -136,16 +164,29 @@ function OrderRace(){
         setIsOpenDetails(!isOpenDetails)
     }
 
+    const [startSuggest, setStartSuggest] = useState(false)
+    const toggleStartSuggest = () => {
+        setStartSuggest(!startSuggest)
+    }
+
     return(
         <>
             <ContainerOrder>
                 <Order>
                     <h2>Commandez une course</h2>
-                    <StyledInput 
-                    $inputAddCard
-                    type="text"
-                    placeholder="Lieu de prise en charge"
-                    name="places"></StyledInput>
+                    <InputWrapper>
+                        <StyledInput
+                            $inputAddCard
+                            type="text"
+                            placeholder="Lieu de prise en charge"
+                            name="places"
+                            onFocus={toggleStartSuggest}
+                            onBlur={toggleStartSuggest}
+                        />
+                        <Suggestions $active={startSuggest}>
+                            <h3>The suggestions</h3>
+                        </Suggestions>
+                    </InputWrapper>
                     <StyledInput
                     $inputAddCard
                     type="text"
