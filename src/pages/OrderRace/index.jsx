@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import colors from "../../colors";
 import { StyledInput,
@@ -143,6 +143,7 @@ const Suggestions = styled.div`
     padding: 0.5rem 0;
     box-shadow: 0 0 10px 0 ${colors.shade};
     top: 100%;
+    z-index: 2;
     h3{
         font-size: 1.25rem;
     }
@@ -159,15 +160,60 @@ function OrderRace(){
         setIsOpen(!isOpen)
     }
 
+    const [propositions, setProposition] = useState({
+        start: {},
+        end: {}
+    })
+
+    const [startPropArray, setStartPropArray] = useState([])
+
+    useEffect(() => {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const coords = {
+                    adresse : "Ma position",
+                    location : {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    }
+                }
+            const state = {...propositions}
+            state.start = {firstStart: coords}
+            setProposition(state)
+        })
+    }, [])
+
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     const toggleIsOpenDetails = () => {
         setIsOpenDetails(!isOpenDetails)
     }
 
-    const [startSuggest, setStartSuggest] = useState(false)
-    const toggleStartSuggest = () => {
-        setStartSuggest(!startSuggest)
+    const [suggest, setSuggest] = useState({
+        start: false,
+        end: false
+    })
+    const toggleSuggest = (name) => {
+        const state = {...suggest}
+        state[name] = !state[name]
+        setSuggest(state)
     }
+
+    const [raceInfo, setRaceInfo] = useState({
+        start: localStorage.getItem('raceStart') ?? '',
+        end: localStorage.getItem('raceEnd') ?? ''
+    })
+
+    const handleChange = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        const state = { ...raceInfo }
+        state[name] = value
+        setRaceInfo(state)
+    }
+
+    useEffect(() => {
+        setStartPropArray(Object.entries(propositions.start))
+    }, [propositions])
+
 
     return(
         <>
@@ -176,22 +222,38 @@ function OrderRace(){
                     <h2>Commandez une course</h2>
                     <InputWrapper>
                         <StyledInput
+                            value={raceInfo.start}
                             $inputAddCard
                             type="text"
                             placeholder="Lieu de prise en charge"
-                            name="places"
-                            onFocus={toggleStartSuggest}
-                            onBlur={toggleStartSuggest}
+                            name="start"
+                            onChange={handleChange}
+                            onFocus={() => {toggleSuggest('start')}}
+                            onBlur={() => {toggleSuggest('start')}}
                         />
-                        <Suggestions $active={startSuggest}>
-                            <h3>The suggestions</h3>
+                        <Suggestions $active={suggest.start}>
+                            {
+                                startPropArray.map((prop) => {
+                                    return <h3 key={prop[0]}>{prop[1].adresse}</h3>
+                                })
+                            }
                         </Suggestions>
                     </InputWrapper>
-                    <StyledInput
-                    $inputAddCard
-                    type="text"
-                    placeholder="Déstination"
-                    name="destination"></StyledInput>
+                    <InputWrapper>
+                        <StyledInput
+                            value={raceInfo.end}
+                            onChange={handleChange}
+                            $inputAddCard
+                            type="text"
+                            placeholder="Déstination"
+                            name="end"
+                            onFocus={() => {toggleSuggest('end')}}
+                            onBlur={() => {toggleSuggest('end')}}
+                        />
+                        <Suggestions $active={suggest.end}>
+                            <h3>Suggestions</h3>
+                        </Suggestions>
+                    </InputWrapper>
                     <TypeChoiceCar>
                         <CarType>
                             <CarImg src={confort} alt="Confort car" />
