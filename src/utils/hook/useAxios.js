@@ -30,6 +30,11 @@ function useProvideAxios() {
         return axios.get(`${apiPath}/${path}`, config)
     };
 
+    const getAdress = (query, {lng, lat}, config = {}) => {
+        query = query.replace(/ /g, "+");
+        return axios.get(`https://api-adresse.data.gouv.fr/search/?q=${query}&lat=${lat}&lon=${lng}`, config)
+    }
+
     const post = (path, data) => {
         setHeader();
         return axios.post(`${apiPath}/${path}`, data)
@@ -50,6 +55,7 @@ function useProvideAxios() {
         get,
         post,
         put,
-        del
+        del,
+        getAdress
     };
 }

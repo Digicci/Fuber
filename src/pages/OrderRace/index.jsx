@@ -10,6 +10,8 @@ import hybride from "../../assets/hybride.webp";
 import AddPayment from "../../components/AddPayment";
 import RaceDetails from "../../components/RaceDetails";
 import Map from "../../components/Map";
+import { useLocation } from "../../utils/hook/useLocation";
+import { useAxios } from "../../utils/hook/useAxios";
 
 
 const ContainerOrder = styled.div`
@@ -153,6 +155,20 @@ const Suggestions = styled.div`
     `}
 `
 
+const SuggestionItem = styled.h3`
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0.1rem 0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    width: 95%;
+    border-radius: 5px;
+    &:hover{
+        background: ${colors.fourth};
+    }
+`
+
 function OrderRace(){
 
     const [isOpen,setIsOpen] = useState(false)
@@ -160,27 +176,13 @@ function OrderRace(){
         setIsOpen(!isOpen)
     }
 
+    const location = useLocation()
+    const axios = useAxios()
+
     const [propositions, setProposition] = useState({
-        start: {},
-        end: {}
+        start: [],
+        end: []
     })
-
-    const [startPropArray, setStartPropArray] = useState([])
-
-    useEffect(() => {
-        navigator.geolocation.getCurrentPosition((position) => {
-            const coords = {
-                    adresse : "Ma position",
-                    location : {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    }
-                }
-            const state = {...propositions}
-            state.start = {firstStart: coords}
-            setProposition(state)
-        })
-    }, [])
 
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     const toggleIsOpenDetails = () => {
@@ -206,14 +208,18 @@ function OrderRace(){
         const name = e.target.name
         const value = e.target.value
         const state = { ...raceInfo }
+        if (value.length > 2) {
+            axios.getAdress(value, { lat: location.location.lat, lng: location.location.lng })
+                .then((res) => {
+                    setProposition({ ...propositions, [name]: res.data.features })
+                })
+        }
+        if (value === '') {
+            setProposition({ ...propositions, [name]: [] })
+        }
         state[name] = value
         setRaceInfo(state)
     }
-
-    useEffect(() => {
-        setStartPropArray(Object.entries(propositions.start))
-    }, [propositions])
-
 
     return(
         <>
@@ -232,9 +238,12 @@ function OrderRace(){
                             onBlur={() => {toggleSuggest('start')}}
                         />
                         <Suggestions $active={suggest.start}>
+                            <SuggestionItem key='position' datalng={location.location.lng} datalat={location.location.lat}>Ma position</SuggestionItem>
                             {
-                                startPropArray.map((prop) => {
-                                    return <h3 key={prop[0]}>{prop[1].adresse}</h3>
+                                (propositions.start && true && propositions.start !== []) && propositions.start.map((prop, index) => {
+                                    return <SuggestionItem key={`${index}`} datalng={prop.geometry.coordinates[0]} datalat={prop.geometry.coordinates[1]}>
+                                                {prop.properties.label}
+                                            </SuggestionItem>
                                 })
                             }
                         </Suggestions>
@@ -251,7 +260,13 @@ function OrderRace(){
                             onBlur={() => {toggleSuggest('end')}}
                         />
                         <Suggestions $active={suggest.end}>
-                            <h3>Suggestions</h3>
+                            {
+                                (propositions.end && true && propositions.end !== []) && propositions.end.map((prop, index) => {
+                                    return <SuggestionItem key={`${index}`} datalng={prop.geometry.coordinates[0]} datalat={prop.geometry.coordinates[1]}>
+                                                {prop.properties.label}
+                                            </SuggestionItem>
+                                })
+                            }
                         </Suggestions>
                     </InputWrapper>
                     <TypeChoiceCar>
@@ -319,5 +334,4 @@ function OrderRace(){
         </>
     )
 }
-
 export default OrderRace

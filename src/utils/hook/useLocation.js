@@ -14,6 +14,8 @@ export const useLocation = () => {
 
 function useProvideLocation() {
     const [location, setLocation] = useState({lng: 0, lat: 0})
+    const [locationMarker, setLocationMarker] = useState(null)
+    const [startMarker, setStartMarker] = useState(null)
     const [locationLoad, setLocationLoad] = useState(true)
     const [trackerId, setTrackerId] = useState(0)
     const [map, setMap] = useState(null)
@@ -26,6 +28,7 @@ function useProvideLocation() {
                     lng: position.coords.longitude
                 })
                 setLocationLoad(false)
+
             })
         }, 5000)
         setTrackerId(id)
@@ -45,9 +48,16 @@ function useProvideLocation() {
                 attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
             }).addTo(map);
 
-            L.marker([location.lat, location.lng]).addTo(map);
+            const marker = L.marker([location.lat, location.lng]).addTo(map);
+            setLocationMarker(marker)
         }
         return false
+    }
+
+    const addStartMarker = (lat, lng) => {
+        const startMarker = L.marker([lat, lng]).addTo(map);
+        locationMarker.remove()
+        setStartMarker(startMarker)
     }
 
     return {
@@ -57,5 +67,6 @@ function useProvideLocation() {
         setTrack,
         unsetTrack,
         getMap,
+        addStartMarker
     }
 }
