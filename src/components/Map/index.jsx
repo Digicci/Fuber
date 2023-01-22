@@ -19,6 +19,7 @@ function Map() {
         location.setTrack()
         return () => {
             location.unsetTrack()
+            location.destroyMap()
         }
     }, [])
 

@@ -34,6 +34,12 @@ function useProvideLocation() {
         setTrackerId(id)
     }
 
+    const destroyMap = () => {
+        if (map) {
+            map.remove()
+        }
+    }
+
     const unsetTrack = () => {
         clearTimeout(trackerId)
         setMap(null)
@@ -67,6 +73,7 @@ function useProvideLocation() {
         setTrack,
         unsetTrack,
         getMap,
-        addStartMarker
+        addStartMarker,
+        destroyMap
     }
 }

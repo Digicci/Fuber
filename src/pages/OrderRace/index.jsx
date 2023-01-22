@@ -214,7 +214,7 @@ function OrderRace(){
                     setProposition({ ...propositions, [name]: res.data.features })
                 })
         }
-        if (value === '') {
+        if (value.length < 3) {
             setProposition({ ...propositions, [name]: [] })
         }
         state[name] = value
