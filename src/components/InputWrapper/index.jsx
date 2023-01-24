@@ -1,10 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import { StyledInput } from "../../utils/Atoms";
 import styled from "styled-components";
 import colors from "../../colors";
-import { useAxios } from "../../utils/hook/useAxios";
 import SuggestionItem from "../SuggestionItem";
-import { useLocation } from "../../utils/hook/useLocation";
+
 
  const InputWrap = styled.div`
     width: 100%;

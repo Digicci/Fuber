@@ -1,6 +1,4 @@
 import React from "react";
-import styled from "styled-components";
-import colors from "../../colors";
 import {
     StyledForm,
     StyledInput,
@@ -8,29 +6,13 @@ import {
     LabelForm,
     SelectForm
 } from "../../utils/Atoms";
+import {
+    ContainerForm,
+    DateAndCcv,
+    ContainerAddCard,
+} from "./atoms"
 
 
-const ContainerForm = styled.div`
-    padding: 0.5rem 1rem;
-    overflow-y: auto;
-    &::-webkit-scrollbar{
-        width: 6px;
-    }
-    &::-webkit-scrollbar-thumb{
-        background: ${colors.fifth};
-    }
-`
-const DateAndCcv = styled.div`
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 3rem;
-`
-const ContainerAddCard = styled.div`
-    display: block;
-    width: 100%;
-
-`
 
 function AddCard(){
 

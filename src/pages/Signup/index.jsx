@@ -13,7 +13,7 @@ import {
 } from "../../utils/Atoms";
 import {useAuth} from "../../utils/hook/useAuth";
 import {useCsrf} from "../../utils/hook/useCsrf";
-import {ToastContainer, toast} from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
 
@@ -215,7 +215,6 @@ function Signup() {
                     </StyledLink>
                 </StyledAccountSign>
             </StyledContainerLogin>
-            <ToastContainer/>
         </>
     )
 }
