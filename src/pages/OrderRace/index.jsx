@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import colors from "../../colors";
 import { StyledInput,
@@ -10,6 +10,8 @@ import hybride from "../../assets/hybride.webp";
 import AddPayment from "../../components/AddPayment";
 import RaceDetails from "../../components/RaceDetails";
 import Map from "../../components/Map";
+import { useLocation } from "../../utils/hook/useLocation";
+import { useAxios } from "../../utils/hook/useAxios";
 
 
 const ContainerOrder = styled.div`
@@ -124,6 +126,49 @@ const ChangeCard = styled.div`
     }
 `
 
+const InputWrapper = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+`
+
+const Suggestions = styled.div`
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    display: none;
+    position: absolute;
+    background: ${colors.primary};
+    border: 1px solid ${colors.fourth};
+    border-radius: 5px;
+    padding: 0.5rem 0;
+    box-shadow: 0 0 10px 0 ${colors.shade};
+    top: 100%;
+    z-index: 2;
+    h3{
+        font-size: 1.25rem;
+    }
+  
+    ${(props) => props.$active && `
+        display: flex;
+    `}
+`
+
+const SuggestionItem = styled.h3`
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0.1rem 0;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    text-align: left;
+    width: 95%;
+    border-radius: 5px;
+    &:hover{
+        background: ${colors.fourth};
+    }
+`
+
 function OrderRace(){
 
     const [isOpen,setIsOpen] = useState(false)
@@ -131,9 +176,49 @@ function OrderRace(){
         setIsOpen(!isOpen)
     }
 
+    const location = useLocation()
+    const axios = useAxios()
+
+    const [propositions, setProposition] = useState({
+        start: [],
+        end: []
+    })
+
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     const toggleIsOpenDetails = () => {
         setIsOpenDetails(!isOpenDetails)
+    }
+
+    const [suggest, setSuggest] = useState({
+        start: false,
+        end: false
+    })
+    const toggleSuggest = (name) => {
+        const state = {...suggest}
+        state[name] = !state[name]
+        setSuggest(state)
+    }
+
+    const [raceInfo, setRaceInfo] = useState({
+        start: localStorage.getItem('raceStart') ?? '',
+        end: localStorage.getItem('raceEnd') ?? ''
+    })
+
+    const handleChange = (e) => {
+        const name = e.target.name
+        const value = e.target.value
+        const state = { ...raceInfo }
+        if (value.length > 2) {
+            axios.getAdress(value, { lat: location.location.lat, lng: location.location.lng })
+                .then((res) => {
+                    setProposition({ ...propositions, [name]: res.data.features })
+                })
+        }
+        if (value.length < 3) {
+            setProposition({ ...propositions, [name]: [] })
+        }
+        state[name] = value
+        setRaceInfo(state)
     }
 
     return(
@@ -141,16 +226,49 @@ function OrderRace(){
             <ContainerOrder>
                 <Order>
                     <h2>Commandez une course</h2>
-                    <StyledInput 
-                    $inputAddCard
-                    type="text"
-                    placeholder="Lieu de prise en charge"
-                    name="places"></StyledInput>
-                    <StyledInput
-                    $inputAddCard
-                    type="text"
-                    placeholder="Déstination"
-                    name="destination"></StyledInput>
+                    <InputWrapper>
+                        <StyledInput
+                            value={raceInfo.start}
+                            $inputAddCard
+                            type="text"
+                            placeholder="Lieu de prise en charge"
+                            name="start"
+                            onChange={handleChange}
+                            onFocus={() => {toggleSuggest('start')}}
+                            onBlur={() => {toggleSuggest('start')}}
+                        />
+                        <Suggestions $active={suggest.start}>
+                            <SuggestionItem key='position' datalng={location.location.lng} datalat={location.location.lat}>Ma position</SuggestionItem>
+                            {
+                                (propositions.start && true && propositions.start !== []) && propositions.start.map((prop, index) => {
+                                    return <SuggestionItem key={`${index}`} datalng={prop.geometry.coordinates[0]} datalat={prop.geometry.coordinates[1]}>
+                                                {prop.properties.label}
+                                            </SuggestionItem>
+                                })
+                            }
+                        </Suggestions>
+                    </InputWrapper>
+                    <InputWrapper>
+                        <StyledInput
+                            value={raceInfo.end}
+                            onChange={handleChange}
+                            $inputAddCard
+                            type="text"
+                            placeholder="Déstination"
+                            name="end"
+                            onFocus={() => {toggleSuggest('end')}}
+                            onBlur={() => {toggleSuggest('end')}}
+                        />
+                        <Suggestions $active={suggest.end}>
+                            {
+                                (propositions.end && true && propositions.end !== []) && propositions.end.map((prop, index) => {
+                                    return <SuggestionItem key={`${index}`} datalng={prop.geometry.coordinates[0]} datalat={prop.geometry.coordinates[1]}>
+                                                {prop.properties.label}
+                                            </SuggestionItem>
+                                })
+                            }
+                        </Suggestions>
+                    </InputWrapper>
                     <TypeChoiceCar>
                         <CarType>
                             <CarImg src={confort} alt="Confort car" />
@@ -216,5 +334,4 @@ function OrderRace(){
         </>
     )
 }
-
 export default OrderRace

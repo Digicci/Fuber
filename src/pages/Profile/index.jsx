@@ -128,8 +128,7 @@ function Profil()
 
     return(
         <>
-            <ContainerProfile>
-                <ToastContainer />
+            <ContainerProfile> 
                 <NavProfile activePage='profile'/>
                 <ContainerInfo>
                     <TitlePage>
