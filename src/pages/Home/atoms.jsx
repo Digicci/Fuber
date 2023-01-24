@@ -69,8 +69,6 @@ export const DivInput = styled.div`
     margin: .5rem;
   }
 `
-
-
 export const Input = styled.input`
   width: 90%;
   border: none;
