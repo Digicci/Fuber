@@ -476,7 +476,7 @@ export const StyledClose = styled.div`
     cursor: pointer;
 `
 export const StyledContainer = styled.div`
-    width: 33%;
+    width: 55%;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -484,7 +484,7 @@ export const StyledContainer = styled.div`
     justify-content: flex-start;
     ${(props) => 
         props.$modalHeight &&
-            `height: 70%;`
+            `height: auto;`
     }
     ${(props) => 
         props.$modalDetails &&
@@ -498,6 +498,13 @@ export const StyledContainer = styled.div`
             `width:80%;
             height:auto;`
         }
+    }
+    @media (max-width:425px){
+        ${(props) => 
+        props.$modalHeight &&
+            `height: auto;
+            width:100%;`
+    }
     }
     @media (min-width: 1440px){
         width: 22%;
