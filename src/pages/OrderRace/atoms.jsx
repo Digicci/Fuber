@@ -29,7 +29,7 @@ export const Order = styled.div`
     @media (max-width:768px) {
         width: 100%;
     }
-    @media (max-width:1024px){
+    @media (min-width:1024px){
         width: 45%;
     }
 `

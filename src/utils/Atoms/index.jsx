@@ -491,7 +491,7 @@ export const StyledContainer = styled.div`
         `width:30%;`
     }
     @media (max-width: 768px){
-        width:40%;
+        width:60%;
         height:100%;
         ${(props) => 
             props.$modalDetails &&

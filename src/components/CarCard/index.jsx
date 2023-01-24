@@ -28,7 +28,7 @@ function CarCard({imgInfo, title, places, descriptionInfo}){
                     <p> {descriptionInfo.price} </p>
                 </Price>
             </CarType>
-</>
+        </>
     )
 }
 export default CarCard
