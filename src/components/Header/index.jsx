@@ -1,19 +1,16 @@
 import React from "react";
 import { 
     StyledLink,
-    ButtonLogout 
-} from "../../utils/Atoms";
-import Logo from '../../assets/logo.webp';
-import { useAuth } from "../../utils/hook/useAuth";
-import { useTranslation } from 'react-i18next';
-import {
+    ButtonLogout,
     HeaderImg,
     HeaderLogo,
     HeaderWrapper,
     StyledNav,
-    StyledNavGroup,
-    
-} from "./atoms"
+    StyledNavGroup, 
+} from "../../utils/Atoms";
+import Logo from '../../assets/logo.webp';
+import { useAuth } from "../../utils/hook/useAuth";
+import { useTranslation } from 'react-i18next';
 
 function Header({toggle}) {
 

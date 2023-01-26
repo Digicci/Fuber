@@ -13,9 +13,10 @@ export const CarType = styled.div`
         props.$active &&
         `border: 1px solid ${colors.sixth}`
     }
+    
 `
 export const CarImg = styled.img`
-    width: 25%;
+    width: 20%;
     display: flex;
     aspect-ratio: 1/1;
     @media (max-width:768px){
@@ -23,6 +24,9 @@ export const CarImg = styled.img`
     }
     @media (max-width:425px){
         width: 25%;
+    }
+    @media (min-width:1440px){
+        width: 15%;
     }
 `
 

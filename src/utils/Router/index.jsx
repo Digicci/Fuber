@@ -10,6 +10,7 @@ import Profile from "../../pages/Profile";
 import Wallet from "../../pages/Wallet";
 import MyRaces from "../../pages/MyRaces";
 import OrderRace from "../../pages/OrderRace";
+import Partner from "../../pages/driver/Partner";
 
 function Router() {
     
@@ -52,6 +53,10 @@ function Router() {
                 {
                     path: "/order",
                     element: <OrderRace/>
+                },
+                {
+                    path:"/partner",
+                    element: <Partner/>
                 }
             ]
         }
