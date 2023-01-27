@@ -9,7 +9,7 @@ export const Container = styled.div`
 export const ContainerSignup = styled.div`
     width: 100vw;
     height:auto;
-    padding: 3rem 3rem 10rem 0;
+    padding: 8rem 3rem 10rem 0;
     display: flex;
     justify-content: end;
     ${(props) => 
@@ -17,7 +17,7 @@ export const ContainerSignup = styled.div`
         `background: url(${cover});
         background-repeat: no-repeat;
         background-size: cover;
-        background-position: top center;
+        background-position: top;
         `
     }
     
