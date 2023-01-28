@@ -9,7 +9,7 @@ import {
     StyledAccountSign,
     StyledLink
 } from "../../utils/Atoms";
-import { toast } from "react-toastify";
+import {toast} from "react-toastify";
 import { useAuth } from "../../utils/hook/useAuth";
 import { useCsrf } from "../../utils/hook/useCsrf";
 import { useTranslation } from 'react-i18next';
@@ -25,6 +25,7 @@ function Login(){
         credential:'',
         mdp:'',
     })
+    const idToast = 1
 
     const toastTimer = 2000
 
@@ -59,16 +60,19 @@ function Login(){
             })
         } else {
             //if present, send request to server, before make a toast
-            const toastId = toast(t('toast loader login'), { autoClose: false })
+            toast.loading(t('toast loader login'), {
+                toastId: idToast
+            })
             auth.signin(user.credential, user.mdp, csrf.token).then(res => {
                 if (res.data) {
-                    toast.update(toastId, {
+                    toast.update(idToast, {
                         type: 'success',
                         autoClose: toastTimer,
                         render: t('toast update login'),
                         isLoading: false,
                         icon: '👌',
-                        className: 'rotateY animated',
+                        className: 'rotateY',
+                        closeOnClick: true
                     })
                     setTimeout(() => {
                         const returnFunc = new Promise((resolve, reject) => {
@@ -77,14 +81,12 @@ function Login(){
                         returnFunc.then(() => {
                             localStorage.setItem('token', res.data.token)
                             auth.setUser(res.data.user)
-                            toast.dismiss(toastId)
-                            console.log('toast dismissed')
                         })
-                    }, toastTimer+1000);
+                    }, toastTimer);
                 }
             }).catch(err => {
                 if (err.response.data.includes('CSRF')) {
-                    toast.update(toastId, {
+                    toast.update(idToast, {
                         render: t('toats update error login'),
                         type: 'error',
                         autoClose: 5000,
@@ -93,7 +95,7 @@ function Login(){
                         className: 'rotateY animated'
                     })
                 } else {
-                    toast.update(toastId, {
+                    toast.update(idToast, {
                         render: err.response.data,
                         type: 'error',
                         autoClose: 5000,

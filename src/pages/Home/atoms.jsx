@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import colors from "../../colors";
-import corverHome from "../../assets/coverhome.webp";
+import coverHome from "../../assets/coverhome.webp";
 
 
 
@@ -12,7 +12,7 @@ export const ContainerWrapper = styled.div`
     props.$cover &&
     `width:auto;
     height: 100vh;
-    background: url(${corverHome});
+    background: url(${coverHome});
     background-repeat: no-repeat;
     background-size: cover;
     background-position: top center;
@@ -69,8 +69,6 @@ export const DivInput = styled.div`
     margin: .5rem;
   }
 `
-
-
 export const Input = styled.input`
   width: 90%;
   border: none;
