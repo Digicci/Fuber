@@ -8,6 +8,7 @@ import {
     LabelForm,
     SelectForm
 } from "../../utils/Atoms";
+import {PaymentElement} from "@stripe/react-stripe-js";
 
 
 const ContainerForm = styled.div`
@@ -38,49 +39,50 @@ function AddCard(){
         <>
             <ContainerForm>
                         <StyledForm $formAddCard>
-                            <StyledContainerInput $containerFormCard>
+                            {/*<StyledContainerInput $containerFormCard>
                                 <LabelForm>Nom :</LabelForm>
                                 <StyledInput
-                                $inputAddCard 
-                                type="text"
-                                placeholder="Votre nom">
+                                    $inputAddCard
+                                    type="text"
+                                    placeholder="Votre nom">
                                 </StyledInput>
                             </StyledContainerInput>
-                            <StyledContainerInput $containerFormCard>
+                                <StyledContainerInput $containerFormCard>
                                 <LabelForm>Numéro de carte :</LabelForm>
                                 <StyledInput
-                                $inputAddCard 
+                                $inputAddCard
                                 type="text"
                                 placeholder="Numéro de votre carte">
                                 </StyledInput>
-                            </StyledContainerInput>
-                            <StyledContainerInput $containerFormCard>
+                                </StyledContainerInput>
+                                <StyledContainerInput $containerFormCard>
                                 <DateAndCcv>
-                                    <ContainerAddCard>
-                                        <LabelForm>Date d'expiration : </LabelForm>
-                                        <StyledInput
-                                        $inputAddCard 
-                                        type="text"
-                                        placeholder="MM/AA">
-                                        </StyledInput>   
-                                    </ContainerAddCard>
-                                    <ContainerAddCard>
-                                        <LabelForm>Code de sécurité : </LabelForm>
-                                        <StyledInput
-                                        $inputAddCard 
-                                        type="text"
-                                        placeholder="CCV">
-                                        </StyledInput>
-                                    </ContainerAddCard>
+                                <ContainerAddCard>
+                                <LabelForm>Date d'expiration : </LabelForm>
+                                <StyledInput
+                                $inputAddCard
+                                type="text"
+                                placeholder="MM/AA">
+                                </StyledInput>
+                                </ContainerAddCard>
+                                <ContainerAddCard>
+                                <LabelForm>Code de sécurité : </LabelForm>
+                                <StyledInput
+                                $inputAddCard
+                                type="text"
+                                placeholder="CCV">
+                                </StyledInput>
+                                </ContainerAddCard>
                                 </DateAndCcv>
-                            </StyledContainerInput>
-                            <StyledContainerInput $containerFormCard>
+                                </StyledContainerInput>
+                                <StyledContainerInput $containerFormCard>
                                 <LabelForm>Pays :</LabelForm>
                                 <SelectForm>
-                                    <option value=''>--Choisir un pays--</option>
-                                    <option value='France'>France</option>
+                                <option value=''>--Choisir un pays--</option>
+                                <option value='France'>France</option>
                                 </SelectForm>
-                            </StyledContainerInput>
+                                </StyledContainerInput>*/}
+                            <PaymentElement />
                             <StyledContainerInput $containerFormCard>
                                 <StyledInput $submit $colorAddCard 
                                 type='submit' 

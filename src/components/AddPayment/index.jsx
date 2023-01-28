@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     StyledContainer,
     StyledClose,
@@ -9,19 +9,39 @@ import {
 } from "../../utils/Atoms";
 import AddCard from "../AddCard";
 import AddPaypal from "../AddPaypal";
+import {Elements} from "@stripe/react-stripe-js";
+import {loadStripe} from "@stripe/stripe-js";
+import {useCard} from "../../utils/hook/useCard";
 
 
+const stripePromise = loadStripe('pk_test_51MP9laGtIjyGGRoGpaBalxu4QM8MJnTztna8yCbYAdiO8ffs8VCVjVtcu1kAUzAF0xQnCjQlmb2ajQrQVB92QXd500UbrRxxFH')
 
 
 
 function AddPayment({isOpen, toggle}){
+    const {getUserToken} = useCard()
 
     const [isAdd, setIsAdd] = useState(true)
+    const [stripeOptions, setStripeOptions] = useState(null)
 
     const toggleDisplay = (state) => {
 
         setIsAdd(state)
     }
+
+
+    useEffect(() => {
+        getUserToken().then((res) => {
+            const client_secret = res.data.client_secret
+            setStripeOptions({
+                clientSecret: client_secret,
+                appearance: {
+                    theme: 'flat'
+                },
+                layout: 'accordion'
+            })
+        })
+    }, [])
     
     return(
         <>
@@ -42,7 +62,13 @@ function AddPayment({isOpen, toggle}){
                     </StyledLink>
                     </ContainerModal>
                     {
-                        isAdd ? (<AddCard/>) : (<AddPaypal/>)
+                        stripeOptions && (
+                            <Elements stripe={stripePromise} options={stripeOptions}>
+                                {
+                                    isAdd ? (<AddCard/>) : (<AddPaypal/>)
+                                }
+                            </Elements>
+                        )
                     }
                 </StyledContainer>
             </StyledModal>

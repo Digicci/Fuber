@@ -12,6 +12,7 @@ import RaceDetails from "../../components/RaceDetails";
 import Map from "../../components/Map";
 import { useLocation } from "../../utils/hook/useLocation";
 import { useAxios } from "../../utils/hook/useAxios";
+import { ProvideCard } from "../../utils/hook/useCard";
 
 
 const ContainerOrder = styled.div`
@@ -323,7 +324,9 @@ function OrderRace(){
                             <i className="ph-caret-right"></i>
                         </span>
                     </ChangeCard>
-                    <AddPayment toggle={toggleIsOpen} isOpen={isOpen}/>
+                    <ProvideCard>
+                        <AddPayment toggle={toggleIsOpen} isOpen={isOpen}/>
+                    </ProvideCard>
                     <RaceDetails toggle={toggleIsOpenDetails} isOpenDetails={isOpenDetails} />
                     <ButtonOrder onClick={toggleIsOpenDetails}>
                         Commandez la course

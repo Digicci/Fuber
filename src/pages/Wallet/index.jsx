@@ -9,6 +9,8 @@ import {
 } from "../../utils/Atoms";
 import colors from "../../colors";
 import AddPayment from "../../components/AddPayment";
+import {ProvideCard} from "../../utils/hook/useCard";
+
 
 const H3 = styled.h3`
     font-size: 1.5rem;
@@ -81,6 +83,7 @@ const ButtonDelete = styled.button`
 `
 function Wallet(){
 
+
     const [isOpen,setIsOpen] = useState(false)
     const toggleIsOpen = () => {
         setIsOpen(!isOpen)
@@ -115,7 +118,9 @@ function Wallet(){
                         Supprimer
                         </ButtonDelete> 
                     </ContainerCard>
-                    <AddPayment toggle={toggleIsOpen} isOpen={isOpen} />
+                    <ProvideCard>
+                        <AddPayment toggle={toggleIsOpen} isOpen={isOpen} />
+                    </ProvideCard>
                     <StyledLink $addCard onClick={toggleIsOpen}>
                         <AddIcon className="ph-plus"></AddIcon>  
                         <AddText>

@@ -8,6 +8,7 @@ import { ProvideAxios } from "../../utils/hook/useAxios";
 import { ProvideCsrf } from "../../utils/hook/useCsrf";
 import { ProvideLocation } from "../../utils/hook/useLocation";
 import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Root(){
     const [isOpen,setIsOpen] = useState(false)
@@ -24,7 +25,7 @@ function Root(){
                             <NavResponsive toggle={toggleIsOpen} isOpen={isOpen}/>
                             <div id="page__container">
                                 <Outlet/>
-                                <ToastContainer style={{zIndex:20000}} />
+                                <ToastContainer style={{zIndex:20000}} autoClose={5000} />
                             </div>
                             <Footer/>
                         </ProvideAuth>

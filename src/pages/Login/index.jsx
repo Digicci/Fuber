@@ -53,22 +53,22 @@ function Login(){
             //if not present, display error toast
             toast(t('toast info error login'), {
                 type: 'error',
-                autoClose: 5000,
+                autoClose: 2000,
                 position: 'top-right',
                 icon: '🤔'
             })
         } else {
             //if present, send request to server, before make a toast
-            const toastId = toast.loading(t('toast loader login'), { autoClose: false, position: 'top-right' })
+            const toastId = toast(t('toast loader login'), { autoClose: false })
             auth.signin(user.credential, user.mdp, csrf.token).then(res => {
                 if (res.data) {
                     toast.update(toastId, {
-                        render: t('toast update login'),
                         type: 'success',
                         autoClose: toastTimer,
+                        render: t('toast update login'),
                         isLoading: false,
                         icon: '👌',
-                        className: 'rotateY animated'
+                        className: 'rotateY animated',
                     })
                     setTimeout(() => {
                         const returnFunc = new Promise((resolve, reject) => {
@@ -77,8 +77,10 @@ function Login(){
                         returnFunc.then(() => {
                             localStorage.setItem('token', res.data.token)
                             auth.setUser(res.data.user)
+                            toast.dismiss(toastId)
+                            console.log('toast dismissed')
                         })
-                    }, toastTimer);
+                    }, toastTimer+1000);
                 }
             }).catch(err => {
                 if (err.response.data.includes('CSRF')) {
