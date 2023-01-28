@@ -5,10 +5,11 @@ import cover from "../../../assets/driver/shop.webp"
 export const Container = styled.div`
     width: 100vw;
     height:100vw;
+    display: flex;
 `
 export const ContainerSignup = styled.div`
     width: 100vw;
-    height:auto;
+    height: 100%;
     padding: 8rem 3rem 10rem 0;
     display: flex;
     justify-content: end;
@@ -26,6 +27,7 @@ export const ContainerForm = styled.div`
     display: flex;
     flex-direction: column;
     width: 50%;
+    height: fit-content;
     background: ${colors.primary};
     border-radius: 5px;
     box-shadow: 0 0 10px ${colors.purple};
