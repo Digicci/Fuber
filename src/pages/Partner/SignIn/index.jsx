@@ -9,7 +9,7 @@ import {
     SelectForm
 } from "../../../utils/Atoms";
 
-function Partner(){
+function SignIn(){
 
     return(
         <>
@@ -87,4 +87,4 @@ function Partner(){
         </>
     )
 }
-export default Partner
+export default SignIn

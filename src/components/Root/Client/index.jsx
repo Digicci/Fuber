@@ -1,15 +1,15 @@
 import React, {useState} from "react";
 import { Outlet } from "react-router-dom";
-import Footer from "../Footer";
-import Header from "../Header";
-import NavResponsive from "../NavResponsive";
-import { ProvideAuth } from "../../utils/hook/useAuth";
-import { ProvideAxios } from "../../utils/hook/useAxios";
-import { ProvideCsrf } from "../../utils/hook/useCsrf";
-import { ProvideLocation } from "../../utils/hook/useLocation";
+import Footer from "../../Footer";
+import Header from "../../Header";
+import NavResponsive from "../../NavResponsive";
+import { ProvideAuth } from "../../../utils/hook/useAuth";
+import { ProvideAxios } from "../../../utils/hook/useAxios";
+import { ProvideCsrf } from "../../../utils/hook/useCsrf";
+import { ProvideLocation } from "../../../utils/hook/useLocation";
 import { ToastContainer } from "react-toastify";
 
-function Root(){
+function Client(){
     const [isOpen,setIsOpen] = useState(false)
     const toggleIsOpen = () => {
         setIsOpen(!isOpen)
@@ -34,4 +34,4 @@ function Root(){
         </>
     )
 }
-export default Root
+export default Client

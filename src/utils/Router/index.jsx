@@ -1,8 +1,9 @@
 import React from "react";
 import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
-import Routes from "./Routes";
+import RoutesClient from "./Routes/RoutesClient";
+import RoutesPartner from "./Routes/RoutesPartner";
 import Error from "../../components/Error";
-import PrivateRoute from "./privateRoute";
+import PrivateRoute from "./Routes/privateRoute/Client";
 import Home from "../../pages/Home";
 import Signup from "../../pages/Signup";
 import Login from "../../pages/Login";
@@ -10,14 +11,15 @@ import Profile from "../../pages/Profile";
 import Wallet from "../../pages/Wallet";
 import MyRaces from "../../pages/MyRaces";
 import OrderRace from "../../pages/OrderRace";
-import Partner from "../../pages/driver/Partner";
+import Partner from "../../pages/Partner/SignIn";
+import SignIn from "../../pages/Partner/SignIn";
 
 function Router() {
     
     const router = createBrowserRouter([
         {
             path: "/",
-            element: <Routes />,
+            element: <RoutesClient />,
             errorElement: <Error />,
             children: [
                 {
@@ -53,12 +55,20 @@ function Router() {
                 {
                     path: "/order",
                     element: <OrderRace/>
-                },
-                {
-                    path:"/partner",
-                    element: <Partner/>
                 }
             ]
+        },
+        {
+            path: "/partner",
+            element: <RoutesPartner />,
+            errorElement: <Error />,
+            children: [
+                {
+                    path: "/partner/signin",
+                    element: <SignIn />
+                }
+            ]
+
         }
     ])
 
