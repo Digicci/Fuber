@@ -19,7 +19,6 @@ function useProvideCard() {
     const csrf = useCsrf();
 
     const getUserToken = () => {
-        csrf.getCsrfToken()
         return axios.post(`${basePath}/addCardIntent`, {_csrf: csrf.token}, { withCredentials: true })
     }
 
