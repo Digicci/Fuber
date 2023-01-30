@@ -8,6 +8,7 @@ const colors = {
     shade: 'rgba(0,0,0,0.2)',
     shadow: 'rgba(0, 0, 0, 0.825)',
     red: 'rgb(248,13,13)',
+    purple: '#9400d3',
 }
 
 export default colors

@@ -18,9 +18,9 @@ function useProvideCsrf() {
     const [token, setToken] = useState(null);
 
     const getCsrfToken = () => {
-        let token
         axios.get(`${apiPath}/security/csrf/form`, { withCredentials: true }).then((res) => {
             setToken(res.data.csrfToken);
+            return true
         })
     }
 
