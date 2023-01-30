@@ -1,12 +1,12 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
-import HeaderDriver from "../../driver/HeaderDriver";
+import Header from "../../Partner/Header";
 import Footer from "../../Footer";
 
 function Partner() {
     return (
         <>
-            <HeaderDriver />
+            <Header/>
             <div id="page_container">
                 <Outlet />
             </div>
