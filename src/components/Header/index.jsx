@@ -30,7 +30,7 @@ function Header({toggle}) {
                     <StyledLink to="/order" $underline $disappear>
                         {t('global.race')}
                     </StyledLink>
-                    <StyledLink $underline $disappear>
+                    <StyledLink to ="/partner/signin" $underline $disappear>
                         {t('global.partner')}
                     </StyledLink>
                     <StyledNavGroup>

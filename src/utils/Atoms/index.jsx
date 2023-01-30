@@ -812,3 +812,93 @@ export const StyledNavGroup = styled.div`
         width: 100%;
     }
 `
+//STEP
+
+export const ContainerStep = styled.div`
+  display:flex;
+  justify-content: space-evenly;
+  @media (max-width:1024px){
+    justify-content: center;
+    margin: 3rem;
+  }
+  @media (max-width:768px) {
+    flex-direction: column;
+    margin: 0;
+    align-items: center;
+  }
+`
+export const DivText = styled.div`
+  width: 250px;
+  height: auto;
+  text-align: center;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  display: block;
+  ${(props) =>
+    props.$textDriver &&
+   `width: auto;
+    text-align: start;
+    `
+  }
+  h5{
+    text-align: start;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 100;
+  }
+  .partenaire{
+    margin-top: 5rem;
+    height:30px;
+  }
+`
+export const Ptext = styled.p`
+  font-size: 1rem ;
+  font-weight: 600;
+  ${(props) =>
+    props.$child2 &&
+    `font-size: .8rem;
+    padding: .2rem 1.5rem;
+    `
+  }
+  ${(props) => 
+    props.$pDriver &&
+    `font-weight: 300;
+    margin-bottom: 1.5rem;`
+  }
+`
+export const Step = styled.div`
+  margin-right: 15rem;
+  @media (max-width:1024px){
+    margin-right: 0;
+  }
+`
+export const CcmImg = styled.img`
+  width: 250px;
+  ${(props) => 
+    props.$driverImg &&
+    `width: 550px;
+    @media (max-width:425px){
+      width:200px;
+    }
+    `
+  }
+`
+export const DivImg = styled.div`
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  position: relative;
+  transform: scale(0.8);
+  
+  ${(props) =>
+    props.$divDriver &&
+    `width: 550px;
+    margin-top: 0;
+    @media (max-width:425px){
+      width: 200px;
+    }
+    `
+  }
+`

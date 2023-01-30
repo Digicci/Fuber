@@ -7,7 +7,9 @@ function Partner() {
     return (
         <>
             <HeaderDriver />
-            <Outlet />
+            <div id="page_container">
+                <Outlet />
+            </div>
             <Footer />
         </>
     )

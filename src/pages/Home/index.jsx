@@ -3,23 +3,25 @@ import firstStep from "../../assets/firststep.webp";
 import secondStep from "../../assets/secondstep.webp";
 import thirdStep from "../../assets/thirdstep.webp";
 import driver from "../../assets/driver.webp"
-import { StyledLink } from "../../utils/Atoms";
+import {
+  StyledLink,
+  ContainerStep,
+  Ptext,
+  Step,
+  DivText,
+  DivImg,
+  CcmImg,
+} from "../../utils/Atoms";
 import { useTranslation } from 'react-i18next';
 import { 
   ContainerWrapper,
   RowWrapper,
   Form,
   DivInput,
-  DivImg,
-  DivText,
   Input,
   Button,
   CCM,
-  CcmImg,
-  ContainerStep,
   SpanStep,
-  Ptext,
-  Step
 } from "./atoms"
 
 
@@ -97,7 +99,7 @@ function Home() {
             <DivText $textDriver>
               <h5>{t('home.signup driver')}</h5>
               <Ptext $pDriver>{t('home.signup driver description')}</Ptext>
-              <StyledLink to="/">
+              <StyledLink to="/partner/signin">
                 <Button $buttonDriver>{t('home.signup to driver')}</Button>
               </StyledLink>
               <h5 className="partenaire">{t('home.partner')}</h5>
