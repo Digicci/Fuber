@@ -829,7 +829,6 @@ export const ContainerStep = styled.div`
 `
 export const DivText = styled.div`
   width: 250px;
-  height: auto;
   text-align: center;
   margin-top: 1rem;
   padding: 0 1rem;
@@ -880,8 +879,11 @@ export const CcmImg = styled.img`
     @media (max-width:425px){
       width:200px;
     }
-    `
-  }
+    `}
+    ${(props) => 
+    props.$functioningImg &&
+    `width: 400px;
+    `}
 `
 export const DivImg = styled.div`
   width: 250px;
@@ -899,6 +901,12 @@ export const DivImg = styled.div`
     @media (max-width:425px){
       width: 200px;
     }
+    `
+  }
+  ${(props) =>
+    props.$divFunctioning &&
+    `width: 400px;
+    margin: 0;
     `
   }
 `
