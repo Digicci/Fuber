@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import logo from '../../../assets/logo.webp';
 import {
      StyledLink,
@@ -31,6 +31,12 @@ function NavResponsive({isOpen, toggle}){
     
     const {user, signout, isConnected} = useAuth()
 
+    const [connected, setConnected] = useState(false)
+
+    useEffect( () => {
+        setConnected(isConnected())
+    }, [user])
+
     return (
         <>
             <StyledModal $isOpen={isOpen} onClick={toggle}>
@@ -38,7 +44,7 @@ function NavResponsive({isOpen, toggle}){
                     <StyledClose>
                         <i className="ph-x closemenu"></i>
                     </StyledClose>
-                    {isConnected() ? (
+                    {connected ? (
                             <>
                                 <StyledConnectionWrap>
                                     <AvatarWrapper>

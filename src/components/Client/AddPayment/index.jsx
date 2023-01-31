@@ -33,14 +33,17 @@ function AddPayment({isOpen, toggle}){
 
 
     useEffect(() => {
+        if (!csrf.token) {
+            csrf.getCsrfToken()
+        }
         getUserToken().then((res) => {
             const client_secret = res.data.client_secret
             setStripeOptions({
                 clientSecret: client_secret,
                 appearance: {
-                    theme: 'flat'
-                },
-                layout: 'accordion'
+                    theme: 'flat',
+                    layout: 'accordion'
+                }
             })
             csrf.getCsrfToken()
         })

@@ -7,28 +7,33 @@ export const H3 = styled.h3`
     font-weight: 100;
 `
 export const ContainerCard = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1rem;
+    width: 100%;
     @media (max-width:768px) {
-        flex-direction: column;
+        grid-template-columns: 1fr;
+    }
+`
+
+export const CardWrapper = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    @media (max-width:768px) {
+        justify-content: flex-start;
     }
 `
 export const Card =styled.div`
-    width: 30%;
     height: auto;
     background: ${colors.fourth};
     border: 1px solid ${colors.fifth};
     border-radius: 10px;
     padding: 1rem .5rem;
-    margin-right: 2rem;
-    @media(max-width: 425px){
-        width: 100%;
-    }
-    @media(min-width: 768px){
-        width: 60%;
-    }
-    @media (min-width: 1024px) {
-        width: 30%;
-    }
+    margin-right: 1rem;
+    width: 100%;
+    
 `
 export const CardInfo = styled.div`
     display: flex;
@@ -69,4 +74,11 @@ export const ButtonDelete = styled.button`
         display: block;
         width: 30%;
     }
+`
+
+export const LoaderWrapper = styled.div`
+  width: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
 `

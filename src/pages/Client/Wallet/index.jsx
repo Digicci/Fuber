@@ -1,14 +1,11 @@
-import React, {useState} from "react";
-import NavProfile from "../../../components/Client/NavProfile";
+import React, {useState, useEffect} from "react";
 import {
-    ContainerProfile,
     ContainerInfo,
     TitlePage,
     StyledLink
 } from "../../../utils/Atoms";
 import AddPayment from "../../../components/Client/AddPayment";
-
-import {ProvideCard} from "../../../utils/hook/useCard";
+import {useCard} from "../../../utils/hook/useCard";
 import {
     H3,
     ContainerCard,
@@ -17,11 +14,25 @@ import {
     CardText,
     AddText,
     AddIcon,
-    ButtonDelete
+    ButtonDelete,
+    CardWrapper,
+    LoaderWrapper
 } from "./atoms"
+import {Loader} from "../../../utils/Atoms";
 
 function Wallet(){
 
+    const initialCard = []
+    const [cards, setCards] = useState(initialCard)
+    const [isLoading, setIsLoading] = useState(true)
+    const { getCards } = useCard()
+
+    useEffect(() => {
+        getCards().then((res) => {
+            setCards(res.data)
+            setIsLoading(false)
+        })
+    }, [])
 
     const [isOpen,setIsOpen] = useState(false)
     const toggleIsOpen = () => {
@@ -30,42 +41,64 @@ function Wallet(){
     
     return(
         <>
-
             <ContainerInfo>
+
                 <TitlePage>
                     Wallet
                 </TitlePage>
+
                 <H3>
                     Moyens de paiement enregistré
                 </H3>
+
                 <ContainerCard>
-                   <Card>
-                        <CardInfo>
-                            <CardText>
-                                Visa
-                            </CardText>
-                            <CardText>
-                                01/25
-                            </CardText>
-                        </CardInfo>
-                        <CardText $numberCard>
-                            **** **** **** 4752
-                        </CardText>
-                    </Card>
-                    <ButtonDelete>
-                    Supprimer
-                    </ButtonDelete>
+
+                    {
+                       isLoading ? (
+                            <LoaderWrapper>
+                                <Loader/>
+                            </LoaderWrapper>
+                       ) : (
+                           cards.length === 0 ? (
+                                 <p>Aucun moyen de paiement enregistré</p>
+                           ) : (
+                               cards.map((card) => {
+                                   return (
+                                       <CardWrapper>
+                                           <Card key={card.id}>
+                                               <CardInfo>
+                                                   <CardText>
+                                                       {card.card.brand}
+                                                   </CardText>
+                                                   <CardText>
+                                                       {card.card.exp_month }/{card.card.exp_year}
+                                                   </CardText>
+                                               </CardInfo>
+                                               <CardText $numberCard>
+                                                   **** **** **** {card.card.last4}
+                                               </CardText>
+                                           </Card>
+                                           <ButtonDelete>
+                                               Supprimer
+                                           </ButtonDelete>
+                                       </CardWrapper>
+                                   )
+                               })
+                           )
+                       )
+                    }
+
                 </ContainerCard>
-                <ProvideCard>
-                    <AddPayment toggle={toggleIsOpen} isOpen={isOpen} />
-                </ProvideCard>
+
+                <AddPayment toggle={toggleIsOpen} isOpen={isOpen} />
+
                 <StyledLink $addCard onClick={toggleIsOpen}>
                     <AddIcon className="ph-plus"></AddIcon>
                     <AddText>
                         Ajouter un moyen de paiement
                     </AddText>
-
                 </StyledLink>
+
             </ContainerInfo>
         </>
     )

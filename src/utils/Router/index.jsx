@@ -14,6 +14,7 @@ import OrderRace from "../../pages/Client/OrderRace";
 import Partner from "../../pages/Partner/SignIn";
 import SignIn from "../../pages/Partner/SignIn";
 import Account from "../../pages/Client/Account";
+import StripeSuccess from "../../pages/Client/StripeSuccess";
 
 function Router() {
     
@@ -37,6 +38,12 @@ function Router() {
                 },
                 {
                     path: "account/:page",
+                    element: <PrivateRoute>
+                                <Account/>
+                            </PrivateRoute>
+                },
+                {
+                    path: "account/:page/*",
                     element: <PrivateRoute>
                                 <Account/>
                             </PrivateRoute>

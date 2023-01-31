@@ -6,6 +6,7 @@ import NavProfile from "../../../components/Client/NavProfile";
 import Wallet from "../Wallet";
 import MyRaces from "../MyRaces";
 import Profile from "../Profile";
+import {ProvideCard} from "../../../utils/hook/useCard";
 
 function Account() {
 
@@ -24,7 +25,7 @@ function Account() {
                 page === "profile" && <Profile/>
             }
             {
-                page === "wallet" && <Wallet/>
+                page === "wallet" && <ProvideCard><Wallet/></ProvideCard>
             }
             {
                 page === "myraces" && <MyRaces/>

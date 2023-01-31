@@ -16,15 +16,30 @@ export const useCard = () => {
 function useProvideCard() {
     const [card, setCard] = useState(null);
     const axios = useAxios();
-    const csrf = useCsrf();
+
 
     const getUserToken = () => {
-        return axios.post(`${basePath}/addCardIntent`, {_csrf: csrf.token}, { withCredentials: true })
+        return axios.get(`${basePath}/addCardIntent`, { withCredentials: true })
+    }
+
+    const saveIntent = () => {
+        return axios.get(`${basePath}/saveCardIntent`, { withCredentials: true })
+    }
+
+    const addCard = (data) => {
+        return axios.post(`${basePath}/addCard`, data, { withCredentials: true })
+    }
+
+    const getCards = () => {
+        return axios.get(`${basePath}/cards`, { withCredentials: true })
     }
 
     return {
         card,
-        getUserToken
+        getUserToken,
+        getCards,
+        saveIntent,
+        addCard
     };
 }
 
