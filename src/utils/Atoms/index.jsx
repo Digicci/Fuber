@@ -314,6 +314,13 @@ export const StyledInput = styled.input`
             }
             `
     }
+    ${(props) => 
+        props.$signinDriver &&
+        `@media (max-width: 768px){
+        width: 80%;
+    }
+        `
+    }
 `
 export const InputUpdate = styled.input`
     width: 40%;

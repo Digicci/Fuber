@@ -12,6 +12,7 @@ export const ContainerForm = styled.div`
     border-radius: 5px;
     box-shadow: 0 0 10px ${colors.purple};
     h2{
+        padding: 1rem;
         font-size: 1.95rem;
         font-weight: 500;
         text-align: center;
@@ -30,10 +31,3 @@ export const Select = styled.select`
     outline: none;
     
 `
-export const Button = styled.button`
-    width: 100%;
-    background: ${colors.secondary};
-    color: ${colors.primary};
-    padding: .8rem .3rem;
-    
-` 

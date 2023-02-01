@@ -25,33 +25,38 @@ export const ContainerSignup = styled.div`
     }
 `
 export const WhyUs = styled.div`
-    width: 100%;
+    width: 80%;
     height: 100%;
-    margin: 5rem 5rem;
+    margin: 5rem 3rem;
     h4{
         font-size: 1.8rem;
         font-weight: 200;
     }
-    @media (max-width:1024px){
+    @media (max-width:1031px){
         h4{
         margin:0 0 2rem 2rem;
         }
     }
-    @media (max-width:425px){
+    @media (max-width:768px){
         h4{
         margin:0 0 2rem 2rem;
         }
     }
     ${(props) =>
         props.$functioning && 
-        `margin:0;
+        `
         h4{
             font-size: 1.98rem;
             font-weight: 500;
         }
-        @media (max-width:1024px){
+        @media (max-width:1031px){
             h4{
-            margin:2rem 0 2rem 2rem;
+            margin:2rem 0 2rem 3rem;
+            }
+        }
+        @media (max-width:768px){
+            h4{
+            margin:2rem 0;
             }
         }
         `
@@ -75,13 +80,23 @@ export const Pinfo = styled.p`
 export const SinginInfo = styled.div`
 display:flex;
 justify-content: space-around;
-@media (max-width:1024px){
+@media (max-width:1031px){
 justify-content: center;
 margin: 3rem;
+}
+@media (min-width:1044px){
+    justify-content: space-around;
 }
 ${(props) =>
     props.$grid && `
     @media (max-width:768px) {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    width: auto;
+    margin: 0;
+    align-items: center;
+    }
+    @media (min-width:1031px) {
     display: grid;
     grid-template-columns: repeat(2,1fr);
     width: auto;
@@ -98,7 +113,7 @@ ${(props) =>
 props.$col && 
     `flex-direction:column;
     align-items:center;
-    width:100%;
+    width:auto;
     padding: 0 8rem;
     @media (max-width:768px){
         margin:0;
@@ -121,8 +136,8 @@ export const Div = styled.div`
 `
 export const InfoSignin = styled.div`
     margin: 0;
-    @media (max-width:1024px){
-        width: 35%;
+    @media (max-width:1031px){
+        width: auto;
         justify-content: space-between;
     }
     @media (max-width:768px){
@@ -183,7 +198,7 @@ export const Title = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem 3rem;
+    padding: 1rem 0;
     width: 40%;
     margin-right: 4rem;
     h3{
@@ -201,5 +216,8 @@ export const Title = styled.div`
         width: auto;
         margin: 0;
         padding: 0;
+    }
+    @media (max-width:768px){
+
     }
 `
