@@ -84,9 +84,7 @@ justify-content: space-around;
 justify-content: center;
 margin: 3rem;
 }
-@media (min-width:1044px){
-    justify-content: space-around;
-}
+
 ${(props) =>
     props.$grid && `
     @media (max-width:768px) {
@@ -103,9 +101,14 @@ ${(props) =>
     margin: 0;
     align-items: center;
     }
+    @media (min-width:1033px){
+        display: flex;
+        justify-content: space-around;
+    }
     @media (max-width:425px) {
     flex-direction: column;
     display:block;
+    
 }
 `
 }
