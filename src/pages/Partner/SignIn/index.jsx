@@ -12,7 +12,8 @@ import {
     CollapseContainer,
     Content,
     Accordion,
-    Down
+    Down,
+    Title
 } from "./atoms";
 import { DivImg,
     CcmImg
@@ -45,13 +46,17 @@ function SignIn(){
         <>
             <Container>
                 <ContainerSignup $cover>
+                    <Title>
+                        <h3>Devenez partenaire</h3>
+                        <p>La plateforme vous offre la flexibilité, la visibilité et les données nécessaires pour vous mettre en relation avec davantage de clients. Devenez partenaire dès aujourd'hui.</p>
+                    </Title>
                     <FormSignin />
                 </ContainerSignup>
                 <ContainerInfo>
                     <WhyUs>
                         <h4>Pourquoi nous ?</h4>
                     </WhyUs>
-                    <SinginInfo>
+                    <SinginInfo $grid>
                         <InfoSignin>
                             <Div>
                                 <Pinfo>Livrez vos commandes à votre façon</Pinfo>
@@ -74,7 +79,7 @@ function SignIn(){
                     <WhyUs $functioning>
                         <h4>Fonctionnement d'ENTREPRISE pour les commerces partenaires</h4>
                     </WhyUs>
-                    <SinginInfo>
+                    <SinginInfo $grid>
                         <InfoSignin>
                             <DivImg $divFunctioning>
                                 <CcmImg $functioningImg src={et1} alt="Première étape" />
@@ -103,10 +108,10 @@ function SignIn(){
                             </Div>
                         </InfoSignin>
                     </SinginInfo>
+                    <WhyUs $functioning>
+                        <h4>Des questions ? Nous avons les réponses.</h4>
+                    </WhyUs>
                     <SinginInfo $col>
-                        <WhyUs $functioning>
-                            <h4>Des questions ? Nous avons les réponses.</h4>
-                        </WhyUs>
                         <Accordion>
                             <CollapseContainer>
                                 <Collapse onClick={() => {toggleCollapsed('question1')}}>

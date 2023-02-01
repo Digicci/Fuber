@@ -16,6 +16,9 @@ export const ContainerForm = styled.div`
         font-weight: 500;
         text-align: center;
     }
+    @media (max-width:425px){
+        width: auto;
+    }
 `
 export const Select = styled.select`
     display: flex;
@@ -27,3 +30,10 @@ export const Select = styled.select`
     outline: none;
     
 `
+export const Button = styled.button`
+    width: 100%;
+    background: ${colors.secondary};
+    color: ${colors.primary};
+    padding: .8rem .3rem;
+    
+` 

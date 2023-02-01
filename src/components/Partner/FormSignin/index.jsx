@@ -1,6 +1,6 @@
 import React from "react";
 import { StyledInput } from "../../../utils/Atoms";
-import { ContainerForm,
+import { Button, ContainerForm,
     Select
 } from "./atoms";
 
@@ -74,6 +74,7 @@ function FormSignin(){
                             <option value=''>- Nombre de salarié -</option>
                             <option value='1'>1</option>
                         </Select>
+                        <StyledInput $submit $connecter type="submit" value="Envoyer"/>
                     </ContainerForm>
         </>
     )

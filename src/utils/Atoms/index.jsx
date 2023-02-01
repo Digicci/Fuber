@@ -883,6 +883,10 @@ export const CcmImg = styled.img`
     ${(props) => 
     props.$functioningImg &&
     `width: 400px;
+    @media (max-width:1024px){
+      width: 300px;
+      margin-left:10rem;
+    }
     `}
 `
 export const DivImg = styled.div`
@@ -907,6 +911,10 @@ export const DivImg = styled.div`
     props.$divFunctioning &&
     `width: 400px;
     margin: 0;
+    @media (max-width:1024px){
+      width: 200px;
+      margin: 0;
+    }
     `
   }
 `
