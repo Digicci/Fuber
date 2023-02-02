@@ -32,6 +32,9 @@ function Login(){
     const csrf = useCsrf()
     //get csrf token
     useEffect(() => {
+        if (auth.isConnected()) {
+            navigate('/account/profile', { replace: true })
+        }
         csrf.getCsrfToken()
     }, [])
 

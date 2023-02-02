@@ -34,12 +34,17 @@ function useProvideCard() {
         return axios.get(`${basePath}/cards`, { withCredentials: true })
     }
 
+    const deleteCard = (pm, csrf) => {
+        return axios.post(`${basePath}/card/delete`, {pm, _csrf: csrf}, { withCredentials: true })
+    }
+
     return {
         card,
         getUserToken,
         getCards,
         saveIntent,
-        addCard
+        addCard,
+        deleteCard
     };
 }
 
