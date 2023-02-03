@@ -63,13 +63,24 @@ export const CardInfo = styled.div`
     font-weight: 600;
 `
 export const CardText = styled.p`
-    color: ${colors.primary};
-    ${(props) =>
-        props.$numberCard &&
-        `margin:  0 10px;
+  color: #e8e1e1;
+  text-shadow: 1px 1px 0 ${colors.shadow};
+  font-weight: 100;
+  ${(props) =>
+      props.$numberCard &&
+      `
+        margin:  0 10px;
         font-size: 1.5rem;
-        `
-    }
+      `
+  }
+  ${(props) =>
+      props.$brand &&
+      `
+        font-size: 1.2rem;
+        self-align: flex-start;
+        color: silver;
+      `
+  }
 `
 export const AddText =  styled.span`
     font-size: 1.05rem;

@@ -1,5 +1,8 @@
-import React, { useState, createContext, useContext } from "react"
+import React, { useState, createContext, useContext, useEffect } from "react"
 import L from 'leaflet'
+import 'leaflet-routing-machine'
+import 'lrm-google'
+import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 
 const locationContext = createContext()
 
@@ -13,13 +16,34 @@ export const useLocation = () => {
 }
 
 function useProvideLocation() {
+    //Localisation de l'utilisateur
     const [location, setLocation] = useState({lng: 0, lat: 0})
+    //Marker de la localisation de l'utilisateur
     const [locationMarker, setLocationMarker] = useState(null)
+    //Coordonnées de départ
+    const [startLngLat, setStartLngLat] = useState(null)
+    //Coordonnées d'arrivée
+    const [endLngLat, setEndLngLat] = useState(null)
+    //Marker de départ
     const [startMarker, setStartMarker] = useState(null)
+    //Objet trajet
+    const [journey, setJourney] = useState(null)
+    //Marker d'arrivée
+    const [endMarker, setEndMarker] = useState(null)
+    //Booléen de chargement de la localisation
     const [locationLoad, setLocationLoad] = useState(true)
+    //Id du setTimeout de tracking
     const [trackerId, setTrackerId] = useState(0)
+    //Map
     const [map, setMap] = useState(null)
+    //Distance
+    const [dist, setDist] = useState(null)
+    //Icone de départ
+    const flagPath = './assets/ressources/flag.svg'
+    //Icone d'arrivée
+    const flagOutlinePath = './assets/ressources/flag-outline.svg'
 
+    //Fonction de tracking de la localisation de l'utilisateur
     const setTrack = () => {
         const id = setTimeout(() => {
             navigator.geolocation.getCurrentPosition((position) => {
@@ -34,18 +58,21 @@ function useProvideLocation() {
         setTrackerId(id)
     }
 
+    //Fonction de déstruction de la map
     const destroyMap = () => {
         if (map) {
             map.remove()
         }
     }
 
+    //Arret du tracking
     const unsetTrack = () => {
         clearTimeout(trackerId)
         setMap(null)
         setLocationLoad(true)
     }
 
+    //Fonction de création de la map
     const getMap = (id) => {
         if (id) {
             const map = L.map(id).setView([location.lat, location.lng], 13);
@@ -60,20 +87,129 @@ function useProvideLocation() {
         return false
     }
 
+    //Fonction de création du marker de départ
     const addStartMarker = (lat, lng) => {
-        const startMarker = L.marker([lat, lng]).addTo(map);
+        const icon = L.icon({
+            iconUrl: flagOutlinePath,
+            iconSize: [25, 25],
+            iconAnchor: [12, 25],
+        })
+        const startMarkerState = L.marker([lat, lng], {icon: icon}).addTo(map);
+        map.setView([lat, lng], 13)
         locationMarker.remove()
-        setStartMarker(startMarker)
+        removeStartMarker()
+        setStartMarker(startMarkerState)
+        setStartLngLat({lat, lng})
     }
+
+    //Fonction de création du marker d'arrivée
+    const addEndMarker = (lat, lng) => {
+        const icon = L.icon({
+            iconUrl: flagPath,
+            iconSize: [25, 25],
+            iconAnchor: [12, 25],
+        })
+        const endMarkerState = L.marker([lat, lng], {icon: icon}).addTo(map);
+        removeEndMarker()
+        setEndMarker(endMarkerState)
+        setEndLngLat({lat,lng})
+    }
+
+    //Fonction de suppression du marker de départ
+    const removeStartMarker = () => {
+        if (startMarker) {
+            startMarker.remove()
+            setStartMarker(null)
+            setStartLngLat(null)
+            if (!endMarker) {
+                locationMarker.addTo(map)
+            }
+        }
+    }
+
+    //Fonction de suppression du marker d'arrivée
+    const removeEndMarker = () => {
+        if (endMarker) {
+            endMarker.remove()
+            setEndMarker(null)
+            setEndLngLat(null)
+            if (!startMarker) {
+                locationMarker.addTo(map)
+            }
+        }
+    }
+
+    //Fonction de création du trajet
+    const createJourney = () => {
+        //Si les deux markers sont présents
+        if (startLngLat && endLngLat) {
+            //On crée le trajet et on ajoute un listener sur la fin du chargement du trajet
+            const polyline = L.Routing.control({
+                waypoints : [
+                    L.latLng(startLngLat.lat, startLngLat.lng),
+                    L.latLng(endLngLat.lat, endLngLat.lng),
+                ],
+                lineOptions: {
+                    styles: [
+                        {
+                            color: "blue",
+                            opacity: 0.5,
+                            weight: 3
+                        }
+                    ]
+                },
+                addWaypoints: false,
+                draggableWaypoints: false,
+                fitSelectedRoutes: true,
+            }).on('routesfound', function(e) {
+                const meters = e.routes[0].summary.totalDistance
+                const km = meters / 1000
+                setDist(km.toFixed(1))
+            })
+            //On change la langue du trajet
+            polyline.getRouter().options.language = 'fr'
+            //On ajoute le trajet à la map
+            polyline.addTo(map)
+            //On enregistre l'objet de trajet et on supprime les markers de départ et d'arrivée
+            setJourney(polyline)
+            startMarker.remove()
+            endMarker.remove()
+        } else {
+            //Si les deux markers ne sont pas présents, on supprime le trajet
+            removeJourney()
+        }
+    }
+
+    //Fonction de suppression du trajet
+    const removeJourney = () => {
+        if (journey) {
+            journey.remove()
+            setJourney(null)
+            if (startMarker) {
+                startMarker.addTo(map)
+            }
+            else if (endMarker) {
+                endMarker.addTo(map)
+            }
+        }
+    }
+
+    useEffect(() => {
+        createJourney()
+    }, [startLngLat, endLngLat])
 
     return {
         location,
         locationLoad,
         map,
+        dist,
         setTrack,
         unsetTrack,
         getMap,
         addStartMarker,
+        addEndMarker,
+        removeEndMarker,
+        removeStartMarker,
         destroyMap
     }
 }

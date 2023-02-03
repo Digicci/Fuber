@@ -18,7 +18,7 @@ const Suggestion = styled.h3`
     }
 `
 
-function SuggestionItem({propositions, isStart}) {
+function SuggestionItem({propositions, isStart, handleClick}) {
 
     const location = useLocation()
 
@@ -30,12 +30,12 @@ function SuggestionItem({propositions, isStart}) {
         <>
             {
                 isStart && (
-                    <Suggestion key='position' datalng={location.location.lng} datalat={location.location.lat}>Ma position</Suggestion>
+                    <Suggestion key='position' onClick={handleClick} data-name='start' data-lng={location.location.lng} data-lat={location.location.lat} data-label='Ma position'>Ma position</Suggestion>
                 )
             }
             {
                 (propositions && true && propositions !== []) && propositions.map((prop, index) => {
-                    return <Suggestion key={`${index}`} datalng={prop.geometry.coordinates[0]} datalat={prop.geometry.coordinates[1]}>
+                    return <Suggestion key={`${index}-${prop.properties.label}`} onClick={handleClick} data-name={isStart ? 'start' : 'end'} data-lng={prop.geometry.coordinates[0]} data-lat={prop.geometry.coordinates[1]} data-label={prop.properties.label}>
                                 {prop.properties.label}
                             </Suggestion>
                 })

@@ -102,7 +102,7 @@ function Wallet(){
                                        <CardWrapper>
                                            <Card key={card.id}>
                                                <CardInfo>
-                                                   <CardText>
+                                                   <CardText $brand>
                                                        {card.card.brand}
                                                    </CardText>
                                                    <CardText>

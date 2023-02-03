@@ -3,6 +3,8 @@ import { StyledInput } from "../../../utils/Atoms";
 import styled from "styled-components";
 import colors from "../../../colors";
 import SuggestionItem from "../SuggestionItem";
+import startIcon from "../../../assets/flag.svg";
+import endIcon from "../../../assets/flag-outline.svg";
 
 
  const InputWrap = styled.div`
@@ -33,7 +35,21 @@ import SuggestionItem from "../SuggestionItem";
     `}
 `
 
-function InputWrapper({isStart, value, toggleSuggest, active, change, suggest}){
+const Icon = styled.img`
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    width: 25px;
+    color: ${colors.fourth};
+    cursor: pointer;
+    z-index: 1;
+    background-size: 100%;
+    background-repeat: no-repeat;
+`
+
+function InputWrapper({isStart, value, toggleSuggest, handleClick, active, change, suggest}){
 
     const placeholder = isStart ? "Lieu de prise en charge" : "Déstination"
 
@@ -48,12 +64,12 @@ function InputWrapper({isStart, value, toggleSuggest, active, change, suggest}){
                     placeholder={placeholder}
                     name={name}
                     onChange={change}
-                    onFocus={() => {toggleSuggest({name})}}
-                    onBlur={() => {toggleSuggest({name})}}
+                    onFocus={() => {toggleSuggest(name)}}
                 />
                 <Suggestions $active={active}>
-                    <SuggestionItem propositions={suggest} isStart={isStart} />
+                    <SuggestionItem propositions={suggest} isStart={isStart} handleClick={(e) => {handleClick(e); toggleSuggest(name)}} />
                 </Suggestions>
+                <Icon $start={isStart} src={isStart ? endIcon : startIcon}/>
             </InputWrap>
         </>
     )
