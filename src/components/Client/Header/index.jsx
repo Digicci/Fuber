@@ -9,7 +9,7 @@ import {
     StyledNavGroup, 
 } from "../../../utils/Atoms";
 import Logo from '../../../assets/logo.webp';
-import { useAuth } from "../../../utils/hook/useAuth";
+import { useAuth } from "../../../utils/hook/Client/useAuth";
 import { useTranslation } from 'react-i18next';
 
 function Header({toggle}) {

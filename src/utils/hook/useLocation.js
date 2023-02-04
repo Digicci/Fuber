@@ -16,6 +16,8 @@ export const useLocation = () => {
 }
 
 function useProvideLocation() {
+    //Trajet sélectionné ?
+    const [asJourney, setAsJourney] = useState(false)
     //Localisation de l'utilisateur
     const [location, setLocation] = useState({lng: 0, lat: 0})
     //Marker de la localisation de l'utilisateur
@@ -37,7 +39,7 @@ function useProvideLocation() {
     //Map
     const [map, setMap] = useState(null)
     //Distance
-    const [dist, setDist] = useState(null)
+    const [dist, setDist] = useState(0)
     //Icone de départ
     const flagPath = './assets/ressources/flag.svg'
     //Icone d'arrivée
@@ -143,6 +145,9 @@ function useProvideLocation() {
     const createJourney = () => {
         //Si les deux markers sont présents
         if (startLngLat && endLngLat) {
+            if (journey) {
+                journey.remove()
+            }
             //On crée le trajet et on ajoute un listener sur la fin du chargement du trajet
             const polyline = L.Routing.control({
                 waypoints : [
@@ -165,6 +170,7 @@ function useProvideLocation() {
                 const meters = e.routes[0].summary.totalDistance
                 const km = meters / 1000
                 setDist(km.toFixed(1))
+                setAsJourney(true)
             })
             //On change la langue du trajet
             polyline.getRouter().options.language = 'fr'
@@ -177,6 +183,7 @@ function useProvideLocation() {
         } else {
             //Si les deux markers ne sont pas présents, on supprime le trajet
             removeJourney()
+            setAsJourney(false)
         }
     }
 
@@ -203,6 +210,7 @@ function useProvideLocation() {
         locationLoad,
         map,
         dist,
+        asJourney,
         setTrack,
         unsetTrack,
         getMap,

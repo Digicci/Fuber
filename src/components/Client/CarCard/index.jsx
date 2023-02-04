@@ -5,15 +5,23 @@ import {
     InfoCar,
     Price
 } from "./atoms"
+import { useLocation } from "../../../utils/hook/useLocation";
+import { useRace } from "../../../utils/hook/Client/useRace";
 
 
-
-function CarCard({imgInfo, title, places, descriptionInfo}){
-    
+function CarCard({id, imgInfo, title, places, descriptionInfo, commission, handleClick}){
+    const { dist } = useLocation()
+    const race = useRace()
+    const driverId = race.raceInfo.driverId
+    const driverPrice = dist * descriptionInfo.price
+    const driverCommission = driverPrice * commission
+    const driverTotal = driverPrice + driverCommission
 
     return(
+
+
         <>
-            <CarType>
+            <CarType key={id} onClick={() => handleClick(id, driverTotal, driverPrice, driverCommission)} $selected={driverId === id}>
                 <CarImg src={imgInfo.img} alt={imgInfo.alt} />
                 <InfoCar>
                     <h5>{title}</h5>
@@ -25,7 +33,7 @@ function CarCard({imgInfo, title, places, descriptionInfo}){
                     <p> {descriptionInfo.position} </p>
                 </InfoCar>
                 <Price>
-                    <p> {descriptionInfo.price} </p>
+                    <p> {driverTotal.toFixed(2)}€ </p>
                 </Price>
             </CarType>
         </>

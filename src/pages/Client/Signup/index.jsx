@@ -12,7 +12,7 @@ import {
     StyledAccountSign,
     StyledLink
 } from "../../../utils/Atoms";
-import {useAuth} from "../../../utils/hook/useAuth";
+import {useAuth} from "../../../utils/hook/Client/useAuth";
 import {useCsrf} from "../../../utils/hook/useCsrf";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';

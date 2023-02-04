@@ -745,6 +745,12 @@ export const ButtonOrder = styled.button`
     @media (max-width:768px){
         width: 100%;
     }
+    ${({$disabled}) => $disabled && `
+        background: ${colors.fourth};
+        color: ${colors.primary};
+        cursor: not-allowed;
+    `
+    }
 `
 
 //HEADER
@@ -815,15 +821,25 @@ export const StyledNavGroup = styled.div`
 
 
 export const Loader = styled.div`
-  border: 16px solid #f3f3f3;
-  border-top: 16px solid #3498db;
+  box-shadow: 
+          0 4px 0 ${colors.sixth}, 
+          4px 0 0 ${colors.primary}, 
+          4px 4px 0 ${colors.purple}, 
+          -4px 0 0 ${colors.primary}, 
+          0 -4px 0 ${colors.sixth}, 
+          -4px -4px 0 ${colors.purple};
+  border: 4px solid transparent;
   border-radius: 50%;
   width: 120px;
   height: 120px;
   animation: spin 2s linear infinite;
-    
+
   @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
   }
 `

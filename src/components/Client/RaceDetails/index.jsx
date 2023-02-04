@@ -18,9 +18,21 @@ import {
     TotalPrice,
     DivValider
 } from "./atoms"
+import { useRace } from "../../../utils/hook/Client/useRace";
+import { useLocation } from "../../../utils/hook/useLocation";
+import Driver from "../../../utils/Data/Driver";
+
 
 
 function RaceDetails({isOpenDetails, toggle}){
+
+    const race = useRace()
+    const location = useLocation()
+    const DriverInfo = Driver.find((d) => {
+        if(d.id === race.raceInfo.driverId) {
+            return d
+        }
+    })
 
     return(
         <>
@@ -35,16 +47,16 @@ function RaceDetails({isOpenDetails, toggle}){
                     <ModalDetails>
                         <p>
                             <i className="ph-car"></i>
-                            Comfort Hybride par Prenom I
+                            {DriverInfo?.title ? DriverInfo.title.toUpperCase() : ''} par Prenom I
                         </p>
                         <Details>
                             <InfoAdresse>
                                 <Span $spanLeft>Adresse de départ :</Span>
-                                <Span $spanRight>adresse</Span>
+                                <Span $spanRight>{race.raceInfo.start ?? ''}</Span>
                             </InfoAdresse>
                             <InfoAdresse>
-                                <Span $spanLeft>Adresse de départ :</Span>
-                                <Span $spanRight>adresse</Span>
+                                <Span $spanLeft>Adresse de d'arrivée :</Span>
+                                <Span $spanRight>{race.raceInfo.end ?? ''}</Span>
                             </InfoAdresse>
                         </Details>
                     </ModalDetails>
@@ -58,15 +70,30 @@ function RaceDetails({isOpenDetails, toggle}){
                         <Details $total>
                             <PanierInfo>
                                 <p>Sous-total</p>
-                                <span>13.50€</span>
+                                <span>{
+                                    race.raceInfo.total && location.dist ?
+                                        race.raceInfo.total.toFixed(2)
+                                        : 0
+                                    }€
+                                </span>
                             </PanierInfo>
                             <PanierInfo>
                                 <p>Code promo</p>
-                                <span>0€</span>
+                                <span>{race.raceInfo.promo.price ?? 0}€</span>
                             </PanierInfo>
                             <PanierInfo>
                                 <Total>Total</Total>
-                                <TotalPrice>13.50€</TotalPrice>
+                                <TotalPrice>
+                                    {
+                                        location.dist ?
+                                            (
+                                                race.raceInfo.promo.price ?
+                                                    ( race.raceInfo.total.toFixed(2) - race.raceInfo.promo.price ).toFixed(2)
+                                                    :
+                                                    race.raceInfo.total.toFixed(2)
+                                            ) : 0
+                                    }€
+                                </TotalPrice>
                             </PanierInfo>
                         </Details>
                         <DivValider>

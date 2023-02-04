@@ -11,7 +11,7 @@ import AddCard from "../AddCard";
 import AddPaypal from "../AddPaypal";
 import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
-import {useCard} from "../../../utils/hook/useCard";
+import {useCard} from "../../../utils/hook/Client/useCard";
 import { useCsrf } from "../../../utils/hook/useCsrf";
 
 

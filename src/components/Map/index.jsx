@@ -1,14 +1,27 @@
 import React, {useEffect} from "react"
 import {useLocation} from "../../utils/hook/useLocation";
 import styled from "styled-components";
+import { Loader } from "../../utils/Atoms";
 
 const Location = styled.div`
-    width: 500px;
-    height: 491px;
-    @media (max-width:768px){
-        width: 100%;
-        height: 400px;
-    }
+  width: 500px;
+  height: 491px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 400px;
+  }
+`
+
+const Loading = styled.div`
+  width: 500px;
+  height: 491px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 400px;
+  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `
 
 function Map() {
@@ -34,7 +47,7 @@ function Map() {
     return (
         <div>
             {
-                location.locationLoad ? <div>Loading...</div> : <Location id='map'></Location>
+                location.locationLoad ? <Loading><Loader/></Loading> : <Location id='map'></Location>
             }
         </div>
     )

@@ -10,7 +10,7 @@ import {
     StyledLink
 } from "../../../utils/Atoms";
 import {toast} from "react-toastify";
-import { useAuth } from "../../../utils/hook/useAuth";
+import { useAuth } from "../../../utils/hook/Client/useAuth";
 import { useCsrf } from "../../../utils/hook/useCsrf";
 import { useTranslation } from 'react-i18next';
 

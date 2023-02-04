@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import van from "../../../assets/van.webp"
-import confort from "../../../assets/confort.webp";
-import hybride from "../../../assets/hybride.webp";
+
 import CarCard from "../CarCard";
+import { useRace } from "../../../utils/hook/Client/useRace";
+import Driver from "../../../utils/Data/Driver";
 import {
     TypeChoiceCar,
 } from "./atoms"
@@ -12,54 +12,26 @@ import {
 
 function CarCards(){
 
-    const [data,setData] = useState([
-        {
-            places: 4,
-            title: 'confort',
-            imgInfo:{
-                img:confort,
-                alt:'Confort car'
-            },
-            descriptionInfo:{
-                vehicule:'Vehicule spacieux',
-                position:'5 min',
-                price:'13.50€'
-            }
-        },
-        {
-            places: 8,
-            title: 'Van',
-            imgInfo:{
-                img:van,
-                alt:'Van car'
-            },
-            descriptionInfo:{
-                vehicule:'Vehicule spacieux',
-                position:'15 min',
-                price:'15.50€'
-            }
-        },
-        {
-            places: 3,
-            title: 'Hybride',
-            imgInfo:{
-                img:hybride,
-                alt:'Hybride car'
-            },
-            descriptionInfo:{
-                vehicule:'Vehicule spacieux',
-                position:'30 min',
-                price:'11.00€'
-            }
-        }
-    ]) 
+    const race = useRace()
+
+    const handleCarChoice = (id, total, driverPrice, enterprise) => {
+        race.setRaceInfo({
+            ...race.raceInfo,
+            total: total,
+            driverPrice: driverPrice,
+            commissionPrice: enterprise,
+            driverId: id
+        })
+    }
+
+    const [data,setData] = useState(Driver)
 
     return(
         <>
             <TypeChoiceCar>
                 {
                     data.map((car) => {
-                        return <CarCard {...car}/>
+                        return <CarCard {...car} handleClick={handleCarChoice}/>
                     })
                 }
             </TypeChoiceCar>

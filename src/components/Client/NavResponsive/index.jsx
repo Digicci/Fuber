@@ -10,7 +10,7 @@ import {
      StyledClose,
      ButtonLogout
 } from "../../../utils/Atoms";
-import { useAuth } from "../../../utils/hook/useAuth";
+import { useAuth } from "../../../utils/hook/Client/useAuth";
 import avatar from '../../../assets/profile.webp';
 import { useTranslation } from 'react-i18next';
 import {

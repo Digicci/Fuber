@@ -1,6 +1,6 @@
 import React, {createContext, useContext, useState} from "react";
-import { useAxios } from "./useAxios";
-import {useCsrf} from "./useCsrf";
+import { useAxios } from "../useAxios";
+import {useCsrf} from "../useCsrf";
 
 const cardContext = createContext();
 const basePath = "user";
@@ -14,7 +14,8 @@ export const useCard = () => {
 }
 
 function useProvideCard() {
-    const [card, setCard] = useState(null);
+    const [card, setCard] = useState({});
+    const [defaultCard, setDefaultCard] = useState(null);
     const axios = useAxios();
 
 
@@ -30,8 +31,22 @@ function useProvideCard() {
         return axios.post(`${basePath}/addCard`, data, { withCredentials: true })
     }
 
-    const getCards = () => {
-        return axios.get(`${basePath}/cards`, { withCredentials: true })
+    const getCards = async () => {
+        const res = await axios.get(`${basePath}/cards`, { withCredentials: true })
+        setCard(res.data)
+        getDefault()
+        return res;
+    }
+
+    const setDefault = (pm) => {
+        setDefaultCard(card.find((c) => c.id === pm))
+        return axios.post(`${basePath}/setDefault`, {pm}, { withCredentials: true })
+    }
+
+    const getDefault = () => {
+        axios.get(`${basePath}/getDefault`, { withCredentials: true }).then((res) => {
+          setDefaultCard(res.data)
+        })
     }
 
     const deleteCard = (pm, csrf) => {
@@ -40,10 +55,12 @@ function useProvideCard() {
 
     return {
         card,
+        defaultCard,
         getUserToken,
         getCards,
         saveIntent,
         addCard,
+        setDefault,
         deleteCard
     };
 }
