@@ -7,6 +7,7 @@ import { ProvideAuth } from "../../../utils/hook/useAuth";
 import { ProvideAxios } from "../../../utils/hook/useAxios";
 import { ProvideCsrf } from "../../../utils/hook/useCsrf";
 import { ProvideLocation } from "../../../utils/hook/useLocation";
+import { ValidatorProvider} from "../../../utils/hook/useValidator";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -21,13 +22,15 @@ function Client(){
                 <ProvideAxios>
                     <ProvideLocation>
                         <ProvideAuth>
-                            <Header toggle={toggleIsOpen}/>
-                            <NavResponsive toggle={toggleIsOpen} isOpen={isOpen}/>
-                            <div id="page__container">
-                                <Outlet/>
-                                <ToastContainer style={{zIndex:20000}} autoClose={5000} />
-                            </div>
-                            <Footer/>
+                            <ValidatorProvider>
+                                <Header toggle={toggleIsOpen}/>
+                                <NavResponsive toggle={toggleIsOpen} isOpen={isOpen}/>
+                                <div id="page__container">
+                                    <Outlet/>
+                                    <ToastContainer style={{zIndex:20000}} autoClose={5000} />
+                                </div>
+                                <Footer/>
+                            </ValidatorProvider>
                         </ProvideAuth>
                     </ProvideLocation>
                 </ProvideAxios>
