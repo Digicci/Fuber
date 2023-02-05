@@ -38,11 +38,15 @@ function Wallet() {
         setIsOpenFav(!isOpenFav)
     }
 
-    useEffect(() => {
+    const updateCartInfo = () => {
         getCards().then((res) => {
             setCards(res.data)
             setIsLoading(false)
         })
+    }
+
+    useEffect(() => {
+        updateCartInfo()
     }, [])
 
     const handleDel = (pm) => {
@@ -109,8 +113,7 @@ function Wallet() {
                             <p>Aucun moyen de paiement enregistré</p>
                         ) : (<>
 
-                                <AddText>Carte favorite <small>(Cliquez sur une carte pour la définir comme
-                                    favori)</small></AddText>
+                                <AddText>Carte favorite</AddText>
                                 {
                                     defaultCard && (
                                         <ContainerCardFavorite>
@@ -135,6 +138,8 @@ function Wallet() {
                                 }
 
                             <>
+                                <AddText>Autre carte  <small>(Cliquez sur une carte pour la définir comme
+                                    favori)</small></AddText>
                                 <ContainerCard>
                                     {cards.map((card) => {
                                         return (
@@ -150,7 +155,6 @@ function Wallet() {
                                                             <CardText>
                                                                 {card.card.exp_month < 10 ? `0${card.card.exp_month}` : card.card.exp_month}/{card.card.exp_year}
                                                             </CardText>
-                                                            {card.isDefault && '*'}
                                                         </CardInfo>
                                                         <CardText $numberCard>
                                                             **** **** **** {card.card.last4}
@@ -180,7 +184,7 @@ function Wallet() {
                     toggleVisible={toggleIsOpenFav}
                 />
 
-                <AddPayment toggle={toggleIsOpen} isOpen={isOpen}/>
+                <AddPayment toggle={toggleIsOpen} isOpen={isOpen} loading={setIsLoading} update={updateCartInfo}/>
 
                 <StyledLink $addCard onClick={toggleIsOpen}>
                     <AddIcon className="ph-plus"></AddIcon>

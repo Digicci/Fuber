@@ -116,6 +116,11 @@ export const AddText = styled.span`
   font-size: 1.05rem;
   font-weight: 600;
   padding-left: 5px;
+  & > small {
+    font-size: .8rem;
+    font-weight: 100;
+    color: ${colors.sixth};
+  }
 `
 export const AddIcon = styled.i`
   font-size: 1.5rem;

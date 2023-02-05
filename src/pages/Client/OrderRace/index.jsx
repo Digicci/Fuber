@@ -17,6 +17,7 @@ import {
 } from "./atoms"
 import RaceState from "../../../components/Client/RaceState";
 import CarCards from "../../../components/Client/CarCards";
+import WalletPopUp from "../../../components/Client/WalletPopUp";
 
 
 function OrderRace({}){
@@ -33,9 +34,11 @@ function OrderRace({}){
         card.getCards()
     }, [])
 
-    const [isOpen,setIsOpen] = useState(false)
-    const toggleIsOpen = () => {
-        setIsOpen(!isOpen)
+
+    const [isOpenWallet,setIsOpenWallet] = useState(false)
+
+    const toggleIsOpenCard = () => {
+        setIsOpenWallet(true)
     }
 
     
@@ -54,13 +57,13 @@ function OrderRace({}){
                     <h2>Commandez une course</h2>
                     <RaceState/>
                     {
-                        location.dist && (
+                        location.dist !== 0 && (
                             <CarCards/>
                         )
                     }
                     {
                         auth.isConnected() && (
-                            <ChangeCard  onClick={toggleIsOpen}>
+                            <ChangeCard  onClick={toggleIsOpenCard}>
                                 <p>choisir un mode de paiement:</p>
                                 {
                                     card.defaultCard ? (
@@ -78,9 +81,7 @@ function OrderRace({}){
                             </ChangeCard>
                         )
                     }
-                    <ProvideCard>
-                        <AddPayment toggle={toggleIsOpen} isOpen={isOpen}/>
-                    </ProvideCard>
+                    <WalletPopUp open={isOpenWallet} setOpen={setIsOpenWallet}/>
                     <RaceDetails toggle={toggleIsOpenDetails} isOpenDetails={isOpenDetails} />
                     <ButtonOrder onClick={toggleIsOpenDetails} disabled={!location.asJourney} $disabled={!location.asJourney || !race.raceInfo.driverId}>
                         Commandez la course

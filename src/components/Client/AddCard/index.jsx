@@ -10,15 +10,18 @@ import {
     ContainerForm,
 } from "./atoms"
 import Success from "../Success";
+import {useCard} from "../../../utils/hook/Client/useCard";
 import {toast} from "react-toastify";
 
-function AddCard(){
+function AddCard({ update, loading, close, updateSecret }){
     const stripe = useStripe()
     const elements = useElements()
     const [error, setError] = useState(null)
-    const navigate = useNavigate()
+    const card = useCard()
+
     const handleSubmit = (e) => {
         e.preventDefault()
+        loading(true)
         if (!stripe || !elements) {
             return;
         }
@@ -30,11 +33,23 @@ function AddCard(){
             },
             redirect: 'if_required'
         }).then((res) => {
-            if (res.error) {
+            if (res.error !== undefined) {
                 setError(res.error)
+                update()
+                toast.update(toastId, {
+                    render: 'Une erreur est survenue',
+                    type: 'error',
+                    position: 'top-right',
+                    autoClose: 3000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    icon: '🤔',
+                    isLoading: false
+                })
+                elements.getElement('payment').clear()
             }
             else {
-                console.log(res)
                 toast.update(toastId, {
                     render: 'Carte ajoutée !',
                     type: 'success',
@@ -45,10 +60,14 @@ function AddCard(){
                     icon: '👍',
                     isLoading: false
                 })
-                navigate('/account/profile', {replace: true})
+                elements.getElement('payment').clear()
+                update()
+                card.getUserToken().then((res) => {
+                    updateSecret(res)
+                })
+                close()
             }
         }).catch((err) => {
-            console.log(err)
             toast.update(toastId, {
                 render: 'Une erreur est survenue',
                 type: 'error',
@@ -60,6 +79,8 @@ function AddCard(){
                 icon: '🤔',
                 isLoading: false
             })
+            elements.getElement('payment').clear()
+            close()
         })
     }
 

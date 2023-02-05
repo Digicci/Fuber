@@ -19,7 +19,7 @@ const stripePromise = loadStripe('pk_test_51MP9laGtIjyGGRoGpaBalxu4QM8MJnTztna8y
 
 
 
-function AddPayment({isOpen, toggle}){
+function AddPayment({isOpen, toggle, loading, update}){
     const {getUserToken} = useCard()
     const csrf = useCsrf()
 
@@ -31,21 +31,25 @@ function AddPayment({isOpen, toggle}){
         setIsAdd(state)
     }
 
+    const handleClientSecret = (res) => {
+        const client_secret = res.data.client_secret
+        setStripeOptions({
+            clientSecret: client_secret,
+            appearance: {
+                theme: 'flat',
+                layout: 'accordion'
+            }
+        })
+        csrf.getCsrfToken()
+    }
+
 
     useEffect(() => {
         if (!csrf.token) {
             csrf.getCsrfToken()
         }
         getUserToken().then((res) => {
-            const client_secret = res.data.client_secret
-            setStripeOptions({
-                clientSecret: client_secret,
-                appearance: {
-                    theme: 'flat',
-                    layout: 'accordion'
-                }
-            })
-            csrf.getCsrfToken()
+            handleClientSecret(res)
         })
     }, [])
     
@@ -71,7 +75,7 @@ function AddPayment({isOpen, toggle}){
                         stripeOptions && (
                             <Elements stripe={stripePromise} options={stripeOptions}>
                                 {
-                                    isAdd ? (<AddCard/>) : (<AddPaypal/>)
+                                    isAdd ? (<AddCard update={update} loading={loading} close={toggle} updateSecret={handleClientSecret}/>) : (<AddPaypal/>)
                                 }
                             </Elements>
                         )

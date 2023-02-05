@@ -34,11 +34,16 @@ function RaceState(){
                 .then((res) => {
                     //On met à jour le state des propositions
                     setProposition({ ...propositions, [name]: res.data.features })
+                    //On ouvre les suggestions
+                    setSuggest({ ...suggest, [name]: true })
                 })
         }
         //Si la valeur est inférieure à 3 caractères, on vide le state des propositions
         if (value.length < 3) {
             setProposition({ ...propositions, [name]: [] })
+            //On ferme les suggestions
+            setSuggest({ ...suggest, [name]: false })
+            //On supprime le marqueur
             if (name === "start") {
                 location.removeStartMarker()
             } else {
