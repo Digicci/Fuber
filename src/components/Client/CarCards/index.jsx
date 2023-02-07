@@ -22,6 +22,7 @@ function CarCards(){
             commissionPrice: enterprise,
             driverId: id
         })
+        console.log({total, driverPrice, enterprise, id, race: race.raceInfo})
     }
 
     const [data,setData] = useState(Driver)

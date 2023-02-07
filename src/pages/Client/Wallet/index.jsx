@@ -24,7 +24,7 @@ import {
 import {Loader} from "../../../utils/Atoms";
 import {toast} from "react-toastify";
 
-function Wallet() {
+function Wallet({isPopUp = false}) {
 
     const initialCard = []
     const [cards, setCards] = useState(initialCard)
@@ -140,7 +140,7 @@ function Wallet() {
                             <>
                                 <AddText>Autre carte  <small>(Cliquez sur une carte pour la définir comme
                                     favori)</small></AddText>
-                                <ContainerCard>
+                                <ContainerCard $popUp={isPopUp}>
                                     {cards.map((card) => {
                                         return (
                                             card.id !== defaultCard?.id && (

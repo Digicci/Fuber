@@ -59,13 +59,15 @@ function RaceState(){
         const value = e.target.getAttribute('data-label')
         const lat = e.target.getAttribute('data-lat')
         const lng = e.target.getAttribute('data-lng')
-        setRace(name, value)
         const isStart = e.target.getAttribute('data-name') === 'start'
         if (isStart) {
             location.addStartMarker(lat, lng)
         } else {
             location.addEndMarker(lat, lng)
         }
+        const label = `${name}LngLat`
+        setRace(name, value)
+        setRace(label, { lat: lat, lng: lng })
     }
 
     return (

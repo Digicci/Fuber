@@ -19,20 +19,52 @@ import {
     DivValider
 } from "./atoms"
 import { useRace } from "../../../utils/hook/Client/useRace";
-import { useLocation } from "../../../utils/hook/useLocation";
+import { useCard } from "../../../utils/hook/Client/useCard";
+import {useCsrf} from "../../../utils/hook/useCsrf";
 import Driver from "../../../utils/Data/Driver";
+import {toast} from "react-toastify";
 
 
 
 function RaceDetails({isOpenDetails, toggle}){
 
     const race = useRace()
-    const location = useLocation()
+    const card = useCard()
+    const csrf = useCsrf()
     const DriverInfo = Driver.find((d) => {
         if(d.id === race.raceInfo.driverId) {
             return d
         }
     })
+
+    const handleOrder = () => {
+        race.commandRace(card.defaultCard.id, csrf.token).then((res) => {
+          if (res.data.message === "success")  {
+              toast.success("Commande effectuée avec succès", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    icon: '🚗'
+              })
+              race.unsetRace()
+              toggle()
+          } else {
+                toast.error("Une erreur est survenue, merci de changer de carte et de réessayer", {
+                        position: toast.POSITION.TOP_RIGHT,
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        icon: "🤔"
+                })
+                toggle()
+          }
+        })
+    }
 
     return(
         <>
@@ -71,7 +103,7 @@ function RaceDetails({isOpenDetails, toggle}){
                             <PanierInfo>
                                 <p>Sous-total</p>
                                 <span>{
-                                    race.raceInfo.total && location.dist ?
+                                    race.raceInfo.total && race.raceInfo.dist ?
                                         race.raceInfo.total.toFixed(2)
                                         : 0
                                     }€
@@ -85,7 +117,7 @@ function RaceDetails({isOpenDetails, toggle}){
                                 <Total>Total</Total>
                                 <TotalPrice>
                                     {
-                                        location.dist ?
+                                        race.raceInfo.dist ?
                                             (
                                                 race.raceInfo.promo.price ?
                                                     ( race.raceInfo.total.toFixed(2) - race.raceInfo.promo.price ).toFixed(2)
@@ -97,7 +129,7 @@ function RaceDetails({isOpenDetails, toggle}){
                             </PanierInfo>
                         </Details>
                         <DivValider>
-                            <ButtonOrder>
+                            <ButtonOrder onClick={handleOrder}>
                             Commandez la course
                             </ButtonOrder>
                         </DivValider>

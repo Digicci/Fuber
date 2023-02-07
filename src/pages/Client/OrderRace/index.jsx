@@ -13,11 +13,13 @@ import { useRace } from "../../../utils/hook/Client/useRace";
 import { 
     ContainerOrder,
     Order,
-    ChangeCard
+    ChangeCard,
+    WarningInfo,
 } from "./atoms"
 import RaceState from "../../../components/Client/RaceState";
 import CarCards from "../../../components/Client/CarCards";
 import WalletPopUp from "../../../components/Client/WalletPopUp";
+import LoginPopUp from "../../../components/Client/LoginPopUp";
 
 
 function OrderRace({}){
@@ -31,21 +33,25 @@ function OrderRace({}){
     const race = useRace()
 
     useEffect(() => {
-        card.getCards()
+        if (auth.isConnected()) {
+            card.getCards()
+        }
     }, [])
 
 
     const [isOpenWallet,setIsOpenWallet] = useState(false)
-
     const toggleIsOpenCard = () => {
         setIsOpenWallet(true)
     }
 
-    
-
     const [isOpenDetails, setIsOpenDetails] = useState(false)
     const toggleIsOpenDetails = () => {
         setIsOpenDetails(!isOpenDetails)
+    }
+
+    const [openLogin, setOpenLogin] = useState(false)
+    const toggleOpenLogin = () => {
+        setOpenLogin(!openLogin)
     }
 
     
@@ -57,12 +63,12 @@ function OrderRace({}){
                     <h2>Commandez une course</h2>
                     <RaceState/>
                     {
-                        location.dist !== 0 && (
+                        location.asJourney && (
                             <CarCards/>
                         )
                     }
                     {
-                        auth.isConnected() && (
+                        auth.isConnected() ? (
                             <ChangeCard  onClick={toggleIsOpenCard}>
                                 <p>choisir un mode de paiement:</p>
                                 {
@@ -79,13 +85,27 @@ function OrderRace({}){
                                     )
                                 }
                             </ChangeCard>
+                        ) : (
+                            <WarningInfo>Vous devez être connecté pour pouvoir commandez une course</WarningInfo>
                         )
                     }
                     <WalletPopUp open={isOpenWallet} setOpen={setIsOpenWallet}/>
                     <RaceDetails toggle={toggleIsOpenDetails} isOpenDetails={isOpenDetails} />
-                    <ButtonOrder onClick={toggleIsOpenDetails} disabled={!location.asJourney} $disabled={!location.asJourney || !race.raceInfo.driverId}>
-                        Commandez la course
-                    </ButtonOrder>
+                    <LoginPopUp open={openLogin} setOpen={setOpenLogin}/>
+                    {
+                        auth.isConnected() ?
+                            (
+                                <ButtonOrder onClick={toggleIsOpenDetails} disabled={!location.asJourney || !race.raceInfo.driverId || !auth.isConnected()} $disabled={!location.asJourney || !race.raceInfo.driverId || !auth.isConnected()}>
+                                    Commandez la course
+                                </ButtonOrder>
+                            )
+                            :
+                            (
+                                <ButtonOrder onClick={toggleOpenLogin} disabled={auth.isConnected()} $disabled={auth.isConnected()}>
+                                    Se connecter
+                                </ButtonOrder>
+                            )
+                    }
                 </Order>
                 <Map/>
             </ContainerOrder>

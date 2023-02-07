@@ -19,6 +19,12 @@ export const ContainerCard = styled.div`
     justify-content: flex-start;
     align-items: center;
   }
+  ${({$popUp}) => $popUp && `
+    grid-template-columns: 1fr;
+    width: 100%;
+    justify-content: flex-start;
+    align-items: center;
+    `}
 `
 
 export const ContainerCardFavorite = styled.div`

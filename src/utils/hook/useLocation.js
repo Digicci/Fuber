@@ -3,6 +3,7 @@ import L from 'leaflet'
 import 'leaflet-routing-machine'
 import 'lrm-google'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
+import {useRace} from "./Client/useRace";
 
 const locationContext = createContext()
 
@@ -22,10 +23,6 @@ function useProvideLocation() {
     const [location, setLocation] = useState({lng: 0, lat: 0})
     //Marker de la localisation de l'utilisateur
     const [locationMarker, setLocationMarker] = useState(null)
-    //Coordonnées de départ
-    const [startLngLat, setStartLngLat] = useState(null)
-    //Coordonnées d'arrivée
-    const [endLngLat, setEndLngLat] = useState(null)
     //Marker de départ
     const [startMarker, setStartMarker] = useState(null)
     //Objet trajet
@@ -38,12 +35,13 @@ function useProvideLocation() {
     const [trackerId, setTrackerId] = useState(0)
     //Map
     const [map, setMap] = useState(null)
-    //Distance
-    const [dist, setDist] = useState(0)
     //Icone de départ
     const flagPath = './assets/ressources/flag.svg'
     //Icone d'arrivée
     const flagOutlinePath = './assets/ressources/flag-outline.svg'
+
+    const race = useRace()
+    const {unsetRace} = useRace()
 
     //Fonction de tracking de la localisation de l'utilisateur
     const setTrack = () => {
@@ -85,6 +83,7 @@ function useProvideLocation() {
 
             const marker = L.marker([location.lat, location.lng]).addTo(map);
             setLocationMarker(marker)
+            unsetRace()
         }
         return false
     }
@@ -101,7 +100,10 @@ function useProvideLocation() {
         locationMarker.remove()
         removeStartMarker()
         setStartMarker(startMarkerState)
-        setStartLngLat({lat, lng})
+        race.setRace('startLngLat', {lat, lng})
+        if (endMarker) {
+            createJourney()
+        }
     }
 
     //Fonction de création du marker d'arrivée
@@ -114,7 +116,10 @@ function useProvideLocation() {
         const endMarkerState = L.marker([lat, lng], {icon: icon}).addTo(map);
         removeEndMarker()
         setEndMarker(endMarkerState)
-        setEndLngLat({lat,lng})
+        race.setRace('endLngLat', {lat, lng})
+        if (startMarker) {
+            createJourney()
+        }
     }
 
     //Fonction de suppression du marker de départ
@@ -122,7 +127,7 @@ function useProvideLocation() {
         if (startMarker) {
             startMarker.remove()
             setStartMarker(null)
-            setStartLngLat(null)
+            race.setRace('startLngLat', null)
             if (!endMarker) {
                 locationMarker.addTo(map)
             }
@@ -134,7 +139,7 @@ function useProvideLocation() {
         if (endMarker) {
             endMarker.remove()
             setEndMarker(null)
-            setEndLngLat(null)
+            race.setRace('endLngLat', null)
             if (!startMarker) {
                 locationMarker.addTo(map)
             }
@@ -143,16 +148,18 @@ function useProvideLocation() {
 
     //Fonction de création du trajet
     const createJourney = () => {
+        console.log({action: 'createJourney', race: race.raceInfo})
         //Si les deux markers sont présents
-        if (startLngLat && endLngLat) {
+        if (race.raceInfo.startLngLat.lat !== 0 && race.raceInfo.endLngLat.lat !== 0) {
+            //On supprime le trajet s'il existe
             if (journey) {
                 journey.remove()
             }
             //On crée le trajet et on ajoute un listener sur la fin du chargement du trajet
             const polyline = L.Routing.control({
                 waypoints : [
-                    L.latLng(startLngLat.lat, startLngLat.lng),
-                    L.latLng(endLngLat.lat, endLngLat.lng),
+                    L.latLng(race.raceInfo.startLngLat.lat, race.raceInfo.startLngLat.lng),
+                    L.latLng(race.raceInfo.endLngLat.lat, race.raceInfo.endLngLat.lng),
                 ],
                 lineOptions: {
                     styles: [
@@ -169,7 +176,7 @@ function useProvideLocation() {
             }).on('routesfound', function(e) {
                 const meters = e.routes[0].summary.totalDistance
                 const km = meters / 1000
-                setDist(km.toFixed(1))
+                race.setRace('dist',parseFloat(km.toFixed(2)))
                 setAsJourney(true)
             })
             //On change la langue du trajet
@@ -203,13 +210,12 @@ function useProvideLocation() {
 
     useEffect(() => {
         createJourney()
-    }, [startLngLat, endLngLat])
+    }, [race.raceInfo.startLngLat.lat, race.raceInfo.endLngLat.lat])
 
     return {
         location,
         locationLoad,
         map,
-        dist,
         asJourney,
         setTrack,
         unsetTrack,

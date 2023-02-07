@@ -1,7 +1,7 @@
 import React from "react";
-import Wallet from "../../../pages/Client/Wallet";
 import styled from "styled-components";
 import colors from "../../../colors";
+import Login from "../../../pages/Client/Login";
 
 const Background = styled.div`
     position: fixed;
@@ -29,6 +29,7 @@ const ModalWrapper = styled.div`
     z-index: 10;
     border-radius: 10px;
     overflow-y: auto;
+    overflow-x: hidden;
 `;
 
 const CloseIcon = styled.div`
@@ -47,7 +48,8 @@ const CloseIcon = styled.div`
         color: ${colors.red};
     }
 `;
-export default function WalletPopUp({open, setOpen}) {
+
+function LoginPopUp({open, setOpen}) {
     if (!open) return;
 
     return (
@@ -56,8 +58,10 @@ export default function WalletPopUp({open, setOpen}) {
                 <CloseIcon onClick={() => setOpen(false)}>
                     <span>&times;</span>
                 </CloseIcon>
-                <Wallet isPopUp={true}/>
+                <Login isPopUp={true} closePopUp={() => setOpen(false)}/>
             </ModalWrapper>
         </Background>
     );
 }
+
+export default LoginPopUp

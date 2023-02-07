@@ -5,12 +5,12 @@ import {
     InfoCar,
     Price
 } from "./atoms"
-import { useLocation } from "../../../utils/hook/useLocation";
 import { useRace } from "../../../utils/hook/Client/useRace";
 
 
 function CarCard({id, imgInfo, title, places, descriptionInfo, commission, handleClick}){
-    const { dist } = useLocation()
+    const { raceInfo } = useRace()
+    const dist = raceInfo.dist
     const race = useRace()
     const driverId = race.raceInfo.driverId
     const driverPrice = dist * descriptionInfo.price
