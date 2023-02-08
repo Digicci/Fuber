@@ -8,7 +8,7 @@ function RaceState(){
 
     const location = useLocation()
     const axios = useAxios()
-    const {raceInfo, setRace} = useRace()
+    const {raceInfo, setRace, setRaceInfo} = useRace()
     const [suggest, setSuggest] = useState({
         start: false,
         end: false
@@ -66,8 +66,7 @@ function RaceState(){
             location.addEndMarker(lat, lng)
         }
         const label = `${name}LngLat`
-        setRace(name, value)
-        setRace(label, { lat: lat, lng: lng })
+        setRaceInfo({ ...raceInfo, [name]: value, [label]: { lat: lat, lng: lng } })
     }
 
     return (

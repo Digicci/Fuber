@@ -95,7 +95,7 @@ function OrderRace({}){
                     {
                         auth.isConnected() ?
                             (
-                                <ButtonOrder onClick={toggleIsOpenDetails} disabled={!location.asJourney || !race.raceInfo.driverId || !auth.isConnected()} $disabled={!location.asJourney || !race.raceInfo.driverId || !auth.isConnected()}>
+                                <ButtonOrder onClick={toggleIsOpenDetails} disabled={!location.asJourney || !race.raceInfo.driverId || !auth.isConnected() || !card.defaultCard} $disabled={!location.asJourney || !race.raceInfo.driverId || !auth.isConnected() || !card.defaultCard}>
                                     Commandez la course
                                 </ButtonOrder>
                             )
