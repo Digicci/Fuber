@@ -6,8 +6,10 @@ import Footer from "../../Footer";
 function Partner() {
     return (
         <>
-            <Header />
-            <Outlet />
+            <Header/>
+            <div id="page_container">
+                <Outlet />
+            </div>
             <Footer />
         </>
     )
