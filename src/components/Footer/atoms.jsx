@@ -12,7 +12,6 @@ export const FooterWrapper = styled.footer`
     align-items:flex-end;
     background: ${colors.secondary};
     padding: 2rem 3rem ;
-    margin: 3rem 0 0 0 !important;
     @media (max-width: 992px){
         flex-direction: column;
         align-items: center;

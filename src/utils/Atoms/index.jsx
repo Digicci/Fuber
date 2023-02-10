@@ -198,6 +198,19 @@ export const StyledLink = styled(Link)`
         }
         `
     }
+    ${(props) =>
+        props.$forgotEntreprise && `
+        font-size: .9rem;
+        color: ${colors.red};
+        `
+    }
+    ${(props) =>
+        props.$signinEntreprise && `
+        color: ${colors.secondary};
+        font-size: .85rem;
+        font-weight: 600;
+        `
+    }
 `
 // styled for Login and Signup
 

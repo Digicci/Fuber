@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, Route, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import RoutesClient from "./Routes/RoutesClient";
 import RoutesPartner from "./Routes/RoutesPartner";
 import Error from "../../components/Error";
@@ -7,13 +7,10 @@ import PrivateRoute from "./Routes/privateRoute/Client";
 import Home from "../../pages/Client/Home";
 import Signup from "../../pages/Client/Signup";
 import Login from "../../pages/Client/Login/index";
-import Profile from "../../pages/Client/Profile";
-import Wallet from "../../pages/Client/Wallet";
-import MyRaces from "../../pages/Client/MyRaces";
 import OrderRace from "../../pages/Client/OrderRace";
-import Partner from "../../pages/Partner/SignIn";
 import SignIn from "../../pages/Partner/SignIn";
 import Account from "../../pages/Client/Account";
+import LogIn from "../../pages/Partner/LogIn";
 
 function Router() {
     
@@ -55,6 +52,10 @@ function Router() {
                 {
                     path: "/partner/signin",
                     element: <SignIn />
+                },
+                {
+                    path:"/partner/login",
+                    element: <LogIn />
                 }
             ]
 
