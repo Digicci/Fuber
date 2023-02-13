@@ -11,12 +11,12 @@ function FormSignin(){
             <ContainerForm>
                 <h2>Lancez-vous !</h2>
                 <StyledInput $signinDriver
-                name="nomEntreprise"
+                name="nomCommercial"
                 type="text"
                 placeholder="Nom entreprise*"
                 />
                 <StyledInput $signinDriver
-                name="numSiret"
+                name="siret"
                 type="text"
                 placeholder="N°Siret/Siren*"
                 />
