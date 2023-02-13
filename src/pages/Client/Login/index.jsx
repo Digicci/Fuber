@@ -10,17 +10,19 @@ import {
     StyledLink
 } from "../../../utils/Atoms";
 import {toast} from "react-toastify";
-import { useAuth } from "../../../utils/hook/useAuth";
+import { useAuth } from "../../../utils/hook/Client/useAuth";
 import { useCsrf } from "../../../utils/hook/useCsrf";
 import { useTranslation } from 'react-i18next';
+import { useCard } from "../../../utils/hook/Client/useCard";
 
-function Login(){
+function Login({isPopUp = false, closePopUp = () => {}}){
 
     const {t, i18n} = useTranslation('translation', {keyPrefix: 'login'});
     
 
     const auth = useAuth()
     const navigate = useNavigate()
+    const card = useCard()
     const [user, setUser] = useState({
         credential:'',
         mdp:'',
@@ -32,6 +34,9 @@ function Login(){
     const csrf = useCsrf()
     //get csrf token
     useEffect(() => {
+        if (auth.isConnected()) {
+            navigate('/account/profile', { replace: true })
+        }
         csrf.getCsrfToken()
     }, [])
 
@@ -65,24 +70,45 @@ function Login(){
             })
             auth.signin(user.credential, user.mdp, csrf.token).then(res => {
                 if (res.data) {
-                    toast.update(idToast, {
-                        type: 'success',
-                        autoClose: toastTimer,
-                        render: t('toast update login'),
-                        isLoading: false,
-                        icon: '👌',
-                        className: 'rotateY',
-                        closeOnClick: true
-                    })
-                    setTimeout(() => {
-                        const returnFunc = new Promise((resolve, reject) => {
-                            resolve(navigate('/', { replace: true }))
+                    if (isPopUp) {
+                        toast.update(idToast, {
+                            type: 'success',
+                            autoClose: toastTimer,
+                            render: "Vous êtes connecté",
+                            isLoading: false,
+                            icon: '👌',
+                            className: 'rotateY',
+                            closeOnClick: true
                         })
-                        returnFunc.then(() => {
-                            localStorage.setItem('token', res.data.token)
-                            auth.setUser(res.data.user)
+                        localStorage.setItem('token', res.data.token)
+                        auth.setUser(res.data.user)
+                        closePopUp()
+                        card.getCards().then(res => {
+
                         })
-                    }, toastTimer);
+                    } else {
+                        toast.update(idToast, {
+                            type: 'success',
+                            autoClose: toastTimer,
+                            render: t('toast update login'),
+                            isLoading: false,
+                            icon: '👌',
+                            className: 'rotateY',
+                            closeOnClick: true
+                        })
+                        setTimeout(() => {
+                            const returnFunc = new Promise((resolve, reject) => {
+                                resolve(navigate('/', { replace: true }))
+                            })
+                            returnFunc.then(() => {
+                                localStorage.setItem('token', res.data.token)
+                                auth.setUser(res.data.user)
+                                card.getCards().then(res => {
+
+                                })
+                            })
+                        }, toastTimer);
+                    }
                 }
             }).catch(err => {
                 if (err.response.data.includes('CSRF')) {

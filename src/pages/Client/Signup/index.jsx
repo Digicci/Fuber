@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
+import {useValidator} from "../../../utils/hook/useValidator";
 // import colors from "../../colors";
 import {useNavigate} from "react-router-dom";
 import {
@@ -11,7 +12,7 @@ import {
     StyledAccountSign,
     StyledLink
 } from "../../../utils/Atoms";
-import {useAuth} from "../../../utils/hook/useAuth";
+import {useAuth} from "../../../utils/hook/Client/useAuth";
 import {useCsrf} from "../../../utils/hook/useCsrf";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -27,6 +28,8 @@ function Signup() {
     const {t, i18n} = useTranslation('translation', {keyPrefix: 'signup'});
 
     const csrf = useCsrf()
+
+    const validator = useValidator()
 
     const [error, setError] = useState('')
 
@@ -44,8 +47,60 @@ function Signup() {
     })
     const auth = useAuth()
 
+    const formConfig = {
+        nom: {
+            rules: {
+                required: true,
+                minLength: 3,
+                maxLength: 25,
+                pattern: /^[A-Za-z]+$/,
+            }
+        },
+        prenom: {
+            rules: {
+                required: true,
+                minLength: 3,
+                maxLength: 25,
+                pattern: /^[A-Za-z]+$/,
+            }
+        },
+        tel: {
+            rules: {
+                required: true,
+                minLength: 10,
+                maxLength: 10,
+                pattern: /^[0-9]+$/,
+            }
+        },
+        email: {
+            rules: {
+                required: true,
+                minLength: 3,
+                maxLength: 25,
+                email: true,
+            }
+        },
+        mdp: {
+            rules: {
+                required: true,
+                maxLength: 25,
+                passwordPattern: true,
+            },
+            value: user.mdp
+        },
+        confirmMdp: {
+            rules: {
+                required: true,
+                minLength: 12,
+                maxLength: 25,
+                passwordConfirm: true,
+            }
+        },
+    }
+
     useEffect(() => {
         csrf.getCsrfToken()
+        validator.registerForm(formConfig)
     }, [])
 
 
@@ -53,6 +108,7 @@ function Signup() {
         const state = {...user}
         state[field] = e.target.value
         setUser(state)
+        validator.validate(field, e.target.value)
     }
 
     function verif() {
@@ -74,6 +130,11 @@ function Signup() {
         }
         if (!verif()) {
             return false
+        }
+        for (const [key, field] of Object.entries(formConfig)) {
+            if (validator.errors[key]) {
+                return false
+            }
         }
         return {
             nom: user.nom,
@@ -131,6 +192,17 @@ function Signup() {
                     confirmMdp: '',
                 })
             })
+        } else {
+            toast.update(toastId, {
+                render: 'Merci de vérifier tout les champs',
+                type: "error",
+                autoClose: 5000,
+                isLoading: false,
+                icon: '🤔',
+                className: 'rotateY animated',
+                closeOnClick: true,
+                closeButton: true
+            })
         }
     }
 
@@ -155,6 +227,7 @@ function Signup() {
                             value={user.nom}
                             required
                         />
+                        {validator.errors.nom && <StyledError>{validator.errors.nom}</StyledError>}
 
                         <StyledInput
                             type="text"
@@ -165,6 +238,7 @@ function Signup() {
                             value={user.prenom}
                             required
                         />
+                        {validator.errors.prenom && <StyledError>{validator.errors.prenom}</StyledError>}
                         <StyledInput
                             type="tel"
                             placeholder={t('phone number')}
@@ -174,6 +248,7 @@ function Signup() {
                             value={user.tel}
                             required
                         />
+                        {validator.errors.tel && <StyledError>{validator.errors.tel}</StyledError>}
                         <StyledInput
                             type="email"
                             placeholder={t('email')}
@@ -183,6 +258,7 @@ function Signup() {
                             value={user.email}
                             required
                         />
+                        {validator.errors.email && <StyledError>{validator.errors.email}</StyledError>}
                         <StyledInput
                             type="password"
                             placeholder={t('password')}
@@ -192,6 +268,7 @@ function Signup() {
                             value={user.mdp}
                             required
                         />
+                        {validator.errors.mdp && <StyledError>{validator.errors.mdp}</StyledError>}
                         <StyledInput
                             type="password"
                             placeholder={t('confirmMdp')}
@@ -202,6 +279,7 @@ function Signup() {
                             value={user.confirmMdp}
                             required
                         />
+                        {validator.errors.confirmMdp && <StyledError>{validator.errors.confirmMdp}</StyledError>}
                         <StyledError>{error}</StyledError>
                         <StyledInput $submit type="submit" value={t('signup')}/>
                     </StyledContainerInput>

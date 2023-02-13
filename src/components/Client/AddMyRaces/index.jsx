@@ -9,7 +9,6 @@ import {
     DivButton,
     ButtonRaceFinish
 } from "../../../utils/Atoms";
-import Van from "../../../assets/van.webp";
 import Hybride from "../../../assets/hybride.webp"
 
 

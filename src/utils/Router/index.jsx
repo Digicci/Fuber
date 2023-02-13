@@ -39,6 +39,12 @@ function Router() {
                             </PrivateRoute>
                 },
                 {
+                    path: "account/:page/*",
+                    element: <PrivateRoute>
+                                <Account/>
+                            </PrivateRoute>
+                },
+                {
                     path: "/order",
                     element: <OrderRace/>
                 }

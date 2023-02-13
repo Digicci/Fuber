@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import { 
     StyledLink,
     ButtonLogout,
@@ -9,7 +9,7 @@ import {
     StyledNavGroup, 
 } from "../../../utils/Atoms";
 import Logo from '../../../assets/logo.webp';
-import { useAuth } from "../../../utils/hook/useAuth";
+import { useAuth } from "../../../utils/hook/Client/useAuth";
 import { useTranslation } from 'react-i18next';
 
 function Header({toggle}) {
@@ -17,6 +17,12 @@ function Header({toggle}) {
     const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
     
     const {user, signout, isConnected} = useAuth()
+
+    const [connected, setConnected] = useState(false)
+
+    useEffect( () => {
+        setConnected(isConnected())
+    }, [user])
 
     return(
         <>
@@ -34,7 +40,7 @@ function Header({toggle}) {
                         {t('global.partner')}
                     </StyledLink>
                     <StyledNavGroup>
-                        {isConnected() ? (
+                        {connected ? (
                             <>
                                 <StyledLink to="/account/profile" $disappear>
                                     {user?.nom} {user?.prenom}
