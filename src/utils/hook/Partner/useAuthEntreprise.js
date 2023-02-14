@@ -1,28 +1,13 @@
 import React ,{ useContext, createContext, useState } from "react";
 import { useAxios } from "../useAxios";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const authContext = createContext();
 const basePath = "entreprise";
 
-const normalizeEntrepriseWithCSRF = (entreprise) => {
-    return{
-        nomCommercial: entreprise.nomCommercial,
-        siret: entreprise.siret,
-        adresse: entreprise.adresse,
-        ville: entreprise.ville,
-        cp: entreprise.cp,
-        complement: entreprise.complement,
-        nom: entreprise.nom,
-        prenom: entreprise.prenom,
-        tel: entreprise.tel,
-        mail: entreprise.mail,
-        _csrf: entreprise._csrf
-    }
-}
 
-export function ProviderAuth({children}) {
-    const authEntreprise = useProvideAuth();
+export function ProvideAuthEntreprise({children}) {
+    const authEntreprise = useProvideAuthEntreprise();
     return <authContext.Provider value={authEntreprise}>{children}</authContext.Provider>;
 }
 
@@ -30,7 +15,7 @@ export const useAuthEntreprise = () =>{
     return useContext(authContext);
 }
 
-function useProvideAuth() {
+function useProvideAuthEntreprise() {
     const [entreprise,setEntreprise] = useState(null);
     const axios = useAxios();
     const navigate = useNavigate();
