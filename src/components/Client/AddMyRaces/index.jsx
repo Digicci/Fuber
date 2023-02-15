@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
     MyRaceH3,
     ContainerMyRaces,
@@ -10,9 +10,19 @@ import {
     ButtonRaceFinish
 } from "../../../utils/Atoms";
 import Hybride from "../../../assets/hybride.webp"
+import { useRace } from "../../../utils/hook/Client/useRace";
 
 
 function AddMyRace(){
+
+    const raceHook = useRace()
+    const [races, setRaces] = useState([])
+
+    useEffect(() => {
+        raceHook.getAllPending().then((res) => {
+            console.log(res.data)
+        })
+    }, [])
 
     return(
         <>
