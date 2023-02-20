@@ -20,11 +20,11 @@ function useProvideAuthEntreprise() {
     const axios = useAxios();
     const navigate = useNavigate();
 
-    const signin = (credential, mdp, token) => {
+    const signin = (email, mdp, token) => {
         let data
-        if(credential.includes('@')){
+        if(email.includes('@')){
             data = {
-                email: credential,
+                mail: email,
                 mdp,
                 _csrf: token
             }
@@ -33,7 +33,7 @@ function useProvideAuthEntreprise() {
     };
 
     const signup = (data) => {
-        return axios.post(`${basePath}/signup`, data,{withCredentials: true})
+        return axios.post(`${basePath}/signup`, data)
     }
 
     const getEntreprise = () => {
@@ -41,20 +41,23 @@ function useProvideAuthEntreprise() {
             return;
         }
         if(localStorage.getItem("token")) {
-            axios.get(`${basePath}/get`,{withCredentials:true}).then((res) => {
+            axios.get(`${basePath}/get`).then((res) => {
                 console.log(res)
                 if(res.status === 401) {
                     setEntreprise(null);
+                    localStorage.removeItem("token");
                 }
                 else if(res.data) {
                     setEntreprise(res.data);
                 }else{
                     setEntreprise(null)
+                    localStorage.removeItem("token");
                 }
             }).catch((err) => {
                 console.log(err)
                 console.log("error")
                 setEntreprise(null);
+                localStorage.removeItem("token");
             })
         }
         else{
@@ -68,7 +71,7 @@ function useProvideAuthEntreprise() {
     }
 
     const signout = () => {
-        axios.post(`${basePath}/logout`, {}, {withCredentials:true}).then((res) =>{
+        axios.post(`${basePath}/logout`, {}).then((res) =>{
             localStorage.removeItem("token");
             localStorage.clear();
             setEntreprise(null);

@@ -178,7 +178,6 @@ function FormSignin(){
         const toatsId = toast.loading('En cours de traitement...', {autoClose: false})
         
         const data = validateForm()
-        console.log(data);
         if(data){
             authEntreprise.signup(data)
             .then((response) => {

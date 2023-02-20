@@ -64,16 +64,19 @@ function useProvideAuth() {
                 console.log(res)
                 if (res.status === 401) {
                     setUser(null);
+                    localStorage.removeItem("token");
                 }
                 else if (res.data) {
                     setUser(res.data);
                 } else {
                     setUser(null);
+                    localStorage.removeItem("token");
                 }
             }).catch((err) => {
                 console.log(err)
                 console.log("error")
                 setUser(null);
+                localStorage.removeItem("token");
             })
         }
         else {
