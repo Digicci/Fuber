@@ -5,6 +5,9 @@ export const Form = styled.form`
     display: flex;
     width: 60%;
     flex-direction: column;
+    @media (max-width: 768px){
+        width: 100%;
+    }
 `
 export const DivInput = styled.div`
     display: flex;
