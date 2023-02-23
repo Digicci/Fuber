@@ -13,7 +13,7 @@ import {
     TitlePage
 } from "../../../utils/Atoms";
 import avatar from '../../../assets/profile.webp';
-import {useAuth} from "../../../utils/hook/useAuth";
+import {useAuth} from "../../../utils/hook/Client/useAuth";
 import {useCsrf} from "../../../utils/hook/useCsrf";
 import {useTranslation} from "react-i18next";
 import {toast} from "react-toastify";

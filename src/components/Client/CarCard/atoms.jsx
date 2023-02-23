@@ -13,6 +13,14 @@ export const CarType = styled.div`
         props.$active &&
         `border: 1px solid ${colors.sixth}`
     }
+    ${({$selected}) => $selected && `
+        border: 1px solid ${colors.sixth};
+        background-color: ${colors.fourth};
+        color: ${colors.secondary};
+        i{
+            color: ${colors.sixth};
+        }
+    `}
     
 `
 export const CarImg = styled.img`

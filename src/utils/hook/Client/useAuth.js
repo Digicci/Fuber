@@ -1,5 +1,5 @@
 import React,{ useContext, createContext, useState } from 'react';
-import { useAxios } from "./useAxios";
+import { useAxios } from "../useAxios";
 import { useNavigate } from "react-router-dom";
 
 
@@ -55,8 +55,38 @@ function useProvideAuth() {
     const signup = (data) => {
         return axios.post(`${basePath}/signup`, data, { withCredentials: true })
     }
+    const getUser = () => {
+        if (user) {
+            return;
+        }
+        if (localStorage.getItem("token")) {
+            axios.get(`${basePath}/get`, { withCredentials: true }).then((res) => {
+                console.log(res)
+                if (res.status === 401) {
+                    setUser(null);
+                    localStorage.removeItem("token");
+                }
+                else if (res.data) {
+                    setUser(res.data);
+                } else {
+                    setUser(null);
+                    localStorage.removeItem("token");
+                }
+            }).catch((err) => {
+                console.log(err)
+                console.log("error")
+                setUser(null);
+                localStorage.removeItem("token");
+            })
+        }
+        else {
+            setUser(null);
+        }
+
+    }
 
     const isConnected = () => {
+        getUser()
         return user !== null;
     }
 
@@ -65,13 +95,17 @@ function useProvideAuth() {
     }
 
     const signout = () => {
-        axios.get(`${basePath}/logout`, { withCredentials: true }).then((res) => {
+        axios.post(`${basePath}/logout`,{}, { withCredentials: true }).then((res) => {
             localStorage.removeItem("token");
             localStorage.clear();
             setUser(null);
             navigate("/login", { replace: true });
         }).catch((err) => {
             console.log(err)
+            localStorage.removeItem("token");
+            localStorage.clear();
+            setUser(null);
+            navigate("/login", { replace: true });
         })
     };
 
@@ -82,6 +116,7 @@ function useProvideAuth() {
         signup,
         signout,
         isConnected,
-        updateUser
+        updateUser,
+        getUser
     };
 }

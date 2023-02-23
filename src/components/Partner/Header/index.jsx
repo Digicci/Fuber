@@ -18,7 +18,7 @@ function Header(){
                     </StyledLink>
                 </HeaderLogo>
                 <StyledNav $navDriver>
-                    <StyledLink $headerDriver>
+                    <StyledLink to="/partner/login" $headerDriver>
                         <i className="ph-user"></i>
                         Connexion
                     </StyledLink>

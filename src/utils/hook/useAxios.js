@@ -32,7 +32,8 @@ function useProvideAxios() {
 
     const getAdress = (query, {lng, lat}, config = {}) => {
         query = query.replace(/ /g, "+");
-        return axios.get(`https://api-adresse.data.gouv.fr/search/?q=${query}&lat=${lat}&lon=${lng}`, config)
+        axios.defaults.headers.common['Authorization'] = null;
+        return axios.get(`https://api-adresse.data.gouv.fr/search/?q=${query}&lat=${lat}&lon=${lng}`, {...config, withCredentials: false})
     }
 
     const post = (path, data) => {

@@ -6,6 +6,7 @@ import NavProfile from "../../../components/Client/NavProfile";
 import Wallet from "../Wallet";
 import MyRaces from "../MyRaces";
 import Profile from "../Profile";
+import {ProvideCard} from "../../../utils/hook/Client/useCard";
 
 function Account() {
 
