@@ -75,13 +75,13 @@ function useProvideAuthEntreprise() {
             localStorage.removeItem("token");
             localStorage.clear();
             setEntreprise(null);
-            navigate("/login",{replace:true});
+            navigate("/patner/login",{replace:true});
         }).catch((err) => {
             console.log(err)
             localStorage.removeItem("token");
             localStorage.clear();
             setEntreprise(null);
-            navigate("/login", {replace:true});
+            navigate("/partner/login", {replace:true});
         })
     };
 

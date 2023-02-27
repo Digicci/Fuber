@@ -1,11 +1,9 @@
-import React, {useState, useEffect} from "react";
-import NavProfile from "../../../components/Client/NavProfile";
+import React, {useState} from "react";
 import {
     Avatar,
     AvatarIconWrapper,
     AvatarWrapper,
     ContainerInfo,
-    ContainerProfile,
     InputUpdate,
     Label,
     Number,

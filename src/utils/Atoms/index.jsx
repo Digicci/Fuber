@@ -392,8 +392,9 @@ export const ButtonLogout = styled.button`
     -webkit-transition: .3s;
     -moz-transition: .3s;
     transition: .3s;
+    cursor: pointer;
     &:hover{
-        background: rgba(0,0,0,0.825);
+        background: ${colors.red};
     }
     ${(props) => 
         props.$buttonRadius &&
