@@ -1,6 +1,6 @@
 import React ,{ useContext, createContext, useState } from "react";
 import { useAxios } from "../useAxios";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const authContext = createContext();
 const basePath = "entreprise";
