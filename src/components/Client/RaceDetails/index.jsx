@@ -23,7 +23,7 @@ import { useCard } from "../../../utils/hook/Client/useCard";
 import {useCsrf} from "../../../utils/hook/useCsrf";
 import Driver from "../../../utils/Data/Driver";
 import {toast} from "react-toastify";
-
+import { useNavigate } from "react-router-dom";
 
 
 function RaceDetails({isOpenDetails, toggle}){
@@ -31,6 +31,7 @@ function RaceDetails({isOpenDetails, toggle}){
     const race = useRace()
     const card = useCard()
     const csrf = useCsrf()
+    const navigate = useNavigate()
     const DriverInfo = Driver.find((d) => {
         if(d.id === race.raceInfo.driverId) {
             return d
@@ -51,6 +52,7 @@ function RaceDetails({isOpenDetails, toggle}){
               })
               race.unsetRace()
               toggle()
+              navigate('/account/myraces')
           } else {
                 toast.error("Une erreur est survenue, merci de changer de carte et de réessayer", {
                         position: toast.POSITION.TOP_RIGHT,
