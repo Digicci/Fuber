@@ -5,24 +5,9 @@ import { useNavigate } from "react-router-dom";
 const authContext = createContext();
 const basePath = "entreprise";
 
-const normalizeEntrepriseWithCSRF = (entreprise) => {
-    return{
-        nomCommercial: entreprise.nomCommercial,
-        siret: entreprise.siret,
-        adresse: entreprise.adresse,
-        ville: entreprise.ville,
-        cp: entreprise.cp,
-        complement: entreprise.complement,
-        nom: entreprise.nom,
-        prenom: entreprise.prenom,
-        tel: entreprise.tel,
-        mail: entreprise.mail,
-        _csrf: entreprise._csrf
-    }
-}
 
-export function ProviderAuth({children}) {
-    const authEntreprise = useProvideAuth();
+export function ProvideAuthEntreprise({children}) {
+    const authEntreprise = useProvideAuthEntreprise();
     return <authContext.Provider value={authEntreprise}>{children}</authContext.Provider>;
 }
 
@@ -30,16 +15,16 @@ export const useAuthEntreprise = () =>{
     return useContext(authContext);
 }
 
-function useProvideAuth() {
+function useProvideAuthEntreprise() {
     const [entreprise,setEntreprise] = useState(null);
     const axios = useAxios();
     const navigate = useNavigate();
 
-    const signin = (credential, mdp, token) => {
+    const signin = (email, mdp, token) => {
         let data
-        if(credential.includes('@')){
+        if(email.includes('@')){
             data = {
-                email: credential,
+                mail: email,
                 mdp,
                 _csrf: token
             }
@@ -48,7 +33,7 @@ function useProvideAuth() {
     };
 
     const signup = (data) => {
-        return axios.post(`${basePath}/signup`, data,{withCredentials: true})
+        return axios.post(`${basePath}/signup`, data)
     }
 
     const getEntreprise = () => {
@@ -56,20 +41,23 @@ function useProvideAuth() {
             return;
         }
         if(localStorage.getItem("token")) {
-            axios.get(`${basePath}/get`,{withCredentials:true}).then((res) => {
+            axios.get(`${basePath}/get`).then((res) => {
                 console.log(res)
                 if(res.status === 401) {
                     setEntreprise(null);
+                    localStorage.removeItem("token");
                 }
                 else if(res.data) {
                     setEntreprise(res.data);
                 }else{
                     setEntreprise(null)
+                    localStorage.removeItem("token");
                 }
             }).catch((err) => {
                 console.log(err)
                 console.log("error")
                 setEntreprise(null);
+                localStorage.removeItem("token");
             })
         }
         else{
@@ -83,7 +71,7 @@ function useProvideAuth() {
     }
 
     const signout = () => {
-        axios.post(`${basePath}/logout`, {}, {withCredentials:true}).then((res) =>{
+        axios.post(`${basePath}/logout`, {}).then((res) =>{
             localStorage.removeItem("token");
             localStorage.clear();
             setEntreprise(null);

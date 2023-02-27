@@ -6,6 +6,10 @@ export const Container = styled.div`
     display: flex;
     width: 100%;
     height: 80vh;
+    @media (max-width: 768px){
+        flex-direction: column;
+    }
+    
 `
 export const ContainerLogin = styled.div`
     height:100%;
@@ -20,13 +24,19 @@ export const ContainerLogin = styled.div`
         background-repeat: no-repeat;
         background-size: cover;
         background-position: top;
+        @media (max-width: 768px){
+            width: 100%;
+        }
         `
     }
     ${(props) => 
         props.$form && `
-            width: 40%;
+            width: 50%;
             background: ${colors.primary};
             justify-content: flex-start;
+            @media (max-width: 768px){
+                width: 100%;
+            }
         `
     }
 `
