@@ -125,7 +125,7 @@ function FormAddDriver(){
 
     function validateForm(){
         for(const[key, field] of Object.entries(entreprise)){
-            if(field === '' && key === ''){
+            if(field === ''){
                 setError('Veuillez remplir tous les champs')
                 return false
             }
@@ -142,12 +142,13 @@ function FormAddDriver(){
             cp: entreprise.cp,
             mdp: entreprise.mdp,
             confirmMdp: entreprise.confirmMdp,
-            _crsf: csrf.token,
+            _csrf: csrf.token,
         }
     }
 
     function onSubmit(e){
-        const toatsId = toast.loading('En cours de traitement...',
+        e.preventDefault()
+        const toatsId = toast.loading('Enregistrement en cour...',
         {autoClose: false,})
 
         const data = validateForm()
@@ -300,7 +301,9 @@ function FormAddDriver(){
                 <DivSignin>
                     <Button
                     type="submit"
-                    value="Envoyer">
+                    value="Envoyer"
+                    onClick={onSubmit}
+                    >
                         Envoyer
                     </Button>
                 </DivSignin>
