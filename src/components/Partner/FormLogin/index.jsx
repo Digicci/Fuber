@@ -63,7 +63,7 @@ function FormLogin() {
                         type: 'success',
                         autoClose: toastTimer,
                         position: 'top-right',
-                        icon: '🤔',
+                        icon: '👍',
                         isLoading: false,
                         closeOnClick: true
                     })

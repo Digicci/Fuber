@@ -7,7 +7,7 @@ function PrivateRouteDriver({children}){
     const location = useLocation()
 
     useEffect(() => {
-        if(!auth.isConnected){
+        if(!auth.isConnected()){
             navigate();
         }
     }, [auth]);
@@ -16,7 +16,7 @@ function PrivateRouteDriver({children}){
         return <Navigate to="/partner/login" state={{from:location}} replace />
     }
 
-    return auth.isConnected ? children : navigate();
+    return auth.isConnected() ? children : navigate();
 }
 
 export default PrivateRouteDriver;

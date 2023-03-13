@@ -31,35 +31,35 @@ function NavDash({activePage}) {
                 </Responsive>
                 <Nav $visible={isOpen && true}>
                     <NavLink to="/partner/account/home" $linkAccountSelected = {activePage === 'home' && true} >
-                        <i class="ph-house"></i>
+                        <i className="ph-house"></i>
                         Home
                     </NavLink>
                     <NavLink to="/partner/account/race"  $linkAccountSelected={activePage === 'race' && true} >
-                        <i class="ph-calendar-check"></i>
+                        <i className="ph-calendar-check"></i>
                         Course
                     </NavLink>
                     <NavLink to="/partner/account/finance" $linkAccountSelected={activePage === 'finance' && true}>
-                        <i class="ph-chart-line-up"></i>
+                        <i className="ph-chart-line-up"></i>
                         Finance
                     </NavLink>
                     <NavLink to="/partner/account/team" $linkAccountSelected={activePage === 'team' && true} >
-                        <i class="ph-users-three"></i>
+                        <i className="ph-users-three"></i>
                         Team
                     </NavLink>
                     <NavLink to="/partner/account/profile" $linkAccountSelected={activePage === 'profile' && true} >
-                        <i class="ph-user-circle-gear"></i>
+                        <i className="ph-user-circle-gear"></i>
                         Profile
                     </NavLink>
                     <NavLink to="/partner/account/help" $linkAccountSelected={activePage === 'help' && true} >
-                        <i class="ph-info"></i>
+                        <i className="ph-info"></i>
                         Aide
                     </NavLink>
                     <NavLink to="/partner/account/setting" $linkAccountSelected={activePage === 'setting' && true} >
-                        <i class="ph-gear"></i>
+                        <i className="ph-gear"></i>
                         Setting
                     </NavLink>
                     <Logout $logoutDisappear>
-                        <i class="ph-sign-out"></i>
+                        <i className="ph-sign-out"></i>
                         Déconnexion
                     </Logout>
                     <Connexion>

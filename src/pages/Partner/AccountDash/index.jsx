@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { Container } from "./atoms";
 import NavDash from "../../../components/Partner/NavDash";
 import HomeDash from "../HomeDash";
+import Team from "../Team";
 
 function AccountDash() {
     const csrf = useCsrf();
@@ -19,6 +20,9 @@ function AccountDash() {
                 <NavDash activePage={page}/>
                 {
                     page === "home" && <HomeDash />
+                }
+                {
+                    page === "team" && <Team />
                 }
             </Container>
         </>

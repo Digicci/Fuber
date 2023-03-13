@@ -987,3 +987,17 @@ font-weight: 700;
     display: block;
 }
 `
+// Dashboard Driver
+
+export const Row = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin: 1rem 1rem 0 1rem;
+    ${(props) =>
+        props.$rowDriver &&
+        `margin-top: 2rem;
+        `
+    }
+`

@@ -9,6 +9,8 @@ const colors = {
     shadow: 'rgba(0, 0, 0, 0.825)',
     red: 'rgb(248,13,13)',
     purple: '#9400d3',
+    yellow: '#FBDA61',
+    pink : '#FF5ACD',
 }
 
 export default colors

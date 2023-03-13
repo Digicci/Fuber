@@ -1,8 +1,8 @@
 import React from 'react';
 
-import confort from "../../assets/confort.webp";
-import van from "../../assets/van.webp";
-import hybride from "../../assets/hybride.webp";
+import confort from "../../../assets/confort.webp";
+import van from "../../../assets/van.webp";
+import hybride from "../../../assets/hybride.webp";
 
 const Driver = [
     {
