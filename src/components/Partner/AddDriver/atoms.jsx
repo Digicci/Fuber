@@ -26,7 +26,8 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 55%;
-    height: 100vh;
+    height: 95%;
+    overflow: hidden;
     background-color: ${colors.primary};
     justify-content: flex-start;
     @media (max-width: 768px){

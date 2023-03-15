@@ -8,6 +8,9 @@ export const Col = styled.div`
     flex: 0 0 auto;
     margin: 1rem 0;
     padding: .5rem 1rem;
+    @media (max-width: 768px) {
+        width: 100%;
+    }
 `
 export const CardLink = styled(Link)`
     display: flex;

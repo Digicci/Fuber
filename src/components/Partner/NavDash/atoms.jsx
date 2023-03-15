@@ -2,14 +2,13 @@ import styled from "styled-components";
 import colors from "../../../colors"
 import {
     StyledLink,
-    ButtonLogout,
-    ButtonResponsive
+    ButtonResponsive,
 } from "../../../utils/Atoms";
 
 export const Container = styled.div`
     display: flex;
     width: 20%;
-    height: 80vh;
+    height: 100%;
     background-color: ${colors.secondary};
     @media (max-width: 768px){
         width: 100%;
@@ -21,7 +20,6 @@ export const Container = styled.div`
 `
 
 export const Nav = styled.div`
-    height: 100%;
     width: 100%;
     margin: 2.5rem 0;
     padding: 1rem .8rem;
@@ -48,6 +46,7 @@ export const Nav = styled.div`
             `
         }
     }
+    
 `
 
 
@@ -172,9 +171,8 @@ export const Logout = styled.button`
     }
 `
 export const Responsive = styled(ButtonResponsive)`
-    @media (max-width: 768px){
+    display: none;
+    @media (max-width:768px){
         display: block;
-        width: 100%;
-        z-index: 10;
     }
 `

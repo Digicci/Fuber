@@ -5,8 +5,9 @@ import {
     NavLink,
     Connexion,
     Logout,
-    Responsive,
+    Responsive
 } from "./atoms"
+
 
 
 

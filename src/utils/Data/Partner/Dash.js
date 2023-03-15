@@ -6,7 +6,7 @@ import team from "../../../assets/driver/team.webp";
 const Dash = [
     {
         id: 1,
-        to: "../../../pages/Partner/Finances",
+        to: "../../../pages/Partner/finances",
         title: "Finances",
         imgInfo: {
             img: courbe,
@@ -18,7 +18,7 @@ const Dash = [
     },
     {
         id: 2,
-        to: "../../../pages/Partner/Races",
+        to: "../../../pages/Partner/races",
         title: "Nombre de courses",
         imgInfo: {
             img: order,
@@ -30,7 +30,7 @@ const Dash = [
     },
     {
         id: 3,
-        to: "../../../pages/Partner/Team",
+        to: "../../../pages/Partner/team",
         title: "Team",
         imgInfo: {
             img: team,
@@ -42,7 +42,7 @@ const Dash = [
     },
     {
         id: 4,
-        to: "../../../pages/Partner/ProfilDash",
+        to: "../../../pages/Partner/profilDash",
         title: "Profile",
         imgInfo: {
             img: params,

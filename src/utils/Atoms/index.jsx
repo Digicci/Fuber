@@ -580,6 +580,12 @@ export const ContainerModal = styled.div`
             justify-content: space-between;
             `
     }
+    ${(props) =>
+        props.$addDriver &&
+            `
+            overflow-y: scroll;
+            `
+    }
 `
  export const TitleModal = styled.h5`
     text-align: center;
@@ -995,9 +1001,34 @@ export const Row = styled.div`
     align-items: center;
     width: 100%;
     margin: 1rem 1rem 0 1rem;
+    
     ${(props) =>
         props.$rowDriver &&
         `margin-top: 2rem;
         `
     }
+    @media (max-width: 768px){
+        ${(props) =>
+            props.$rowDriver &&
+            `flex-direction: column;
+            margin: 1rem 0;
+            width: 100vw;
+            `
+        }
+        ${(props) =>
+            props.$col &&
+            `display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            `
+        }
+    }
+    @media (max-width: 425px){
+        ${(props) =>
+            props.$col &&
+            `display: flex;
+            flex-direction: column;
+            `
+        }
+    }
+
 `

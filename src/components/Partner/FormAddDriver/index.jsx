@@ -176,7 +176,7 @@ function FormAddDriver(){
                         icon: '👌',
                     })
                     setTimeout(() => {
-                        navigate('/partner/account/teams', {replace: true})
+                        navigate('/partner/account/team', {replace: true})
                     }, toastTimer)
                 }
             })

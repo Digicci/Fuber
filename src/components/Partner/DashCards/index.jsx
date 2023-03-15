@@ -11,7 +11,7 @@ function DashCards() {
 
     return (
         <>
-            <Row>
+            <Row $col>
                 {
                     data.map((card) => {
                         return <DashCard key={card.id} {...card} $first={card.id[1]} />

@@ -6,10 +6,13 @@ export const Container = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 100vw;
     height: 100%;
     background-color: ${colors.white};
     padding: 3rem 4rem 0 4rem;
+    @media (max-width: 768px) {
+        padding: 3rem 1rem 0 1rem;
+    }
 `
 
 export const Title = styled.div`
@@ -39,6 +42,14 @@ export const DivDriver = styled.div`
     i{
         font-size: 1.4rem;
         margin-right: 2rem;
+    }
+    @media (max-width: 768px) {
+        width: 100%;
+        margin-top: 1rem;
+        i{
+            font-size: 1.2rem;
+            margin-right: 1rem;
+        }
     }
 `
 export const Button = styled.button`

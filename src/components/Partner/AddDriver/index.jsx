@@ -22,7 +22,7 @@ function AddDriver({toggle, isOpen}){
                     <TitleModal>
                         Ajouter un chauffeur ?
                     </TitleModal>
-                    <ContainerModal>
+                    <ContainerModal $addDriver>
                         <FormAddDriver/>
                     </ContainerModal>
                 </Container>
