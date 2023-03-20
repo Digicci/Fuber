@@ -21,7 +21,7 @@ function FormLogin() {
     //get csrf token
     useEffect(() => {
         if (authEntreprise.isConnected()) {
-            navigate('/partner/home', { replace: true })
+            navigate('/partner/account/home', { replace: true })
         }
         csrf.getCsrfToken()
     }, [])
@@ -51,6 +51,11 @@ function FormLogin() {
             })
         } else {
             //if present, send request to server
+            toast.loading('Connexion en cours...', {
+                position: "top-right",
+                autoClose: false,
+                toastId: idToast
+            })
             authEntreprise.signin(entreprise.mail, entreprise.mdp, csrf.token).then((res) => {
                 if(res.data){
                     toast.update(idToast, {
@@ -58,12 +63,16 @@ function FormLogin() {
                         type: 'success',
                         autoClose: toastTimer,
                         position: 'top-right',
-                        icon: '🤔',
+                        icon: '👍',
                         isLoading: false,
                         closeOnClick: true
                     })
                     localStorage.setItem('token', res.data.token)
-                    authEntreprise.setEntreprise(res.data.entreprise)
+                    authEntreprise.setEntreprise(res.data.driver)
+                    console.log(res.data);
+                    setTimeout(() => {
+                        navigate('/partner/account/home', { replace: true })
+                    }, 2000)
                 }
             }).catch((err) => {
                 if(err.response.data.includes('CSRF')){
@@ -76,6 +85,7 @@ function FormLogin() {
                         isLoading: false,
                         closeOnClick: true
                     })
+
                 } else {
                     toast.update(idToast, {
                         render: err.response.data,

@@ -36,6 +36,10 @@ function useProvideAuthEntreprise() {
         return axios.post(`${basePath}/signup`, data)
     }
 
+    const register = (data) => {
+        return axios.post(`${basePath}/register`, data)
+    }
+
     const getEntreprise = () => {
         if(entreprise){
             return;
@@ -71,17 +75,17 @@ function useProvideAuthEntreprise() {
     }
 
     const signout = () => {
-        axios.post(`${basePath}/logout`, {}).then((res) =>{
+        axios.get(`${basePath}/logout`, {}).then((res) =>{
             localStorage.removeItem("token");
             localStorage.clear();
             setEntreprise(null);
-            navigate("/login",{replace:true});
+            navigate("/partner/login",{replace:true});
         }).catch((err) => {
             console.log(err)
             localStorage.removeItem("token");
             localStorage.clear();
             setEntreprise(null);
-            navigate("/login", {replace:true});
+            navigate("/partner/login", {replace:true});
         })
     };
 
@@ -90,6 +94,7 @@ function useProvideAuthEntreprise() {
         setEntreprise,
         signin,
         signup,
+        register,
         signout,
         isConnected,
         getEntreprise,

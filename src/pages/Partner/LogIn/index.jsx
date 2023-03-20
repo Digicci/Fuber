@@ -6,8 +6,8 @@ import {
     ContainerLogin,
     Title
 } from "./atoms";
-import logo from "../../../assets/driver/logodriver.webp"
 import darkLogo from "../../../assets/driver/logodriverreverse.webp"
+import logo from "../../../assets/driver/logodriver.webp"
 import FormLogin from "../../../components/Partner/FormLogin";
 
 

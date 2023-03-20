@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import CarCard from "../CarCard";
 import { useRace } from "../../../utils/hook/Client/useRace";
-import Driver from "../../../utils/Data/Driver";
+import Driver from "../../../utils/Data/Client/Driver";
 import {
     TypeChoiceCar,
 } from "./atoms"
