@@ -61,7 +61,7 @@ function AddMyRace() {
                                         </InfoRace>
                                         <DivButton>
                                             <ButtonRaceFinish>
-                                                Course terminer
+                                                {race.validNumber}
                                             </ButtonRaceFinish>
                                         </DivButton>
                                     </DivRace>
