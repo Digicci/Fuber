@@ -224,6 +224,7 @@ function useProvideLocation() {
         addEndMarker,
         removeEndMarker,
         removeStartMarker,
+        removeJourney,
         destroyMap
     }
 }

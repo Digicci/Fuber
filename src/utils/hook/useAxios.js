@@ -36,6 +36,11 @@ function useProvideAxios() {
         return axios.get(`https://api-adresse.data.gouv.fr/search/?q=${query}&lat=${lat}&lon=${lng}`, {...config, withCredentials: false})
     }
 
+    const getAdressByCoord = ({lng, lat}, config = {}) => {
+        axios.defaults.headers.common['Authorization'] = null;
+        return axios.get(`https://api-adresse.data.gouv.fr/reverse/?lon=${lng}&lat=${lat}`, {...config, withCredentials: false})
+    }
+
     const post = (path, data) => {
         setHeader();
         return axios.post(`${apiPath}/${path}`, data)
@@ -57,6 +62,7 @@ function useProvideAxios() {
         post,
         put,
         del,
-        getAdress
+        getAdress,
+        getAdressByCoord
     };
 }
