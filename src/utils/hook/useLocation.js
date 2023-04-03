@@ -152,7 +152,7 @@ function useProvideLocation() {
         //Si les deux markers sont présents
         if (race.raceInfo.startLngLat.lat !== 0 && race.raceInfo.endLngLat.lat !== 0) {
             //On supprime le trajet s'il existe
-            if (journey) {
+            if (asJourney) {
                 journey.remove()
             }
             //On crée le trajet et on ajoute un listener sur la fin du chargement du trajet
@@ -196,7 +196,7 @@ function useProvideLocation() {
 
     //Fonction de suppression du trajet
     const removeJourney = () => {
-        if (journey) {
+        if (asJourney) {
             journey.remove()
             setJourney(null)
             if (startMarker) {
@@ -205,6 +205,7 @@ function useProvideLocation() {
             else if (endMarker) {
                 endMarker.addTo(map)
             }
+            setAsJourney(false)
         }
     }
 

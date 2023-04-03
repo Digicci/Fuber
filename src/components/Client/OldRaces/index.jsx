@@ -7,7 +7,8 @@ import {
     RaceImg,
     InfoRace,
     DivButton,
-    ButtonRaceFinish
+    ButtonRaceFinish,
+    Loader
 } from "../../../utils/Atoms";
 import Van from "../../../assets/van.webp";
 import Hybride from "../../../assets/hybride.webp";
@@ -37,7 +38,7 @@ function OldRaces(){
         <>
             <ContainerMyRaces>
                 {isLoading ? (
-                    <>Chargement...</>
+                    <><Loader/></>
                 ) : (
                     <>
                         {oldRaces.length > 0 ? (
@@ -46,23 +47,33 @@ function OldRaces(){
                                     Courses en cours
                                 </RaceInProgress>
                                 {oldRaces.map((race, index) => {
+                                    const dateObj = new Date(race.createdAt)
+                                    const date = dateObj.getDate() + "/" + (dateObj.getMonth() + 1) + "/" + dateObj.getFullYear()
+                                    const time = dateObj.getHours() + ":" + dateObj.getMinutes()
+                                    const nom = race.entreprise.nom.slice(0,1)
+                                    const prenom = race.entreprise.prenom
+                                    const type = race.entreprise.vehicule.type.toUpperCase()
+                                    const total = (race.total / 100).toFixed(2)
                                     return (
                                         <>
                                             <DivRace key={index}>
                                                 <RaceImg src={Confort} alt="hybrid car"/>
                                                 <InfoRace>
-                                                    <h4>{race.entreprise.vehicule.type} par {race.entreprise.prenom} {race.entreprise.nom.slice(0,1)}.</h4>
+                                                    <h4>{type} par {prenom} {nom}.</h4>
                                                     <h5>{race.entreprise.num}</h5>
-                                                    <h5>{(race.total / 100).toFixed(2)}€</h5>
+                                                    <h5>{total}€</h5>
                                                     <h5>{race.start}</h5>
                                                     <h5>{race.end}</h5>
-                                                    <h5>Date / heure</h5>
+                                                    <h5>{date} à {time}</h5>
                                                 </InfoRace>
+                                                {/*
+                                                //A rajouter lors de la V2 du projet
                                                 <DivButton>
                                                     <ButtonRaceFinish $noteRace>
                                                         Notez la course
                                                     </ButtonRaceFinish>
                                                 </DivButton>
+                                                */}
                                             </DivRace>
                                         </>
                                     )
@@ -70,7 +81,7 @@ function OldRaces(){
                             </>
                         ) : (
                             <MyRaceH3>
-                                Il semble que vous n'avez pas de course en cours.
+                                Il semble que vous n'avez pas de course archivée.
                             </MyRaceH3>
                         )}
                     </>
