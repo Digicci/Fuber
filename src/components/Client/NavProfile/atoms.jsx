@@ -38,18 +38,3 @@ export const Nav = styled.div`
     }
     
 `
- export const ButtonResponsive = styled.button`
-    display: none;
-    border: 1px solid ${colors.secondary};
-    color: ${colors.primary};
-    padding: 10px 15px;
-    width: 100%;
-    background-color: ${colors.secondary};
-    font-size: 1rem;
-    letter-spacing: 8px;
-    text-transform: uppercase;
-    font-weight: 700;
-    @media (max-width: 425px){
-        display: block;
-    }
-`

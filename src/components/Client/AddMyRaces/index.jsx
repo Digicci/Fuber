@@ -4,45 +4,72 @@ import {
     ContainerMyRaces,
     RaceInProgress,
 } from "../../../utils/Atoms";
-import { useRace } from "../../../utils/hook/Client/useRace";
-import PendingRace from "../PendingRace";
+
+import Hybride from "../../../assets/hybride.webp"
+import confort from "../../../assets/confort.webp"
+import van from "../../../assets/van.webp"
+import {useAxios} from "../../../utils/hook/useAxios";
 
 
-function AddMyRace(){
+function AddMyRace() {
 
-    const raceHook = useRace()
-    const [races, setRaces] = useState([])
+    const axios = useAxios()
+    const [data, setData] = useState([])
 
     useEffect(() => {
-        raceHook.getAllPending().then((res) => {
-            setRaces(res.data)
+        axios.get('race/getAllPending').then((res) => {
+            console.log(res.data)
+            setData(res.data)
         })
     }, [])
 
-    return(
+    return (
         <>
             <ContainerMyRaces>
-
-                {
-                    races.length > 0 ? (
-                        <>
-                            <RaceInProgress>
-                                Courses en cours
-                            </RaceInProgress>
-                            {
-                                races.map((race) => {
-                                    return <PendingRace {...race} />
-                                })
-                            }
-                        </>
-                    ) : (
-                        <MyRaceH3>
-                            Il semble que vous n'avez pas de course en cours.
-                        </MyRaceH3>
-                    )
+                {data.length < 0 ? (
+                    <MyRaceH3>
+                        Il semble que vous n'avez pas de course en cours.
+                    </MyRaceH3>
+                ) : (
+                    <>
+                        <RaceInProgress>
+                            Courses en cours
+                        </RaceInProgress>
+                        {
+                            data.map((race) => {
+                                const dateObj = new Date(race.createdAt)
+                                const date = dateObj.getDate() + "/" + (dateObj.getMonth() + 1) + "/" + dateObj.getFullYear()
+                                const time = dateObj.getHours() + ":" + dateObj.getMinutes()
+                                const entreprise = race.entreprise
+                                const car = entreprise.vehicule
+                                const img = car.img_path
+                                const src = img === "confort" ? confort : img === "hybride" ? Hybride : van
+                                return (
+                                    <DivRace>
+                                        <RaceImg src={src} alt="car img"/>
+                                        <InfoRace>
+                                            <h4>{car.type.toUpperCase()} par {entreprise.prenom}</h4>
+                                            <h5>{entreprise.num}</h5>
+                                            <h5>{(race.total / 100).toFixed(2)}€</h5>
+                                            <h5>Départ : {race.start}</h5>
+                                            <h5>Arrivée : {race.end}</h5>
+                                            <h5>{`${date} à ${time}`}</h5>
+                                        </InfoRace>
+                                        <DivButton>
+                                            <ButtonRaceFinish>
+                                                {race.validNumber}
+                                            </ButtonRaceFinish>
+                                        </DivButton>
+                                    </DivRace>
+                                )
+                            })
+                        }
+                    </>
+                )
                 }
             </ContainerMyRaces>
         </>
     )
 }
+
 export default AddMyRace

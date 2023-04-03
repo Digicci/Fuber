@@ -9,8 +9,6 @@ function PrivateRoute({children}){
     if(!auth.isConnected()){
         return <Navigate to="/login" state={{from:location}} replace />
     }
-
-
     return children
 }
 

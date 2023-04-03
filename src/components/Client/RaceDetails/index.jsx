@@ -21,7 +21,7 @@ import {
 import { useRace } from "../../../utils/hook/Client/useRace";
 import { useCard } from "../../../utils/hook/Client/useCard";
 import {useCsrf} from "../../../utils/hook/useCsrf";
-import Driver from "../../../utils/Data/Driver";
+import Driver from "../../../utils/Data/Client/Driver";
 import {toast} from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -89,8 +89,8 @@ function RaceDetails({isOpenDetails, toggle}){
                                 <Span $spanRight>{race.raceInfo.start ?? ''}</Span>
                             </InfoAdresse>
                             <InfoAdresse>
-                                <Span $spanLeft>Adresse de d'arrivée :</Span>
-                                <Span $spanRight>{race.raceInfo.end ?? ''}</Span>
+                                <Span $spanLeft>Adresse de d'arrivée </Span>
+                                <Span $spanRight>: {race.raceInfo.end ?? ''}</Span>
                             </InfoAdresse>
                         </Details>
                     </ModalDetails>

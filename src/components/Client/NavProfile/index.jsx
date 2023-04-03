@@ -1,11 +1,13 @@
 import React, {useState} from "react";
-import { StyledLink } from "../../../utils/Atoms";
+import {
+    StyledLink,
+    ButtonResponsive
+} from "../../../utils/Atoms";
 import { useTranslation } from "react-i18next";
 import {
     ContainerNav,
-    ButtonResponsive,
     Nav
-} from "./atoms"
+} from "./atoms";
 
 
 function NavProfile({activePage})
