@@ -22,7 +22,6 @@ function AddMyRace() {
 
     useEffect(() => {
         axios.get('race/getAllPending').then((res) => {
-            console.log(res.data)
             setData(res.data)
         })
     }, [])
