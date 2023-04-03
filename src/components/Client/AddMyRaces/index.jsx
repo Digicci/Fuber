@@ -3,6 +3,11 @@ import {
     MyRaceH3,
     ContainerMyRaces,
     RaceInProgress,
+    DivRace,
+    RaceImg,
+    InfoRace,
+    DivButton,
+    ButtonRaceFinish,
 } from "../../../utils/Atoms";
 
 import Hybride from "../../../assets/hybride.webp"
