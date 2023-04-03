@@ -101,12 +101,17 @@ function useProvideRace() {
         return axios.post('race/add', body)
     }
 
+    function getAllPending() {
+        return axios.get('race/getAllPending')
+    }
+
 
     return {
         raceInfo,
         setRace,
         setRaceInfo,
         unsetRace,
-        commandRace
+        commandRace,
+        getAllPending
     }
 }
