@@ -5,6 +5,8 @@ import { Container } from "./atoms";
 import NavDash from "../../../components/Partner/NavDash";
 import HomeDash from "../HomeDash";
 import Team from "../Team";
+import Races from "../Races";
+
 
 function AccountDash() {
     const csrf = useCsrf();
@@ -20,6 +22,9 @@ function AccountDash() {
                 <NavDash activePage={page}/>
                 {
                     page === "home" && <HomeDash />
+                }
+                {
+                    page === 'race' && <Races />
                 }
                 {
                     page === "team" && <Team />
