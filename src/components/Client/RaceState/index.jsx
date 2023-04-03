@@ -49,6 +49,7 @@ function RaceState(){
             } else {
                 location.removeEndMarker()
             }
+            location.removeJourney()
         }
         //On met à jour le state de la course
         setRace(name, value)
@@ -56,7 +57,6 @@ function RaceState(){
     //Fonction qui permet de récupérer les infos de la suggestion à utiliser au clic
     const handleSuggestion = (e) => {
         const name = e.target.getAttribute("data-name")
-        const value = e.target.getAttribute('data-label')
         const lat = e.target.getAttribute('data-lat')
         const lng = e.target.getAttribute('data-lng')
         const isStart = e.target.getAttribute('data-name') === 'start'
@@ -66,7 +66,18 @@ function RaceState(){
             location.addEndMarker(lat, lng)
         }
         const label = `${name}LngLat`
-        setRaceInfo({ ...raceInfo, [name]: value, [label]: { lat: lat, lng: lng } })
+
+        //Si l'utilisateur clique sur "Ma position", on récupère l'adresse de sa position
+        if (e.target.getAttribute('data-label') === "Ma position") {
+            axios.getAdressByCoord({ lat: location.location.lat, lng: location.location.lng }).then((res) => {
+              const value = res.data.features[0].properties.label
+                setRaceInfo({ ...raceInfo, [name]: value, [label]: { lat: lat, lng: lng } })
+            })
+        } else {
+            const value = e.target.getAttribute('data-label')
+            //On met à jour le state de la course
+            setRaceInfo({ ...raceInfo, [name]: value, [label]: { lat: lat, lng: lng } })
+        }
     }
 
     return (

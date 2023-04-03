@@ -25,6 +25,7 @@ import FormSignin from "../../../components/Partner/FormSignin";
 
 function SignIn(){
 
+
     const [isCollapsed, setIsCollapsed] = useState({
         question1: false,
         question2: false,
@@ -50,12 +51,14 @@ function SignIn(){
                         <h3>Devenez partenaire</h3>
                         <p>La plateforme vous offre la flexibilité, la visibilité et les données nécessaires pour vous mettre en relation avec davantage de clients. Devenez partenaire dès aujourd'hui.</p>
                     </Title>
-                    <FormSignin />
+                    <FormSignin/>
                 </ContainerSignup>
+                
                 <ContainerInfo>
                     <WhyUs>
                         <h4>Pourquoi nous ?</h4>
                     </WhyUs>
+
                     <SinginInfo $grid>
                         <InfoSignin>
                             <Div>
@@ -63,12 +66,14 @@ function SignIn(){
                                 <Pinfo $child2>Nos offres sont flexibles : vous pouvez ainsi les adapter à vos besoins. Rejoignez NOUS et faites livrer vos commandes par vos coursiers.</Pinfo>
                             </Div>
                         </InfoSignin>
+
                         <InfoSignin>
                             <Div>
                                 <Pinfo>Augmentez votre visibilité</Pinfo>
                                 <Pinfo $child2>Démarquez-vous grâce au marketing intégré à l'application pour atteindre davantage de clients et accroître vos ventes.</Pinfo>
                             </Div>
                         </InfoSignin>
+
                         <InfoSignin>
                             <Div>
                                 <Pinfo>Établissez un lien avec vos clients</Pinfo>
@@ -76,41 +81,50 @@ function SignIn(){
                             </Div>
                         </InfoSignin>
                     </SinginInfo>
+
                     <WhyUs $functioning>
                         <h4>Fonctionnement d'ENTREPRISE pour les commerces partenaires</h4>
                     </WhyUs>
+
                     <SinginInfo $grid>
                         <InfoSignin>
                             <DivImg $divFunctioning>
                                 <CcmImg $functioningImg src={et1} alt="Première étape" />
                             </DivImg>
+
                             <Div>
                                 <Pinfo>Les clients passent commande</Pinfo>
                                 <Pinfo $child2>Le client trouve votre etablissement et passe commande sur l'ENTREPRISE.</Pinfo>
                             </Div>
                         </InfoSignin>
+
                         <InfoSignin>
                             <DivImg $divFunctioning>
                                 <CcmImg $functioningImg src={et2} alt="Première étape" />
                             </DivImg>
+
                             <Div>
                                 <Pinfo>Vous préparez</Pinfo>
                                 <Pinfo $child2>Votre etablissement accepte et prépare la commande.</Pinfo>
                             </Div>
                         </InfoSignin>
+
                         <InfoSignin>
                             <DivImg $divFunctioning>
                                 <CcmImg $functioningImg src={et3} alt="Première étape" />
                             </DivImg>
+
                             <Div>
                                 <Pinfo>Les clients viennent ou vous livrer</Pinfo>
                                 <Pinfo $child2>Les cliens viennent chercher leur commandes sur place ou bien vous les livrer chez eux.</Pinfo>
                             </Div>
                         </InfoSignin>
                     </SinginInfo>
+
                     <WhyUs $functioning>
                         <h4>Des questions ? Nous avons les réponses.</h4>
                     </WhyUs>
+
                     <SinginInfo $col>
                         <Accordion>
                             <CollapseContainer>
@@ -126,6 +140,7 @@ function SignIn(){
                                     </Pinfo>
                                 </Content>
                             </CollapseContainer>
+
                             <CollapseContainer>
                                 <Collapse onClick={() => {toggleCollapsed('question2')}}>
                                     <Pinfo $child2>
@@ -139,6 +154,7 @@ function SignIn(){
                                     </Pinfo>
                                 </Content>
                             </CollapseContainer>
+                            
                             <CollapseContainer>
                                 <Collapse onClick={() => {toggleCollapsed('question3')}}>
                                     <Pinfo $child2>   

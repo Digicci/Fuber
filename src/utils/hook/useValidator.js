@@ -51,6 +51,18 @@ export const useValidator = () => {
                 error = 'Les mots de passe ne correspondent pas';
             }
         }
+        if(form[name].rules.siret){
+            const pattern = /^[0-9]{14}$/;
+            if(!pattern.test(value)){
+                error = 'Le siret n\'est pas valide';
+            }
+        }
+        if(form[name].rules.staff){
+            const pattern = /^[0-9]+$/;
+            if(!pattern.test(value)){
+                error = 'Le nombre de salarié n\'est pas valide';
+            }
+        }
         setErrors({...errors, [name]: error});
     }
     return {

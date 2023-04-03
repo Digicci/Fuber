@@ -1,14 +1,26 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import {
     HeaderImg,
     HeaderLogo,
     HeaderWrapper,
     StyledNav,
-    StyledLink
+    StyledLink,
+    ButtonLogout,
 } from "../../../utils/Atoms"
 import Logo from "../../../assets/driver/logodriver.webp"
+import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
+
 
 function Header(){
+
+    const {entreprise, isConnected,signout} = useAuthEntreprise()
+
+    const [connected, setConnected] = useState(false)
+
+    useEffect( () => {
+        setConnected(isConnected())
+    }, [entreprise])
+
     return(
         <>
             <HeaderWrapper $driverHeader>
@@ -18,10 +30,20 @@ function Header(){
                     </StyledLink>
                 </HeaderLogo>
                 <StyledNav $navDriver>
-                    <StyledLink to="/partner/login" $headerDriver>
-                        <i className="ph-user"></i>
-                        Connexion
-                    </StyledLink>
+                    {connected ? (
+                        <>
+                            <ButtonLogout $buttonRadius $logoutDisappear onClick={signout}>
+                                Déconnexion
+                            </ButtonLogout>
+                        </>
+                    ) : (
+                        <>
+                            <StyledLink to="/partner/login" $headerDriver>
+                                <i className="ph-user"></i>
+                                Connexion
+                            </StyledLink>
+                        </>
+                    )}
                 </StyledNav>
             </HeaderWrapper>
         </>

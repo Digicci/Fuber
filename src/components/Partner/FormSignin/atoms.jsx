@@ -31,3 +31,7 @@ export const Select = styled.select`
     outline: none;
     
 `
+export const Error = styled.span`
+  color: red;
+  text-align: center;
+`

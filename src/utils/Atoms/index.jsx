@@ -392,8 +392,9 @@ export const ButtonLogout = styled.button`
     -webkit-transition: .3s;
     -moz-transition: .3s;
     transition: .3s;
+    cursor: pointer;
     &:hover{
-        background: rgba(0,0,0,0.825);
+        background: ${colors.red};
     }
     ${(props) => 
         props.$buttonRadius &&
@@ -577,6 +578,12 @@ export const ContainerModal = styled.div`
             `width: 25%;
             padding: 1rem 0;
             justify-content: space-between;
+            `
+    }
+    ${(props) =>
+        props.$addDriver &&
+            `
+            overflow-y: scroll;
             `
     }
 `
@@ -841,14 +848,9 @@ export const StyledNavGroup = styled.div`
 
 
 export const Loader = styled.div`
-  box-shadow: 
-          0 4px 0 ${colors.sixth}, 
-          4px 0 0 ${colors.primary}, 
-          4px 4px 0 ${colors.purple}, 
-          -4px 0 0 ${colors.primary}, 
-          0 -4px 0 ${colors.sixth}, 
-          -4px -4px 0 ${colors.purple};
-  border: 4px solid transparent;
+  border-left: 4px solid ${colors.sixth};
+    border-right: 4px solid transparent;
+    border-top: 4px solid transparent;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -857,9 +859,14 @@ export const Loader = styled.div`
   @keyframes spin {
     0% {
       transform: rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
     }
     100% {
       transform: rotate(360deg);
+      opacity: 1;
     }
   }
 `
@@ -968,4 +975,60 @@ export const DivImg = styled.div`
     }
     `
   }
+`
+// Nav Profile
+
+export const ButtonResponsive = styled.button`
+display: none;
+border: 1px solid ${colors.secondary};
+color: ${colors.primary};
+padding: 10px 15px;
+width: 100%;
+background-color: ${colors.secondary};
+font-size: 1rem;
+letter-spacing: 8px;
+text-transform: uppercase;
+font-weight: 700;
+@media (max-width: 425px){
+    display: block;
+}
+`
+// Dashboard Driver
+
+export const Row = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    width: 100%;
+    margin: 1rem 1rem 0 1rem;
+    
+    ${(props) =>
+        props.$rowDriver &&
+        `margin-top: 2rem;
+        `
+    }
+    @media (max-width: 768px){
+        ${(props) =>
+            props.$rowDriver &&
+            `flex-direction: column;
+            margin: 1rem 0;
+            width: 100vw;
+            `
+        }
+        ${(props) =>
+            props.$col &&
+            `display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            `
+        }
+    }
+    @media (max-width: 425px){
+        ${(props) =>
+            props.$col &&
+            `display: flex;
+            flex-direction: column;
+            `
+        }
+    }
+
 `
