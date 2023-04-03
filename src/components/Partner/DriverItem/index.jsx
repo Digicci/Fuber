@@ -11,9 +11,11 @@ import {
 import profile from "../../../assets/driver/drivercard.webp"
 import DetailDriver from "../DetailDriver";
 
-function DriverLists() {
+function DriverItem({item}) {
 
     const [isOpen, setIsOpen] = useState(false)
+    const nom = item.nom
+    const prenom = item.prenom
     const toggleIsOpen = () => {
         setIsOpen(!isOpen)
     }
@@ -27,7 +29,7 @@ function DriverLists() {
                 </DivImg>
                 <DivInfo>
                     <Text>
-                        Nom Prenom
+                        {nom} {prenom}
                     </Text>
                 </DivInfo>
                 <DivInfo>
@@ -54,4 +56,4 @@ function DriverLists() {
   )
 }
 
-export default DriverLists;
+export default DriverItem;

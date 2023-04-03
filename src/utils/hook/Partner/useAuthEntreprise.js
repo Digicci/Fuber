@@ -1,6 +1,6 @@
-import React ,{ useContext, createContext, useState } from "react";
-import { useAxios } from "../useAxios";
-import { useNavigate } from "react-router-dom";
+import React, {createContext, useContext, useState} from "react";
+import {useAxios} from "../useAxios";
+import {useNavigate} from "react-router-dom";
 
 const authContext = createContext();
 const basePath = "entreprise";
@@ -69,6 +69,10 @@ function useProvideAuthEntreprise() {
         }
     }
 
+    const getTeam = async () => {
+        return await axios.get(`${basePath}/team`, {withCredentials: true});
+    }
+
     const isConnected = () => {
         getEntreprise()
         return entreprise !== null;
@@ -98,5 +102,6 @@ function useProvideAuthEntreprise() {
         signout,
         isConnected,
         getEntreprise,
+        getTeam,
     }
 }
