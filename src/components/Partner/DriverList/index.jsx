@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useState} from "react";
 import DriverItem from "../DriverItem";
 import {useAuthEntreprise} from "../../../utils/hook/Partner/useAuthEntreprise";
 import {
@@ -11,19 +11,8 @@ import {Loader} from "../../../utils/Atoms";
 
 function DriverList() {
     const auth = useAuthEntreprise()
-    const [team, setTeam] = useState(null)
-    const [loading, setLoading] = useState(true)
+    const [team, setTeam] = useState(auth.entreprise.employes)
 
-    useEffect(() => {
-        auth.getTeam().then((data) => {
-            if (data.data.length > 0) {
-                setTeam(data.data)
-            } else {
-                setTeam(false)
-            }
-            setLoading(false)
-        })
-    }, [])
     return (
         <>
             <List>
@@ -31,17 +20,13 @@ function DriverList() {
                     Chauffeurs
                     <i className="ph-dots-three"></i>
                 </H4>
-                {loading ? (<Loader/>)
-                    :
-                    (
-                        <Div>
-                            {team ? team.map((item, index) => {
-                                return (
-                                    <DriverItem key={index} item={item}/>
-                                )
-                            }): <p>Vous n'avez pas encore d'équipe</p>}
-                        </Div>
-                    )}
+                <Div>
+                    {team ? team.map((item, index) => {
+                        return (
+                            <DriverItem key={index} item={item}/>
+                        )
+                    }): <p>Vous n'avez pas encore d'équipe</p>}
+                </Div>
             </List>
         </>
     )
