@@ -9,8 +9,11 @@ import {
     DivInput,
     Input,
     Button,
-    DivSignin
+    DivSignin,
+    Select
 } from "./atoms";
+import CarType from "../../../utils/Data/Partner/CarType";
+import OptionCarType from "../OptionCarType";
 
 function FormAddDriver(){
 
@@ -23,6 +26,8 @@ function FormAddDriver(){
     const validator = useValidator()
 
     const navigate = useNavigate()
+
+    const [data , setData] = useState(CarType)
 
     const toastTimer = 2000
 
@@ -142,6 +147,7 @@ function FormAddDriver(){
             cp: entreprise.cp,
             mdp: entreprise.mdp,
             confirmMdp: entreprise.confirmMdp,
+            car: entreprise.car,
             _csrf: csrf.token,
         }
     }
@@ -298,6 +304,16 @@ function FormAddDriver(){
                         handleChange(e, "confirmMdp")
                     }} />
                 </DivInput>
+                <Select name="car">
+                    <option value="0">Type de véhicule</option>
+                    {
+                        data.map((type) => {
+                            return <OptionCarType key={type.value} {...type} onClick={(e) => {
+                                handleChange(e, "car")
+                            }}/>
+                        })
+                    }
+                </Select>
                 <DivSignin>
                     <Button
                     type="submit"

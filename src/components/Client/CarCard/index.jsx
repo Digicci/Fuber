@@ -26,7 +26,7 @@ function CarCard({id, imgInfo, title, places, descriptionInfo, commission, handl
                 <InfoCar>
                     <h5>{title}</h5>
                     <span>
-                        <i className="ph-users"></i>
+                        <i className="ph-bold ph-users"></i>
                         {places}
                     </span>
                     <p>{descriptionInfo.vehicule}</p>

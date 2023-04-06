@@ -71,14 +71,14 @@ function RaceDetails({isOpenDetails, toggle}){
             <StyledModal $modalPayment $isOpen={isOpenDetails} >
                 <StyledContainer $modalHeight $modalDetails>
                     <StyledClose onClick={toggle}>
-                        <i className="ph-x closemenu"></i>
+                        <i className="ph-bold ph-x closemenu"></i>
                     </StyledClose>
                     <TitleModal $titleDetails>
                         Détails de la course
                     </TitleModal>
                     <ModalDetails>
                         <p>
-                            <i className="ph-car"></i>
+                            <i className="ph-bold ph-car"></i>
                             {DriverInfo?.title ? DriverInfo.title.toUpperCase() : ''} par Prenom I
                         </p>
                         <Details>

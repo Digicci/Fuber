@@ -13,7 +13,7 @@ function DriverList() {
             <List>
                 <H4>
                     Chauffeurs
-                    <i className="ph-dots-three"></i>
+                    <i className="ph-bold ph-dots-three"></i>
                 </H4>
                 <Div>
                     <DriverLists/>

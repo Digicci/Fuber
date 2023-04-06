@@ -75,12 +75,12 @@ function OrderRace({}){
                                     card.defaultCard ? (
                                         <span>
                                             Carte ****{card.defaultCard.card?.last4}
-                                                    <i className="ph-caret-right"></i>
+                                                    <i className="ph-bold ph-caret-right"></i>
                                         </span>
                                     ) : (
                                         <span>
                                             Choisir une carte par défaut
-                                            <i className="ph-caret-right"></i>
+                                            <i className="ph-bold ph-caret-right"></i>
                                         </span>
                                     )
                                 }

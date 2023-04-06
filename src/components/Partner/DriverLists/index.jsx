@@ -36,7 +36,7 @@ function DriverLists() {
                     </Text>
                 </DivInfo>
                 <DivInfo>
-                    <i className="ph-flag-checkered"></i>
+                    <i className="ph-bold ph-flag-checkered"></i>
                     <span>10</span>
                 </DivInfo>
                 <DivInfo>
@@ -45,7 +45,7 @@ function DriverLists() {
                 <DivInfo>
                     <DetailDriver toggle={toggleIsOpen} isOpen={isOpen} />
                     <Button onClick={toggleIsOpen}>
-                        <i className="ph-dots-three-outline"></i>
+                        <i className="ph-bold ph-dots-three-outline"></i>
                     </Button>
                 </DivInfo>
             </DivDriver>

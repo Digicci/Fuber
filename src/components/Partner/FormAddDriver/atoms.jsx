@@ -43,3 +43,16 @@ export const DivSignin = styled.div`
     margin: 1rem 0;
     text-align: center;
 `
+
+export const Select = styled.select`
+    display: flex;
+    align-items: center;
+    font-size: .97rem;
+    padding: 0.5rem 0.3rem;
+    width: 100%;
+    border-bottom: 1px solid ${colors.thirdly};
+    margin: 2rem 0;
+    background: ${colors.primary};
+    outline: none;
+    color: ${colors.secondary};
+`

@@ -23,7 +23,7 @@ function LogIn(){
                     </Title>
                 </ContainerLogin>
                 <ContainerLogin $form>
-                    <Close className="ph-x"/>
+                    <Close className="ph-bold ph-x"/>
                     <ContainerForm>
                         <img src={darkLogo} alt="Logo" />
                         <FormLogin />

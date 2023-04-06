@@ -58,7 +58,7 @@ function AddPayment({isOpen, toggle, loading, update}){
             <StyledModal $modalPayment $isOpen={isOpen} >
                 <StyledContainer $modalHeight>
                     <StyledClose onClick={toggle}>
-                        <i className="ph-x closemenu"></i>
+                        <i className="ph-bold ph-x closemenu"></i>
                     </StyledClose>
                     <TitleModal>
                         Ajouter un moyen de paiement ?

@@ -26,7 +26,7 @@ function DetailDriver({toggle, isOpen}) {
             <Modal $isOpen={isOpen}>
                 <Container>
                     <StyledClose onClick={toggle}>
-                        <i className="ph-x closemenu"></i>
+                        <i className="ph-bold ph-x closemenu"></i>
                     </StyledClose>
                     <TitleModal $titleDetails>
                         Détail du chauffeur
