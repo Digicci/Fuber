@@ -117,7 +117,7 @@ function FormLogin() {
                         required
                     />
                     <Label>
-                        <i className="ph-envelope"></i>
+                        <i className="ph-bold ph-envelope"></i>
                     </Label>
                 </DivInput>
                 <DivInput>
@@ -129,7 +129,7 @@ function FormLogin() {
                         required
                     />
                     <Label>
-                        <i className="ph-lock-key"></i>
+                        <i className="ph-bold ph-lock-key"></i>
                     </Label>
                 </DivInput>
                 <DivForgot>

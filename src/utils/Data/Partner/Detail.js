@@ -1,17 +1,17 @@
 const Detail = [
     {
         id: 1,
-        icon: "ph ph-flag-checkered",
+        icon: "ph-bold ph-flag-checkered",
         info : "10"
     },
     {
         id: 2,
-        icon: "ph ph-bank",
+        icon: "ph-bold ph-bank",
         info : "430 €"
     },
     {
         id: 3,
-        icon:"ph ph-taxi",
+        icon:"ph-bold ph-taxi",
         info : "Voiture"
     },
 ]

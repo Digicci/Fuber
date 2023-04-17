@@ -19,7 +19,7 @@ function DashCard({id,to,imgInfo,descriptionInfo,title}) {
                     <DivCard $first={id === 1}>
                         <CardTitle>
                         <h3>{title}</h3>
-                        <i className="ph-dots-three-outline"></i>
+                        <i className="ph-bold ph-dots-three-outline"></i>
                         </CardTitle>
                         <DashInfo>
                             <span>

@@ -29,7 +29,7 @@ function Team(){
                 <Row>
                     <AddDriver toggle={toggleIsOpen} isOpen={isOpen}/>
                     <DivDriver>
-                        <i className="ph-plus"></i>
+                        <i className="ph-bold ph-plus"></i>
                         <Button onClick={toggleIsOpen}>Ajoutez un chauffeur</Button>
                     </DivDriver>
                 </Row>

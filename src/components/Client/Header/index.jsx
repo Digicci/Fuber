@@ -60,7 +60,7 @@ function Header({toggle}) {
                             </>
                         )}
                         <StyledLink $phone onClick={toggle} >
-                            <i className="ph-user"></i>
+                            <i className="ph-bold ph-user"></i>
                         </StyledLink>
                     </StyledNavGroup>
                 </StyledNav>
