@@ -67,7 +67,7 @@ function FormLogin() {
                         isLoading: false,
                         closeOnClick: true
                     })
-                    localStorage.setItem('token', res.data.token)
+                    localStorage.setItem('driver_token', res.data.token)
                     authEntreprise.setEntreprise(res.data.driver)
                     console.log(res.data);
                     setTimeout(() => {

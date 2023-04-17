@@ -44,7 +44,7 @@ function OldRaces(){
                         {oldRaces.length > 0 ? (
                             <>
                                 <RaceInProgress>
-                                    Courses en cours
+                                    Historique des courses
                                 </RaceInProgress>
                                 {oldRaces.map((race, index) => {
                                     const dateObj = new Date(race.createdAt)
@@ -52,12 +52,19 @@ function OldRaces(){
                                     const time = dateObj.getHours() + ":" + dateObj.getMinutes()
                                     const nom = race.entreprise.nom.slice(0,1)
                                     const prenom = race.entreprise.prenom
-                                    const type = race.entreprise.vehicule.type.toUpperCase()
+                                    const type = race.entreprise.vehicule?.type.toUpperCase()
                                     const total = (race.total / 100).toFixed(2)
+                                    const img = race.entreprise.vehicule?.type === 'confort' ?
+                                        Confort
+                                        :
+                                        race.entreprise.vehicule?.type === 'hybride' ?
+                                            Hybride
+                                            :
+                                            Van
                                     return (
                                         <>
                                             <DivRace key={index}>
-                                                <RaceImg src={Confort} alt="hybrid car"/>
+                                                <RaceImg src={img} alt="hybrid car"/>
                                                 <InfoRace>
                                                     <h4>{type} par {prenom} {nom}.</h4>
                                                     <h5>{race.entreprise.num}</h5>

@@ -626,6 +626,7 @@ export const DivRace = styled.div`
     width: 100%;
     display: flex;
     border-bottom: 1px solid ${colors.fifth};
+    padding: 1rem 0;
     @media (max-width:768px) {
         width: 80%;
         flex-direction: column;

@@ -30,7 +30,7 @@ function AddMyRace() {
     return (
         <>
             <ContainerMyRaces>
-                {data.length < 0 ? (
+                {data.length <= 0 ? (
                     <MyRaceH3>
                         Il semble que vous n'avez pas de course en cours.
                     </MyRaceH3>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import DashCard from "../DashCard";
 import Dash from "../../../utils/Data/Partner/Dash";
 import {
@@ -14,7 +14,14 @@ function DashCards() {
 
     const auth = useAuthEntreprise()
     const stats = useStats()
-    const [data, setData] = useState(Dash)
+
+    useEffect(() => {
+        const timer = stats.setStatsTracker()
+        return () => {
+            stats.unsetStatsTracker(timer)
+        }
+    }, [])
+
     const teamCard = {
         id: 5,
         to: "/partner/account/team",
@@ -57,15 +64,15 @@ function DashCards() {
     return (
         <>
             <Row $col>
-                {
-                    data.map((card) => {
-                        return <DashCard key={card.id} {...card} />
-                        
-                    })
-                }
                 <DashCard key="1" {...financeCard} />
                 <DashCard key="2" {...raceCard} />
                 <DashCard key="5" {...teamCard} />
+                {
+                    Dash.map((card) => {
+                        return <DashCard key={card.id} {...card} />
+
+                    })
+                }
             </Row>
         </>
     )

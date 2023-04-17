@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useAxios } from "../useAxios";
 import { useAuthEntreprise } from "./useAuthEntreprise";
 
@@ -16,18 +16,29 @@ export const useStats = () => {
 
 function useProvideStats() {
     const axios = useAxios();
-    const { entreprise } = useAuthEntreprise();
     const [numberOfRace, setNumberOfRace] = useState(0);
     const [ca, setCa] = useState(0);
 
-    useEffect(() => {
+
+    const setStatsTracker = () => {
+        updateData()
+        return setInterval(() => {
+            updateData()
+        }, 10000)
+    }
+
+    const updateData = () => {
         getNumberOfRace().then((res) => {
             setNumberOfRace(res.data.count)
         })
         getCa().then((res) => {
             setCa(res.data.ca)
         })
-    },[entreprise])
+    }
+
+    const unsetStatsTracker = (timer) => {
+        clearInterval(timer)
+    }
 
     const getNumberOfRace = () => {
         return axios.get(`${basePath}/getNumberOfRace`, { withCredentials: true })
@@ -45,6 +56,8 @@ function useProvideStats() {
         ca,
         numberOfRace,
         getNumberOfRace,
-        getNumberOfRaceById
+        getNumberOfRaceById,
+        setStatsTracker,
+        unsetStatsTracker
     };
 }
