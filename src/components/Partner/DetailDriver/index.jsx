@@ -41,6 +41,30 @@ function DetailDriver({toggle, isOpen}) {
                                 <p>Numéro de téléphone</p>
                             </DivText>
                         </DivProfil>
+                        <DivProfil $carInfo>
+                            <DivText $info>
+                                <p>
+                                    <strong>Immatriculation: </strong>
+                                    GB-067-HH
+                                </p>
+                                <p>
+                                    <strong>Type de véhicule: </strong>
+                                    Confort
+                                </p>
+                                <p>
+                                    <strong>Marque: </strong>
+                                    Peugeot
+                                </p>
+                                <p>
+                                    <strong>Modèle: </strong>
+                                    308
+                                </p>
+                                <p>
+                                    <strong>Place: </strong>
+                                    4
+                                </p>
+                            </DivText>
+                        </DivProfil>
                         <InfoDetail/>
                         <DivDelete>
                             <Delete>
