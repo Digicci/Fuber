@@ -49,13 +49,8 @@ function DriverItem({item}) {
                     </Text>
                 </DivInfo>
                 <DivInfo>
-<<<<<<< HEAD:src/components/Partner/DriverItem/index.jsx
                     <i className="ph-flag-checkered"></i>
                     <span>{numberOfRace}</span>
-=======
-                    <i className="ph-bold ph-flag-checkered"></i>
-                    <span>10</span>
->>>>>>> partnerDash:src/components/Partner/DriverLists/index.jsx
                 </DivInfo>
                 <DivInfo>
                     <Animation $online></Animation>
