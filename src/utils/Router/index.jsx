@@ -11,7 +11,6 @@ import OrderRace from "../../pages/Client/OrderRace";
 import SignIn from "../../pages/Partner/SignIn";
 import Account from "../../pages/Client/Account";
 import LogIn from "../../pages/Partner/LogIn";
-import HomeDash from "../../pages/Partner/HomeDash";
 import PrivateRouteDriver from "./Routes/privateRoute/Partner";
 import AccountDash from "../../pages/Partner/AccountDash";
 

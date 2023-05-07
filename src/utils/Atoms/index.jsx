@@ -376,7 +376,6 @@ export const LabelForm = styled.label`
 export const SelectForm = styled.select`
     display: flex;
     align-items: center;
-    font-size: 1rem;
     padding: 0.7rem 0.3rem;
     width: 100%;
     margin: 0.5rem 0;

@@ -42,7 +42,7 @@ function NavResponsive({isOpen, toggle}){
             <StyledModal $isOpen={isOpen} onClick={toggle}>
                 <StyledContainer>
                     <StyledClose>
-                        <i className="ph-x closemenu"></i>
+                        <i className="ph-bold ph-x closemenu"></i>
                     </StyledClose>
                     {connected ? (
                             <>

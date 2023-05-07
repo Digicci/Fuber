@@ -32,35 +32,35 @@ function NavDash({activePage}) {
                 </Responsive>
                 <Nav $visible={isOpen && true}>
                     <NavLink to="/partner/account/home" $linkAccountSelected = {activePage === 'home' && true} >
-                        <i className="ph-house"></i>
+                        <i className="ph-bold ph-house"></i>
                         Home
                     </NavLink>
                     <NavLink to="/partner/account/race"  $linkAccountSelected={activePage === 'race' && true} >
-                        <i className="ph-calendar-check"></i>
+                        <i className="ph-bold ph-calendar-check"></i>
                         Course
                     </NavLink>
                     <NavLink to="/partner/account/finance" $linkAccountSelected={activePage === 'finance' && true}>
-                        <i className="ph-chart-line-up"></i>
+                        <i className="ph-bold ph-chart-line-up"></i>
                         Finance
                     </NavLink>
                     <NavLink to="/partner/account/team" $linkAccountSelected={activePage === 'team' && true} >
-                        <i className="ph-users-three"></i>
+                        <i className="ph-bold ph-users-three"></i>
                         Team
                     </NavLink>
                     <NavLink to="/partner/account/profile" $linkAccountSelected={activePage === 'profile' && true} >
-                        <i className="ph-user-circle-gear"></i>
+                        <i className="ph-bold ph-user-circle-gear"></i>
                         Profile
                     </NavLink>
                     <NavLink to="/partner/account/help" $linkAccountSelected={activePage === 'help' && true} >
-                        <i className="ph-info"></i>
+                        <i className="ph-bold ph-info"></i>
                         Aide
                     </NavLink>
                     <NavLink to="/partner/account/setting" $linkAccountSelected={activePage === 'setting' && true} >
-                        <i className="ph-gear"></i>
+                        <i className="ph-bold ph-gear"></i>
                         Setting
                     </NavLink>
                     <Logout $logoutDisappear>
-                        <i className="ph-sign-out"></i>
+                        <i className="ph-bold ph-sign-out"></i>
                         Déconnexion
                     </Logout>
                     <Connexion>

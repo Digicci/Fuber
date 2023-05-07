@@ -1,7 +1,5 @@
 import React,{useState} from "react";
-import NavProfile from "../../../components/Client/NavProfile";
 import {
-    ContainerProfile,
     ContainerInfo,
     TitlePage,
     ContainerModal,

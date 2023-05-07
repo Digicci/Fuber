@@ -1,0 +1,7 @@
+{
+  "material-icon-theme.folders.associations": {
+    "partner" : "../../../../icons/partner/partner",
+    "sample": "dist"
+  },
+  "material-icon-theme.activeIconPack": "react"
+}

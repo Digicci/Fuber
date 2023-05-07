@@ -22,7 +22,7 @@ export const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 55%;
-    height: 95%;
+    height: 80%;
     overflow: hidden;
     background-color: ${colors.primary};
     justify-content: flex-start;
@@ -50,6 +50,10 @@ export const DivProfil = styled.div`
         border-radius: 50%;
         margin: 0 1rem 0 0.3rem;
     }
+    ${(props) =>
+        props.$carInfo &&
+            `margin-left: 8px;`
+    }
 `
 export const DivText = styled.div`
     display: flex;
@@ -62,6 +66,12 @@ export const DivText = styled.div`
     p{
         font-size: .8rem;
         margin-top: 0.5rem;
+    }
+    ${(props) =>
+        props.$info &&
+            `p{
+                font-size: 1.2rem;
+            }`
     }
 `
 export const DivDelete = styled.div`

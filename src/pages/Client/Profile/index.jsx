@@ -120,7 +120,7 @@ function Profil()
                                         onChange={handleChange}
                                     />
                                     <ButtonUpdate>
-                                        <i className="ph-x" dataField='nom' onClick={toggleUpdate}></i>
+                                        <i className="ph-bold ph-x" dataField='nom' onClick={toggleUpdate}></i>
                                     </ButtonUpdate>
                                 </>
                             ) : (
@@ -129,7 +129,7 @@ function Profil()
                                         {user?.nom} {user?.prenom}
                                     </UserName>
                                     <ButtonUpdate>
-                                        <i className="ph-pencil" dataField='nom' onClick={toggleUpdate}></i>
+                                        <i className="ph-bold ph-pencil" dataField='nom' onClick={toggleUpdate}></i>
                                     </ButtonUpdate>
                                 </>
                             )
@@ -151,7 +151,7 @@ function Profil()
                                     onChange={handleChange}
                                 />
                                 <ButtonUpdate>
-                                    <i className="ph-x" dataField='num' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-x" dataField='num' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 
@@ -161,7 +161,7 @@ function Profil()
                                     {user?.num}
                                 </Number>
                                 <ButtonUpdate>
-                                    <i className="ph-pencil" dataField='num' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-pencil" dataField='num' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 
@@ -186,7 +186,7 @@ function Profil()
                                     onChange={handleChange}
                                 />
                                 <ButtonUpdate>
-                                    <i className="ph-x" dataField='mail' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-x" dataField='mail' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 
@@ -196,7 +196,7 @@ function Profil()
                                     {user?.mail}
                                 </Email>
                                 <ButtonUpdate>
-                                    <i className="ph-pencil" dataField='mail' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-pencil" dataField='mail' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 

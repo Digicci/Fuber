@@ -24,6 +24,7 @@ export const Modal = styled.div`
 `
 export const Container = styled.div`
     display: flex;
+    position: relative;
     flex-direction: column;
     width: 55%;
     height: 95%;
@@ -36,4 +37,10 @@ export const Container = styled.div`
     @media (max-width: 576px){
         width: 100%;
     }
+`
+export const ContainerModal = styled.div`
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+    padding: 1rem;
 `

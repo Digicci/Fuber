@@ -39,7 +39,7 @@ function Header(){
                     ) : (
                         <>
                             <StyledLink to="/partner/login" $headerDriver>
-                                <i className="ph-user"></i>
+                                <i className="ph-bold ph-user"></i>
                                 Connexion
                             </StyledLink>
                         </>

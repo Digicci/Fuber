@@ -42,7 +42,7 @@ function Home() {
               <Input type="text" placeholder={t('home.destination')}></Input>
             </DivInput>
             <Button type="submit">
-              <i className="ph-magnifying-glass"></i>
+              <i className="ph-bold ph-magnifying-glass"></i>
             </Button>
           </Form>
         </RowWrapper>

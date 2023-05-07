@@ -2,11 +2,11 @@ import React from "react";
 import {    
     StyledClose,
     TitleModal,
-    ContainerModal,
 } from "../../../utils/Atoms"
 import {
     Container,
-    Modal
+    Modal,
+    ContainerModal,
 } from "./atoms"
 import FormAddDriver from "../FormAddDriver";
 
@@ -17,12 +17,12 @@ function AddDriver({toggle, isOpen}){
             <Modal $modalDriver $isOpen={isOpen}>
                 <Container>
                     <StyledClose onClick={toggle}>
-                        <i className="ph-x closemenu"></i>
+                        <i className="ph-bold ph-x closemenu"></i>
                     </StyledClose>
                     <TitleModal>
                         Ajouter un chauffeur ?
                     </TitleModal>
-                    <ContainerModal $addDriver>
+                    <ContainerModal>
                         <FormAddDriver/>
                     </ContainerModal>
                 </Container>

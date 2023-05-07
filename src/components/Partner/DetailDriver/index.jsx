@@ -26,7 +26,7 @@ function DetailDriver({toggle, isOpen}) {
             <Modal $isOpen={isOpen}>
                 <Container>
                     <StyledClose onClick={toggle}>
-                        <i className="ph-x closemenu"></i>
+                        <i className="ph-bold ph-x closemenu"></i>
                     </StyledClose>
                     <TitleModal $titleDetails>
                         Détail du chauffeur
@@ -39,6 +39,30 @@ function DetailDriver({toggle, isOpen}) {
                                 <p>adresse</p>
                                 <p>E-mail</p>
                                 <p>Numéro de téléphone</p>
+                            </DivText>
+                        </DivProfil>
+                        <DivProfil $carInfo>
+                            <DivText $info>
+                                <p>
+                                    <strong>Immatriculation: </strong>
+                                    GB-067-HH
+                                </p>
+                                <p>
+                                    <strong>Type de véhicule: </strong>
+                                    Confort
+                                </p>
+                                <p>
+                                    <strong>Marque: </strong>
+                                    Peugeot
+                                </p>
+                                <p>
+                                    <strong>Modèle: </strong>
+                                    308
+                                </p>
+                                <p>
+                                    <strong>Place: </strong>
+                                    4
+                                </p>
                             </DivText>
                         </DivProfil>
                         <InfoDetail/>

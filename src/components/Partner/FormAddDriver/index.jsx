@@ -9,8 +9,11 @@ import {
     DivInput,
     Input,
     Button,
-    DivSignin
+    DivSignin,
+    Select
 } from "./atoms";
+import CarType from "../../../utils/Data/Partner/CarType";
+import OptionCarType from "../OptionCarType";
 
 function FormAddDriver(){
 
@@ -24,7 +27,15 @@ function FormAddDriver(){
 
     const navigate = useNavigate()
 
+    const [data , setData] = useState(CarType)
+
     const toastTimer = 2000
+
+    const [slider, setSlider] = useState(true)
+
+    const toogleSlider = () => {
+        setSlider(!slider)
+    }
 
     const [entreprise, setEntreprise] = useState({
         nom: "",
@@ -36,6 +47,11 @@ function FormAddDriver(){
         cp: "",
         mdp: "",
         confirmMdp: "",
+        car: "",
+        immatriculation: "",
+        marque: "",
+        modele: "",
+        place: "",
     });
 
     const formConfig = {
@@ -142,6 +158,11 @@ function FormAddDriver(){
             cp: entreprise.cp,
             mdp: entreprise.mdp,
             confirmMdp: entreprise.confirmMdp,
+            car: entreprise.car,
+            immatriculation: entreprise.immatriculation,
+            modele: entreprise.modele,
+            marque: entreprise.marque,
+            place: entreprise.place,
             _csrf: csrf.token,
         }
     }
@@ -166,6 +187,11 @@ function FormAddDriver(){
                         cp: "",
                         mdp: "",
                         confirmMdp: "",
+                        immatriculation: "",
+                        modele: "",
+                        marque: "",
+                        place: "",
+                        car: "",
                     })
                     setError('')
                     toast.update(toatsId, {
@@ -198,6 +224,11 @@ function FormAddDriver(){
                     cp: "",
                     mdp: "",
                     confirmMdp: "",
+                    immatriculation: "",
+                    modele: "",
+                    marque: "",
+                    place: "",
+                    car: "",
                 })
             })
         }else{
@@ -210,14 +241,15 @@ function FormAddDriver(){
                 closeOnClick: true,
                 closeButton: true,
             })
-        } 
+        }
+        setEntreprise(null)
     }
 
 
     return(
 
         <>
-            <Form>
+            <Form $slider={!slider} >
                 <DivInput>
                     <Input type="text"
                     name="nom"
@@ -298,6 +330,75 @@ function FormAddDriver(){
                         handleChange(e, "confirmMdp")
                     }} />
                 </DivInput>
+                
+                <DivSignin>
+                    <Button
+                    type="button"
+                    value="Suivant"
+                    onClick={toogleSlider}
+                    >
+                        Suivant
+                    </Button>
+                </DivSignin>
+            </Form>
+            
+            <Form $slider={slider}>
+                <DivSignin $carInfo>
+                    <Button $cancel
+                    type="button"
+                    value="Retour"
+                    onClick={toogleSlider}
+                    >
+                        <i class="ph-bold ph-arrow-fat-left"></i>
+                    </Button>
+                </DivSignin>
+                <DivInput>
+                    <Input
+                    type="text"
+                    placeholder="Imatriculation"
+                    name="imatriculation"
+                    onChange={(e) => {
+                        handleChange(e, "imatriculation")
+                    }} />
+                </DivInput>
+                <Select name="car">
+                    <option value="0">Type de véhicule</option>
+                    {
+                        data.map((type) => {
+                            return <OptionCarType key={type.value} {...type} onClick={(e) => {
+                                handleChange(e, "car")
+                            }}/>
+                        })
+                    }
+                </Select>
+                <DivInput>
+                    <Input
+                    type="text"
+                    placeholder="Marque"
+                    name="marque"
+                    onChange={(e) => {
+                        handleChange(e, "marque")
+                    }} />
+                </DivInput>
+                <DivInput>
+                    <Input
+                    type="text"
+                    placeholder="Modèle"
+                    name="modele"
+                    onChange={(e) => {
+                        handleChange(e, "modele")
+                    }} />
+                </DivInput>
+                <DivInput>
+                    <Input
+                    type="text"
+                    placeholder="Nombre de place"
+                    name="place"
+                    onChange={(e) => {
+                        handleChange(e, "place")
+                    }} />
+                </DivInput>
+
                 <DivSignin>
                     <Button
                     type="submit"

@@ -5,6 +5,9 @@ import { Container } from "./atoms";
 import NavDash from "../../../components/Partner/NavDash";
 import HomeDash from "../HomeDash";
 import Team from "../Team";
+import Races from "../Races";
+import Finance from "../Finance";
+
 
 function AccountDash() {
     const csrf = useCsrf();
@@ -22,7 +25,13 @@ function AccountDash() {
                     page === "home" && <HomeDash />
                 }
                 {
+                    page === 'race' && <Races />
+                }
+                {
                     page === "team" && <Team />
+                }
+                {
+                    page === "finance" && <Finance/>
                 }
             </Container>
         </>

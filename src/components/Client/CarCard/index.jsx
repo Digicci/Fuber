@@ -31,7 +31,7 @@ function CarCard({id, img_path, places, prix, model, marque, distance, commissio
                 <CarImg src={imgInfo.img} alt={imgInfo.alt} />
                 <InfoCar>
                     <span>
-                        <i className="ph-users"></i>
+                        <i className="ph-bold ph-users"></i>
                         {places}
                     </span>
                     <p>{marque.toUpperCase()} | {model}</p>
