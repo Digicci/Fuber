@@ -3,6 +3,11 @@ import {
     MyRaceH3,
     ContainerMyRaces,
     RaceInProgress,
+    DivRace,
+    RaceImg,
+    InfoRace,
+    DivButton,
+    ButtonRaceFinish,
 } from "../../../utils/Atoms";
 
 import Hybride from "../../../assets/hybride.webp"
@@ -25,7 +30,7 @@ function AddMyRace() {
     return (
         <>
             <ContainerMyRaces>
-                {data.length < 0 ? (
+                {data.length <= 0 ? (
                     <MyRaceH3>
                         Il semble que vous n'avez pas de course en cours.
                     </MyRaceH3>

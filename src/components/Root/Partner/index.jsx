@@ -5,6 +5,7 @@ import Footer from "../../Footer";
 import { ProvideCsrf } from "../../../utils/hook/useCsrf";
 import { ProvideAxios } from "../../../utils/hook/useAxios";
 import { ProvideAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
+import { ProvideStats } from "../../../utils/hook/Partner/useStats";
 import { ToastContainer } from "react-toastify";
 
 function Partner() {
@@ -13,11 +14,14 @@ function Partner() {
             <ProvideCsrf>
                 <ProvideAxios>
                     <ProvideAuthEntreprise>
-                        <Header/>
-                        <div id="page_container">
-                            <Outlet />
-                            <ToastContainer style={{zIndex: 20000}} autoClose={5000}/>
-                        </div>
+                        <ProvideStats>
+                            <Header/>
+                            <div id="page_container">
+                                <Outlet />
+                                <ToastContainer style={{zIndex: 20000}} autoClose={5000}/>
+                            </div>
+                            <Footer />
+                        </ProvideStats>
                     </ProvideAuthEntreprise>
                 </ProvideAxios>
             </ProvideCsrf>

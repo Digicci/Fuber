@@ -1,6 +1,6 @@
-import React ,{ useContext, createContext, useState } from "react";
-import { useAxios } from "../useAxios";
-import { useNavigate } from "react-router-dom";
+import React, {createContext, useContext, useState} from "react";
+import {useAxios} from "../useAxios";
+import {useNavigate} from "react-router-dom";
 
 const authContext = createContext();
 const basePath = "entreprise";
@@ -44,29 +44,33 @@ function useProvideAuthEntreprise() {
         if(entreprise){
             return;
         }
-        if(localStorage.getItem("token")) {
+        if(localStorage.getItem("driver_token")) {
             axios.get(`${basePath}/get`).then((res) => {
                 console.log(res)
                 if(res.status === 401) {
                     setEntreprise(null);
-                    localStorage.removeItem("token");
+                    localStorage.removeItem("driver_token");
                 }
                 else if(res.data) {
                     setEntreprise(res.data);
                 }else{
                     setEntreprise(null)
-                    localStorage.removeItem("token");
+                    localStorage.removeItem("driver_token");
                 }
             }).catch((err) => {
                 console.log(err)
                 console.log("error")
                 setEntreprise(null);
-                localStorage.removeItem("token");
+                localStorage.removeItem("driver_token");
             })
         }
         else{
             setEntreprise(null)
         }
+    }
+
+    const getTeam = async () => {
+        return await axios.get(`${basePath}/team`, {withCredentials: true});
     }
 
     const isConnected = () => {
@@ -98,5 +102,6 @@ function useProvideAuthEntreprise() {
         signout,
         isConnected,
         getEntreprise,
+        getTeam,
     }
 }

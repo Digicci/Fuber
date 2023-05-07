@@ -7,15 +7,16 @@ import {
     DashImg,
     DivCard,
 } from "./atoms";
+import courbe from "../../../assets/driver/courbe.webp";
 
 function DashCard({id,to,imgInfo,descriptionInfo,title}) {
-    const cardId = id
+
 
     return (
         <>
             <Col>
                 <CardLink to={to}>
-                    <DivCard $first={cardId === 1}>
+                    <DivCard $first={id === 1}>
                         <CardTitle>
                         <h3>{title}</h3>
                         <i className="ph-bold ph-dots-three-outline"></i>
