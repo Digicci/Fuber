@@ -8,7 +8,7 @@ import {
 export const Container = styled.div`
     display: flex;
     width: 20%;
-    height: 100vh;
+    height: 100dvh;
     background-color: ${colors.secondary};
     @media (max-width: 768px){
         width: 100%;

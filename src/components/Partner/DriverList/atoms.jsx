@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import colors from "../../../colors";
-import { StyledLink } from "../../../utils/Atoms";
 
 export const List = styled.div`
     display: flex;

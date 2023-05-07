@@ -14,13 +14,19 @@ export const Title = styled.h2`
     display: flex;
     border-bottom : 1px solid ${colors.sixth};
     padding-bottom: 0.5rem;
+    margin : 1rem;
 `
 export const Modal = styled.div`
     display: flex;
     justify-content: space-between;
     margin-top: 1rem;
     padding: 1rem 0;
-    width: 25%;
+    width: 50%;
+    @media (min-width: 768px) {
+        width: 100%;
+        margin: 1rem;
+        justify-content: flex-start;
+    }
 `
 export const Button = styled.button`
 ${(props) =>
@@ -48,7 +54,7 @@ ${(props) =>
             text-align: center;
             border-radius: 25px;
             padding: 1rem;
-            margin: 0;
+            margin: 0 0 0 1rem;
             font-size: .95rem;
         `
     }
@@ -61,7 +67,7 @@ ${(props) =>
             text-align: center;
             border-radius: 25px;
             padding: 1rem;
-            margin: 0;
+            margin: 0 0 0 1rem;
             font-size: .95rem;
             &:hover{
                 background:${colors.secondary};
@@ -88,11 +94,15 @@ export const Select = styled.select`
     align-items: center;
     font-size: .9rem;
     padding: 0.7rem 0.3rem;
-    width: 100%;
     border: 1px solid ${colors.sixth};
     border-radius: 5px;
-    margin: 1rem 0;
+    margin: 1rem 1rem;
     background: ${colors.fourth};
-    outline: none;
+    &:focus{
+        outline: none;
+    }
     color: ${colors.secondary};
+    @media (min-width: 768px) {
+        width: 33%;
+    }
 `
