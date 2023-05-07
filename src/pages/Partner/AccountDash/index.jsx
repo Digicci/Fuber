@@ -6,6 +6,7 @@ import NavDash from "../../../components/Partner/NavDash";
 import HomeDash from "../HomeDash";
 import Team from "../Team";
 import Races from "../Races";
+import Finance from "../Finance";
 
 
 function AccountDash() {
@@ -28,6 +29,9 @@ function AccountDash() {
                 }
                 {
                     page === "team" && <Team />
+                }
+                {
+                    page === "finance" && <Finance/>
                 }
             </Container>
         </>
