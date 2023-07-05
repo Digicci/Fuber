@@ -20,7 +20,6 @@ function Partner() {
                                 <Outlet />
                                 <ToastContainer style={{zIndex: 20000}} autoClose={5000}/>
                             </div>
-                            <Footer />
                         </ProvideStats>
                     </ProvideAuthEntreprise>
                 </ProvideAxios>

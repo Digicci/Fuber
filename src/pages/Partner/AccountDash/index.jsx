@@ -7,6 +7,7 @@ import HomeDash from "../HomeDash";
 import Team from "../Team";
 import Races from "../Races";
 import Finance from "../Finance";
+import Profil from "../Profil";
 
 
 function AccountDash() {
@@ -32,6 +33,9 @@ function AccountDash() {
                 }
                 {
                     page === "finance" && <Finance/>
+                }
+                {
+                    page ==="profile" && <Profil/>
                 }
             </Container>
         </>

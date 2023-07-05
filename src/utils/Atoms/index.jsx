@@ -391,6 +391,7 @@ export const ButtonLogout = styled.button`
     -webkit-transition: .3s;
     -moz-transition: .3s;
     transition: .3s;
+    border: none;
     cursor: pointer;
     &:hover{
         background: ${colors.red};
