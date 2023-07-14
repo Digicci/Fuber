@@ -37,7 +37,7 @@ function FormAddDriver(){
         setSlider(!slider)
     }
 
-    const [entreprise, setEntreprise] = useState({
+    const initialState = {
         nom: "",
         prenom: "",
         mail: "",
@@ -52,7 +52,9 @@ function FormAddDriver(){
         marque: "",
         modele: "",
         place: "",
-    });
+    }
+
+    const [entreprise, setEntreprise] = useState(initialState);
 
     const formConfig = {
         nom: {
@@ -177,22 +179,6 @@ function FormAddDriver(){
             authEntreprise.register(data)
             .then((response) => {
                 if(response.data){
-                    setEntreprise({
-                        nom: "",
-                        prenom: "",
-                        mail: "",
-                        tel: "",
-                        adresse: "",
-                        ville: "",
-                        cp: "",
-                        mdp: "",
-                        confirmMdp: "",
-                        immatriculation: "",
-                        modele: "",
-                        marque: "",
-                        place: "",
-                        car: "",
-                    })
                     setError('')
                     toast.update(toatsId, {
                         render: 'Le compte chauffeur a bien été créé',
@@ -214,22 +200,7 @@ function FormAddDriver(){
                     isLoading: false,
                     icon: '🤔',
                 })
-                setEntreprise({
-                    nom: "",
-                    prenom: "",
-                    mail: "",
-                    tel: "",
-                    adresse: "",
-                    ville: "",
-                    cp: "",
-                    mdp: "",
-                    confirmMdp: "",
-                    immatriculation: "",
-                    modele: "",
-                    marque: "",
-                    place: "",
-                    car: "",
-                })
+                setEntreprise(initialState)
             })
         }else{
             toast.update(toatsId, {
@@ -242,7 +213,6 @@ function FormAddDriver(){
                 closeButton: true,
             })
         }
-        setEntreprise(null)
     }
 
 
