@@ -319,7 +319,7 @@ function FormAddDriver(){
                     value="Retour"
                     onClick={toogleSlider}
                     >
-                        <i class="ph-bold ph-arrow-fat-left"></i>
+                        <i className="ph-bold ph-arrow-fat-left"></i>
                     </Button>
                 </DivSignin>
                 <DivInput>
