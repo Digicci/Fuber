@@ -1,55 +1,35 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
-    Lien,
-    DivDriver,
-    DivImg,
-    DivInfo,
-    Text,
-    Animation,
-    Button
+    Lien
 } from "./atoms";
-import profile from "../../../assets/driver/drivercard.webp"
-import DetailDriver from "../DetailDriver";
+import DriverItem from "./DriverItem";
+import {useAxios} from "../../../utils/hook/useAxios";
 
 function DriverLists() {
 
-    const [isOpen, setIsOpen] = useState(false)
-    const toggleIsOpen = () => {
-        setIsOpen(!isOpen)
-    }
+    const {get} = useAxios()
+    const [drivers, setDrivers] = useState([])
+
+    useEffect(() => {
+        get('/entreprise/team').then((res) => {
+            console.log(res)
+            setDrivers(res.data)
+        }).catch((err) => {
+            console.log(err)
+        })
+    }, [])
 
   return (
     <>
-        <Lien>
-            <DivDriver>
-                <DivImg>
-                    <img src={profile} alt="Image de profile"/>
-                </DivImg>
-                <DivInfo>
-                    <Text>
-                        Nom Prenom
-                    </Text>
-                </DivInfo>
-                <DivInfo>
-                    <Text>
-                        Voiture
-                    </Text>
-                </DivInfo>
-                <DivInfo>
-                    <i className="ph-bold ph-flag-checkered"></i>
-                    <span>10</span>
-                </DivInfo>
-                <DivInfo>
-                    <Animation $online></Animation>
-                </DivInfo>
-                <DivInfo>
-                    <DetailDriver toggle={toggleIsOpen} isOpen={isOpen} />
-                    <Button onClick={toggleIsOpen}>
-                        <i className="ph-bold ph-dots-three-outline"></i>
-                    </Button>
-                </DivInfo>
-            </DivDriver>
-        </Lien>
+        {
+            drivers.map((driver) => {
+              return (
+                  <Lien>
+                      <DriverItem {...driver} />
+                  </Lien>
+              )
+            })
+        }
     </>
   )
 }
