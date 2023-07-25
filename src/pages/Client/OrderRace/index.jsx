@@ -2,10 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
     ButtonOrder
 } from "../../../utils/Atoms";
-import AddPayment from "../../../components/Client/AddPayment";
 import RaceDetails from "../../../components/Client/RaceDetails";
 import Map from "../../../components/Map";
-import { ProvideCard } from "../../../utils/hook/Client/useCard";
 import {useAuth} from "../../../utils/hook/Client/useAuth";
 import { useCard } from "../../../utils/hook/Client/useCard";
 import { useLocation } from "../../../utils/hook/useLocation";

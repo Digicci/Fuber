@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import {
     StyledContainerLogin,
     StyledForm,
@@ -27,6 +27,8 @@ function Login({isPopUp = false, closePopUp = () => {}}){
         credential:'',
         mdp:'',
     })
+    const location = useLocation()
+    const {from} = location.state || {from: {pathname: "/"}}
     const idToast = 1
 
     const toastTimer = 2000
@@ -34,11 +36,14 @@ function Login({isPopUp = false, closePopUp = () => {}}){
     const csrf = useCsrf()
     //get csrf token
     useEffect(() => {
-        if (auth.isConnected()) {
-            navigate('/account/profile', { replace: true })
-        }
         csrf.getCsrfToken()
     }, [])
+
+    useEffect(() => {
+        if (auth.isConnected()) {
+            navigate(from, { replace: true })
+        }
+    }, [auth.user])
 
     //handle change of input
     const handleChange = (e,field) => {

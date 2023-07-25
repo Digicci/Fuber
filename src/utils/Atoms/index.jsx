@@ -625,6 +625,7 @@ export const DivRace = styled.div`
     width: 100%;
     display: flex;
     border-bottom: 1px solid ${colors.fifth};
+    padding: 1rem 0;
     @media (max-width:768px) {
         width: 80%;
         flex-direction: column;
@@ -847,14 +848,9 @@ export const StyledNavGroup = styled.div`
 
 
 export const Loader = styled.div`
-  box-shadow: 
-          0 4px 0 ${colors.sixth}, 
-          4px 0 0 ${colors.primary}, 
-          4px 4px 0 ${colors.purple}, 
-          -4px 0 0 ${colors.primary}, 
-          0 -4px 0 ${colors.sixth}, 
-          -4px -4px 0 ${colors.purple};
-  border: 4px solid transparent;
+  border-left: 4px solid ${colors.sixth};
+    border-right: 4px solid transparent;
+    border-top: 4px solid transparent;
   border-radius: 50%;
   width: 120px;
   height: 120px;
@@ -863,9 +859,14 @@ export const Loader = styled.div`
   @keyframes spin {
     0% {
       transform: rotate(0deg);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
     }
     100% {
       transform: rotate(360deg);
+      opacity: 1;
     }
   }
 `

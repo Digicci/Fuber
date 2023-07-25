@@ -4,6 +4,7 @@ import params from "../../../assets/driver/etablishement.webp";
 import team from "../../../assets/driver/team.webp";
 
 const Dash = [
+<<<<<<< HEAD
     {
         id: 1,
         to: "../../../partner/account/finance",
@@ -41,6 +42,9 @@ const Dash = [
         },
     },
     {
+=======
+{
+>>>>>>> master
         id: 4,
         to: "../../../partner/account/profile",
         title: "Profile",

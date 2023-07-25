@@ -19,7 +19,10 @@ function useProvideAxios() {
     const csrf = useCsrf();
 
     const setHeader = () => {
-        const JWT = localStorage.getItem("token");
+        const JWT = window.location.pathname.includes("partner") ?
+            localStorage.getItem("driver_token")
+            :
+            localStorage.getItem("token");
         axios.defaults.headers.common['Authorization'] = JWT ? `Bearer ${JWT}` : null;
         axios.defaults.headers.post['X-CSRF-TOKEN'] = csrf.token;
         axios.defaults.withCredentials = true;
@@ -34,6 +37,11 @@ function useProvideAxios() {
         query = query.replace(/ /g, "+");
         axios.defaults.headers.common['Authorization'] = null;
         return axios.get(`https://api-adresse.data.gouv.fr/search/?q=${query}&lat=${lat}&lon=${lng}`, {...config, withCredentials: false})
+    }
+
+    const getAdressByCoord = ({lng, lat}, config = {}) => {
+        axios.defaults.headers.common['Authorization'] = null;
+        return axios.get(`https://api-adresse.data.gouv.fr/reverse/?lon=${lng}&lat=${lat}`, {...config, withCredentials: false})
     }
 
     const post = (path, data) => {
@@ -57,6 +65,7 @@ function useProvideAxios() {
         post,
         put,
         del,
-        getAdress
+        getAdress,
+        getAdressByCoord
     };
 }
