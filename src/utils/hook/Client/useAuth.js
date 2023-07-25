@@ -59,24 +59,24 @@ function useProvideAuth() {
         if (user) {
             return;
         }
-        if (localStorage.getItem("token")) {
+        if (localStorage.getItem("user_token")) {
             axios.get(`${basePath}/get`, { withCredentials: true }).then((res) => {
                 console.log(res)
                 if (res.status === 401) {
                     setUser(null);
-                    localStorage.removeItem("token");
+                    localStorage.removeItem("user_token");
                 }
                 else if (res.data) {
                     setUser(res.data);
                 } else {
                     setUser(null);
-                    localStorage.removeItem("token");
+                    localStorage.removeItem("user_token");
                 }
             }).catch((err) => {
                 console.log(err)
                 console.log("error")
                 setUser(null);
-                localStorage.removeItem("token");
+                localStorage.removeItem("user_token");
             })
         }
         else {
@@ -96,13 +96,13 @@ function useProvideAuth() {
 
     const signout = () => {
         axios.post(`${basePath}/logout`,{}, { withCredentials: true }).then((res) => {
-            localStorage.removeItem("token");
+            localStorage.removeItem("user_token");
             localStorage.clear();
             setUser(null);
             navigate("/login", { replace: true });
         }).catch((err) => {
             console.log(err)
-            localStorage.removeItem("token");
+            localStorage.removeItem("user_token");
             localStorage.clear();
             setUser(null);
             navigate("/login", { replace: true });

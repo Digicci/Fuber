@@ -85,7 +85,7 @@ function Login({isPopUp = false, closePopUp = () => {}}){
                             className: 'rotateY',
                             closeOnClick: true
                         })
-                        localStorage.setItem('token', res.data.token)
+                        localStorage.setItem('user_token', res.data.token)
                         auth.setUser(res.data.user)
                         closePopUp()
                         card.getCards().then(res => {
@@ -106,7 +106,7 @@ function Login({isPopUp = false, closePopUp = () => {}}){
                                 resolve(navigate('/', { replace: true }))
                             })
                             returnFunc.then(() => {
-                                localStorage.setItem('token', res.data.token)
+                                localStorage.setItem('user_token', res.data.token)
                                 auth.setUser(res.data.user)
                                 card.getCards().then(res => {
 

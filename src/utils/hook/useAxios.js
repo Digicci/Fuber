@@ -22,7 +22,7 @@ function useProvideAxios() {
         const JWT = window.location.pathname.includes("partner") ?
             localStorage.getItem("driver_token")
             :
-            localStorage.getItem("token");
+            localStorage.getItem("user_token");
         axios.defaults.headers.common['Authorization'] = JWT ? `Bearer ${JWT}` : null;
         axios.defaults.headers.post['X-CSRF-TOKEN'] = csrf.token;
         axios.defaults.withCredentials = true;
