@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import {
     Lien,
     DivDriver,
@@ -10,26 +10,13 @@ import {
 } from "./atoms";
 import profile from "../../../assets/driver/drivercard.webp"
 import DetailDriver from "../DetailDriver";
-import { useStats } from "../../../utils/hook/Partner/useStats";
 
 function DriverItem({item}) {
 
-    const stats = useStats()
     const [isOpen, setIsOpen] = useState(false)
-    const [numberOfRace, setNumberOfRace] = useState(0)
-    const nom = item.nom
-    const prenom = item.prenom
-    const vehicule = item.vehicule
-
     const toggleIsOpen = () => {
         setIsOpen(!isOpen)
     }
-
-    useEffect(() => {
-        stats.getNumberOfRaceById(item.id).then((res) => {
-            setNumberOfRace(res.data.count)
-        })
-    }, [])
 
   return (
     <>
@@ -40,17 +27,17 @@ function DriverItem({item}) {
                 </DivImg>
                 <DivInfo>
                     <Text>
-                        {nom} {prenom}
+                        Nom Prenom
                     </Text>
                 </DivInfo>
                 <DivInfo>
                     <Text>
-                        {vehicule.type.toUpperCase()}
+                        Voiture
                     </Text>
                 </DivInfo>
                 <DivInfo>
-                    <i className="ph-flag-checkered"></i>
-                    <span>{numberOfRace}</span>
+                    <i className="ph-bold ph-flag-checkered"></i>
+                    <span>10</span>
                 </DivInfo>
                 <DivInfo>
                     <Animation $online></Animation>
