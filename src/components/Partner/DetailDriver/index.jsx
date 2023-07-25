@@ -5,6 +5,10 @@ import {
     DivProfil,
     Modal,
     DivText,
+    Cards,
+    Card,
+    TopCard,
+    BottomCard,
     Delete,
     DivDelete,
 
@@ -16,13 +20,7 @@ import {
 import profil from "../../../assets/driver/profile.webp"
 import InfoDetail from "../InfoDetail";
 
-function DetailDriver({toggle, isOpen, driver}) {
-    const vehiculeType = [
-        "Confort",
-        "Van",
-        "Hybride",
-    ]
-
+function DetailDriver({toggle, isOpen}) {
     return (
         <>
             <Modal $isOpen={isOpen}>
@@ -37,40 +35,37 @@ function DetailDriver({toggle, isOpen, driver}) {
                         <DivProfil>
                             <img src={profil} alt='Image de Profile'/>
                             <DivText>
-                                <h6>{driver.nom} {driver.prenom}</h6>
-                                <p>{driver.adresse}</p>
-                                <p>{driver.mail}</p>
-                                <p>{driver.num}</p>
+                                <h6>Nom Prénom</h6>
+                                <p>adresse</p>
+                                <p>E-mail</p>
+                                <p>Numéro de téléphone</p>
                             </DivText>
                         </DivProfil>
                         <DivProfil $carInfo>
                             <DivText $info>
                                 <p>
                                     <strong>Immatriculation: </strong>
-                                    {driver.vehicule.immatriculation}
+                                    GB-067-HH
                                 </p>
                                 <p>
                                     <strong>Type de véhicule: </strong>
-                                    {vehiculeType[driver.vehicule.type - 1]}
+                                    Confort
                                 </p>
                                 <p>
                                     <strong>Marque: </strong>
-                                    {driver.vehicule.marque}
+                                    Peugeot
                                 </p>
                                 <p>
                                     <strong>Modèle: </strong>
-                                    {driver.vehicule.model}
+                                    308
                                 </p>
                                 <p>
                                     <strong>Place: </strong>
-                                    {driver.vehicule.places}
+                                    4
                                 </p>
                             </DivText>
                         </DivProfil>
-                        {
-                            // ToDo : Rework the info detail component to be more reusable
-                        }
-                        <InfoDetail />
+                        <InfoDetail/>
                         <DivDelete>
                             <Delete>
                                 Supprimer le chauffeur
