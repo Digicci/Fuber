@@ -14,6 +14,21 @@ import {
 } from "./atoms";
 import CarType from "../../../utils/Data/Partner/CarType";
 import OptionCarType from "../OptionCarType";
+import { formConfig } from "./config";
+
+function InputWrap({inputInfo, handleChange}) {
+
+    return (
+        <Input
+            type={inputInfo.type}
+            placeholder={inputInfo.placeholder}
+            name={inputInfo.name}
+            onChange={(e) => {
+                handleChange(e, inputInfo.name)
+            }}
+        />
+    )
+}
 
 function FormAddDriver(){
 
@@ -37,7 +52,7 @@ function FormAddDriver(){
         setSlider(!slider)
     }
 
-    const [entreprise, setEntreprise] = useState({
+    const initialState = {
         nom: "",
         prenom: "",
         mail: "",
@@ -52,80 +67,10 @@ function FormAddDriver(){
         marque: "",
         modele: "",
         place: "",
-    });
+    }
 
-    const formConfig = {
-        nom: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[A-Za-z]+$/,
-            },
-        },
-        prenom: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[A-Za-z]+$/,
-            },
-        },
-        mail: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                email: true,
-            },
-        },
-        tel: {
-            rules: {
-                required: true,
-                minLength: 10,
-                maxLength: 10,
-                pattern: /^[0-9]+$/,
-            },
-        },
-        adresse: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[\dA-Za-z ]+[A-Za-z]+$/,
-            },
-        },
-        ville: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[A-Za-z]+$/,
-            },
-        },
-        cp: {
-            rules: {
-                required: true,
-                minLength: 5,
-                maxLength: 5,
-                pattern: /^[0-9]+$/,
-            },
-        },
-        mdp: {
-            rules: {
-                required: true,
-                maxLength: 25,
-                passwordPattern: true,
-            },
-        },
-        confirmMdp: {
-            rules: {
-                required: true,
-                maxLength: 25,
-                passwordConfirm: true,
-            },
-        },
-    };
+    const [entreprise, setEntreprise] = useState(initialState);
+
 
     useEffect(() => {
         csrf.getCsrfToken()
@@ -177,22 +122,6 @@ function FormAddDriver(){
             authEntreprise.register(data)
             .then((response) => {
                 if(response.data){
-                    setEntreprise({
-                        nom: "",
-                        prenom: "",
-                        mail: "",
-                        tel: "",
-                        adresse: "",
-                        ville: "",
-                        cp: "",
-                        mdp: "",
-                        confirmMdp: "",
-                        immatriculation: "",
-                        modele: "",
-                        marque: "",
-                        place: "",
-                        car: "",
-                    })
                     setError('')
                     toast.update(toatsId, {
                         render: 'Le compte chauffeur a bien été créé',
@@ -214,22 +143,7 @@ function FormAddDriver(){
                     isLoading: false,
                     icon: '🤔',
                 })
-                setEntreprise({
-                    nom: "",
-                    prenom: "",
-                    mail: "",
-                    tel: "",
-                    adresse: "",
-                    ville: "",
-                    cp: "",
-                    mdp: "",
-                    confirmMdp: "",
-                    immatriculation: "",
-                    modele: "",
-                    marque: "",
-                    place: "",
-                    car: "",
-                })
+                setEntreprise(initialState)
             })
         }else{
             toast.update(toatsId, {
@@ -242,7 +156,6 @@ function FormAddDriver(){
                 closeButton: true,
             })
         }
-        setEntreprise(null)
     }
 
 
@@ -251,84 +164,31 @@ function FormAddDriver(){
         <>
             <Form $slider={!slider} >
                 <DivInput>
-                    <Input type="text"
-                    name="nom"
-                    placeholder="Nom"
-                    onChange={(e)=>{
-                        handleChange(e,"nom")
-                    }} />
-                    
+                    <InputWrap inputInfo={formConfig.nom} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input type="text"
-                    placeholder="Prénom"
-                    name="prenom"
-                    onChange={(e) => {
-                        handleChange(e, "prenom")
-                    }} />
+                    <InputWrap inputInfo={formConfig.prenom} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Téléphone" 
-                    name="tel"
-                    onChange={(e) => {
-                        handleChange(e, "tel")
-                    }} />
+                    <InputWrap inputInfo={formConfig.tel} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Adresse"
-                    name="adresse"
-                    onChange={(e) => {
-                        handleChange(e, "adresse")
-                    }} />
+                    <InputWrap inputInfo={formConfig.adresse} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Ville"
-                    name="ville"
-                    onChange={(e) => {
-                        handleChange(e, "ville")
-                    }} />
+                    <InputWrap inputInfo={formConfig.ville} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Code postal"
-                    name="cp"
-                    onChange={(e) => {
-                        handleChange(e, "cp")
-                    }} />
+                    <InputWrap inputInfo={formConfig.cp} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input
-                    type="email"
-                    placeholder="Email"
-                    name="mail"
-                    onChange={(e) => {
-                        handleChange(e, "mail")
-                    }} />
+                    <InputWrap inputInfo={formConfig.mail} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input
-                    type="password"
-                    placeholder="Mot de passe"
-                    name="mdp"
-                    onChange={(e) => {
-                        handleChange(e, "mdp")
-                    }} />
+                    <InputWrap inputInfo={formConfig.mdp} handleChange={handleChange} />
                 </DivInput>
                 <DivInput>
-                    <Input
-                    type="password"
-                    placeholder="Confirmer mot de passe"
-                    name="confirmMdp"
-                    onChange={(e) => {
-                        handleChange(e, "confirmMdp")
-                    }} />
+                    <InputWrap inputInfo={formConfig.confirmMdp} handleChange={handleChange} />
                 </DivInput>
                 
                 <DivSignin>
@@ -349,7 +209,7 @@ function FormAddDriver(){
                     value="Retour"
                     onClick={toogleSlider}
                     >
-                        <i class="ph-bold ph-arrow-fat-left"></i>
+                        <i className="ph-bold ph-arrow-fat-left"></i>
                     </Button>
                 </DivSignin>
                 <DivInput>
