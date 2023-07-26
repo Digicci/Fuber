@@ -64,9 +64,6 @@ function DashCards() {
     return (
         <>
             <Row $col>
-                <DashCard key="1" {...financeCard} />
-                <DashCard key="2" {...raceCard} />
-                <DashCard key="5" {...teamCard} />
                 {
                     Dash.map((card) => {
                         return <DashCard key={card.id} {...card} />

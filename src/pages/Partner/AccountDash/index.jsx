@@ -35,7 +35,7 @@ function AccountDash() {
                     page === "finance" && <Finance/>
                 }
                 {
-                    page ==="profile" && <Profil/>
+                    page === "profile" && <Profil/>
                 }
             </Container>
         </>

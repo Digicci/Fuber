@@ -5,6 +5,15 @@ import {useNavigate} from "react-router-dom";
 const authContext = createContext();
 const basePath = "entreprise";
 
+const normalizeEntrepriseWithCSRF = (entreprise) => {
+    return {
+        nom: entreprise.nom,
+        prenom: entreprise.prenom,
+        num: entreprise.num,
+        mail: entreprise.mail,
+        _csrf: entreprise._csrf
+    }
+}
 
 export function ProvideAuthEntreprise({children}) {
     const authEntreprise = useProvideAuthEntreprise();
@@ -78,6 +87,10 @@ function useProvideAuthEntreprise() {
         return entreprise !== null;
     }
 
+    const UpdateEntreprise = (entreprise) => {
+        return axios.put(`${basePath}/update`, normalizeEntrepriseWithCSRF(entreprise), {withCredentials: true})
+    }
+
     const signout = () => {
         axios.get(`${basePath}/logout`, {}).then((res) =>{
             localStorage.removeItem("token");
@@ -101,6 +114,7 @@ function useProvideAuthEntreprise() {
         register,
         signout,
         isConnected,
+        UpdateEntreprise,
         getEntreprise,
         getTeam,
     }
