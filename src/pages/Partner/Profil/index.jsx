@@ -23,12 +23,17 @@ import {useAuthEntreprise} from '../../../utils/hook/Partner/useAuthEntreprise';
 import {useCsrf} from '../../../utils/hook/useCsrf';
 import {toast} from 'react-toastify';
 import Online from '../../../components/Partner/Online';
+import {useSelector, useDispatch} from "react-redux";
+import {getAuthUser} from "../../../utils/store/Partner/selectors/AuthSelectors";
+import {setAuth} from "../../../utils/store/Partner/actions/AuthActions";
 
 function Profil() {
 
 
+    const dispatch = useDispatch()
+    const entreprise = useSelector(getAuthUser)
 
-    const {entreprise, signout, setEntreprise, updateEntreprise,} = useAuthEntreprise()
+    const { signout, updateEntreprise,} = useAuthEntreprise()
     const [update, setUpdate] = useState({
         nom:false,
         num:false,
@@ -67,12 +72,12 @@ function Profil() {
 
     const updateProfile = () => {
         updateEntreprise({...entrepriseCopy, _csrf: csrf.token}).then((res) => {
-            setEntreprise({
+            dispatch(setAuth({
                 ...entreprise,
                 nom: res.data.nom,
                 prenom: res.data.prenom,
                 num: res.data.num
-            })
+            }))
             setUpdate({
                 nom:false,
                 num:false,
