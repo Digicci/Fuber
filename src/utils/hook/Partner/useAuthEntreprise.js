@@ -1,6 +1,9 @@
 import React, {createContext, useContext, useState} from "react";
 import {useAxios} from "../useAxios";
 import {useNavigate} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import {setAuth} from "../../store/Partner/actions/AuthActions";
+import {getAuth} from "../../store/Partner/selectors/AuthSelectors";
 
 const authContext = createContext();
 const basePath = "entreprise";
@@ -19,6 +22,8 @@ function useProvideAuthEntreprise() {
     const [entreprise,setEntreprise] = useState(null);
     const axios = useAxios();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const auth = useSelector(getAuth);
 
     const signin = (email, mdp, token) => {
         let data
@@ -49,23 +54,28 @@ function useProvideAuthEntreprise() {
                 console.log(res)
                 if(res.status === 401) {
                     setEntreprise(null);
+                    dispatch(setAuth(null));
                     localStorage.removeItem("driver_token");
                 }
                 else if(res.data) {
                     setEntreprise(res.data);
+                    dispatch(setAuth(res.data));
                 }else{
-                    setEntreprise(null)
+                    setEntreprise(null);
+                    dispatch(setAuth(null));
                     localStorage.removeItem("driver_token");
                 }
             }).catch((err) => {
                 console.log(err)
                 console.log("error")
                 setEntreprise(null);
+                dispatch(setAuth(null));
                 localStorage.removeItem("driver_token");
             })
         }
         else{
             setEntreprise(null)
+            dispatch(setAuth(null));
         }
     }
 
@@ -75,20 +85,24 @@ function useProvideAuthEntreprise() {
 
     const isConnected = () => {
         getEntreprise()
-        return entreprise !== null;
+        return auth.auth;
     }
+
+    // TODO : when logout a bug appear the redirection is not working properly and the user fall on a blank page
 
     const signout = () => {
         axios.get(`${basePath}/logout`, {}).then((res) =>{
-            localStorage.removeItem("token");
+            localStorage.removeItem("driver_token");
             localStorage.clear();
             setEntreprise(null);
+            dispatch(setAuth(null));
             navigate("/partner/login",{replace:true});
         }).catch((err) => {
             console.log(err)
-            localStorage.removeItem("token");
+            localStorage.removeItem("driver_token");
             localStorage.clear();
             setEntreprise(null);
+            dispatch(setAuth(null));
             navigate("/partner/login", {replace:true});
         })
     };

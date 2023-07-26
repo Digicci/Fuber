@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from "react";
 import { StyledLink } from "../../../utils/Atoms";
 import { Button, DivForgot, DivInput, DivSignin, Form, Input, Label } from "./atoms";
+import {useDispatch} from "react-redux";
+import {setAuth} from "../../../utils/store/Partner/actions/AuthActions";
 import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
 import { useNavigate } from "react-router-dom";
 import { useCsrf } from "../../../utils/hook/useCsrf";
@@ -10,6 +12,7 @@ function FormLogin() {
 
     const authEntreprise = useAuthEntreprise()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const [entreprise, setEntreprise] = useState({
         mail:'',
         mdp:'',
@@ -69,7 +72,7 @@ function FormLogin() {
                     })
                     localStorage.setItem('driver_token', res.data.token)
                     authEntreprise.setEntreprise(res.data.driver)
-                    console.log(res.data);
+                    dispatch(setAuth(res.data.driver))
                     setTimeout(() => {
                         navigate('/partner/account/home', { replace: true })
                     }, 2000)
@@ -98,6 +101,7 @@ function FormLogin() {
                     })
                 }
                 localStorage.clear()
+                dispatch(setAuth(null))
                 csrf.getCsrfToken()
             })
 
