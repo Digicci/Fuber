@@ -6,12 +6,11 @@ import {
     H4,
     Div
 } from "./atoms";
-import {Loader} from "../../../utils/Atoms";
 
 
 function DriverList() {
     const auth = useAuthEntreprise()
-    const [team, setTeam] = useState(auth.entreprise.employes)
+    const [team, setTeam] = useState(auth.entreprise?.employes)
 
     return (
         <>

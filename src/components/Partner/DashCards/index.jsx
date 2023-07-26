@@ -1,25 +1,29 @@
 import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getNumberOfRace, getCa } from "../../../utils/store/Partner/selectors/StatsSelector";
+import { getAuth } from "../../../utils/store/Partner/selectors/AuthSelectors";
+import { updateStats } from "../../../utils/store/Partner/actions/StatActions";
 import DashCard from "../DashCard";
-import Dash from "../../../utils/Data/Partner/Dash";
 import {
     Row
 } from "../../../utils/Atoms"
 import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
-import { useStats } from "../../../utils/hook/Partner/useStats";
 import courbe from "../../../assets/driver/courbe.webp";
 import team from "../../../assets/driver/team.webp";
 import order from "../../../assets/driver/order.webp";
+import {useAxios} from "../../../utils/hook/useAxios";
+import params from "../../../assets/driver/etablishement.webp";
 
 function DashCards() {
 
-    const auth = useAuthEntreprise()
-    const stats = useStats()
+    const axios = useAxios()
+    const auth = useSelector(getAuth)
+    const numberOfRace = useSelector(getNumberOfRace)
+    const ca = useSelector(getCa)
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        const timer = stats.setStatsTracker()
-        return () => {
-            stats.unsetStatsTracker(timer)
-        }
+        dispatch(updateStats(axios))
     }, [])
 
     const teamCard = {
@@ -31,20 +35,20 @@ function DashCards() {
             alt: "Team",
         },
         descriptionInfo: {
-            info: `${auth.entreprise.employes?.length} chauffeurs`
+            info: `${auth.user.employes?.length} chauffeurs`
         },
     }
 
     const financeCard = {
         id: 1,
-        to: "../../../pages/Partner/finances",
+        to: "../../../partner/account/finances",
         title: "Finances",
         imgInfo: {
             img: courbe,
             alt: "Courbe de progression",
         },
         descriptionInfo: {
-            info: `${(stats.ca / 100).toFixed(2)}€`,
+            info: `${(ca / 100).toFixed(2)}€`,
         },
     }
 
@@ -57,7 +61,19 @@ function DashCards() {
             alt: "Nombre de courses",
         },
         descriptionInfo: {
-            info:  stats.numberOfRace,
+            info:  numberOfRace,
+        },
+    }
+    const profileCard = {
+        id: 4,
+        to: "../../../partner/account/profile",
+        title: "Profile",
+        imgInfo: {
+            img: params,
+            alt: "Profile",
+        },
+        descriptionInfo: {
+            info: "Voir mon profil",
         },
     }
 
@@ -67,12 +83,7 @@ function DashCards() {
                 <DashCard key="1" {...financeCard} />
                 <DashCard key="2" {...raceCard} />
                 <DashCard key="5" {...teamCard} />
-                {
-                    Dash.map((card) => {
-                        return <DashCard key={card.id} {...card} />
-
-                    })
-                }
+                <DashCard key="4" {...profileCard} />
             </Row>
         </>
     )

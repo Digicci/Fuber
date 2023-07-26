@@ -1,6 +1,9 @@
 import React, {createContext, useContext, useState} from "react";
 import {useAxios} from "../useAxios";
 import {useNavigate} from "react-router-dom";
+import {useSelector, useDispatch} from "react-redux";
+import {setAuth} from "../../store/Partner/actions/AuthActions";
+import {getAuth} from "../../store/Partner/selectors/AuthSelectors";
 
 const authContext = createContext();
 const basePath = "entreprise";
@@ -19,6 +22,8 @@ function useProvideAuthEntreprise() {
     const [entreprise,setEntreprise] = useState(null);
     const axios = useAxios();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const auth = useSelector(getAuth);
 
     const signin = (email, mdp, token) => {
         let data
@@ -41,31 +46,31 @@ function useProvideAuthEntreprise() {
     }
 
     const getEntreprise = () => {
-        if(entreprise){
+        if(auth.user !== null){
             return;
         }
         if(localStorage.getItem("driver_token")) {
             axios.get(`${basePath}/get`).then((res) => {
                 console.log(res)
                 if(res.status === 401) {
-                    setEntreprise(null);
+                    dispatch(setAuth(null));
                     localStorage.removeItem("driver_token");
                 }
                 else if(res.data) {
-                    setEntreprise(res.data);
+                    dispatch(setAuth(res.data));
                 }else{
-                    setEntreprise(null)
+                    dispatch(setAuth(null));
                     localStorage.removeItem("driver_token");
                 }
             }).catch((err) => {
                 console.log(err)
                 console.log("error")
-                setEntreprise(null);
+                dispatch(setAuth(null));
                 localStorage.removeItem("driver_token");
             })
         }
         else{
-            setEntreprise(null)
+            dispatch(setAuth(null));
         }
     }
 
@@ -75,22 +80,15 @@ function useProvideAuthEntreprise() {
 
     const isConnected = () => {
         getEntreprise()
-        return entreprise !== null;
+        return auth.auth;
     }
 
     const signout = () => {
-        axios.get(`${basePath}/logout`, {}).then((res) =>{
-            localStorage.removeItem("token");
-            localStorage.clear();
-            setEntreprise(null);
-            navigate("/partner/login",{replace:true});
-        }).catch((err) => {
-            console.log(err)
-            localStorage.removeItem("token");
-            localStorage.clear();
-            setEntreprise(null);
-            navigate("/partner/login", {replace:true});
-        })
+        localStorage.removeItem("driver_token");
+        localStorage.clear();
+        setEntreprise(null);
+        dispatch(setAuth(null));
+        navigate("/partner/login",{replace:true});
     };
 
     return {
