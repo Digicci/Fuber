@@ -65,7 +65,12 @@ function Profil() {
 
     const updateProfile = () => {
         updateEntreprise({...entrepriseCopy, _csrf: csrf.token}).then((res) => {
-            setEntreprise(res.data.entreprise)
+            setEntreprise({
+                ...entreprise,
+                nom: res.data.nom,
+                prenom: res.data.prenom,
+                num: res.data.num
+            })
             setUpdate({
                 nom:false,
                 num:false,

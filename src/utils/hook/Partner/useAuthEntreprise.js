@@ -86,7 +86,7 @@ function useProvideAuthEntreprise() {
         return entreprise !== null;
     }
 
-    const UpdateEntreprise = (entreprise) => {
+    const updateEntreprise = (entreprise) => {
         return axios.put(`${basePath}/update`, normalizeEntrepriseWithCSRF(entreprise), {withCredentials: true})
     }
 
@@ -113,7 +113,7 @@ function useProvideAuthEntreprise() {
         register,
         signout,
         isConnected,
-        UpdateEntreprise,
+        updateEntreprise,
         getEntreprise,
         getTeam,
     }
