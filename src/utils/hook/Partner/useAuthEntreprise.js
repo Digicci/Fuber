@@ -10,7 +10,6 @@ const normalizeEntrepriseWithCSRF = (entreprise) => {
         nom: entreprise.nom,
         prenom: entreprise.prenom,
         num: entreprise.num,
-        mail: entreprise.mail,
         _csrf: entreprise._csrf
     }
 }

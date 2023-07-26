@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
     ContainerInfo,
     InputUpdate,
@@ -38,6 +38,11 @@ function Profil() {
     const [entrepriseCopy, setEntrepriseCopy] = useState({...entreprise})
 
     const csrf = useCsrf()
+
+    useEffect(() => {
+        csrf.getCsrfToken()
+    }, [])
+
     const toggleUpdate = (e) => {
         const field = e.target.attributes.datafield.value
         let state =  {...update}
