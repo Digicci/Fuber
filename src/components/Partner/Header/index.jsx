@@ -7,19 +7,22 @@ import {
     StyledLink,
     ButtonLogout,
 } from "../../../utils/Atoms"
+import { useSelector } from "react-redux";
 import Logo from "../../../assets/driver/logodriver.webp"
 import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
+import {getAuth} from "../../../utils/store/Partner/selectors/AuthSelectors";
 
 
 function Header(){
 
-    const {entreprise, isConnected,signout} = useAuthEntreprise()
+    const {isConnected,signout} = useAuthEntreprise()
+    const auth = useSelector(getAuth)
 
     const [connected, setConnected] = useState(false)
 
     useEffect( () => {
         setConnected(isConnected())
-    }, [entreprise])
+    }, [auth.auth])
 
     return(
         <>
