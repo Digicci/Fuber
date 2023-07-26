@@ -3,7 +3,6 @@ export const SET_AUTH = "SET_AUTH";
 
 const initialState = {
     auth: false,
-    token: null,
     user: null,
 }
 
@@ -13,7 +12,7 @@ const AuthReducer = (state = initialState, action) => {
         case SET_AUTH:
             return {
                 ...state,
-                user: {...action.payload},
+                user: action.payload === null ? null : { ...action.payload},
                 auth: action.payload !== null,
             }
 
