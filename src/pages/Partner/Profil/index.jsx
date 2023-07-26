@@ -14,25 +14,27 @@ import {
     DivUpdate,
     ValideModif,
     ButtonUpdate,
-    Connexion
-} from "./atoms";
+    DivOnline,
+    EntrepriseName,
+    EntrepriseSiret
+} from './atoms'
 import avatar from '../../../assets/profile.webp';
 import {useAuthEntreprise} from '../../../utils/hook/Partner/useAuthEntreprise';
 import {useCsrf} from '../../../utils/hook/useCsrf';
 import {toast} from 'react-toastify';
+import Online from '../../../components/Partner/Online';
 
 function Profil() {
 
-    const [isOpen, setIsOpen] = useState(false)
-    const toggleMenu = () => {
-        setIsOpen(!isOpen)
-    }
 
-    const {entreprise, signout, setEntreprise, updateEntreprise} = useAuthEntreprise()
+
+    const {entreprise, signout, setEntreprise, updateEntreprise,} = useAuthEntreprise()
     const [update, setUpdate] = useState({
         nom:false,
         num:false,
-        mail:false
+        mail:false,
+        nom_commercial:false,
+        siret:false
     })
 
     const [entrepriseCopy, setEntrepriseCopy] = useState({...entreprise})
@@ -97,26 +99,16 @@ function Profil() {
         <>
             <ContainerInfo>
                 <TitlePage>Profil</TitlePage>
-                <Connexion>
-                    <label>
-                        <input type="checkbox" onClick={toggleMenu} />
-                        <span></span>
-                    </label>
-                    {
-                        isOpen ?
-                          <p className="txton">
-                              En ligne
-                          </p>
-                    :
-                        <p className="txtoff">
-                            Hors ligne
-                        </p>
-                    }
-                </Connexion>
+                <DivOnline>
+                    <Online />
+                </DivOnline>
                 <AvatarWrapper>
                     <AvatarIconWrapper>
                         <Avatar src={avatar} alt="avatar" />
                     </AvatarIconWrapper>
+                    <Label>
+                        Nom et prénom
+                    </Label>
                     <DivUpdate>
                         {
                             update.nom ? (
@@ -154,10 +146,14 @@ function Profil() {
                         }
                     </DivUpdate>
                 </AvatarWrapper>
+                <Label>
+                    Numéro de téléphone professionnel
+                </Label>
                 <DivUpdate>
                     {
                         update.num ? (
                             <>
+
                                 <InputUpdate
                                     $updateEntreprise
                                     type="tel"
@@ -176,7 +172,7 @@ function Profil() {
                                     {entreprise.num}
                                 </Number>
                                 <ButtonUpdate>
-                                    <i className="ph-bold ph-phone" datafield="num" onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-pencil" datafield="num" onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
                         )
@@ -184,36 +180,24 @@ function Profil() {
                 </DivUpdate>
 
                 <Label>
-                    Email
+                    Email professionnel
                 </Label>
-                <DivUpdate>
-                    {
-                        update.mail ? (
-                            <>
-                                <InputUpdate
-                                    $updateEntreprise
-                                    type="email"
-                                    placeholder={entreprise.mail}
-                                    name="mail"
-                                    value={entrepriseCopy.mail}
-                                    onChange={handleChange}
-                                />
-                                <ButtonUpdate>
-                                    <i className="ph-bold ph-x" datafield="mail" onClick={toggleUpdate}></i>
-                                </ButtonUpdate>
-                            </>
-                        ) : (
-                            <>
-                                <Email>
-                                    {entreprise.mail}
-                                </Email>
-                                <ButtonUpdate>
-                                    <i className="ph-bold ph-mail" datafield="mail" onClick={toggleUpdate}></i>
-                                </ButtonUpdate>
-                            </>
-                        )
-                    }
-                </DivUpdate>
+                <Email>
+                    {entreprise.mail}
+                </Email>
+
+                <Label>
+                    Nom entreprise
+                </Label>
+                <EntrepriseName>
+                    {entreprise.nom_commercial}
+                </EntrepriseName>
+                <Label>
+                    Siret/Siren
+                </Label>
+                <EntrepriseSiret>
+                    {entreprise.siret}
+                </EntrepriseSiret>
                 <ProfileLogout onClick={signout}>
                     Déconnexion
                 </ProfileLogout>

@@ -7,6 +7,7 @@ import {
     Logout,
     Responsive
 } from "./atoms"
+import Online from '../Online'
 
 
 
@@ -19,10 +20,7 @@ function NavDash({activePage}) {
         setIsOpen(!isOpen)
     }
 
-    const [isOnline, setIsOnline] = useState(false)
-    const toggleOnline = () => {
-        setIsOnline(!isOnline)
-    }
+
 
     const closeMenu = () => {
         setIsOpen(false)
@@ -63,22 +61,7 @@ function NavDash({activePage}) {
                         <i className="ph-bold ph-sign-out"></i>
                         Déconnexion
                     </Logout>
-                    <Connexion>
-                        <label>
-                            <input type="checkbox" onClick={toggleOnline} />
-                            <span></span>
-                        </label>
-                        {
-                            isOnline ? 
-                                <p className="txton">
-                                    En ligne
-                                </p>
-                            :
-                                <p className="txtoff">
-                                Hors ligne
-                                </p>
-                        }
-                    </Connexion>
+                    <Online />
                 </Nav>
             </Container>
         </>
