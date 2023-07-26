@@ -15,6 +15,7 @@ function Partner() {
         <>
             <ProvideCsrf>
                 <ProvideAxios>
+
                     <StoreProvider store={store}>
                         <ProvideAuthEntreprise>
                             <ProvideStats>

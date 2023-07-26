@@ -8,6 +8,14 @@ import {getAuth} from "../../store/Partner/selectors/AuthSelectors";
 const authContext = createContext();
 const basePath = "entreprise";
 
+const normalizeEntrepriseWithCSRF = (entreprise) => {
+    return {
+        nom: entreprise.nom,
+        prenom: entreprise.prenom,
+        num: entreprise.num,
+        _csrf: entreprise._csrf
+    }
+}
 
 export function ProvideAuthEntreprise({children}) {
     const authEntreprise = useProvideAuthEntreprise();
@@ -83,6 +91,10 @@ function useProvideAuthEntreprise() {
         return auth.auth;
     }
 
+    const updateEntreprise = (entreprise) => {
+        return axios.put(`${basePath}/update`, normalizeEntrepriseWithCSRF(entreprise), {withCredentials: true})
+    }
+
     const signout = () => {
         localStorage.removeItem("driver_token");
         localStorage.clear();
@@ -99,6 +111,7 @@ function useProvideAuthEntreprise() {
         register,
         signout,
         isConnected,
+        updateEntreprise,
         getEntreprise,
         getTeam,
     }

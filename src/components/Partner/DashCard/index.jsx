@@ -7,7 +7,6 @@ import {
     DashImg,
     DivCard,
 } from "./atoms";
-import courbe from "../../../assets/driver/courbe.webp";
 
 function DashCard({id,to,imgInfo,descriptionInfo,title}) {
 

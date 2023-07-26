@@ -12,8 +12,10 @@ export const Container = styled.div`
     background-color: ${colors.secondary};
     @media (max-width: 768px){
         width: 100%;
-        height: 0;
-        position: relative;
+        height: 40px;
+        position: absolute;
+        top: 60px;
+        left: 0;
         flex-direction: column;
     }
     
@@ -26,12 +28,14 @@ export const Nav = styled.div`
     display: flex;
     flex-direction: column;
     @media (max-width: 768px){
-        height: 0;
+        height: 0vh;
         opacity: 0;
         margin: 0;
         padding: 0;
         transition: all .5s ease-in;
-        position: relative;
+        position: absolute;
+        top: 40px;
+        left: 0;
         transform: translateY(-100%);
         backdrop-filter: blur(5px) brightness(75%);
         width:100%;
@@ -40,7 +44,7 @@ export const Nav = styled.div`
         props.$visible && 
             `
                 transform: translateY(0);
-                height:100vh;
+                height:calc(100vh - 100px);
                 opacity: 1;
                 z-index:5;
             `
