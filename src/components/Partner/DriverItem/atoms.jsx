@@ -58,14 +58,11 @@ export const Animation = styled.div`
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    animation: pulse 1s infinite;
     ${(props) =>
-        props.$online && `
+        props.$online ? `
             background-color: ${colors.sixth};
-        `
-    }
-    ${(props) =>
-        props.$offline && `
+            animation: pulse 1s infinite;
+        ` : `
             background-color: ${colors.red};
         `
     }

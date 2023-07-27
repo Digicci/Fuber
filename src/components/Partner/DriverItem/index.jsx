@@ -32,7 +32,7 @@ function DriverItem({item}) {
                 </DivInfo>
                 <DivInfo>
                     <Text>
-                        Voiture
+                        {item.vehicule?.marque || "Aucun"} {item.vehicule?.modele || "véhicule"}
                     </Text>
                 </DivInfo>
                 <DivInfo>
@@ -40,7 +40,11 @@ function DriverItem({item}) {
                     <span>{item.courses?.length || 0}</span>
                 </DivInfo>
                 <DivInfo>
-                    <Animation $online></Animation>
+                    {
+                        // If online is true Animation is green otherwise he's red
+                        // ToDo : change the online system to send information to the server and save it in db
+                    }
+                    <Animation $online={true}></Animation>
                 </DivInfo>
                 <DivInfo>
                     <DetailDriver toggle={toggleIsOpen} isOpen={isOpen} driver={item} />

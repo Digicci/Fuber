@@ -73,7 +73,7 @@ function DetailDriver({toggle, isOpen, driver}) {
                                 }
                             </DivText>
                         </DivProfil>
-                        <InfoDetail/>
+                        <InfoDetail driver={driver}/>
                         <DivDelete>
                             <Delete>
                                 Supprimer le chauffeur
