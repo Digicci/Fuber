@@ -13,14 +13,14 @@ import {
     DivDelete,
 
 } from "./atoms";
-import {    
+import {
     StyledClose,
     TitleModal,
 } from "../../../utils/Atoms"
 import profil from "../../../assets/driver/profile.webp"
 import InfoDetail from "../InfoDetail";
 
-function DetailDriver({toggle, isOpen}) {
+function DetailDriver({toggle, isOpen, driver}) {
     return (
         <>
             <Modal $isOpen={isOpen}>
@@ -35,34 +35,42 @@ function DetailDriver({toggle, isOpen}) {
                         <DivProfil>
                             <img src={profil} alt='Image de Profile'/>
                             <DivText>
-                                <h6>Nom Prénom</h6>
-                                <p>adresse</p>
-                                <p>E-mail</p>
-                                <p>Numéro de téléphone</p>
+                                <h6>{driver.nom} {driver.prenom}</h6>
+                                <p>{driver.adresse}</p>
+                                <p>{driver.mail}</p>
+                                <p>{driver.tel}</p>
                             </DivText>
                         </DivProfil>
                         <DivProfil $carInfo>
                             <DivText $info>
-                                <p>
-                                    <strong>Immatriculation: </strong>
-                                    GB-067-HH
-                                </p>
-                                <p>
-                                    <strong>Type de véhicule: </strong>
-                                    Confort
-                                </p>
-                                <p>
-                                    <strong>Marque: </strong>
-                                    Peugeot
-                                </p>
-                                <p>
-                                    <strong>Modèle: </strong>
-                                    308
-                                </p>
-                                <p>
-                                    <strong>Place: </strong>
-                                    4
-                                </p>
+                                {
+                                    driver.vehicule ? (
+                                        <>
+                                            <p>
+                                                <strong>Immatriculation: </strong>
+                                                {driver.vehicule?.immatriculation}
+                                            </p>
+                                            <p>
+                                                <strong>Type de véhicule: </strong>
+                                                {driver.vehicule?.type}
+                                            </p>
+                                            <p>
+                                                <strong>Marque: </strong>
+                                                {driver.vehicule?.marque}
+                                            </p>
+                                            <p>
+                                                <strong>Modèle: </strong>
+                                                {driver.vehicule?.modele}
+                                            </p>
+                                            <p>
+                                                <strong>Place: </strong>
+                                                {driver.vehicule?.place}
+                                            </p>
+                                        </>
+                                    ) : (
+                                        <p>Ce chauffeur n'a pas de véhicule.</p>
+                                    )
+                                }
                             </DivText>
                         </DivProfil>
                         <InfoDetail/>

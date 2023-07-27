@@ -27,7 +27,7 @@ function DriverItem({item}) {
                 </DivImg>
                 <DivInfo>
                     <Text>
-                        Nom Prenom
+                        {item.nom} {item.prenom}
                     </Text>
                 </DivInfo>
                 <DivInfo>
@@ -37,13 +37,13 @@ function DriverItem({item}) {
                 </DivInfo>
                 <DivInfo>
                     <i className="ph-bold ph-flag-checkered"></i>
-                    <span>10</span>
+                    <span>{item.courses?.length || 0}</span>
                 </DivInfo>
                 <DivInfo>
                     <Animation $online></Animation>
                 </DivInfo>
                 <DivInfo>
-                    <DetailDriver toggle={toggleIsOpen} isOpen={isOpen} />
+                    <DetailDriver toggle={toggleIsOpen} isOpen={isOpen} driver={item} />
                     <Button onClick={toggleIsOpen}>
                         <i className="ph-bold ph-dots-three-outline"></i>
                     </Button>
