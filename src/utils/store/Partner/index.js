@@ -4,6 +4,8 @@ import thunk from "redux-thunk";
 
 import StatReducer from "./reducers/StatReducer";
 import AuthReducer from "./reducers/AuthReducer";
+import TeamReducer from "./reducers/TeamReducer";
+import TeamMiddleware from "./middleware/TeamMiddleware";
 
 
 
@@ -11,10 +13,11 @@ import AuthReducer from "./reducers/AuthReducer";
 const store = createStore(
     combineReducers({
         stats: StatReducer,
-        auth: AuthReducer
+        auth: AuthReducer,
+        team: TeamReducer
     }),
     composeWithDevTools(
-        applyMiddleware(thunk)
+        applyMiddleware(thunk, TeamMiddleware)
     )
 )
 

@@ -1,4 +1,5 @@
 import { SET_AUTH, TOGGLE_ONLINE } from "../reducers/AuthReducer";
+import { SET_TEAM } from "../reducers/TeamReducer";
 
 export const setAuth = (auth) => {
     return {
@@ -10,5 +11,12 @@ export const setAuth = (auth) => {
 export const toggleOnline = () => {
     return {
         type: TOGGLE_ONLINE,
+    }
+}
+
+export const setTeam = (team) => {
+    return {
+        type: SET_TEAM,
+        payload: team,
     }
 }
