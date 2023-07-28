@@ -1,29 +1,26 @@
-import React, { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import React, {useEffect} from "react";
+import { useSelector } from "react-redux";
 import { getNumberOfRace, getCa } from "../../../utils/store/Partner/selectors/StatsSelector";
 import { getAuth } from "../../../utils/store/Partner/selectors/AuthSelectors";
-import { updateStats } from "../../../utils/store/Partner/actions/StatActions";
 import DashCard from "../DashCard";
 import {
     Row
 } from "../../../utils/Atoms"
-import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
 import courbe from "../../../assets/driver/courbe.webp";
 import team from "../../../assets/driver/team.webp";
 import order from "../../../assets/driver/order.webp";
-import {useAxios} from "../../../utils/hook/useAxios";
 import params from "../../../assets/driver/etablishement.webp";
+import {useStats} from "../../../utils/hook/Partner/useStats";
 
 function DashCards() {
 
-    const axios = useAxios()
+    const {getStats} = useStats()
     const auth = useSelector(getAuth)
     const numberOfRace = useSelector(getNumberOfRace)
     const ca = useSelector(getCa)
-    const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(updateStats(axios))
+        getStats()
     }, [])
 
     const teamCard = {
