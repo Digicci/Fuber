@@ -10,7 +10,8 @@ import {
     AcceptDiv,
     AcceptButton,
     RefuseButton,
-    RacePrice
+    RacePrice,
+    RaceInfo
 } from './atoms'
 import { getAuth, getAuthStatus } from '../../../utils/store/Partner/selectors/AuthSelectors'
 import { useSelector } from 'react-redux'
@@ -52,10 +53,24 @@ function OrderAccept() {
                           <AcceptDiv>
                             <AcceptButton>Accepter</AcceptButton>
                             <RefuseButton>Refuser</RefuseButton>
+                            <RacePrice>10.30€</RacePrice>
                           </AcceptDiv>
-                            <RacePrice>
-                                10.30€
-                            </RacePrice>
+                            <RaceInfo>
+                                <p>
+                                    <i className="ph-bold ph-clock"></i>
+                                    10 min
+                                </p>
+                                <ul>
+                                    <li>
+                                        <i className="ph-bold ph-map-pin"></i>
+                                        adresse de départ
+                                    </li>
+                                    <li>
+                                        <i className="ph-bold ph-crosshair"></i>
+                                        adresse d'arrivée
+                                    </li>
+                                </ul>
+                            </RaceInfo>
                         </InfoOrder>
                     </BottomOrder>
                 </Popup>
