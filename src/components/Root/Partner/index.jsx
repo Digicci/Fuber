@@ -1,7 +1,6 @@
 import React from "react";
 import {Outlet} from "react-router-dom";
 import Header from "../../Partner/Header";
-import Footer from "../../Footer";
 import { ProvideCsrf } from "../../../utils/hook/useCsrf";
 import { ProvideAxios } from "../../../utils/hook/useAxios";
 import { ProvideAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
@@ -9,6 +8,7 @@ import { ProvideStats } from "../../../utils/hook/Partner/useStats";
 import { ToastContainer } from "react-toastify";
 import {Provider as StoreProvider} from "react-redux";
 import store from "../../../utils/store/Partner"
+import OrderAccept from '../../Partner/OrderAccept'
 
 function Partner() {
     return (
@@ -23,8 +23,8 @@ function Partner() {
                                 <div id="page_container">
                                     <Outlet />
                                     <ToastContainer style={{zIndex: 20000}} autoClose={5000}/>
+                                    <OrderAccept/>
                                 </div>
-                                <Footer />
                             </ProvideStats>
                         </ProvideAuthEntreprise>
                     </StoreProvider>
