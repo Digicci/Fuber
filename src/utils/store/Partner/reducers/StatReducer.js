@@ -1,6 +1,4 @@
-const basePath = "entreprise/stats"
-
-export const GET_STATS = "GET_STATS";
+export const SET_STATS = "SET_STATS";
 
 
 const initialState = {
@@ -10,25 +8,12 @@ const initialState = {
 
 const statReducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_STATS:
-            action.payload.axios.get(
-                `${basePath}/getNumberOfRace`,
-                { withCredentials: true }
-            ).then((res) => {
-                const {count} = res.data;
-                action.payload.axios.get(
-                    `${basePath}/getCa`,
-                    { withCredentials: true }
-                ).then((res) => {
-                    const {ca} = res.data
-                    return ({
-                        ...state,
-                        numberOfRace: count,
-                        ca
-                    })
-                })
-            })
-            return state;
+        case SET_STATS:
+            return {
+                ...state,
+                ...action.payload
+            }
+
 
         default:
             return state;

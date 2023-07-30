@@ -6,3 +6,5 @@ export const getAuthStatus = state => state.auth.online;
 
 export const getAuthUser = state => state.auth.user;
 
+export const getTeam = state => state.team.team;
+

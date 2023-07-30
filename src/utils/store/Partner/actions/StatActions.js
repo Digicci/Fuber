@@ -1,10 +1,8 @@
-import { GET_STATS } from "../reducers/StatReducer";
+import { SET_STATS } from "../reducers/StatReducer";
 
-export const updateStats = (axios) => {
+export const updateStats = (payload) => {
     return {
-        type: GET_STATS,
-        payload: {
-            axios
-        }
+        type: SET_STATS,
+        payload
     }
 }

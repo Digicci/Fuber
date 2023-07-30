@@ -1,6 +1,8 @@
 import React, { useState} from "react";
 import DriverItem from "../DriverItem";
 import {useAuthEntreprise} from "../../../utils/hook/Partner/useAuthEntreprise";
+import { useSelector } from "react-redux";
+import { getTeam } from "../../../utils/store/Partner/selectors/AuthSelectors";
 import {
     List,
     H4,
@@ -9,8 +11,7 @@ import {
 
 
 function DriverList() {
-    const auth = useAuthEntreprise()
-    const [team, setTeam] = useState(auth.entreprise?.employes)
+    const team = useSelector(getTeam)
 
     return (
         <>
@@ -20,7 +21,7 @@ function DriverList() {
                     <i className="ph-bold ph-dots-three"></i>
                 </H4>
                 <Div>
-                    {team ? team.map((item, index) => {
+                    {team.length > 0 ? team.map((item, index) => {
                         return (
                             <DriverItem key={index} item={item}/>
                         )

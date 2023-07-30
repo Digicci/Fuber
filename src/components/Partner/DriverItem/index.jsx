@@ -27,23 +27,27 @@ function DriverItem({item}) {
                 </DivImg>
                 <DivInfo>
                     <Text>
-                        Nom Prenom
+                        {item.nom} {item.prenom}
                     </Text>
                 </DivInfo>
                 <DivInfo>
                     <Text>
-                        Voiture
+                        {item.vehicule?.marque || "Aucun"} {item.vehicule?.modele || "véhicule"}
                     </Text>
                 </DivInfo>
                 <DivInfo>
                     <i className="ph-bold ph-flag-checkered"></i>
-                    <span>10</span>
+                    <span>{item.courses?.length || 0}</span>
                 </DivInfo>
                 <DivInfo>
-                    <Animation $online></Animation>
+                    {
+                        // If online is true Animation is green otherwise he's red
+                        // ToDo : change the online system to send information to the server and save it in db
+                    }
+                    <Animation $online={true}></Animation>
                 </DivInfo>
                 <DivInfo>
-                    <DetailDriver toggle={toggleIsOpen} isOpen={isOpen} />
+                    <DetailDriver toggle={toggleIsOpen} isOpen={isOpen} driver={item} />
                     <Button onClick={toggleIsOpen}>
                         <i className="ph-bold ph-dots-three-outline"></i>
                     </Button>
