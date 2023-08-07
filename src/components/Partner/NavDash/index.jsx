@@ -3,7 +3,6 @@ import {
     Container,
     Nav,
     NavLink,
-    Connexion,
     Logout,
     Responsive
 } from "./atoms"
