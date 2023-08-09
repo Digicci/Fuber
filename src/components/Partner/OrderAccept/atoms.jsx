@@ -6,7 +6,7 @@ export const Container = styled.div`
   bottom: 0;
   right: 0;
 grid-area: popup;
-  width: calc(100% - 16.6%);
+  width: calc(100% - 378px);
   @media (max-width: 768px) {
     width: 100%;
   }
