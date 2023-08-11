@@ -36,7 +36,6 @@ function FormSignin(){
         mail: "",
         mdp: "",
         confirmMdp: "",
-        staff: "",
         
     });
 
@@ -135,13 +134,6 @@ function FormSignin(){
                 passwordConfirm: true,
             },
         },
-        staff: {
-            rules: {
-                required: true,
-                staff: true,
-                maxLength: 5,
-            }
-        },
     };
 
     useEffect(() => {
@@ -178,7 +170,6 @@ function FormSignin(){
             tel: entreprise.tel,
             mail: entreprise.mail,
             mdp: entreprise.mdp,
-            staff: entreprise.staff,
             _csrf: csrf.token,
         }
     }
@@ -204,7 +195,6 @@ function FormSignin(){
                         mail: '',
                         mdp: '',
                         confirmMdp: '',
-                        staff: '',
                     })
                     setError('')
                     toast.update(toatsId, {
@@ -240,7 +230,6 @@ function FormSignin(){
                     mail: '',
                     mdp: '',
                     confirmMdp: '',
-                    staff: '',
                 })
             })
         }else{
@@ -416,19 +405,6 @@ function FormSignin(){
                 />
                 {validator.errors.confirmMdp && <Error>
                 {validator.errors.confirmMdp}</Error>}
-
-                <StyledInput $signinDriver
-                name="staff"
-                type="text"
-                placeholder="Nombre de salariés*"
-                onChange={(e) => {
-                    handleChange(e, 'staff')
-                }}
-                value={entreprise.staff}
-                required
-                />
-                {validator.errors.staff && <Error>
-                {validator.errors.staff}</Error>}
 
                 <Error>{error}</Error>
                 <StyledInput

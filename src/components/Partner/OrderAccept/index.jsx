@@ -31,9 +31,9 @@ function OrderAccept() {
                 <DivOnline>
                     {
                         isOnline ?
-                          <p>Vous êtes hors ligne</p>
-                          :
                           <p>Vous êtes en ligne</p>
+                          :
+                          <p>Vous êtes hors ligne</p>
                     }
                 </DivOnline>
                 <Popup>
