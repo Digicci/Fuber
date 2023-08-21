@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "../../../colors";
 import cover from "../../../assets/driver/shop.webp"
+import banner from "../../../assets/driver/us.webp"
 
 export const Container = styled.div`
     width: 100%;
@@ -10,18 +11,11 @@ export const ContainerSignup = styled.div`
     height: 100%;
     padding: 8rem 3rem 10rem 0;
     display: flex;
-    justify-content: end;
-    ${(props) => 
-        props.$cover &&
-        `background: url(${cover});
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: top;
-        `
-    }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     @media (max-width:425px){
         padding:2rem;
-        flex-direction: column;
     }
 `
 export const WhyUs = styled.div`
@@ -59,6 +53,13 @@ export const WhyUs = styled.div`
             margin:2rem 0;
             }
         }
+        `
+    }
+    ${(props) =>
+        props.$advantage &&
+        `
+        display: flex;
+        width: 40%;
         `
     }
 `
@@ -116,7 +117,7 @@ ${(props) =>
 props.$col && 
     `flex-direction:column;
     align-items:center;
-    width:auto;
+    width:50%;
     padding: 0 8rem;
     @media (max-width:768px){
         margin:0;
@@ -196,24 +197,22 @@ export const Down = styled.i`
     }
 `
 export const Title = styled.div`
-    color: ${colors.primary};
+    color: ${colors.secondary};
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 1rem 0;
-    width: 40%;
-    margin-right: 4rem;
-    h3{
-        font-size: 3.1rem;
-        font-weight: 560;
-        letter-spacing: 2px;
-        line-height: 50px;
-    }
     p{
-        font-size: .95rem;
-        font-weight: 300;
-        margin: 2rem 0;
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: 550;
+        width: 60%;
+    }
+    h2{
+        font-size: 3.2rem;
+        font-weight: 800;
+        margin: 1rem 0;
     }
     @media (max-width:425px){
         width: auto;
@@ -222,5 +221,112 @@ export const Title = styled.div`
     }
     @media (max-width:768px){
 
+    }
+`
+
+export const Cover = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 0 5rem;
+    @media (max-width:425px){
+        padding: 2rem 0;
+    }
+    div{
+        height: 400px;
+        width: 50%;
+        border-radius: 30px;
+        background: url(${cover}) no-repeat center center;
+        background-size: cover;
+        margin-bottom: 2rem;
+    }
+`
+
+export const Button = styled.a`
+    font-size: .87rem;
+    background: ${colors.sixth};
+    color: ${colors.primary};
+    border-radius: 30px;
+    padding: 0.9rem 2rem;
+`
+
+export const Form = styled.div`
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+`
+
+export const DivInfo = styled.div`
+  background: ${colors.sixth};
+  width: 50%;
+  padding: 1rem .5rem;
+  color: ${colors.primary};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+    h3{
+        font-size: 3.3rem;
+        margin: 2rem 0;
+        width: 70%;
+    }
+    p{
+        font-size: 1.9rem;
+        margin: 2rem 0;
+        width: 70%;
+    }
+`
+
+export const DivForm = styled.div`
+  width: 50%;
+  padding: 3rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: ${colors.grey};
+`
+
+export const ContainerAccordion = styled.div`
+    width: 100%;
+    display: flex;
+    background: ${colors.grey};
+`
+export const ContactUs = styled.div`
+  display: flex;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+  background: ${colors.grey};
+  padding: 4rem 2rem;
+`
+export const Banner = styled.div`
+  height: 350px;
+  width: 80%;
+  display: flex;
+  background: ${colors.primary};
+  border-radius: 30px;
+  overflow: hidden;
+  padding-right: 0;
+  padding-left: 0;
+`
+export const BannerLeft = styled.div`
+  width: 50%;
+  height: 100%;
+  background: url(${banner}) no-repeat;
+  background-size: cover;
+ `
+
+export const BannerRight = styled.div`
+  width: 50%;
+  height: 100%;
+  padding: 3rem 1rem;
+    h4{
+        font-size: 1.95rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+    }
+    p{
+        font-size: 1.15rem;
+        margin-bottom: 2rem;
     }
 `

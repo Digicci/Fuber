@@ -409,7 +409,8 @@ function FormSignin(){
                 <Error>{error}</Error>
                 <StyledInput
                 $submit 
-                $connecter 
+                $connecter
+                $entreprise
                 type="submit" 
                 value="Envoyer"
                 onClick={onSubmit}

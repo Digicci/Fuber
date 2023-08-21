@@ -329,9 +329,19 @@ export const StyledInput = styled.input`
     }
     ${(props) => 
         props.$signinDriver &&
-        `@media (max-width: 768px){
+        `
+        width: 80%;
+        height: 50px;
+        @media (max-width: 768px){
         width: 80%;
     }
+        `
+    }
+    ${(props) =>
+        props.$entreprise &&
+        `
+        width: 80%;
+        height: 50px;
         `
     }
 `
