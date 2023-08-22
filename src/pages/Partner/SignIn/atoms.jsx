@@ -4,7 +4,7 @@ import cover from "../../../assets/driver/shop.webp"
 import banner from "../../../assets/driver/us.webp"
 
 export const Container = styled.div`
-    width: 100%;
+    width: 100vw;
 `
 export const ContainerSignup = styled.div`
     width: 100%;
@@ -15,7 +15,8 @@ export const ContainerSignup = styled.div`
     justify-content: center;
     align-items: center;
     @media (max-width:425px){
-        padding:2rem;
+        padding:1rem;
+        text-align: center;
     }
 `
 export const WhyUs = styled.div`
@@ -60,6 +61,12 @@ export const WhyUs = styled.div`
         `
         display: flex;
         width: 40%;
+        @media (max-width: 425px){
+            width: 100%;
+            h4{
+                font-size: 1.5rem;
+            }
+        }
         `
     }
 `
@@ -125,6 +132,7 @@ props.$col &&
     }
     @media (max-width:425px){
     padding: 0 2rem;
+    width: 100%;
     }`
 }
 `
@@ -215,9 +223,16 @@ export const Title = styled.div`
         margin: 1rem 0;
     }
     @media (max-width:425px){
-        width: auto;
+        width: 100%;
         margin: 0;
         padding: 0;
+        p{
+            font-size: 1rem;
+            width: 100%;
+        }
+        h2{
+            font-size: 2rem;
+        }
     }
     @media (max-width:768px){
 
@@ -230,9 +245,6 @@ export const Cover = styled.div`
     flex-direction: column;
     align-items: center;
     padding: 2rem 0 5rem;
-    @media (max-width:425px){
-        padding: 2rem 0;
-    }
     div{
         height: 400px;
         width: 50%;
@@ -240,6 +252,13 @@ export const Cover = styled.div`
         background: url(${cover}) no-repeat center center;
         background-size: cover;
         margin-bottom: 2rem;
+    }
+    @media (max-width:425px){
+        padding: 2rem 0;
+        div{
+            width: 80%;
+            height: 300px;
+        }
     }
 `
 
@@ -249,12 +268,22 @@ export const Button = styled.a`
     color: ${colors.primary};
     border-radius: 30px;
     padding: 0.9rem 2rem;
+    ${(props) =>
+        props.$padding && `
+            @media (max-width:425px){
+                padding: 1rem;
+            }
+        `
+    }
 `
 
 export const Form = styled.div`
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    @media (max-width: 425px){
+        flex-direction: column;
+    }
 `
 
 export const DivInfo = styled.div`
@@ -275,6 +304,15 @@ export const DivInfo = styled.div`
         margin: 2rem 0;
         width: 70%;
     }
+    @media (max-width: 425px){
+        width: 100%;
+        h3{
+            font-size: 2rem;
+        }
+        p{
+            font-size: 1.4rem;
+        }
+    }
 `
 
 export const DivForm = styled.div`
@@ -284,12 +322,18 @@ export const DivForm = styled.div`
   align-items: center;
   justify-content: center;
   background: ${colors.grey};
+  @media (max-width: 425px){
+    width: 100%;
+  }
 `
 
 export const ContainerAccordion = styled.div`
     width: 100%;
     display: flex;
     background: ${colors.grey};
+    @media (max-width: 425px){
+        flex-direction: column;
+    }
 `
 export const ContactUs = styled.div`
   display: flex;
@@ -308,12 +352,19 @@ export const Banner = styled.div`
   overflow: hidden;
   padding-right: 0;
   padding-left: 0;
+  @media (max-width: 425px){
+    width: 100%;
+    height: 450px;
+  }
 `
 export const BannerLeft = styled.div`
   width: 50%;
   height: 100%;
   background: url(${banner}) no-repeat;
   background-size: cover;
+  @media (max-width: 425px){
+    width: 100%;
+  }
  `
 
 export const BannerRight = styled.div`
@@ -328,5 +379,8 @@ export const BannerRight = styled.div`
     p{
         font-size: 1.15rem;
         margin-bottom: 2rem;
+    }
+    @media (max-width: 425px){
+        width: 100%;
     }
 `

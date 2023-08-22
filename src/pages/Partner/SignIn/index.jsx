@@ -163,7 +163,7 @@ function SignIn(){
                         <BannerRight>
                             <h4>Vous avez encore des questions ?</h4>
                             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, voluptatum.</p>
-                            <Button>Contactez-nous</Button>
+                            <Button $padding>Contactez-nous</Button>
                         </BannerRight>
                     </Banner>
                 </ContactUs>

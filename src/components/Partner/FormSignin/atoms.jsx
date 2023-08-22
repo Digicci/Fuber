@@ -18,7 +18,10 @@ export const ContainerForm = styled.div`
         text-align: center;
     }
     @media (max-width:425px){
-        width: auto;
+        width: 100%;
+    }
+    @media (max-width:768px){
+      width: 100%;
     }
 `
 
