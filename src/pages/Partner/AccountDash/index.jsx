@@ -8,6 +8,7 @@ import Team from "../Team";
 import Races from "../Races";
 import Finance from "../Finance";
 import Profil from "../Profil";
+import OrderAccept from '../../../components/Partner/OrderAccept'
 
 
 function AccountDash() {
@@ -22,21 +23,22 @@ function AccountDash() {
         <>
             <Container>
                 <NavDash activePage={page}/>
-                {
-                    page === "home" && <HomeDash />
-                }
-                {
-                    page === 'race' && <Races />
-                }
-                {
-                    page === "team" && <Team />
-                }
-                {
-                    page === "finance" && <Finance/>
-                }
-                {
-                    page === "profile" && <Profil/>
-                }
+                    {
+                      page === "home" && <HomeDash />
+                    }
+                    {
+                      page === 'race' && <Races />
+                    }
+                    {
+                      page === "team" && <Team />
+                    }
+                    {
+                      page === "finance" && <Finance/>
+                    }
+                    {
+                      page === "profile" && <Profil/>
+                    }
+                <OrderAccept/>
             </Container>
         </>
     )

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import colors from "../../../colors";
 import cover from "../../../assets/driver/shop.webp"
+import { StyledLink } from "../../../utils/Atoms";
 
 export const Container = styled.div`
     display: flex;
@@ -67,12 +68,15 @@ export const Title = styled.div`
 
     }
 `
-export const Close = styled.i`
+export const Close = styled(StyledLink)`
     width: 100%;
     display: flex;
     justify-content: flex-end;
     font-size: 1.5rem;
-    margin-top: .5rem;
+    margin: .5rem .5rem 0 0;
+    &:hover{
+        color: ${colors.red};
+    }
 `
 export const ContainerForm = styled.div`
     width: 100%;

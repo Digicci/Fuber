@@ -24,9 +24,7 @@ function LogIn(){
     useEffect(() => {
         if(auth.auth){
             navigate(from, {replace: true})
-            console.log("connected")
         }
-        console.log(auth.auth)
     }, [auth.auth])
     return (
         <>
@@ -38,7 +36,9 @@ function LogIn(){
                     </Title>
                 </ContainerLogin>
                 <ContainerLogin $form>
-                    <Close className="ph-bold ph-x"/>
+                    <Close to="/">
+                        <i className="ph-bold ph-x"></i>
+                    </Close>
                     <ContainerForm>
                         <img src={darkLogo} alt="Logo" />
                         <FormLogin />

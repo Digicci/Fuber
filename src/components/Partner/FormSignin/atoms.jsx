@@ -4,13 +4,13 @@ import colors from "../../../colors";
 export const ContainerForm = styled.div`
     display: flex;
     flex-direction: column;
-    width: 45%;
+    width: 70%;
     height: fit-content;
     align-items: center;
     justify-content: center;
     background: ${colors.primary};
-    border-radius: 5px;
-    box-shadow: 0 0 10px ${colors.purple};
+    border-radius: 30px;
+    padding: 2rem 3rem;
     h2{
         padding: 1rem;
         font-size: 1.95rem;
@@ -18,19 +18,13 @@ export const ContainerForm = styled.div`
         text-align: center;
     }
     @media (max-width:425px){
-        width: auto;
+        width: 100%;
+    }
+    @media (max-width:768px){
+      width: 100%;
     }
 `
-export const Select = styled.select`
-    display: flex;
-    font-size: 1rem;
-    padding: 0.7rem 0.3rem;
-    width: 60%;
-    margin: .5rem .5rem;
-    border: 1px solid ${colors.fifth};
-    outline: none;
-    
-`
+
 export const Error = styled.span`
   color: red;
   text-align: center;

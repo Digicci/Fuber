@@ -3,18 +3,18 @@ import {
     Container,
     Nav,
     NavLink,
-    Connexion,
     Logout,
     Responsive
 } from "./atoms"
 import Online from '../Online'
+import { useAuthEntreprise } from '../../../utils/hook/Partner/useAuthEntreprise'
 
 
 
 
 
 function NavDash({activePage}) {
-
+    const { signout } = useAuthEntreprise()
     const [isOpen, setIsOpen] = useState(false)
     const toggleMenu = () => {
         setIsOpen(!isOpen)
@@ -57,7 +57,7 @@ function NavDash({activePage}) {
                         <i className="ph-bold ph-info"></i>
                         Aide
                     </NavLink>
-                    <Logout onClick={closeMenu}  $logoutDisappear>
+                    <Logout onClick={signout} $logoutDisappear>
                         <i className="ph-bold ph-sign-out"></i>
                         Déconnexion
                     </Logout>

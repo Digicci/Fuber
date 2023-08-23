@@ -148,7 +148,7 @@ function FormLogin() {
                     Connexion
                 </Button>
                 <DivSignin>
-                    <StyledLink $signinEntreprise>
+                    <StyledLink to="/partner/signin" $signinEntreprise>
                         Pas encore inscrit ? S'incrire
                     </StyledLink>
                 </DivSignin>

@@ -11,6 +11,7 @@ const colors = {
     purple: '#9400d3',
     yellow: '#FBDA61',
     pink : '#FF5ACD',
+    grey: '#f7f7f7',
 }
 
 export default colors
