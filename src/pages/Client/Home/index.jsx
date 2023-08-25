@@ -103,7 +103,7 @@ function Home() {
               </StyledLink>
               <h5 className="partenaire">{t('home.partner')}</h5>
               <Ptext $pDriver>{t('home.partner description')}</Ptext>
-              <StyledLink to="/">
+              <StyledLink to="/partner/login">
                 <Button $connecterDriver>{t('home.login partner')}</Button>
               </StyledLink>
             </DivText>

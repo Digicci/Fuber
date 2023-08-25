@@ -24,16 +24,16 @@ function NavProfile({activePage})
                 <ButtonResponsive onClick={toggleMenu}>{!isOpen ? 'Menu' : 'Fermer'}</ButtonResponsive>
                 <Nav $visible={isOpen && true} onClick={toggleMenu}>
                     <StyledLink to="/order" $linkProfile >
-                        {t('global.race')}
+                        <i className="ph ph-taxi"></i><p>{t('global.race')}</p>
                     </StyledLink>
                     <StyledLink to="/account/myraces" $linkProfile $linkProfileSelected={activePage === 'myraces' && true} >
-                        {t('global.my races')}
+                        <i className="ph ph-activity"></i><p>{t('global.my races')}</p>
                     </StyledLink>
                     <StyledLink to="/account/wallet" $linkProfile $linkProfileSelected={activePage === 'wallet' && true}>
-                        {t('global.wallet')}
+                        <i className="ph ph-cardholder"></i><p>{t('global.wallet')}</p>
                     </StyledLink>
                     <StyledLink to="/account/profile" $linkProfile $linkProfileSelected={activePage === 'profile' && true} >
-                        {t('global.settings')}
+                        <i className=" ph ph-gear"></i> <p>{t('global.settings')}</p>
                     </StyledLink>
                 </Nav>
             </ContainerNav>

@@ -35,7 +35,7 @@ export const StyledLink = styled(Link)`
     }
     ${(props) => 
         props.$isFullLink &&
-            `background: ${colors.secondary};
+            `background: ${colors.sixth};
             color: ${colors.primary};
             padding: .5rem 1.3rem;
             -webkit-transition: .3s;
@@ -62,11 +62,11 @@ export const StyledLink = styled(Link)`
             transition: .3s;
             font-size: 1.15rem;
             &:hover{
-                background: ${colors.secondary};
+                background: ${colors.sixth};
                 color: ${colors.primary};
             }
             @media (max-width: 992px){
-                background: ${colors.secondary};
+                background: ${colors.sixth};
                 color: ${colors.primary};
             }`
     }
@@ -136,21 +136,32 @@ export const StyledLink = styled(Link)`
     }
     ${(props) =>
         props.$linkProfile &&
-            `font-size: 1.05rem;
+            `font-size: 1.3rem;
             padding 1rem 0 0 .5rem;
-            height: 50px;
-            &:hover{
-                background: ${colors.fourth};
+            height: 25px;
+            display: flex;
+            
+            i{
+                font-size: 1.3rem;
+                margin-right: 5px;
+                height: 25px;
+                width: 25px;
+            }
+            p:hover{
+                border-bottom: 2px solid ${colors.secondary};
+            }
+            @media (max-width: 768px){
+                padding: 0;
             }
         `
     }
     ${(props) =>
         props.$linkProfileSelected &&
-            `font-size: 1.05rem;
-            padding rem 0;
-            height: 50px;
-            border-left: 4px solid ${colors.secondary};
-            background: ${colors.fourth};
+            `p{
+                font-size: 1.05rem;
+                height: 25px;
+                border-bottom: 2px solid ${colors.secondary};
+            }
             `
     }
     ${(props) =>
@@ -193,6 +204,9 @@ export const StyledLink = styled(Link)`
     ${(props) => 
         props.$headerDriver && 
         `color: ${colors.primary};
+        background: ${colors.sixth};
+        padding: .5rem 1.3rem;
+        border-radius: 10px;
         .ph-user{
             margin-right: 5px;
         }
@@ -474,18 +488,26 @@ export const Avatar = styled.img`
 
 export const ContainerProfile = styled.div`
     width: 100%;
-    display: flex;
+    display: block;
+    padding: 3rem 0;
+    margin: 0 4rem;
     @media (max-width: 425px){
         flex-direction: column;
         justify-content: center;
         align-items: center;
+        margin: 0;
+        padding: 0;
+    }
+    @media (max-width: 768px){
+        margin: 0 2rem;
+        padding: 0 2rem;
     }
 `
 export const ContainerInfo = styled.div`
     width: 70%;
     display: flex;
     flex-direction: column;
-    margin: 2.5rem 0 ;
+    margin: 4rem 2rem;
     
 `
 export const TitlePage = styled.h2`
