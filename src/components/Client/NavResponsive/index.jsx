@@ -72,7 +72,7 @@ function NavResponsive({isOpen, toggle}){
                                 <StyledLink to='' $navVertical>
                                     {t('global.race')}
                                 </StyledLink>
-                                <StyledLink $navVertical>
+                                <StyledLink to ="/partner/signin" $navVertical>
                                     {t('global.partner')}
                                 </StyledLink>
                             </>
@@ -89,7 +89,7 @@ function NavResponsive({isOpen, toggle}){
                                <StyledLink to='/order' $navVertical>
                                     {t('global.race')}
                                 </StyledLink>
-                                <StyledLink $navVertical>
+                                <StyledLink to ="/partner/signin" $navVertical>
                                     {t('global.partner')}
                                 </StyledLink>
                                 <StyledLink $navVertical>

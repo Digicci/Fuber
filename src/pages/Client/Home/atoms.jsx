@@ -85,7 +85,7 @@ export const Input = styled.input`
   outline: none;
   border: none;
   border-radius: 8px;
-  background: ${colors.secondary};
+  background: ${colors.sixth};
   @media (max-width: 768px){
     margin: .5rem;
     width: 100%;

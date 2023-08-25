@@ -2,7 +2,7 @@ import styled from "styled-components";
 import colors from "../../../colors";
 
 export const ContainerNav = styled.div`
-    width: 30%;
+    width: 100%;
     @media (max-width: 425px){
         width: 100%;
         position: relative;
@@ -11,11 +11,12 @@ export const ContainerNav = styled.div`
 `
 export const Nav = styled.div`
     height: 100%;
-    margin: 2.5rem 0;
+    margin: 2.5rem 0 4rem 0;
     padding: 1rem .8rem;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     @media (max-width: 425px){
+        flex-direction: column;
         height: 0;
         opacity: 0;
         margin: 0;
@@ -36,5 +37,13 @@ export const Nav = styled.div`
             `
     }
     }
-    
+    @media (max-width: 768px){
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        
+    }
+    @media (min-width: 1024px){
+      flex-direction: row;
+      display: flex;
+    }
 `

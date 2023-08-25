@@ -22,6 +22,7 @@ export const useValidator = () => {
     }
     const validate = (name, value) => {
         let error = null;
+        if(!form[name]) return null;
         if (form[name].rules.required && !value) {
             error = 'Ce champ est obligatoire'
         }
@@ -57,10 +58,9 @@ export const useValidator = () => {
                 error = 'Le siret n\'est pas valide';
             }
         }
-        if(form[name].rules.staff){
-            const pattern = /^[0-9]+$/;
-            if(!pattern.test(value)){
-                error = 'Le nombre de salarié n\'est pas valide';
+        if(form[name].rules.pattern){
+            if(!form[name].rules.pattern.test(value)){
+                error = 'Le format attendu n\'est pas respecté';
             }
         }
         setErrors({...errors, [name]: error});

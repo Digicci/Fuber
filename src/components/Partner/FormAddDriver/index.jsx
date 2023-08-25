@@ -20,11 +20,11 @@ function InputWrap({inputInfo, handleChange}) {
 
     return (
         <Input
-            type={inputInfo.type}
-            placeholder={inputInfo.placeholder}
-            name={inputInfo.name}
+            type={inputInfo?.type}
+            placeholder={inputInfo?.placeholder}
+            name={inputInfo?.name}
             onChange={(e) => {
-                handleChange(e, inputInfo.name)
+                handleChange(e, inputInfo?.name)
             }}
         />
     )
@@ -60,7 +60,7 @@ function FormAddDriver(){
         adresse: "",
         ville: "",
         cp: "",
-        mdp: "",
+        password: "",
         confirmMdp: "",
         car: "",
         immatriculation: "",
@@ -74,7 +74,7 @@ function FormAddDriver(){
 
     useEffect(() => {
         csrf.getCsrfToken()
-        validator.registerForm(formConfig)
+        validator.registerForm(formConfig(entreprise))
     }, [])
 
     function handleChange(e,field) {
@@ -101,7 +101,7 @@ function FormAddDriver(){
             adresse: entreprise.adresse,
             ville: entreprise.ville,
             cp: entreprise.cp,
-            mdp: entreprise.mdp,
+            mdp: entreprise.password,
             confirmMdp: entreprise.confirmMdp,
             car: entreprise.car,
             immatriculation: entreprise.immatriculation,
@@ -162,33 +162,33 @@ function FormAddDriver(){
     return(
 
         <>
-            <Form $slider={!slider} >
+            <Form $slider={slider} >
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.nom} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().nom} handleChange={(e) =>{handleChange(e, 'nom')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.prenom} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().prenom} handleChange={(e) =>{handleChange(e, 'prenom')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.tel} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().tel} handleChange={(e) =>{handleChange(e, 'tel')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.adresse} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().adresse} handleChange={(e) =>{handleChange(e, 'adresse')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.ville} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().ville} handleChange={(e) =>{handleChange(e, 'ville')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.cp} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().cp} handleChange={(e) =>{handleChange(e, 'cp')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.mail} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().mail} handleChange={(e) =>{handleChange(e, 'mail')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.mdp} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().password} handleChange={(e) =>{handleChange(e, 'password')}} />
                 </DivInput>
                 <DivInput>
-                    <InputWrap inputInfo={formConfig.confirmMdp} handleChange={handleChange} />
+                    <InputWrap inputInfo={formConfig().confirmMdp} handleChange={(e) =>{handleChange(e, 'confirmMdp')}} />
                 </DivInput>
                 
                 <DivSignin>
@@ -202,7 +202,7 @@ function FormAddDriver(){
                 </DivSignin>
             </Form>
             
-            <Form $slider={slider}>
+            <Form $slider={!slider}>
                 <DivSignin $carInfo>
                     <Button $cancel
                     type="button"
@@ -215,19 +215,19 @@ function FormAddDriver(){
                 <DivInput>
                     <Input
                     type="text"
-                    placeholder="Imatriculation"
-                    name="imatriculation"
+                    placeholder="Immatriculation"
+                    name="immatriculation"
                     onChange={(e) => {
-                        handleChange(e, "imatriculation")
+                        handleChange(e, "immatriculation")
                     }} />
                 </DivInput>
-                <Select name="car">
+                <Select name="car" onChange={(e) => {
+                    handleChange(e, "car")}}>
                     <option value="0">Type de véhicule</option>
                     {
                         data.map((type) => {
-                            return <OptionCarType key={type.value} {...type} onClick={(e) => {
-                                handleChange(e, "car")
-                            }}/>
+                            return <OptionCarType key={type.value} {...type}
+                            />
                         })
                     }
                 </Select>
