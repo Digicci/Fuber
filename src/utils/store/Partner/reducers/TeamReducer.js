@@ -1,8 +1,11 @@
 
 export const SET_TEAM = "SET_TEAM";
 
+export const SELECT_EMPLOYEE = "SELECT_EMPLOYEE";
+
 const initialState = {
-    team: []
+    team: [],
+    selectedEmployee: 0,
 }
 
 const TeamReducer = (state = initialState, action) => {
@@ -13,7 +16,11 @@ const TeamReducer = (state = initialState, action) => {
                 ...state,
                 team: action.payload,
             }
-
+        case SELECT_EMPLOYEE:
+            return {
+                ...state,
+                selectedEmployee: action.payload,
+            }
         default:
             return state;
     }

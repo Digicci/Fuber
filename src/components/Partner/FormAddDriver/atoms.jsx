@@ -80,3 +80,7 @@ export const Select = styled.select`
     outline: none;
     color: ${colors.secondary};
 `
+export const Error = styled.span`
+  color: red;
+  text-align: center;
+`

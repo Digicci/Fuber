@@ -8,3 +8,7 @@ export const getAuthUser = state => state.auth.user;
 
 export const getTeam = state => state.team.team;
 
+export const getSelectedEmployee = state => state.team.selectedEmployee != 0? state.team.team.filter((employe) =>
+  employe.id === state.team.selectedEmployee) : state.team.team;
+
+export const getNbDriver = state => state.team.team.length;

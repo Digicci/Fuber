@@ -49,7 +49,6 @@ export const formConfig = (state = null) => {
             rules: {
                 required: true,
                 minLength: 3,
-                maxLength: 25,
                 pattern: /^[\dA-Za-z ]+[A-Za-z]+$/,
             },
             type: 'text',
@@ -87,12 +86,11 @@ export const formConfig = (state = null) => {
             type: 'password',
             name: 'mdp',
             placeholder: 'Mot de passe',
-            value: state?.mdp,
+            value: state?.password,
         },
         confirmMdp: {
             rules: {
                 required: true,
-                maxLength: 25,
                 passwordConfirm: true,
             },
             type: 'password',
@@ -104,11 +102,14 @@ export const formConfig = (state = null) => {
                 required: true,
                 minLength: 3,
                 maxLength: 25,
-                pattern: /^([A-Z]{2}\\-[0-9]{3}\\-[A-Z]{2})|([A-Z]{2}\\ [0-9]{4})$/,
+                pattern: /^[A-Z]{2}((-[0-9]{3}-[A-Z]{2})|( [0-9]{4}))$/,
             },
             type: 'text',
             name: 'immatriculation',
             placeholder: 'Immatriculation',
+        },
+        car: {
+            name: 'car',
         },
         marque: {
             rules: {
@@ -141,5 +142,6 @@ export const formConfig = (state = null) => {
             name: 'place',
             placeholder: 'Nombre de place',
         },
+
     }
 };

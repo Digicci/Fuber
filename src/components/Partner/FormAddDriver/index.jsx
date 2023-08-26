@@ -10,25 +10,14 @@ import {
     Input,
     Button,
     DivSignin,
-    Select
+    Select,
+    Error,
 } from "./atoms";
 import CarType from "../../../utils/Data/Partner/CarType";
 import OptionCarType from "../OptionCarType";
 import { formConfig } from "./config";
 
-function InputWrap({inputInfo, handleChange}) {
 
-    return (
-        <Input
-            type={inputInfo?.type}
-            placeholder={inputInfo?.placeholder}
-            name={inputInfo?.name}
-            onChange={(e) => {
-                handleChange(e, inputInfo?.name)
-            }}
-        />
-    )
-}
 
 function FormAddDriver(){
 
@@ -77,6 +66,10 @@ function FormAddDriver(){
         validator.registerForm(formConfig(entreprise))
     }, [])
 
+    useEffect(() => {
+        validator.registerForm(formConfig(entreprise))
+    }, [entreprise.password])
+
     function handleChange(e,field) {
         const state = {...entreprise}
         state[field] = e.target.value
@@ -88,6 +81,12 @@ function FormAddDriver(){
         for(const[key, field] of Object.entries(entreprise)){
             if(field === ''){
                 setError('Veuillez remplir tous les champs')
+                return false
+            }
+            if(!validator.validate(key, field)){
+                console.log(key)
+                console.log(validator.errors[key])
+                setError(validator.errors[key])
                 return false
             }
         }
@@ -158,39 +157,78 @@ function FormAddDriver(){
         }
     }
 
+    const  InputWrap =({inputInfo, handleChange}) =>{
 
+        if(inputInfo?.name === 'car'){
+            return(
+              <Select name={inputInfo?.name} onChange={(e) => {
+                  handleChange(e, inputInfo?.name)}}>
+                  <option value="0">Type de véhicule</option>
+                  {
+                      data.map((type) => {
+                          return <OptionCarType key={type.value} {...type}
+                          />
+                      })
+                  }
+              </Select>
+            )
+        }
+
+        return (
+          <>
+              <DivInput>
+                  <Input
+                    type={inputInfo?.type}
+                    placeholder={inputInfo?.placeholder}
+                    name={inputInfo?.name}
+                    onChange={(e) => {
+                        handleChange(e, inputInfo?.name)
+                    }}
+                  />
+                  {
+                      validator.errors[inputInfo?.name] && <Error>{validator.errors[inputInfo?.name]}</Error>
+                  }
+              </DivInput>
+
+          </>
+        )
+    }
+
+    const  {
+        nom,
+        prenom,
+        tel,
+        adresse,
+        ville,
+        cp,
+        mail,
+        password,
+        confirmMdp,
+        ...part2
+    } = formConfig(entreprise)
+
+    const part1 = {
+        nom,
+        prenom,
+        tel,
+        adresse,
+        ville,
+        cp,
+        mail,
+        password,
+        confirmMdp,
+    }
     return(
 
         <>
             <Form $slider={slider} >
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().nom} handleChange={(e) =>{handleChange(e, 'nom')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().prenom} handleChange={(e) =>{handleChange(e, 'prenom')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().tel} handleChange={(e) =>{handleChange(e, 'tel')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().adresse} handleChange={(e) =>{handleChange(e, 'adresse')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().ville} handleChange={(e) =>{handleChange(e, 'ville')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().cp} handleChange={(e) =>{handleChange(e, 'cp')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().mail} handleChange={(e) =>{handleChange(e, 'mail')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().password} handleChange={(e) =>{handleChange(e, 'password')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().confirmMdp} handleChange={(e) =>{handleChange(e, 'confirmMdp')}} />
-                </DivInput>
-                
+                {
+                    Object.keys(part1).map((key) => {
+                        return <InputWrap key={`${key}-1`} inputInfo={part1[key]} handleChange={handleChange} />
+                    })
+                }
+
+
                 <DivSignin>
                     <Button
                     type="button"
@@ -212,52 +250,11 @@ function FormAddDriver(){
                         <i className="ph-bold ph-arrow-fat-left"></i>
                     </Button>
                 </DivSignin>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Immatriculation"
-                    name="immatriculation"
-                    onChange={(e) => {
-                        handleChange(e, "immatriculation")
-                    }} />
-                </DivInput>
-                <Select name="car" onChange={(e) => {
-                    handleChange(e, "car")}}>
-                    <option value="0">Type de véhicule</option>
-                    {
-                        data.map((type) => {
-                            return <OptionCarType key={type.value} {...type}
-                            />
-                        })
-                    }
-                </Select>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Marque"
-                    name="marque"
-                    onChange={(e) => {
-                        handleChange(e, "marque")
-                    }} />
-                </DivInput>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Modèle"
-                    name="modele"
-                    onChange={(e) => {
-                        handleChange(e, "modele")
-                    }} />
-                </DivInput>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Nombre de place"
-                    name="place"
-                    onChange={(e) => {
-                        handleChange(e, "place")
-                    }} />
-                </DivInput>
+                {
+                    Object.keys(part2).map((key) => {
+                        return <InputWrap key={`${key}-2`} inputInfo={part2[key]} handleChange={handleChange} />
+                    })
+                }
 
                 <DivSignin>
                     <Button
