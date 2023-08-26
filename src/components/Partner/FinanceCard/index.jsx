@@ -3,16 +3,22 @@ import {
     Div,
 } from "./atoms";
 import FinanceCards from "../FinanceCards";
-import { useSelector } from 'react-redux'
-import { getNbDriver, getSelectedEmployee } from '../../../utils/store/Partner/selectors/AuthSelectors'
+import {useSelector} from 'react-redux'
+import {getNbDriver, getSelectedEmployee} from '../../../utils/store/Partner/selectors/AuthSelectors'
 
 function FinanceCard() {
 
     const drivers = useSelector(getSelectedEmployee)
+    console.log(drivers)
     const nbDriver = useSelector(getNbDriver)
     const nbCourse = drivers.reduce((acc, driver) => acc + driver.courses.length, 0)
     const totalRevenu = drivers.reduce((acc, driver) => acc + driver.courses.reduce((ac, course) => ac + course.driverPrice, 0), 0);
-    const totalClient = drivers.reduce((acc, driver) => acc + driver.courses.reduce((ac, course) => !ac.includes(course.utilisateurId) && ac.push(course.utilisateurId), [] ).length, 0)
+    const totalClient = drivers.reduce((acc, driver) => acc + driver.courses.reduce(
+        (ac, course) => {
+            !ac.includes(course.utilisateurId) && ac.push(course.utilisateurId)
+            return ac
+        }, []).length, 0)
+
 
     const cards = [
         {
