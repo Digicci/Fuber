@@ -32,7 +32,7 @@ function DriverItem({item}) {
                 </DivInfo>
                 <DivInfo>
                     <Text>
-                        {item.vehicule?.marque || "Aucun"} {item.vehicule?.modele || "véhicule"}
+                        {item.vehicule?.marque || "Aucun"} {item.vehicule?.model || "véhicule"}
                     </Text>
                 </DivInfo>
                 <DivInfo>
