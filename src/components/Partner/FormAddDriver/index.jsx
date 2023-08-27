@@ -1,39 +1,27 @@
 import React, {useState, useEffect} from "react";
-import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
-import { useCsrf } from "../../../utils/hook/useCsrf";
-import { useValidator } from "../../../utils/hook/useValidator";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import {useAuthEntreprise} from "../../../utils/hook/Partner/useAuthEntreprise";
+import {useCsrf} from "../../../utils/hook/useCsrf";
+import {useValidator} from "../../../utils/hook/useValidator";
+import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
 import {
     Form,
     DivInput,
     Input,
     Button,
     DivSignin,
-    Select
+    Select,
+    Error,
 } from "./atoms";
 import CarType from "../../../utils/Data/Partner/CarType";
 import OptionCarType from "../OptionCarType";
-import { formConfig } from "./config";
+import {formConfig} from "./config";
 
-function InputWrap({inputInfo, handleChange}) {
 
-    return (
-        <Input
-            type={inputInfo?.type}
-            placeholder={inputInfo?.placeholder}
-            name={inputInfo?.name}
-            onChange={(e) => {
-                handleChange(e, inputInfo?.name)
-            }}
-        />
-    )
-}
-
-function FormAddDriver(){
+function FormAddDriver() {
 
     const authEntreprise = useAuthEntreprise()
-    
+
     const [error, setError] = useState('')
 
     const csrf = useCsrf()
@@ -42,7 +30,6 @@ function FormAddDriver(){
 
     const navigate = useNavigate()
 
-    const [data , setData] = useState(CarType)
 
     const toastTimer = 2000
 
@@ -74,20 +61,30 @@ function FormAddDriver(){
 
     useEffect(() => {
         csrf.getCsrfToken()
-        validator.registerForm(formConfig(entreprise))
+        validator.registerForm(formConfig)
     }, [])
 
-    function handleChange(e,field) {
-        const state = {...entreprise}
-        state[field] = e.target.value
-        setEntreprise(state)
-        validator.validate(field, e.target.value)
+    // useEffect(() => {
+    //     validator.registerForm(formConfig(entreprise))
+    // }, [entreprise.password])
+
+    function handleChange(e) {
+        const {name, value} = e.target
+        validator.validate(name, value)
+        setEntreprise({
+            ...entreprise,
+            [name]: value,
+        })
     }
 
-    function validateForm(){
-        for(const[key, field] of Object.entries(entreprise)){
-            if(field === ''){
+    function validateForm() {
+        for (const [key, field] of Object.entries(entreprise)) {
+            if (field === '') {
                 setError('Veuillez remplir tous les champs')
+                return false
+            }
+            if (!validator.validate(key, field)) {
+                setError(validator.errors[key])
                 return false
             }
         }
@@ -112,40 +109,40 @@ function FormAddDriver(){
         }
     }
 
-    function onSubmit(e){
+    function onSubmit(e) {
         e.preventDefault()
         const toatsId = toast.loading('Enregistrement en cour...',
-        {autoClose: false,})
+            {autoClose: false,})
 
         const data = validateForm()
-        if(data){
+        if (typeof data !== 'boolean' && data) {
             authEntreprise.register(data)
-            .then((response) => {
-                if(response.data){
-                    setError('')
+                .then((response) => {
+                    if (response.data) {
+                        setError('')
+                        toast.update(toatsId, {
+                            render: 'Le compte chauffeur a bien été créé',
+                            type: toast.TYPE.SUCCESS,
+                            autoClose: toastTimer,
+                            isLoading: false,
+                            icon: '👌',
+                        })
+                        setTimeout(() => {
+                            navigate('/partner/account/team', {replace: true})
+                        }, toastTimer)
+                    }
+                })
+                .catch((error) => {
                     toast.update(toatsId, {
-                        render: 'Le compte chauffeur a bien été créé',
-                        type: toast.TYPE.SUCCESS,
+                        render: error.response.data,
+                        type: toast.TYPE.ERROR,
                         autoClose: toastTimer,
                         isLoading: false,
-                        icon: '👌',
+                        icon: '🤔',
                     })
-                    setTimeout(() => {
-                        navigate('/partner/account/team', {replace: true})
-                    }, toastTimer)
-                }
-            })
-            .catch((error) => {
-                toast.update(toatsId, {
-                    render: error.response.data,
-                    type: toast.TYPE.ERROR,
-                    autoClose: toastTimer,
-                    isLoading: false,
-                    icon: '🤔',
+                    setEntreprise(initialState)
                 })
-                setEntreprise(initialState)
-            })
-        }else{
+        } else {
             toast.update(toatsId, {
                 render: 'Veuillez remplir tous les champs',
                 type: toast.TYPE.ERROR,
@@ -158,112 +155,115 @@ function FormAddDriver(){
         }
     }
 
+    const {
+        nom,
+        prenom,
+        tel,
+        adresse,
+        ville,
+        cp,
+        mail,
+        password,
+        confirmMdp,
+        ...part2
+    } = formConfig
 
-    return(
+    const part1 = {
+        nom,
+        prenom,
+        tel,
+        adresse,
+        ville,
+        cp,
+        mail,
+        password,
+        confirmMdp,
+    }
+
+    part1.password.value = entreprise.password
+    return (
 
         <>
-            <Form $slider={slider} >
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().nom} handleChange={(e) =>{handleChange(e, 'nom')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().prenom} handleChange={(e) =>{handleChange(e, 'prenom')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().tel} handleChange={(e) =>{handleChange(e, 'tel')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().adresse} handleChange={(e) =>{handleChange(e, 'adresse')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().ville} handleChange={(e) =>{handleChange(e, 'ville')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().cp} handleChange={(e) =>{handleChange(e, 'cp')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().mail} handleChange={(e) =>{handleChange(e, 'mail')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().password} handleChange={(e) =>{handleChange(e, 'password')}} />
-                </DivInput>
-                <DivInput>
-                    <InputWrap inputInfo={formConfig().confirmMdp} handleChange={(e) =>{handleChange(e, 'confirmMdp')}} />
-                </DivInput>
-                
+            <Form $slider={slider}>
+                {
+                    Object.entries(part1).map((value, index) => {
+                        return (
+                            <DivInput>
+                                <Input
+                                    type={value[1].type}
+                                    placeholder={value[1].placeholder}
+                                    name={value[1].name}
+                                    onChange={handleChange}
+                                    value={entreprise[value[1].name]}
+                                />
+                                {
+                                    validator.errors[value[1].name] && <Error>{validator.errors[value[1].name]}</Error>
+                                }
+                            </DivInput>
+                        )
+                    })
+                }
+
+
                 <DivSignin>
                     <Button
-                    type="button"
-                    value="Suivant"
-                    onClick={toogleSlider}
+                        type="button"
+                        value="Suivant"
+                        onClick={toogleSlider}
                     >
                         Suivant
                     </Button>
                 </DivSignin>
             </Form>
-            
+
             <Form $slider={!slider}>
                 <DivSignin $carInfo>
                     <Button $cancel
-                    type="button"
-                    value="Retour"
-                    onClick={toogleSlider}
+                            type="button"
+                            value="Retour"
+                            onClick={toogleSlider}
                     >
                         <i className="ph-bold ph-arrow-fat-left"></i>
                     </Button>
                 </DivSignin>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Immatriculation"
-                    name="immatriculation"
-                    onChange={(e) => {
-                        handleChange(e, "immatriculation")
-                    }} />
-                </DivInput>
-                <Select name="car" onChange={(e) => {
-                    handleChange(e, "car")}}>
-                    <option value="0">Type de véhicule</option>
-                    {
-                        data.map((type) => {
-                            return <OptionCarType key={type.value} {...type}
-                            />
-                        })
-                    }
-                </Select>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Marque"
-                    name="marque"
-                    onChange={(e) => {
-                        handleChange(e, "marque")
-                    }} />
-                </DivInput>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Modèle"
-                    name="modele"
-                    onChange={(e) => {
-                        handleChange(e, "modele")
-                    }} />
-                </DivInput>
-                <DivInput>
-                    <Input
-                    type="text"
-                    placeholder="Nombre de place"
-                    name="place"
-                    onChange={(e) => {
-                        handleChange(e, "place")
-                    }} />
-                </DivInput>
+                {
+                    Object.entries(part2).map((value, index) => {
+                        return value[1].name !== 'car' ? (
+                            <DivInput>
+                                <Input
+                                    type={value[1].type}
+                                    placeholder={value[1].placeholder}
+                                    name={value[1].name}
+                                    onChange={handleChange}
+                                    value={entreprise[value[1].name]}
+                                />
+                                {
+                                    validator.errors[value[1].name] && <Error>{validator.errors[value[1].name]}</Error>
+                                }
+                            </DivInput>
+                        ) : (
+                            <Select
+                                name={value[1].name}
+                                onChange={handleChange}
+                                value={entreprise[value[1].name]}
+                            >
+                                <option value="0">Type de véhicule</option>
+                                {
+                                    CarType.map((type) => {
+                                        return <OptionCarType key={type.value} {...type}
+                                        />
+                                    })
+                                }
+                            </Select>
+                        )
+                    })
+                }
 
                 <DivSignin>
                     <Button
-                    type="submit"
-                    value="Envoyer"
-                    onClick={onSubmit}
+                        type="button"
+                        value="Envoyer"
+                        onClick={onSubmit}
                     >
                         Envoyer
                     </Button>

@@ -1,145 +1,144 @@
 
-export const formConfig = (state = null) => {
-    return {
-        nom: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[A-Za-z]+$/,
-            },
-            type: 'text',
-            name: 'nom',
-            placeholder: 'Nom',
+export const formConfig = {
+    nom: {
+        rules: {
+            required: true,
+            minLength: 3,
+            maxLength: 25,
+            pattern: /^[A-Za-z]+$/,
         },
-        prenom: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[A-Za-z]+$/,
-            },
-            type: 'text',
-            name: 'prenom',
-            placeholder: 'Prénom',
+        type: 'text',
+        name: 'nom',
+        placeholder: 'Nom',
+    },
+    prenom: {
+        rules: {
+            required: true,
+            minLength: 3,
+            maxLength: 25,
+            pattern: /^[A-Za-z]+$/,
         },
-        mail: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                email: true,
-            },
-            type: 'email',
-            name: 'mail',
-            placeholder: 'Email',
+        type: 'text',
+        name: 'prenom',
+        placeholder: 'Prénom',
+    },
+    mail: {
+        rules: {
+            required: true,
+            minLength: 3,
+            maxLength: 25,
+            email: true,
         },
-        tel: {
-            rules: {
-                required: true,
-                minLength: 10,
-                maxLength: 10,
-                pattern: /^[0-9]+$/,
-            },
-            type: 'tel',
-            name: 'tel',
-            placeholder: 'Téléphone',
+        type: 'email',
+        name: 'mail',
+        placeholder: 'Email',
+    },
+    tel: {
+        rules: {
+            required: true,
+            minLength: 10,
+            maxLength: 10,
+            pattern: /^[0-9]+$/,
         },
-        adresse: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[\dA-Za-z ]+[A-Za-z]+$/,
-            },
-            type: 'text',
-            name: 'adresse',
-            placeholder: 'Adresse',
+        type: 'tel',
+        name: 'tel',
+        placeholder: 'Téléphone',
+    },
+    adresse: {
+        rules: {
+            required: true,
+            minLength: 3,
+            pattern: /^[\dA-Za-z ]+[A-Za-z]+$/,
         },
-        ville: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^[A-Za-z]+$/,
-            },
-            type: 'text',
-            name: 'ville',
-            placeholder: 'Ville',
+        type: 'text',
+        name: 'adresse',
+        placeholder: 'Adresse',
+    },
+    ville: {
+        rules: {
+            required: true,
+            minLength: 3,
+            maxLength: 25,
+            pattern: /^[A-Za-z]+$/,
         },
-        cp: {
-            rules: {
-                required: true,
-                minLength: 5,
-                maxLength: 5,
-                pattern: /^[0-9]+$/,
-            },
-            type: 'text',
-            name: 'cp',
-            placeholder: 'Code postal',
+        type: 'text',
+        name: 'ville',
+        placeholder: 'Ville',
+    },
+    cp: {
+        rules: {
+            required: true,
+            minLength: 5,
+            maxLength: 5,
+            pattern: /^[0-9]+$/,
         },
-        password: {
-            rules: {
-                required: true,
-                maxLength: 25,
-                passwordPattern: true,
-            },
-            type: 'password',
-            name: 'mdp',
-            placeholder: 'Mot de passe',
-            value: state?.mdp,
+        type: 'text',
+        name: 'cp',
+        placeholder: 'Code postal',
+    },
+    password: {
+        rules: {
+            required: true,
+            maxLength: 25,
+            passwordPattern: true,
         },
-        confirmMdp: {
-            rules: {
-                required: true,
-                maxLength: 25,
-                passwordConfirm: true,
-            },
-            type: 'password',
-            name: 'confirmMdp',
-            placeholder: 'Confirmer le mot de passe',
+        type: 'password',
+        name: 'password',
+        placeholder: 'Mot de passe',
+        value: "",
+    },
+    confirmMdp: {
+        rules: {
+            required: true,
+            passwordConfirm: true,
         },
-        immatriculation: {
-            rules: {
-                required: true,
-                minLength: 3,
-                maxLength: 25,
-                pattern: /^([A-Z]{2}\\-[0-9]{3}\\-[A-Z]{2})|([A-Z]{2}\\ [0-9]{4})$/,
-            },
-            type: 'text',
-            name: 'immatriculation',
-            placeholder: 'Immatriculation',
+        type: 'password',
+        name: 'confirmMdp',
+        placeholder: 'Confirmer le mot de passe',
+    },
+    immatriculation: {
+        rules: {
+            required: true,
+            minLength: 3,
+            maxLength: 25,
+            pattern: /^[A-Z]{2}((-[0-9]{3}-[A-Z]{2})|( [0-9]{4}))$/,
         },
-        marque: {
-            rules: {
-                required: true,
-                minLength: 2,
-                maxLength: 25,
-            },
-            type: 'text',
-            name: 'marque',
-            placeholder: 'Marque',
+        type: 'text',
+        name: 'immatriculation',
+        placeholder: 'Immatriculation',
+    },
+    car: {
+        name: 'car',
+    },
+    marque: {
+        rules: {
+            required: true,
+            minLength: 2,
+            maxLength: 25,
         },
-        modele: {
-            rules: {
-                required: true,
-                minLength: 2,
-                maxLength: 25,
-            },
-            type: 'text',
-            name: 'modele',
-            placeholder: 'Modèle',
+        type: 'text',
+        name: 'marque',
+        placeholder: 'Marque',
+    },
+    modele: {
+        rules: {
+            required: true,
+            minLength: 2,
+            maxLength: 25,
         },
-        place : {
-            rules: {
-                required: true,
-                minLength: 1,
-                maxLength: 2,
-                pattern: /^[0-9]+$/,
-            },
-            type: 'text',
-            name: 'place',
-            placeholder: 'Nombre de place',
+        type: 'text',
+        name: 'modele',
+        placeholder: 'Modèle',
+    },
+    place : {
+        rules: {
+            required: true,
+            minLength: 1,
+            maxLength: 2,
+            pattern: /^[0-9]+$/,
         },
+        type: 'text',
+        name: 'place',
+        placeholder: 'Nombre de place',
     }
 };

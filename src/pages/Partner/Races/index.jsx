@@ -8,6 +8,7 @@ import {
 } from "./atoms";
 import OldRace from "../../../components/Partner/OldRace";
 import CurrentRace from "../../../components/Partner/CurrentRace";
+import SelectDriver from '../../../components/Partner/SelectDriver'
 
 function Races(){
 
@@ -23,12 +24,7 @@ function Races(){
                 <Title>
                     Courses
                 </Title>
-                <Select>
-                    <option value="1">Toutes les chauffeurs</option>
-                    <option value="2">Chauffeur 1</option>
-                    <option value="3">Chauffeur 2</option>
-                    <option value="4">Chauffeur 3</option>
-                </Select>
+                <SelectDriver/>
                 <Modal>
                     <Button $buttonRaces={!races} $buttonRacesSelected={races} onClick={()=> {toggleRace(true)}}>
                         Courses en cours
