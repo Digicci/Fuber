@@ -23,7 +23,10 @@ export const useValidator = () => {
     const validate = (name, value) => {
         let error = null;
         let isSafe = true;
-        if(!form[name]) return true;
+        if(!form[name] || !form[name].rules || value === '') {
+            setErrors({...errors, [name]: error});
+            return true
+        };
         if (form[name].rules.required && !value) {
             isSafe = false;
             console.log('required')
