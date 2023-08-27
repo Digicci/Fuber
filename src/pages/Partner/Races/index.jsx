@@ -6,8 +6,7 @@ import {
     Button,
     Select,
 } from "./atoms";
-import OldRace from "../../../components/Partner/OldRace";
-import CurrentRace from "../../../components/Partner/CurrentRace";
+import RaceByStatus from "../../../components/Partner/RaceByStatus";
 import SelectDriver from '../../../components/Partner/SelectDriver'
 
 function Races(){
@@ -18,6 +17,8 @@ function Races(){
         setRaces(state)
     }
 
+    const status = races? 'confirmed' : 'done'
+    console.log(status)
     return(
         <>
             <Container>
@@ -33,7 +34,7 @@ function Races(){
                         Anciennes courses
                     </Button>
                 </Modal>
-                {races ? (<CurrentRace/>) : (<OldRace/>)}
+                <RaceByStatus status={status}/>
             </Container>
         </>
     )   
