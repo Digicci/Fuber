@@ -1,13 +1,15 @@
 import React from "react";
 import { Div } from "./atoms";
 
-function ClientLists({nom, date, prix}) {
+function ClientLists({utilisateur, createdAt, driverPrice,}) {
+  const [date, hour] = createdAt.split('T')
+  const displayHour = hour.split('.')[0]
   return (
     <>
       <Div>
-        <p>{nom}</p>
-        <p>{date}</p>
-        <p>{prix}</p>
+        <p>{utilisateur.nom} {utilisateur.prenom}</p>
+        <p>{date} / {displayHour}</p>
+        <p>{(driverPrice/100).toFixed(2)} €</p>
       </Div>
     </>
   )

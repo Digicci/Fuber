@@ -4,31 +4,22 @@ import  {
     Div,
 }  from "./atoms";
 import ClientLists from "../ClientLists";
+import { useSelector} from 'react-redux'
+import { getSelectedEmployee} from '../../../utils/store/Partner/selectors/AuthSelectors'
+
 
 function ClientList() {
 
-    const infos = [
-        {
-            id: 1,
-            nom: "Prenom.N",
-            date: "01/01/2021",
-            prix: "100€",
-        },
-        {
-            id: 2,
-            nom: "Prenom.N",
-            date: "01/01/2021",
-            prix: "100€",
-        },
-        {
-            id: 3,
-            nom: "Prenom.N",
-            date: "01/01/2021",
-            prix: "100€",
-        },
-    ]
-
-    const [data, setData] = useState(infos);
+    const drivers = useSelector(getSelectedEmployee)
+    const copyDrivers = [...drivers]
+    copyDrivers.map((driver) => {
+        return driver.courses.map((course) => {
+            return course.driver = driver
+        })
+    })
+    const races = copyDrivers.reduce((acc, driver) => {
+        return  acc.concat(driver.courses)
+    }, [])
 
     return (
         <>
@@ -39,9 +30,9 @@ function ClientList() {
             <p>Prix</p>
             </Div>
             {
-                data.map((client) => {
+                races.map((race) => {
                     return (
-                        <ClientLists key={client.id} {...client} />
+                        <ClientLists key={race.id} {...race} />
                     )
                 }
                 )
