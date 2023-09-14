@@ -839,6 +839,7 @@ export const HeaderWrapper = styled.header`
         `justify-content: space-between;
         background:${colors.secondary};
         padding: 0 41px;
+        box-shadow: none;
         `
     }
 `
@@ -1040,6 +1041,11 @@ export const Row = styled.div`
         `margin-top: 2rem;
         `
     }
+    ${(props) =>
+        props.$rowVehicule &&
+        `margin: 0;
+        `
+    }
     @media (max-width: 768px){
         ${(props) =>
             props.$rowDriver &&
@@ -1054,12 +1060,22 @@ export const Row = styled.div`
             grid-template-columns: repeat(2, 1fr);
             `
         }
+        ${(props) =>
+            props.$rowVehicule &&
+            `flex-direction: row;
+            `
+        }
     }
     @media (max-width: 425px){
         ${(props) =>
             props.$col &&
             `display: flex;
             flex-direction: column;
+            `
+        }
+        ${(props) =>
+            props.$rowVehicule &&
+            `flex-direction: row;
             `
         }
     }

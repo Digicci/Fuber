@@ -60,11 +60,11 @@ function DetailDriver({toggle, isOpen, driver}) {
                                             </p>
                                             <p>
                                                 <strong>Modèle: </strong>
-                                                {driver.vehicule?.modele}
+                                                {driver.vehicule?.model}
                                             </p>
                                             <p>
                                                 <strong>Place: </strong>
-                                                {driver.vehicule?.place}
+                                                {driver.vehicule?.places}
                                             </p>
                                         </>
                                     ) : (

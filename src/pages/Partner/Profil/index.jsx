@@ -16,8 +16,12 @@ import {
     ButtonUpdate,
     DivOnline,
     EntrepriseName,
-    EntrepriseSiret
-} from './atoms'
+    EntrepriseSiret,
+    Button,
+    DivText,
+
+} from './atoms';
+import {Row} from '../../../utils/Atoms';
 import avatar from '../../../assets/profile.webp';
 import {useAuthEntreprise} from '../../../utils/hook/Partner/useAuthEntreprise';
 import {useCsrf} from '../../../utils/hook/useCsrf';
@@ -26,6 +30,7 @@ import Online from '../../../components/Partner/Online';
 import {useSelector, useDispatch} from "react-redux";
 import {getAuthUser} from "../../../utils/store/Partner/selectors/AuthSelectors";
 import {setAuth} from "../../../utils/store/Partner/actions/AuthActions";
+import AddCar from '../../../components/Partner/AddCar'
 
 function Profil() {
 
@@ -33,7 +38,7 @@ function Profil() {
     const dispatch = useDispatch()
     const entreprise = useSelector(getAuthUser)
 
-    const { signout, updateEntreprise,} = useAuthEntreprise()
+    const { signout, updateEntreprise} = useAuthEntreprise()
     const [update, setUpdate] = useState({
         nom:false,
         num:false,
@@ -103,7 +108,11 @@ function Profil() {
             })
             csrf.getCsrfToken()
         })
+    }
 
+    const [isOpen, setIsOpen] = useState(false)
+    const toggleIsOpen = () => {
+        setIsOpen(!isOpen)
     }
     return (
         <>
@@ -213,6 +222,34 @@ function Profil() {
                 </ProfileLogout>
                 {
                     Object.values(update).includes(true) && <ValideModif onClick={updateProfile}>Valider les modifications</ValideModif>
+                }
+            </ContainerInfo>
+            <ContainerInfo $vehicule>
+                <TitlePage>Véhicule</TitlePage>
+                {
+                    entreprise.vehicule.entrepriseId === null ? (
+                      <Row>
+                          <AddCar toggle={toggleIsOpen} isOpen={isOpen}/>
+                          <Button onClick={toggleIsOpen}><i className="ph-bold ph-plus"></i> Ajouter un véhicule</Button>
+                      </Row>
+                    ) : (
+                      <Row $rowVehicule>
+                          <DivText>
+                              <p>Immatriculation</p>
+                              <p>Marque</p>
+                              <p>Modèle</p>
+                              <p>Place</p>
+                              <p>Supprimer</p>
+                          </DivText>
+                          <DivText $info>
+                              <p>{entreprise.vehicule.immatriculation}</p>
+                              <p>{entreprise.vehicule.marque}</p>
+                              <p>{entreprise.vehicule.model}</p>
+                              <p>{entreprise.vehicule.places}</p>
+                              <p><i className="ph-bold ph-x"></i></p>
+                          </DivText>
+                      </Row>
+                    )
                 }
             </ContainerInfo>
         </>

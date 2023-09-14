@@ -103,6 +103,10 @@ function useProvideAuthEntreprise() {
         navigate("/partner/login",{replace:true});
     };
 
+    const registerVehicule = (data) => {
+        return axios.post(`${basePath}/addVehiculeToSelf`, data)
+    }
+
     return {
         entreprise,
         setEntreprise,
@@ -114,5 +118,6 @@ function useProvideAuthEntreprise() {
         updateEntreprise,
         getEntreprise,
         getTeam,
+        registerVehicule,
     }
 }

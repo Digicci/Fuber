@@ -29,8 +29,22 @@ export const AvatarWrapper = styled.div`
 export const ContainerInfo = styled.div`
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 20%;
     margin: 2.5rem 0 0 1.5rem;
+    ${(props) => props.$vehicule && (
+    `
+        width: 50%;
+    `
+    )}
+    @media (max-width:768px){
+        width: 100%;
+        padding-top: 1rem;
+      ${(props) => props.$vehicule && (
+      `
+          width: 100%;
+      `
+      )}
+    }
 `
 
 export const InputUpdate = styled.input`
@@ -135,4 +149,41 @@ export const EntrepriseName = styled.p`
 export const EntrepriseSiret = styled.p`
   font-size: 1.15rem;
   margin: 1rem 0 1rem;
+`
+
+export const Button = styled.button`
+    padding: .7rem .3rem;
+    font-size: 1.05rem;
+    background: ${colors.sixth};
+    color: ${colors.primary};
+    border-radius: 10px;
+    border: none;
+`
+export const DivText = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    padding: 1rem 0;
+    border-bottom: 1px solid ${colors.sixth};
+    @media (max-width:768px){
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        border: none;
+        width: 50%;
+    }
+    p{
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    ${(props) => props.$info && (
+      `
+      p{
+        font-weight: 400;
+      }
+      `)}
 `

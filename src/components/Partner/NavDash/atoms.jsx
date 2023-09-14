@@ -14,10 +14,11 @@ export const Container = styled.div`
   grid-area: navDash;
   background-color: ${colors.secondary};
   @media (max-width: 768px) {
-    width: 100%;
+    max-width: unset !important;
+    width: 100% !important;
     height: 40px;
     position: absolute;
-    top: 60px;
+    top: 0;
     left: 0;
     flex-direction: column;
   }
