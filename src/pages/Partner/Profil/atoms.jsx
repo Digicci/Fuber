@@ -37,13 +37,27 @@ export const ContainerInfo = styled.div`
     `
     )}
     @media (max-width:768px){
-        width: 100%;
+        width: 70%;
         padding-top: 1rem;
       ${(props) => props.$vehicule && (
       `
-          width: 100%;
+          width: 70%;
       `
       )}
+    }
+    @media (min-width:1204px){
+        ${(props) => props.$vehicule && (
+        `
+            width: 40%;
+        `
+        )}
+    }
+    @media(min-width:1440px){
+        ${(props) => props.$vehicule && (
+        `
+            width: 50%;
+        `
+        )}
     }
 `
 
@@ -161,29 +175,31 @@ export const Button = styled.button`
 `
 export const DivText = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     width: 100%;
     padding: 1rem 0;
-    border-bottom: 1px solid ${colors.sixth};
     @media (max-width:768px){
         flex-direction: column;
         align-items: center;
         padding: 1rem 0;
         border: none;
-        width: 50%;
     }
-    p{
-        font-weight: 600;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    ul{
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 10px;
+      align-items: center;
+      text-align: center;
+      justify-content: space-evenly;
+      width: 100%;
+      padding: 0 0 1rem 0;
+      margin: 0 0 1rem 0;
+      border-bottom: 1px solid ${colors.seventh};
     }
-    ${(props) => props.$info && (
-      `
-      p{
-        font-weight: 400;
-      }
-      `)}
+    
+    li{
+      list-style: none;
+    }
 `

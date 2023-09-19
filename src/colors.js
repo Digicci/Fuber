@@ -5,6 +5,7 @@ const colors = {
     fourth : '#eeeeee',
     fifth : '#e2e2e2',
     sixth: '#8ec6a1f2',
+    seventh: '#66b280',
     shade: 'rgba(0,0,0,0.2)',
     shadow: 'rgba(0, 0, 0, 0.825)',
     red: 'rgb(248,13,13)',
