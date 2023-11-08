@@ -235,18 +235,60 @@ function Profil() {
                     ) : (
                       <Row $rowVehicule>
                           <DivText>
-                              <p>Immatriculation</p>
-                              <p>Marque</p>
-                              <p>Modèle</p>
-                              <p>Place</p>
-                              <p>Supprimer</p>
-                          </DivText>
-                          <DivText $info>
-                              <p>{entreprise.vehicule.immatriculation}</p>
-                              <p>{entreprise.vehicule.marque}</p>
-                              <p>{entreprise.vehicule.model}</p>
-                              <p>{entreprise.vehicule.places}</p>
-                              <p><i className="ph-bold ph-x"></i></p>
+                              <ul>
+                                  <li>
+                                      <span>
+                                          Immatriculation
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                          Marque
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                          Modèle
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                          Places
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                        Supprimer
+                                      </span>
+                                  </li>
+                              </ul>
+                              <ul>
+                                  <li>
+                                      <span>
+                                          {entreprise.vehicule.immatriculation}
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                          {entreprise.vehicule.marque}
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                          {entreprise.vehicule.model}
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                          {entreprise.vehicule.places}
+                                      </span>
+                                  </li>
+                                  <li>
+                                      <span>
+                                          <i className="ph-bold ph-x"></i>
+                                      </span>
+                                  </li>
+                              </ul>
                           </DivText>
                       </Row>
                     )
