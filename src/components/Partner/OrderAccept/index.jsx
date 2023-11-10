@@ -15,12 +15,20 @@ import {
 } from './atoms'
 import { getAuth, getAuthStatus } from '../../../utils/store/Partner/selectors/AuthSelectors'
 import { useSelector } from 'react-redux'
+import {useSocket} from "../../../utils/hook/useWebSocket";
 
 function OrderAccept() {
 
     const isConnected= useSelector(getAuth).auth
     const isOnline = useSelector(getAuthStatus)
     const [isOpen, setIsOpen] = useState(false)
+    const {driverSocket} = useSocket()
+    const [hasNewOrder, setHasNewOrder] = useState(false)
+
+    driverSocket.on("race:request", (data) => {
+        console.log(data)
+    })
+
     const toggle = () => {
         setIsOpen(!isOpen)
     }
@@ -38,7 +46,9 @@ function OrderAccept() {
                 </DivOnline>
                 <Popup>
                     <TopOrder>
-                        Vous avez reçu une nouvelle commande
+                        {
+                            hasNewOrder ? 'Vous avez reçu une nouvelle commande' : "Auncune commande pour le moment"
+                        }
                         <MpOrder>
                             {
                                 !isOpen ?

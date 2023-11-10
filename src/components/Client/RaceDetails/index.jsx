@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import {
     StyledContainer,
     StyledClose,
@@ -18,59 +18,69 @@ import {
     TotalPrice,
     DivValider
 } from "./atoms"
-import { useRace } from "../../../utils/hook/Client/useRace";
-import { useCard } from "../../../utils/hook/Client/useCard";
+import {useRace} from "../../../utils/hook/Client/useRace";
+import {useCard} from "../../../utils/hook/Client/useCard";
 import {useCsrf} from "../../../utils/hook/useCsrf";
 import Driver from "../../../utils/Data/Client/Driver";
 import {toast} from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
+import {useSocket} from "../../../utils/hook/useWebSocket";
 
 
-function RaceDetails({isOpenDetails, toggle}){
+function RaceDetails({isOpenDetails, toggle}) {
 
     const race = useRace()
     const card = useCard()
     const csrf = useCsrf()
     const navigate = useNavigate()
-    const DriverInfo = Driver.find((d) => {
-        if(d.id === race.raceInfo.driverId) {
-            return d
-        }
+    const [DriverInfo, setDriverInfo] = useState({})
+    const {connectUser, requestRace} = useSocket()
+
+    useEffect(() => {
+        setDriverInfo(Driver.find((d) => {
+            console.log(d, race.raceInfo)
+            if (d.id === parseInt(race.raceInfo.type)) {
+                return d
+            }
+        }))
     })
 
     const handleOrder = () => {
         race.commandRace(card.defaultCard.id, csrf.token).then((res) => {
-          if (res.data.message === "success")  {
-              toast.success("Commande effectuée avec succès", {
+            if (res.data.message === "success") {
+                //res.data.id = id de la course
+                connectUser()
+                requestRace(res.data.course)
+                // toast.success("Commande effectuée avec succès", {
+                //     position: toast.POSITION.TOP_RIGHT,
+                //     autoClose: 5000,
+                //     hideProgressBar: false,
+                //     closeOnClick: true,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     icon: '🚗'
+                // })
+                // race.unsetRace()
+                // toggle()
+                // navigate('/account/myraces')
+            } else {
+                toast.error("Une erreur est survenue, merci de changer de carte et de réessayer", {
                     position: toast.POSITION.TOP_RIGHT,
                     autoClose: 5000,
                     hideProgressBar: false,
                     closeOnClick: true,
                     pauseOnHover: true,
                     draggable: true,
-                    icon: '🚗'
-              })
-              race.unsetRace()
-              toggle()
-              navigate('/account/myraces')
-          } else {
-                toast.error("Une erreur est survenue, merci de changer de carte et de réessayer", {
-                        position: toast.POSITION.TOP_RIGHT,
-                        autoClose: 5000,
-                        hideProgressBar: false,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        icon: "🤔"
+                    icon: "🤔"
                 })
                 toggle()
-          }
+            }
         })
     }
 
-    return(
+    return (
         <>
-            <StyledModal $modalPayment $isOpen={isOpenDetails} >
+            <StyledModal $modalPayment $isOpen={isOpenDetails}>
                 <StyledContainer $modalHeight $modalDetails>
                     <StyledClose onClick={toggle}>
                         <i className="ph-bold ph-x closemenu"></i>
@@ -81,7 +91,7 @@ function RaceDetails({isOpenDetails, toggle}){
                     <ModalDetails>
                         <p>
                             <i className="ph-bold ph-car"></i>
-                            {DriverInfo?.title ? DriverInfo.title.toUpperCase() : ''} par Prenom I
+                            {DriverInfo?.title ? DriverInfo.title.toUpperCase() : ''} par {race.raceInfo.driverName} {race.raceInfo.driverSurname?.substring(0, 1).toUpperCase()}
                         </p>
                         <Details>
                             <InfoAdresse>
@@ -96,10 +106,10 @@ function RaceDetails({isOpenDetails, toggle}){
                     </ModalDetails>
                     <Panier>
                         <StyledInput
-                        $inputAddCard
-                        type="text"
-                        placeholder="Ajouter un code promo"
-                        name="code">
+                            $inputAddCard
+                            type="text"
+                            placeholder="Ajouter un code promo"
+                            name="code">
                         </StyledInput>
                         <Details $total>
                             <PanierInfo>
@@ -108,7 +118,7 @@ function RaceDetails({isOpenDetails, toggle}){
                                     race.raceInfo.total && race.raceInfo.dist ?
                                         race.raceInfo.total.toFixed(2)
                                         : 0
-                                    }€
+                                }€
                                 </span>
                             </PanierInfo>
                             <PanierInfo>
@@ -122,7 +132,7 @@ function RaceDetails({isOpenDetails, toggle}){
                                         race.raceInfo.dist ?
                                             (
                                                 race.raceInfo.promo.price ?
-                                                    ( race.raceInfo.total.toFixed(2) - race.raceInfo.promo.price ).toFixed(2)
+                                                    (race.raceInfo.total.toFixed(2) - race.raceInfo.promo.price).toFixed(2)
                                                     :
                                                     race.raceInfo.total.toFixed(2)
                                             ) : 0
@@ -132,7 +142,7 @@ function RaceDetails({isOpenDetails, toggle}){
                         </Details>
                         <DivValider>
                             <ButtonOrder onClick={handleOrder}>
-                            Commandez la course
+                                Commandez la course
                             </ButtonOrder>
                         </DivValider>
                     </Panier>

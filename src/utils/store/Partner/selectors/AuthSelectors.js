@@ -12,3 +12,5 @@ export const getSelectedEmployee = state => parseInt(state.team.selectedEmployee
   employe.id === parseInt(state.team.selectedEmployee)) : state.team.team;
 
 export const getNbDriver = state => state.team.team.length;
+
+export const getDriverId = state => state.auth.user?.id;

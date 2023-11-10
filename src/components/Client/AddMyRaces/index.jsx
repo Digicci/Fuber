@@ -10,10 +10,8 @@ import {
     ButtonRaceFinish,
 } from "../../../utils/Atoms";
 
-import Hybride from "../../../assets/hybride.webp"
-import confort from "../../../assets/confort.webp"
-import van from "../../../assets/van.webp"
 import {useAxios} from "../../../utils/hook/useAxios";
+import Driver from "../../../utils/Data/Client/Driver";
 
 
 function AddMyRace() {
@@ -45,14 +43,15 @@ function AddMyRace() {
                                 const date = dateObj.getDate() + "/" + (dateObj.getMonth() + 1) + "/" + dateObj.getFullYear()
                                 const time = dateObj.getHours() + ":" + dateObj.getMinutes()
                                 const entreprise = race.entreprise
-                                const car = entreprise.vehicule
-                                const img = car.img_path
-                                const src = img === "confort" ? confort : img === "hybride" ? Hybride : van
+                                const car = Driver.find((d) => {
+                                    return d.id === parseInt(entreprise.vehicule.type)
+                                })
+                                const img = car.imgInfo
                                 return (
                                     <DivRace>
-                                        <RaceImg src={src} alt="car img"/>
+                                        <RaceImg src={img.img} alt={img.alt}/>
                                         <InfoRace>
-                                            <h4>{car.type.toUpperCase()} par {entreprise.prenom}</h4>
+                                            <h4>{car.title.toUpperCase()} par {entreprise.prenom}</h4>
                                             <h5>{entreprise.num}</h5>
                                             <h5>{(race.total / 100).toFixed(2)}€</h5>
                                             <h5>Départ : {race.start}</h5>

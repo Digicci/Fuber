@@ -34,7 +34,10 @@ function useProvideRace() {
             lat: 0,
             lng: 0
         },
-        dist: 0
+        dist: 0,
+        driverName: localStorage.getItem("raceDriverName") || '',
+        driverSurname: localStorage.getItem("raceDriverSurname") || '',
+        type: localStorage.getItem("raceType") || '',
     });
 
     const setRace = (field, value) => {

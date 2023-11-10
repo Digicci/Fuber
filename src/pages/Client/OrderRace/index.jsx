@@ -30,9 +30,14 @@ function OrderRace({}){
 
     const race = useRace()
 
+    // Si l'utilisateur est connecté, on récupère ses cartes de paiement
     useEffect(() => {
         if (auth.isConnected()) {
-            card.getCards()
+            card.getCards().catch((err) => {
+                if(err.code === 401) {
+                    auth.signout()
+                }
+            })
         }
     }, [])
 
@@ -88,7 +93,11 @@ function OrderRace({}){
                         )
                     }
                     <WalletPopUp open={isOpenWallet} setOpen={setIsOpenWallet}/>
-                    <RaceDetails toggle={toggleIsOpenDetails} isOpenDetails={isOpenDetails} />
+                    {
+                        isOpenDetails && (
+                            <RaceDetails toggle={toggleIsOpenDetails} isOpenDetails={isOpenDetails} />
+                        )
+                    }
                     <LoginPopUp open={openLogin} setOpen={setOpenLogin}/>
                     {
                         auth.isConnected() ?

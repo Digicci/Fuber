@@ -65,7 +65,7 @@ function useProvideLocation() {
         }
     }
 
-    //Arret du tracking
+    //Arrêt du tracking
     const unsetTrack = () => {
         clearTimeout(trackerId)
         setMap(null)
@@ -199,10 +199,10 @@ function useProvideLocation() {
         if (asJourney) {
             journey.remove()
             setJourney(null)
-            if (startMarker) {
+            if (startMarker && map) {
                 startMarker.addTo(map)
             }
-            else if (endMarker) {
+            else if (endMarker && map) {
                 endMarker.addTo(map)
             }
             setAsJourney(false)
