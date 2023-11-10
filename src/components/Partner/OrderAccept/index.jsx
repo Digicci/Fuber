@@ -16,6 +16,7 @@ import {
 import { getAuth, getAuthStatus } from '../../../utils/store/Partner/selectors/AuthSelectors'
 import { useSelector } from 'react-redux'
 import {useSocket} from "../../../utils/hook/useWebSocket";
+import driver from "../../../utils/Data/Client/Driver";
 
 function OrderAccept() {
 
@@ -24,14 +25,38 @@ function OrderAccept() {
     const [isOpen, setIsOpen] = useState(false)
     const {driverSocket} = useSocket()
     const [hasNewOrder, setHasNewOrder] = useState(false)
+    const [order, setOrder] = useState({})
 
     driverSocket.on("race:request", (data) => {
         console.log(data)
+        setHasNewOrder(true)
+        setIsOpen(true)
+        setOrder(data)
     })
+
+    const acceptOrder = () => {
+        driverSocket.emit('race:accept', order, (data) => {
+            console.log(data)
+        })
+        raceIsViewed()
+    }
+
+    const refuseOrder = () => {
+        driverSocket.emit("race:refuse", order, (data) => {
+            console.log(data)
+        })
+        raceIsViewed()
+    }
 
     const toggle = () => {
         setIsOpen(!isOpen)
     }
+
+    const raceIsViewed = () => {
+        setHasNewOrder(false)
+        setIsOpen(false)
+    }
+
     if (!isConnected) return null
     return (
         <>
@@ -47,23 +72,33 @@ function OrderAccept() {
                 <Popup>
                     <TopOrder>
                         {
-                            hasNewOrder ? 'Vous avez reçu une nouvelle commande' : "Auncune commande pour le moment"
+                            hasNewOrder ? 'Vous avez reçu une nouvelle commande' : "Aucune commande pour le moment"
                         }
                         <MpOrder>
                             {
-                                !isOpen ?
+                                isOpen ?
                                   <button onClick={toggle}><i className="ph-bold ph-minus-circle"></i></button>
                                   :
-                                  <button onClick={toggle}><i className="ph-bold ph-plus-circle"></i></button>
+                                    <button onClick={toggle} disabled={!hasNewOrder}><i className="ph-bold ph-plus-circle"></i></button>
                             }
                         </MpOrder>
                     </TopOrder>
                     <BottomOrder $open={isOpen}>
                         <InfoOrder>
                           <AcceptDiv>
-                            <AcceptButton>Accepter</AcceptButton>
-                            <RefuseButton>Refuser</RefuseButton>
-                            <RacePrice>10.30€</RacePrice>
+                              {
+                                    hasNewOrder && (
+                                        <>
+                                            <AcceptButton onClick={acceptOrder}>
+                                                Accepter
+                                            </AcceptButton>
+                                            <RefuseButton onClick={refuseOrder}>
+                                                Refuser
+                                            </RefuseButton>
+                                        </>
+                                  )
+                              }
+                            <RacePrice>{order.driverPrice ? `${(order.driverPrice / 100).toFixed(2)} €` : '0 €'}</RacePrice>
                           </AcceptDiv>
                             <RaceInfo>
                                 <p>
@@ -73,11 +108,11 @@ function OrderAccept() {
                                 <ul>
                                     <li>
                                         <i className="ph-bold ph-map-pin"></i>
-                                        adresse de départ
+                                        {order.start ? order.start : 'adresse de départ'}
                                     </li>
                                     <li>
                                         <i className="ph-bold ph-crosshair"></i>
-                                        adresse d'arrivée
+                                        {order.end ? order.end : 'adresse d\'arrivée'}
                                     </li>
                                 </ul>
                             </RaceInfo>

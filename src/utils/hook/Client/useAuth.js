@@ -77,10 +77,16 @@ function useProvideAuth() {
                 console.log("error")
                 setUser(null);
                 localStorage.removeItem("user_token");
+            }).finally(() => {
+                if(!user) {
+                    navigate("/login", { replace: true });
+                }
             })
+
         }
         else {
             setUser(null);
+            navigate("/login", { replace: true })
         }
 
     }
