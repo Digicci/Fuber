@@ -21,11 +21,19 @@ function LogIn(){
     const location = useLocation()
     const {from} = location.state || {from: {pathname: "/partner/account/home"}}
 
-    useEffect(() => {
+    const redirectIfConnected = () => {
         if(auth.auth){
             navigate(from, {replace: true})
         }
+    }
+
+    useEffect(() => {
+        redirectIfConnected()
     }, [auth.auth])
+
+    useEffect(() => {
+        redirectIfConnected()
+    }, [])
     return (
         <>
             <Container>
