@@ -27,13 +27,13 @@ function AccountDash() {
                       page === "home" && <HomeDash />
                     }
                     {
-                      page === 'race' && <Races />
+                      page === 'races' && <Races />
                     }
                     {
                       page === "team" && <Team />
                     }
                     {
-                      page === "finance" && <Finance/>
+                      page === "finances" && <Finance/>
                     }
                     {
                       page === "profile" && <Profil/>

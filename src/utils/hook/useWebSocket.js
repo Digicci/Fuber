@@ -57,7 +57,12 @@ const useProvideSocket = () => {
             console.log('user connected')
         })
     }
-
+    
+    /**
+     * Emmet l'évènement race:request sur la websocket user
+     * @param raceInfo
+     * @return {void}
+     */
     const requestRace = (raceInfo) => {
         userSocket.emit('race:request', {raceInfo}, (data) => {
           console.log(data)

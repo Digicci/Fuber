@@ -12,7 +12,7 @@ function ClientList() {
 
     const drivers = useSelector(getSelectedEmployee)
     const copyDrivers = [...drivers]
-    copyDrivers.map((driver) => {
+    copyDrivers.forEach((driver) => {
         return driver.courses.map((course) => {
             return course.driver = driver
         })

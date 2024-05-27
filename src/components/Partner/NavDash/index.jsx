@@ -37,11 +37,11 @@ function NavDash({activePage}) {
                         <i className="ph-bold ph-house"></i>
                         Home
                     </NavLink>
-                    <NavLink onClick={closeMenu} to="/partner/account/race"  $linkAccountSelected={activePage === 'race' && true} >
+                    <NavLink onClick={closeMenu} to="/partner/account/races"  $linkAccountSelected={activePage === 'race' && true} >
                         <i className="ph-bold ph-calendar-check"></i>
                         Course
                     </NavLink>
-                    <NavLink onClick={closeMenu} to="/partner/account/finance" $linkAccountSelected={activePage === 'finance' && true}>
+                    <NavLink onClick={closeMenu} to="/partner/account/finances" $linkAccountSelected={activePage === 'finance' && true}>
                         <i className="ph-bold ph-chart-line-up"></i>
                         Finance
                     </NavLink>

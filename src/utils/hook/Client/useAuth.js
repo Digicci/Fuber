@@ -33,6 +33,29 @@ function useProvideAuth() {
     const [user, setUser] = useState(null);
     const axios = useAxios();
     const navigate = useNavigate();
+    
+    axios.api.interceptors.response.use(
+      (response) => response,
+      async function (error) {
+          console.log(error)
+          const originalRequest = error.config
+          if (error.config.url !== "/api/user/refreshToken" && error.response.status === 401 && !originalRequest._retry) {
+              originalRequest._retry = true;
+              const refreshToken = localStorage.getItem('user_refresh_token')
+              if (refreshToken && refreshToken !== '') {
+                  axios.api.defaults.headers.common['Authorization'] = `Bearer ${refreshToken}`
+                  await axios.api.post('/user/refreshToken').then(response => {
+                      originalRequest.headers['Authorization'] = `Bearer ${response.data.token}`
+                      axios.api.defaults.headers.common['Authorization'] = `Bearer ${response.data.token}`
+                      localStorage.setItem('user_token', response.data.token)
+                  })
+                  return axios.api(originalRequest)
+              }
+          }
+          signout()
+          return Promise.reject(error);
+      }
+    )
 
     const signin = (credential, mdp, token) => {
         let data

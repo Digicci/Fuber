@@ -50,19 +50,19 @@ function RaceDetails({isOpenDetails, toggle}) {
             if (res.data.message === "success") {
                 //res.data.id = id de la course
                 connectUser()
+                //requestRace permet d'émettre l'évènement race:request sur la websocket
                 requestRace(res.data.course)
-                // toast.success("Commande effectuée avec succès", {
-                //     position: toast.POSITION.TOP_RIGHT,
-                //     autoClose: 5000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     icon: '🚗'
-                // })
-                // race.unsetRace()
-                // toggle()
-                // navigate('/account/myraces')
+                toast.success("Commande effectuée avec succès", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    icon: '🚗'
+                })
+                race.unsetRace()
+                navigate('/account/myraces', {replace: true})
             } else {
                 toast.error("Une erreur est survenue, merci de changer de carte et de réessayer", {
                     position: toast.POSITION.TOP_RIGHT,
@@ -73,8 +73,19 @@ function RaceDetails({isOpenDetails, toggle}) {
                     draggable: true,
                     icon: "🤔"
                 })
-                toggle()
             }
+        }).catch(e => {
+            toast.error("Une erreur est survenue, merci de réessayer.", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                icon: "🤔"
+            })
+        }).finally(() => {
+            toggle()
         })
     }
 

@@ -4,6 +4,9 @@ import axios from "axios";
 
 const axiosContext = createContext();
 const apiPath = "http://localhost:8000/api";
+const api = axios.create({
+    baseURL: apiPath
+})
 
 export function ProvideAxios({ children }) {
     const axios = useProvideAxios();
@@ -23,14 +26,14 @@ function useProvideAxios() {
             localStorage.getItem("driver_token")
             :
             localStorage.getItem("user_token");
-        axios.defaults.headers.common['Authorization'] = JWT ? `Bearer ${JWT}` : null;
-        axios.defaults.headers.post['X-CSRF-TOKEN'] = csrf.token;
-        axios.defaults.withCredentials = true;
+        api.defaults.headers.common['Authorization'] = JWT ? `Bearer ${JWT}` : null;
+        api.defaults.headers.post['X-CSRF-TOKEN'] = csrf.token;
+        api.defaults.withCredentials = true;
     }
 
     const get = (path, config) => {
         setHeader();
-        return axios.get(`${apiPath}/${path}`, config)
+        return api.get(`${path}`, config)
     };
 
     const getAdress = (query, {lng, lat}, config = {}) => {
@@ -46,17 +49,17 @@ function useProvideAxios() {
 
     const post = (path, data) => {
         setHeader();
-        return axios.post(`${apiPath}/${path}`, data)
+        return api.post(`${path}`, data)
     };
 
     const put = (path, data, config) => {
         setHeader();
-        return axios.put(`${apiPath}/${path}`, data, config)
+        return api.put(`${path}`, data, config)
     };
 
     const del = (path, config) => {
         setHeader();
-        return axios.delete(`${apiPath}/${path}`, config)
+        return api.delete(`${path}`, config)
     };
 
 
@@ -66,6 +69,7 @@ function useProvideAxios() {
         put,
         del,
         getAdress,
-        getAdressByCoord
+        getAdressByCoord,
+        api
     };
 }

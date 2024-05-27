@@ -8,7 +8,7 @@ import {useAuth} from "../../../utils/hook/Client/useAuth";
 import { useCard } from "../../../utils/hook/Client/useCard";
 import { useLocation } from "../../../utils/hook/useLocation";
 import { useRace } from "../../../utils/hook/Client/useRace";
-import { 
+import {
     ContainerOrder,
     Order,
     ChangeCard,
@@ -18,6 +18,7 @@ import RaceState from "../../../components/Client/RaceState";
 import CarCards from "../../../components/Client/CarCards";
 import WalletPopUp from "../../../components/Client/WalletPopUp";
 import LoginPopUp from "../../../components/Client/LoginPopUp";
+import {useNavigate} from "react-router-dom";
 
 
 function OrderRace({}){
@@ -30,12 +31,15 @@ function OrderRace({}){
 
     const race = useRace()
 
+    const navigate = useNavigate()
+
     // Si l'utilisateur est connecté, on récupère ses cartes de paiement
     useEffect(() => {
         if (auth.isConnected()) {
             card.getCards().catch((err) => {
                 if(err.code === 401) {
                     auth.signout()
+                    navigate('/login', {replace: true})
                 }
             })
         }
@@ -57,7 +61,7 @@ function OrderRace({}){
         setOpenLogin(!openLogin)
     }
 
-    
+
 
     return(
         <>
