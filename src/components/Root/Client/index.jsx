@@ -12,6 +12,7 @@ import {ProvideCard} from "../../../utils/hook/Client/useCard";
 import {RaceProvider} from "../../../utils/hook/Client/useRace";
 import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {SocketProvider} from "../../../utils/hook/useWebSocket";
 
 function Client() {
     const [isOpen, setIsOpen] = useState(false)
@@ -27,13 +28,15 @@ function Client() {
                             <ProvideAuth>
                                 <ValidatorProvider>
                                     <ProvideCard>
-                                        <Header toggle={toggleIsOpen}/>
-                                        <NavResponsive toggle={toggleIsOpen} isOpen={isOpen}/>
-                                        <div id="page__container">
-                                            <Outlet/>
-                                            <ToastContainer style={{zIndex: 20000}} autoClose={5000}/>
-                                        </div>
-                                        <Footer/>
+                                        <SocketProvider>
+                                            <Header toggle={toggleIsOpen}/>
+                                            <NavResponsive toggle={toggleIsOpen} isOpen={isOpen}/>
+                                            <div id="page__container">
+                                                <Outlet/>
+                                                <ToastContainer style={{zIndex: 20000}} autoClose={5000}/>
+                                            </div>
+                                            <Footer/>
+                                        </SocketProvider>
                                     </ProvideCard>
                                 </ValidatorProvider>
                             </ProvideAuth>

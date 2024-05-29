@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from "react";
 import { StyledLink } from "../../../utils/Atoms";
 import { Button, DivForgot, DivInput, DivSignin, Form, Input, Label } from "./atoms";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setAuth} from "../../../utils/store/Partner/actions/AuthActions";
 import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
 import { useNavigate } from "react-router-dom";
 import { useCsrf } from "../../../utils/hook/useCsrf";
 import { toast } from "react-toastify";
+import {getAuth} from "../../../utils/store/Partner/selectors/AuthSelectors";
 
 function FormLogin() {
 
+    const auth = useSelector(getAuth)
     const authEntreprise = useAuthEntreprise()
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -23,7 +25,7 @@ function FormLogin() {
 
     //get csrf token
     useEffect(() => {
-        if (authEntreprise.isConnected()) {
+        if (auth.auth) {
             navigate('/partner/account/home', { replace: true })
         }
         csrf.getCsrfToken()
@@ -71,7 +73,6 @@ function FormLogin() {
                         closeOnClick: true
                     })
                     localStorage.setItem('driver_token', res.data.token)
-                    authEntreprise.setEntreprise(res.data.driver)
                     dispatch(setAuth(res.data.driver))
                     setTimeout(() => {
                         navigate('/partner/account/home', { replace: true })

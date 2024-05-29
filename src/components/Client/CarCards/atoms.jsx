@@ -12,3 +12,11 @@ export const TypeChoiceCar = styled.div`
         background: ${colors.fifth};
     }
 `
+
+export const NoDriver = styled.p`
+    color: ${colors.sixth};
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 40px 0 0;
+    padding: 0;
+`

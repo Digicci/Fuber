@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {
     Container,
     ContainerSignup,
@@ -28,9 +28,20 @@ import {
 
 import FormSignin from "../../../components/Partner/FormSignin";
 import Footer from '../../../components/Footer'
+import {useSelector} from "react-redux";
+import {getAuth} from "../../../utils/store/Partner/selectors/AuthSelectors";
+import {useNavigate} from "react-router-dom";
 
 function SignIn(){
 
+    const auth = useSelector(getAuth)
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if(auth.auth) {
+            navigate('/partner/account/home', { replace: true })
+        }
+    }, [auth.auth])
 
     const [isCollapsed, setIsCollapsed] = useState({
         question1: false,

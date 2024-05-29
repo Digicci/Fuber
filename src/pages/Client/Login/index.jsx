@@ -86,6 +86,7 @@ function Login({isPopUp = false, closePopUp = () => {}}){
                             closeOnClick: true
                         })
                         localStorage.setItem('user_token', res.data.token)
+                        localStorage.setItem('user_refresh_token', res.data.refreshToken)
                         auth.setUser(res.data.user)
                         closePopUp()
                         card.getCards().then(res => {
@@ -107,6 +108,7 @@ function Login({isPopUp = false, closePopUp = () => {}}){
                             })
                             returnFunc.then(() => {
                                 localStorage.setItem('user_token', res.data.token)
+                                localStorage.setItem('user_refresh_token', res.data.refreshToken)
                                 auth.setUser(res.data.user)
                                 card.getCards().then(res => {
 
@@ -165,7 +167,7 @@ function Login({isPopUp = false, closePopUp = () => {}}){
                             required
                         >
                         </StyledInput>
-                        <StyledInput $submit $connecter type="submit" value={t('login')}></StyledInput> 
+                        <StyledInput $submit $connecter type="submit" value={t('login')}></StyledInput>
                     </StyledContainerInput>
                 </StyledForm>
                 <StyledObliger>

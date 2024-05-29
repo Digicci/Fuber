@@ -227,7 +227,7 @@ function Profil() {
             <ContainerInfo $vehicule>
                 <TitlePage>Véhicule</TitlePage>
                 {
-                    entreprise.vehicule.entrepriseId === null ? (
+                    entreprise?.vehicule == null ? (
                       <Row>
                           <AddCar toggle={toggleIsOpen} isOpen={isOpen}/>
                           <Button onClick={toggleIsOpen}><i className="ph-bold ph-plus"></i> Ajouter un véhicule</Button>
@@ -256,38 +256,42 @@ function Profil() {
                                           Places
                                       </span>
                                   </li>
-                                  <li>
+                                  {
+                                    entreprise.entrepriseId == null && <li>
                                       <span>
                                         Supprimer
                                       </span>
-                                  </li>
+                                    </li>
+                                  }
                               </ul>
                               <ul>
                                   <li>
                                       <span>
-                                          {entreprise.vehicule.immatriculation}
+                                          {entreprise.vehicule?.immatriculation}
                                       </span>
                                   </li>
                                   <li>
                                       <span>
-                                          {entreprise.vehicule.marque}
+                                          {entreprise.vehicule?.marque}
                                       </span>
                                   </li>
                                   <li>
                                       <span>
-                                          {entreprise.vehicule.model}
+                                          {entreprise.vehicule?.model}
                                       </span>
                                   </li>
                                   <li>
                                       <span>
-                                          {entreprise.vehicule.places}
+                                          {entreprise.vehicule?.places}
                                       </span>
                                   </li>
-                                  <li>
+                                  {
+                                    entreprise.entrepriseId == null && <li>
                                       <span>
                                           <i className="ph-bold ph-x"></i>
                                       </span>
-                                  </li>
+                                    </li>
+                                  }
                               </ul>
                           </DivText>
                       </Row>

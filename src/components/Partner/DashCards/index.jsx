@@ -38,7 +38,7 @@ function DashCards() {
 
     const financeCard = {
         id: 1,
-        to: "../../../partner/account/finances",
+        to: "/partner/account/finances",
         title: "Finances",
         imgInfo: {
             img: courbe,
@@ -51,7 +51,7 @@ function DashCards() {
 
     const raceCard = {
         id: 2,
-        to: "../../../pages/Partner/races",
+        to: "/partner/account/races",
         title: "Nombre de courses",
         imgInfo: {
             img: order,
@@ -63,7 +63,7 @@ function DashCards() {
     }
     const profileCard = {
         id: 4,
-        to: "../../../partner/account/profile",
+        to: "/partner/account/profile",
         title: "Profile",
         imgInfo: {
             img: params,

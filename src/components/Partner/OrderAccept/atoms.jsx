@@ -57,7 +57,7 @@ export const BottomOrder = styled.div`
   padding: 1rem 0 2rem;
   transition: .5s ease;
   ${(props) =>
-          props.$open &&
+          !props.$open &&
           `
     height: 0;
     overflow: hidden;
@@ -96,7 +96,7 @@ export const AcceptButton = styled.button`
     left: 0;
     height: 100%;
     background: #333333;
-    animation: animate 3s linear;
+    animation: animate 10s linear;
     z-index: -1;
   }
   @keyframes animate {

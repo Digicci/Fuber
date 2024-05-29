@@ -64,7 +64,7 @@ function InputWrapper({isStart, value, toggleSuggest, handleClick, active, chang
                     placeholder={placeholder}
                     name={name}
                     onChange={change}
-                    onFocus={() => {toggleSuggest(name)}}
+                    onFocus={() => {toggleSuggest(name); change({target: {name: name, value: ""}})}}
                 />
                 <Suggestions $active={active}>
                     <SuggestionItem propositions={suggest} isStart={isStart} handleClick={(e) => {handleClick(e); toggleSuggest(name)}} />

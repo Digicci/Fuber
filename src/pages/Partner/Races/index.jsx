@@ -17,8 +17,7 @@ function Races(){
         setRaces(state)
     }
 
-    const status = races? 'confirmed' : 'done'
-    console.log(status)
+    const status = races? 'pending' : 'done'
     return(
         <>
             <Container>
@@ -37,7 +36,7 @@ function Races(){
                 <RaceByStatus status={status}/>
             </Container>
         </>
-    )   
+    )
 }
 
 export default Races;
