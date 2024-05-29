@@ -2,7 +2,7 @@ import React, {createContext, useContext, useState} from "react";
 import {useAxios} from "../useAxios";
 import {useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
-import {setAuth} from "../../store/Partner/actions/AuthActions";
+import {setAuth} from "../../store/Partner/reducers/AuthReducer";
 import {getAuth} from "../../store/Partner/selectors/AuthSelectors";
 
 const authContext = createContext();

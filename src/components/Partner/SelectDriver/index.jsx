@@ -12,8 +12,6 @@ function SelectDriver() {
       const changeDriver = (e) => {
           dispatch(selectEmployee(e.target.value))
       }
-
-      console.log(team)
       return (
           <>
               <Select onChange={changeDriver}>

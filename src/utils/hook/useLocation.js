@@ -44,17 +44,20 @@ function useProvideLocation() {
     const {unsetRace} = useRace()
 
     //Fonction de tracking de la localisation de l'utilisateur
+    // Fixme Probleme liée à la localisation de l'utilisateur, la map ne se charge jamais
     const setTrack = () => {
-        const id = setTimeout(() => {
-            navigator.geolocation.getCurrentPosition((position) => {
-                setLocation({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                })
-                setLocationLoad(false)
-
+        console.log("try to access position")
+        const id = navigator.geolocation.watchPosition((position) => {
+            console.log("success")
+            setLocation({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
             })
-        }, 5000)
+        },
+          (positionError) => {
+            console.log(positionError)
+          })
+        setLocationLoad(false)
         setTrackerId(id)
     }
 
@@ -67,7 +70,7 @@ function useProvideLocation() {
 
     //Arrêt du tracking
     const unsetTrack = () => {
-        clearTimeout(trackerId)
+        navigator.geolocation.clearWatch(trackerId)
         setMap(null)
         setLocationLoad(true)
     }

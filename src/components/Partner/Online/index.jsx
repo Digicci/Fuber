@@ -5,7 +5,7 @@ import {
 } from './atoms'
 import { useDispatch, useSelector } from 'react-redux'
 import {getAuthStatus, getDriverId} from '../../../utils/store/Partner/selectors/AuthSelectors'
-import { toggleOnline } from '../../../utils/store/Partner/actions/AuthActions'
+import { toggleOnline } from '../../../utils/store/Partner/reducers/AuthReducer'
 import { useSocket } from "../../../utils/hook/useWebSocket";
 import { useDriverLocation } from "../../../utils/hook/Partner/useDriverLocation";
 
