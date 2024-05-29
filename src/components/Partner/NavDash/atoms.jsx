@@ -84,14 +84,14 @@ export const NavLink = styled(StyledLink)`
   }
 
   ${(props) =>
-          props.$linkAccountSelected &&
-          `
-            background-color: ${colors.fourth};
-            color: ${colors.secondary};
-            i{
-                color: ${colors.secondary};
-            }
-            `
+    props.$linkAccountSelected &&
+    `
+      background-color: ${colors.fourth};
+      color: ${colors.secondary};
+      i{
+          color: ${colors.secondary};
+      }
+    `
   }
 `
 

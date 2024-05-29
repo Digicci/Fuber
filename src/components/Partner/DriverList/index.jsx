@@ -1,6 +1,5 @@
-import React, { useState} from "react";
+import React from "react";
 import DriverItem from "../DriverItem";
-import {useAuthEntreprise} from "../../../utils/hook/Partner/useAuthEntreprise";
 import { useSelector } from "react-redux";
 import { getTeam } from "../../../utils/store/Partner/selectors/AuthSelectors";
 import {
