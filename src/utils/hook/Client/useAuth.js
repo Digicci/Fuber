@@ -37,7 +37,6 @@ function useProvideAuth() {
     axios.api.interceptors.response.use(
       (response) => response,
       async function (error) {
-          console.log(error)
           const originalRequest = error.config
           if (error.config.url !== "/api/user/refreshToken" && error.response.status === 401 && !originalRequest._retry) {
               originalRequest._retry = true;
@@ -51,8 +50,9 @@ function useProvideAuth() {
                   })
                   return axios.api(originalRequest)
               }
+          } else if (error.response.status === 401 && originalRequest._retry){
+              signout()
           }
-          signout()
           return Promise.reject(error);
       }
     )

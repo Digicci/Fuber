@@ -30,18 +30,39 @@ function AddMyRace() {
     }, [])
     
     const onCancel = (raceId) => {
+        const id = toast.loading("Demande de remboursement en cours")
+        const toastOptions = {
+            autoClose: 3000,
+            toastId: id
+        }
         axios.post('/race/refundRace', {raceId, _csrf: csrf.token})
           .then(res => {
               if (res.data === 'succeeded') {
-                  toast.success("Demande de remboursement effectuée",{
-                      autoClose: true
+                  toast.update(id, {
+                      render: "Demande de remboursement effectuée",
+                      autoClose: 3000,
+                      isLoading: false,
+                      type: "success"
                   })
+                  const races = data.filter((r) => r.id !== raceId)
+                  setData(races)
               } else {
-                  toast.error("Une erreur s'est produite lors de la demande de remboursement", {
-                      autoClose: true
+                  toast.update(id, {
+                      render: "Une erreur s'est produite lors de la demande de remboursement",
+                      autoClose: 3000,
+                      isLoading: false,
+                      type: "error"
                   })
               }
-          })
+          }).catch(e => {
+              console.log("catch",e.response)
+              toast.update(id, {
+                  type: "error",
+                  render: e.response.data,
+                  autoClose: 3000,
+                  isLoading: false
+              })
+        })
     }
 
     return (
