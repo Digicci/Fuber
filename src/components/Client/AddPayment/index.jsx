@@ -67,16 +67,11 @@ function AddPayment({isOpen, toggle, loading, update}){
                     <StyledLink onClick={() => {toggleDisplay(true)}} $linkModal>
                         Carte
                     </StyledLink>
-                    <StyledLink onClick={() => {toggleDisplay(false)}} $linkModal>
-                        Paypal
-                    </StyledLink>
                     </ContainerModal>
                     {
                         stripeOptions && (
                             <Elements stripe={stripePromise} options={stripeOptions}>
-                                {
-                                    isAdd ? (<AddCard update={update} loading={loading} close={toggle} updateSecret={handleClientSecret}/>) : (<AddPaypal/>)
-                                }
+                                <AddCard update={update} loading={loading} close={toggle} updateSecret={handleClientSecret}/>
                             </Elements>
                         )
                     }

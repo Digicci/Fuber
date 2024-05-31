@@ -44,10 +44,11 @@ function useProvideLocation() {
     const {unsetRace} = useRace()
 
     //Fonction de tracking de la localisation de l'utilisateur
-    // Fixme Probleme liée à la localisation de l'utilisateur, la map ne se charge jamais
     const setTrack = () => {
+        //console log
         console.log("try to access position")
         const id = navigator.geolocation.watchPosition((position) => {
+            //console log
             console.log("success")
             setLocation({
                 lat: position.coords.latitude,
@@ -151,7 +152,6 @@ function useProvideLocation() {
 
     //Fonction de création du trajet
     const createJourney = () => {
-        console.log({action: 'createJourney', race: race.raceInfo})
         //Si les deux markers sont présents
         if (race.raceInfo.startLngLat.lat !== 0 && race.raceInfo.endLngLat.lat !== 0) {
             //On supprime le trajet s'il existe

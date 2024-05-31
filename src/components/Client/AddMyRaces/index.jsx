@@ -12,18 +12,37 @@ import {
 
 import {useAxios} from "../../../utils/hook/useAxios";
 import Driver from "../../../utils/Data/Client/Driver";
+import {toast} from "react-toastify";
+import {useCsrf} from "../../../utils/hook/useCsrf";
 
 
 function AddMyRace() {
 
     const axios = useAxios()
+    const csrf = useCsrf()
     const [data, setData] = useState([])
 
     useEffect(() => {
+        csrf.getCsrfToken()
         axios.get('race/getAllPending').then((res) => {
             setData(res.data)
         })
     }, [])
+    
+    const onCancel = (raceId) => {
+        axios.post('/race/refundRace', {raceId, _csrf: csrf.token})
+          .then(res => {
+              if (res.data === 'succeeded') {
+                  toast.success("Demande de remboursement effectuée",{
+                      autoClose: true
+                  })
+              } else {
+                  toast.error("Une erreur s'est produite lors de la demande de remboursement", {
+                      autoClose: true
+                  })
+              }
+          })
+    }
 
     return (
         <>
@@ -48,7 +67,7 @@ function AddMyRace() {
                                 })
                                 const img = car.imgInfo
                                 return (
-                                    <DivRace>
+                                    <DivRace key={race.id}>
                                         <RaceImg src={img.img} alt={img.alt}/>
                                         <InfoRace>
                                             <h4>{car.title.toUpperCase()} par {entreprise.prenom}</h4>
@@ -62,6 +81,11 @@ function AddMyRace() {
                                             <ButtonRaceFinish>
                                                 {race.validNumber}
                                             </ButtonRaceFinish>
+                                        </DivButton>
+                                        <DivButton>
+                                            <button onClick={() => onCancel(race.id)}>
+                                                Annuler la course
+                                            </button>
                                         </DivButton>
                                     </DivRace>
                                 )

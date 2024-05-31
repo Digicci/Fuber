@@ -124,7 +124,7 @@ function useProvideAuth() {
     }
 
     const signout = () => {
-        axios.post(`${basePath}/logout`,{}, { withCredentials: true }).then((res) => {
+        axios.get(`${basePath}/logout`, { withCredentials: true }).then((res) => {
             localStorage.removeItem("user_token");
             localStorage.clear();
             setUser(null);
