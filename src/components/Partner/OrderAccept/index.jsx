@@ -14,9 +14,10 @@ import {
     RaceInfo
 } from './atoms'
 import { getAuth, getAuthStatus } from '../../../utils/store/Partner/selectors/AuthSelectors'
-import { useSelector } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {useSocket} from "../../../utils/hook/useWebSocket";
-import driver from "../../../utils/Data/Client/Driver";
+import {useAxios} from "../../../utils/hook/useAxios";
+import {fetchRaces} from "../../../utils/store/Partner/reducers/AuthReducer";
 
 function OrderAccept() {
 
@@ -26,6 +27,8 @@ function OrderAccept() {
     const {driverSocket} = useSocket()
     const [hasNewOrder, setHasNewOrder] = useState(false)
     const [order, setOrder] = useState({})
+    const dispatch = useDispatch()
+    const {api} = useAxios()
 
     driverSocket.on("race:request", (data) => {
         console.log(data)
@@ -39,6 +42,7 @@ function OrderAccept() {
             console.log(data)
         })
         raceIsViewed()
+        dispatch(fetchRaces(api))
     }
 
     const refuseOrder = () => {

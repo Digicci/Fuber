@@ -19,7 +19,7 @@ const TeamReducer = (state = initialState, action) => {
         case SELECT_EMPLOYEE:
             return {
                 ...state,
-                selectedEmployee: action.payload,
+                selectedEmployee: parseInt(action.payload),
             }
         default:
             return state;

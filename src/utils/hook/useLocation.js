@@ -45,16 +45,20 @@ function useProvideLocation() {
 
     //Fonction de tracking de la localisation de l'utilisateur
     const setTrack = () => {
-        const id = setTimeout(() => {
-            navigator.geolocation.getCurrentPosition((position) => {
-                setLocation({
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                })
-                setLocationLoad(false)
-
+        //console log
+        console.log("try to access position")
+        const id = navigator.geolocation.watchPosition((position) => {
+            //console log
+            console.log("success")
+            setLocation({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
             })
-        }, 5000)
+        },
+          (positionError) => {
+            console.log(positionError)
+          })
+        setLocationLoad(false)
         setTrackerId(id)
     }
 
@@ -67,7 +71,7 @@ function useProvideLocation() {
 
     //Arrêt du tracking
     const unsetTrack = () => {
-        clearTimeout(trackerId)
+        navigator.geolocation.clearWatch(trackerId)
         setMap(null)
         setLocationLoad(true)
     }
@@ -148,7 +152,6 @@ function useProvideLocation() {
 
     //Fonction de création du trajet
     const createJourney = () => {
-        console.log({action: 'createJourney', race: race.raceInfo})
         //Si les deux markers sont présents
         if (race.raceInfo.startLngLat.lat !== 0 && race.raceInfo.endLngLat.lat !== 0) {
             //On supprime le trajet s'il existe

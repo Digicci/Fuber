@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import { StyledLink } from "../../../utils/Atoms";
 import { Button, DivForgot, DivInput, DivSignin, Form, Input, Label } from "./atoms";
 import {useDispatch, useSelector} from "react-redux";
-import {setAuth} from "../../../utils/store/Partner/actions/AuthActions";
+import {setAuth} from "../../../utils/store/Partner/reducers/AuthReducer";
 import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
 import { useNavigate } from "react-router-dom";
 import { useCsrf } from "../../../utils/hook/useCsrf";

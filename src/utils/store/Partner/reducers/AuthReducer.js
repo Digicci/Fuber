@@ -1,6 +1,11 @@
+import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
 
-export const SET_AUTH = "SET_AUTH";
-export const TOGGLE_ONLINE = "TOGGLE_ONLINE";
+export const fetchRaces = createAsyncThunk(
+  'fetchRaces',
+  async (api) => {
+      return (await api.get('/entreprise/getRaces')).data
+  }
+)
 
 const initialState = {
     auth: false,
@@ -8,25 +13,28 @@ const initialState = {
     online: false,
 }
 
-const AuthReducer = (state = initialState, action) => {
-    switch(action.type) {
-
-        case SET_AUTH:
-            return {
-                ...state,
-                user: action.payload === null ? null : { ...action.payload},
-                auth: action.payload !== null,
-            }
-            
-        case TOGGLE_ONLINE:
-            return {
-                ...state,
-                online: !state.online,
-            }
-
-        default:
-            return state;
+const authSlice = createSlice({
+    name: 'auth',
+    initialState,
+    reducers: {
+        setAuth(state, action) {
+            state.user = action.payload === null ? null : {...action.payload}
+            state.auth = action.payload !== null
+        },
+        toggleOnline(state, action) {
+            state.online = !state.online
+        }
+    },
+    extraReducers: (builder) => {
+        builder.addCase(fetchRaces.fulfilled, (state,action) => {
+            state.user.courses = action.payload
+        })
     }
-}
+})
 
-export default AuthReducer;
+export const {
+    setAuth,
+  toggleOnline
+} = authSlice.actions
+
+export default authSlice.reducer

@@ -29,7 +29,7 @@ import {toast} from 'react-toastify';
 import Online from '../../../components/Partner/Online';
 import {useSelector, useDispatch} from "react-redux";
 import {getAuthUser} from "../../../utils/store/Partner/selectors/AuthSelectors";
-import {setAuth} from "../../../utils/store/Partner/actions/AuthActions";
+import {setAuth} from "../../../utils/store/Partner/reducers/AuthReducer";
 import AddCar from '../../../components/Partner/AddCar'
 
 function Profil() {
