@@ -138,7 +138,6 @@ export const StyledLink = styled(Link)`
         props.$linkProfile &&
             `font-size: 1.3rem;
             padding 1rem 0 0 .5rem;
-            height: 25px;
             display: flex;
             
             i{
@@ -149,6 +148,7 @@ export const StyledLink = styled(Link)`
             }
             p:hover{
                 border-bottom: 2px solid ${colors.secondary};
+                top:0;
             }
             @media (max-width: 768px){
                 padding: 0;

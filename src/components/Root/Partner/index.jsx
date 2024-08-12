@@ -1,4 +1,5 @@
 import React from "react";
+import './atoms.css'
 import {Outlet} from "react-router-dom";
 import Header from "../../Partner/Header";
 import { ProvideCsrf } from "../../../utils/hook/useCsrf";
@@ -22,7 +23,7 @@ function Partner() {
                                 <ProvideStats>
                                     <SocketProvider>
                                         <Header/>
-                                        <div id="page_container">
+                                        <div id="page_container_partner">
                                             <Outlet />
                                             <ToastContainer style={{zIndex: 20000}} autoClose={5000}/>
                                         </div>
