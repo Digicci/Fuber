@@ -311,6 +311,7 @@ export const StyledInput = styled.input`
             border-radius: 5px;
             &:hover{
                 background: ${colors.shadow}!important;
+                color: ${colors.primary};
             }
             `
     }
