@@ -69,7 +69,7 @@ function NavResponsive({isOpen, toggle}){
                                         {t('global.settings')}
                                     </StyledLink>
                                 </StyledConnectionWrap>
-                                <StyledLink to='' $navVertical>
+                                <StyledLink to='/order' $navVertical>
                                     {t('global.race')}
                                 </StyledLink>
                                 <StyledLink to ="/partner/signin" $navVertical>

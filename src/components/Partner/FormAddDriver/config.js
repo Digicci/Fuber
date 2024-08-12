@@ -140,5 +140,15 @@ export const formConfig = {
         type: 'text',
         name: 'place',
         placeholder: 'Nombre de place',
+    },
+    prix : {
+        rules: {
+            required: false,
+            maxLength: 2,
+            pattern: /^[0-9]+$/,
+        },
+        type: 'text',
+        name: 'prix',
+        placeholder: 'Prix au kilomètre du chauffeur (facultatif)',
     }
 };

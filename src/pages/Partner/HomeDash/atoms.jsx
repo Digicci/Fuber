@@ -27,3 +27,17 @@ export const H1 = styled.h1`
     color: ${colors.secondary};
     padding: 1rem 0 1rem 0;
 `
+export const Alert = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    color: ${colors.secondary};
+    background-color: #ff8c00;
+    ${(props) => !props.$truePrice &&
+      `
+        height: 0;
+        overflow: hidden;
+        padding: 0;
+      `
+    }
+`

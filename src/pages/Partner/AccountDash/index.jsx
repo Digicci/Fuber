@@ -38,6 +38,7 @@ function AccountDash() {
                     {
                       page === "profile" && <Profil/>
                     }
+                <div style={{height: 150,}}></div>
                 <OrderAccept/>
             </Container>
         </>

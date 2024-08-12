@@ -59,9 +59,9 @@ export const BottomOrder = styled.div`
   ${(props) =>
           !props.$open &&
           `
-    height: 0;
-    overflow: hidden;
-    padding: 0;
+      height: 0;
+      overflow: hidden;
+      padding: 0;
     `
   }
 `
