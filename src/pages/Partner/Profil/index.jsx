@@ -72,7 +72,7 @@ function Profil() {
     const handleChange = (e) => {
         const field = e.target.name
         let state = {...entrepriseCopy}
-        state[field] = e.target.value
+        field === "prix" ? state[field] = e.target.value.replace(",", ".") : state[field] = e.target.value
         setEntrepriseCopy(state)
     }
 
@@ -119,7 +119,7 @@ function Profil() {
     }
     console.log(entreprise)
     return (
-        <>
+        <div style={{display: "flex", width: "100%", marginBottom: "1rem"}}>
             <ContainerInfo>
                 <TitlePage>Profil</TitlePage>
                 <DivOnline>
@@ -334,7 +334,7 @@ function Profil() {
                     )
                 }
             </ContainerInfo>
-        </>
+        </div>
     );
 }
 

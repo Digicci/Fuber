@@ -29,13 +29,13 @@ export const AvatarWrapper = styled.div`
 export const ContainerInfo = styled.div`
     display: flex;
     flex-direction: column;
-    width: 20%;
+    width: 45%;
     margin: 2.5rem 0 0 1.5rem;
     ${(props) => props.$vehicule && (
     `
         width: 50%;
     `
-    )}
+    )};
     @media (max-width:768px){
         width: 70%;
         padding-top: 1rem;

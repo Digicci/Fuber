@@ -1,8 +1,10 @@
 import React from 'react'
 import { DivRace, Info } from './atoms'
 import CarType from '../../../utils/Data/Partner/CarType'
+import RaceStatusButton from "../RaceStatusButton";
 
-function RaceStatusInfo({ driverPrice, start, end, createdAt,driver, utilisateur  }) {
+function RaceStatusInfo({ id, state, driverPrice, start, end, createdAt,driver, utilisateur  }) {
+    console.log(id)
     const type = CarType.find((car) => car.value === driver?.vehicule.type)?.type
     const [date, hour] = createdAt?.split('T') || ['','']
     const displayHour = hour?.split('.')[0]
@@ -17,6 +19,8 @@ function RaceStatusInfo({ driverPrice, start, end, createdAt,driver, utilisateur
                 <h5>{end || ""}</h5>
                 <h5>{date || ''} / {displayHour || ''}</h5>
             </Info>
+            {state === "pending" && <RaceStatusButton raceId={id} />
+            }
         </DivRace>
     )
 }

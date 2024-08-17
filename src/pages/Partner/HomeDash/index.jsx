@@ -10,15 +10,17 @@ import { useSelector } from 'react-redux'
 import { getAuthUser } from '../../../utils/store/Partner/selectors/AuthSelectors'
 
 function HomeDash() {
-    const price = useSelector(getAuthUser);
+    const user = useSelector(getAuthUser);
     return (
         <>
             <Container>
                 {
-                    price.prix === null &&
+                    (!user.prix || !user.vehicule) &&
                         <Alert>
                             <p>
-                                Veuillez renseigné le prix au kilomètre dans la section profile
+                                Attention, votre compte ne vous permet pas de passer en ligne.
+                                <br/>
+                                Afin de passer en ligne merci de renseigner un prix au kilomètre, ainsi qu'un véhicule dans la section profile.
                             </p>
                         </Alert>
                 }
