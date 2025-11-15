@@ -14,6 +14,7 @@ export const Container = styled.div`
   grid-area: navDash;
   background-color: ${colors.secondary};
   @media (max-width: 768px) {
+    min-width: unset !important;
     max-width: unset !important;
     width: 100% !important;
     height: 40px;
