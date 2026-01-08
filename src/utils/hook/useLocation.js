@@ -1,7 +1,7 @@
 import React, {useState, createContext, useContext, useEffect} from "react"
 import L from 'leaflet'
 import 'leaflet-routing-machine'
-import 'lrm-google'
+import 'lrm-google-router'
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css'
 import {useRace} from "./Client/useRace";
 

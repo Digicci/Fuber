@@ -82,13 +82,19 @@ function RaceByStatus({status}){
             accumulRaces()
             addConnectedDriverRaces()
         }
-    }, [races]);
-    
+    }, []);
+
+    if(loadRace){
+        return (
+          <div>Chargement</div>
+        )
+    }
+
     return(
         <>
             <Container>
                 {
-                    races.filter(race => race.state === status).length === 0 &&
+                    !races || races?.filter(race => race.state === status).length === 0 &&
                   <H3>
                       Il semble que vous n'avez pas encore{status === 'done' ? ' effectué de course.' : ' de courses en cours'}
                   </H3>
