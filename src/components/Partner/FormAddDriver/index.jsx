@@ -54,6 +54,7 @@ function FormAddDriver() {
         marque: "",
         modele: "",
         place: "",
+        prix: "",
     }
 
     const [entreprise, setEntreprise] = useState(initialState);
@@ -78,8 +79,9 @@ function FormAddDriver() {
     }
 
     function validateForm() {
+        const excludeField = ["prix"]
         for (const [key, field] of Object.entries(entreprise)) {
-            if (field === '') {
+            if (field === '' && !excludeField.includes(key)) {
                 setError('Veuillez remplir tous les champs')
                 return false
             }
@@ -105,6 +107,7 @@ function FormAddDriver() {
             modele: entreprise.modele,
             marque: entreprise.marque,
             place: entreprise.place,
+            prix: entreprise.prix,
             _csrf: csrf.token,
         }
     }

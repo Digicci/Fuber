@@ -14,8 +14,11 @@ import { useAuthEntreprise} from '../../../utils/hook/Partner/useAuthEntreprise'
 import { useValidator} from '../../../utils/hook/useValidator'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-function FormAddCar() {
+import {useDispatch} from "react-redux";
+import {addVehicule} from "../../../utils/store/Partner/reducers/AuthReducer";
+function FormAddCar({toggle}) {
   const authEntreprise = useAuthEntreprise()
+  const dispatch = useDispatch()
   const [error, setError] = useState('')
   const validator = useValidator()
   const navigate = useNavigate()
@@ -65,18 +68,21 @@ function FormAddCar() {
             if (response.data) {
               setError('')
               toast.update(toastId, {
-                render: 'Le compte chauffeur a bien été créé',
+                render: 'Le vehicule a bien été créé.',
                 type: toast.TYPE.SUCCESS,
                 autoClose: toastTimer,
                 isLoading: false,
                 icon: '👌',
               })
+              dispatch(addVehicule(response.data))
+              toggle()
               setTimeout(() => {
                 navigate('/partner/account/profile', {replace: true})
               }, toastTimer)
             }
           })
           .catch((error) => {
+            console.log(error, "error catch")
             toast.update(toastId, {
               render: error.response.data,
               type: toast.TYPE.ERROR,

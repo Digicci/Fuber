@@ -20,10 +20,6 @@ function RaceByStatus({status}){
     
     const dispatch = useDispatch()
     
-    // FIXME : Ce component copie les course à chaque fois que l'on change
-    //  de type de courses (pending / done)
-    //  de plus les courses apparaissent en pending et en done peut importe leur statut reel.
-    
     const selectedDriverId = useSelector(getSelectedDriverId)
     const drivers = useSelector(getSelectedEmployee)
     const driver = useSelector(getAuthUser)
@@ -88,7 +84,7 @@ function RaceByStatus({status}){
         <>
             <Container>
                 {
-                    races.filter(race => race.state === status).length === 0 &&
+                  races?.filter(race => race.state === status).length === 0 &&
                   <H3>
                       Il semble que vous n'avez pas encore{status === 'done' ? ' effectué de course.' : ' de courses en cours'}
                   </H3>

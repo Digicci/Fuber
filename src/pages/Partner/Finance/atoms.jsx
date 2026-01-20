@@ -66,3 +66,10 @@ export const H4 = styled.h4`
     padding-bottom: 0.5rem;
     width: 100%;
 `
+
+export const ContainerSelect = styled.div`
+  display: flex;
+  @media (max-width: 769px) {
+    flex-direction: column;
+  }
+`

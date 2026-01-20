@@ -1,6 +1,6 @@
 import React,{ useContext, createContext, useState } from 'react';
 import { useAxios } from "../useAxios";
-import { useNavigate } from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 
 
 const authContext = createContext();
@@ -33,12 +33,13 @@ function useProvideAuth() {
     const [user, setUser] = useState(null);
     const axios = useAxios();
     const navigate = useNavigate();
+    const location = useLocation();
     
     axios.api.interceptors.response.use(
       (response) => response,
       async function (error) {
           const originalRequest = error.config
-          if (error.config.url !== "/api/user/refreshToken" && error.response.status === 401 && !originalRequest._retry) {
+          if (error.config.url !== "/user/refreshToken" && error.response.status === 401 && !originalRequest._retry) {
               originalRequest._retry = true;
               const refreshToken = localStorage.getItem('user_refresh_token')
               if (refreshToken && refreshToken !== '') {
@@ -101,7 +102,7 @@ function useProvideAuth() {
                 setUser(null);
                 localStorage.removeItem("user_token");
             }).finally(() => {
-                if(!user) {
+                if(!user && location.pathname !== '/') {
                     navigate("/login", { replace: true });
                 }
             })
@@ -109,7 +110,7 @@ function useProvideAuth() {
         }
         else {
             setUser(null);
-            navigate("/login", { replace: true })
+            if (location.pathname !== "/") navigate("/login", { replace: true })
         }
 
     }
