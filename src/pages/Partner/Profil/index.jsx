@@ -44,7 +44,8 @@ function Profil() {
         num:false,
         mail:false,
         nom_commercial:false,
-        siret:false
+        siret:false,
+        prix: false,
     })
 
     const [entrepriseCopy, setEntrepriseCopy] = useState({...entreprise})
@@ -71,22 +72,24 @@ function Profil() {
     const handleChange = (e) => {
         const field = e.target.name
         let state = {...entrepriseCopy}
-        state[field] = e.target.value
+        field === "prix" ? state[field] = e.target.value.replace(",", ".") : state[field] = e.target.value
         setEntrepriseCopy(state)
     }
 
     const updateProfile = () => {
-        updateEntreprise({...entrepriseCopy, _csrf: csrf.token}).then((res) => {
+        updateEntreprise({...entrepriseCopy}).then((res) => {
             dispatch(setAuth({
                 ...entreprise,
                 nom: res.data.nom,
                 prenom: res.data.prenom,
-                num: res.data.num
+                num: res.data.num,
+                prix: res.data.prix
             }))
             setUpdate({
                 nom:false,
                 num:false,
-                mail:false
+                mail:false,
+                prix: false,
             })
             toast.success('Votre profil a bien été mis à jour',{
                 position: "top-right",
@@ -114,8 +117,9 @@ function Profil() {
     const toggleIsOpen = () => {
         setIsOpen(!isOpen)
     }
+    console.log(entreprise)
     return (
-        <>
+        <div style={{display: "flex", width: "100%", marginBottom: "1rem"}}>
             <ContainerInfo>
                 <TitlePage>Profil</TitlePage>
                 <DivOnline>
@@ -197,7 +201,39 @@ function Profil() {
                         )
                     }
                 </DivUpdate>
+                <Label>
+                    Prix au kilomètre
+                </Label>
+                <DivUpdate>
+                    {
+                        update.prix ? (
+                          <>
 
+                              <InputUpdate
+                                $updateEntreprise
+                                type="text"
+                                placeholder={entreprise.prix}
+                                name="prix"
+                                value={entrepriseCopy.prix}
+                                onChange={handleChange}
+                              />
+                              <ButtonUpdate>
+                                  <i className="ph-bold ph-x" datafield="prix" onClick={toggleUpdate}></i>
+                              </ButtonUpdate>
+                          </>
+                        ) : (
+                          <>
+                              <Number>
+                                  {entreprise.prix} €/km
+                              </Number>
+                              <ButtonUpdate>
+                                  <i className="ph-bold ph-pencil" datafield="prix" onClick={toggleUpdate}></i>
+                              </ButtonUpdate>
+                          </>
+                        )
+
+                    }
+                </DivUpdate>
                 <Label>
                     Email professionnel
                 </Label>
@@ -298,7 +334,7 @@ function Profil() {
                     )
                 }
             </ContainerInfo>
-        </>
+        </div>
     );
 }
 

@@ -12,7 +12,7 @@ import hybride from "../../../assets/hybride.webp";
 import Driver from "../../../utils/Data/Client/Driver";
 
 
-function CarCard({id, places, prix, model, marque, distance, commission, handleClick, nom, prenom, type}){
+function CarCard({id, entrepriseId, places, prix, model, marque, distance, commission, handleClick, nom, prenom, type}){
     const { raceInfo } = useRace()
     const dist = raceInfo.dist
     const race = useRace()
@@ -30,7 +30,7 @@ function CarCard({id, places, prix, model, marque, distance, commission, handleC
 
 
         <>
-            <CarType key={id} onClick={() => handleClick(id, driverTotal, driverPrice, driverCommission,nom, prenom, type)} $selected={driverId === id}>
+            <CarType key={id} onClick={() => handleClick(entrepriseId, driverTotal, driverPrice, driverCommission,nom, prenom, type)} $selected={driverId === entrepriseId}>
                 <CarImg src={imgInfo.img} alt={imgInfo.alt} />
                 <InfoCar>
                     <span>

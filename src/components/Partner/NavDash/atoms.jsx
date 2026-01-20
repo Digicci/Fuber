@@ -10,7 +10,6 @@ export const Container = styled.div`
   width: 378px !important;
   max-width: 378px !important;
   min-width: 378px !important;
-  height: 100dvh;
   grid-area: navDash;
   background-color: ${colors.secondary};
   @media (max-width: 768px) {

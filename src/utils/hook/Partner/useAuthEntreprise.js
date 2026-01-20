@@ -13,6 +13,7 @@ const normalizeEntrepriseWithCSRF = (entreprise) => {
         nom: entreprise.nom,
         prenom: entreprise.prenom,
         num: entreprise.num,
+        prix: entreprise.prix,
         _csrf: entreprise._csrf
     }
 }

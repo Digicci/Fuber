@@ -29,17 +29,14 @@ export const useValidator = () => {
         };
         if (form[name].rules.required && !value) {
             isSafe = false;
-            console.log('required')
             error = 'Ce champ est obligatoire'
         }
         if (form[name].rules.minLength && value.length < form[name].rules.minLength) {
             isSafe = false;
-            console.log('min')
             error = `Ce champ doit être composé d'au moins ${form[name].rules.minLength} caractères`;
         }
         if (form[name].rules.maxLength && value.length > form[name].rules.maxLength) {
             isSafe = false;
-            console.log('max')
             error = `Ce champ doit faire moins de  ${form[name].rules.maxLength} caractères`;
         }
         if (form[name].rules.pattern && !form[name].rules.pattern.test(value)) {
@@ -56,14 +53,12 @@ export const useValidator = () => {
         if (form[name].rules.passwordPattern) {
             const pattern = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$.!%*?&])[A-Za-z\d@$.!%*?&]{12,}$/;
             if (!pattern.test(value)) {
-                console.log(name, value)
                 isSafe = false;
                 error = 'Le mot de passe doit contenir au moins \n\r12 caractères, \n\rune majuscule, \n\rune minuscule \n\r un chiffre et un caractère spécial'
             }
         }
         if (form[name].rules.passwordConfirm) {
             if (value !== form.password.value) {
-                console.log(name, value , form.password.value)
                 isSafe = false;
                 error = 'Les mots de passe ne correspondent pas';
             }

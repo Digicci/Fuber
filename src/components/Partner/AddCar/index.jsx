@@ -16,7 +16,7 @@ function AddCar({ toggle, isOpen }) {
           Ajouter un véhicule ?
         </TitleModal>
         <ContainerModal>
-          <FormAddCar />
+          <FormAddCar toggle={toggle} />
         </ContainerModal>
       </Container>
     </Modal>

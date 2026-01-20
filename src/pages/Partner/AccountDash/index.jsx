@@ -20,9 +20,9 @@ function AccountDash() {
     }, []);
 
     return (
-        <>
+        <div style={{display: "flex"}}>
+            <NavDash activePage={page}/>
             <Container>
-                <NavDash activePage={page}/>
                     {
                       page === "home" && <HomeDash />
                     }
@@ -38,9 +38,9 @@ function AccountDash() {
                     {
                       page === "profile" && <Profil/>
                     }
-                <OrderAccept/>
+             <OrderAccept/>
             </Container>
-        </>
+        </div>
     )
 }
 

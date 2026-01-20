@@ -73,6 +73,7 @@ function FormLogin() {
                         closeOnClick: true
                     })
                     localStorage.setItem('driver_token', res.data.token)
+                    console.log(res.data.driver)
                     dispatch(setAuth(res.data.driver))
                     setTimeout(() => {
                         navigate('/partner/account/home', { replace: true })

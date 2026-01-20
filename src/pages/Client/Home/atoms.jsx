@@ -36,6 +36,7 @@ export const RowWrapper = styled.div`
       font-size: 2.5rem;
       font-weight: 150;
       margin-bottom: 2rem;
+      text-align: start;
     }
   }
   ${(props) =>
