@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import {useNavigate, useLocation, Link} from "react-router-dom";
 import {
     StyledContainerLogin,
     StyledForm,
@@ -171,7 +171,9 @@ function Login({isPopUp = false, closePopUp = () => {}}){
                     </StyledContainerInput>
                 </StyledForm>
                 <StyledObliger>
-                    {t('forgot password')}
+                    <Link to={"/forgot-password"} style={{textDecoration: 'none', color: "inherit"}}>
+                        {t('forgot password')}
+                    </Link>
                 </StyledObliger>
                 <StyledAccountSign>
                     <StyledLink to="/signup" $loginSignup>

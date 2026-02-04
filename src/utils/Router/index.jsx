@@ -37,6 +37,15 @@ function Router() {
                     element: <Signup/>
                 },
                 {
+                    path: "/order",
+                    element: <OrderRace/>
+                },
+                {
+                    path: "/forgot-password",
+                    element: <ForgotPasswordClient/>
+                    
+                },
+                {
                     path: "account/:page",
                     element: <PrivateRoute>
                                 <Account/>
@@ -47,15 +56,6 @@ function Router() {
                     element: <PrivateRoute>
                                 <Account/>
                             </PrivateRoute>
-                },
-                {
-                    path: "/order",
-                    element: <OrderRace/>
-                },
-                {
-                    path: "/client/forgot-password",
-                    element: <ForgotPasswordClient/>
-
                 }
             ]
         },
@@ -89,7 +89,7 @@ function Router() {
                     element: <ForgotPasswordPartner/>
 
                 }
-                            
+                
             ]
 
         }

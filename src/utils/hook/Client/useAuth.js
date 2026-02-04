@@ -79,7 +79,7 @@ function useProvideAuth() {
     const signup = (data) => {
         return axios.post(`${basePath}/signup`, data, { withCredentials: true })
     }
-    const getUser = () => {
+    const getUser = ({redirect = true}) => {
         if (user) {
             return;
         }
@@ -102,7 +102,7 @@ function useProvideAuth() {
                 setUser(null);
                 localStorage.removeItem("user_token");
             }).finally(() => {
-                if(!user && location.pathname !== '/') {
+                if(!user && location.pathname !== '/' && redirect) {
                     navigate("/login", { replace: true });
                 }
             })
@@ -110,13 +110,13 @@ function useProvideAuth() {
         }
         else {
             setUser(null);
-            if (location.pathname !== "/") navigate("/login", { replace: true })
+            if (location.pathname !== "/" && redirect) navigate("/login", { replace: true })
         }
 
     }
 
     const isConnected = () => {
-        getUser()
+        getUser({redirect: false});
         return user !== null;
     }
 

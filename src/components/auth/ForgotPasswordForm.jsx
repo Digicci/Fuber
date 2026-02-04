@@ -1,10 +1,10 @@
 import {useState} from 'react';
-import {forgotPassword} from '../../utils/services/auth.service';
 import {
   Message,
-  ContainerForm
+  ContainerForm, Input, Button
 } from './atoms'
 import Error from '../Error'
+import {useAxios} from "../../utils/hook/useAxios";
 
 function ForgotPasswordForm({userType}){
 
@@ -12,6 +12,7 @@ function ForgotPasswordForm({userType}){
   const [loading,setLoading] = useState(false);
   const [success,setSuccess]= useState(false);
   const [error, setError]= useState(null);
+  const api = useAxios();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +20,7 @@ function ForgotPasswordForm({userType}){
     setError(null);
 
     try{
-      const success = await forgotPassword({email,userType});
+      const success = await api.post("/user/forgotPassword", {email,userType});
 
       if(success){
         setSuccess(true)
@@ -53,7 +54,7 @@ function ForgotPasswordForm({userType}){
           required
         />
 
-        <Button type="submit" disabled={loading}>
+        <Button type="submit" disabled={loading} onClick={handleSubmit}>
           {loading ? 'Envoi...' : 'Réinitialiser'}
 
           {error && <Error>{error}</Error>}
