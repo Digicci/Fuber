@@ -13,6 +13,8 @@ import Account from "../../pages/Client/Account";
 import LogIn from "../../pages/Partner/LogIn";
 import PrivateRouteDriver from "./Routes/privateRoute/Partner";
 import AccountDash from "../../pages/Partner/AccountDash";
+import ForgotPasswordClient from '../../pages/Client/ForgotPasswordClient'
+import ForgotPasswordPartner from '../../pages/Partner/ForgotPasswordPartner'
 
 function Router() {
     
@@ -49,6 +51,11 @@ function Router() {
                 {
                     path: "/order",
                     element: <OrderRace/>
+                },
+                {
+                    path: "/client/forgot-password",
+                    element: <ForgotPasswordClient/>
+
                 }
             ]
         },
@@ -77,6 +84,11 @@ function Router() {
                                 <AccountDash/>
                             </PrivateRouteDriver>
                 },
+                {
+                    path: "/partner/forgot-password",
+                    element: <ForgotPasswordPartner/>
+
+                }
                             
             ]
 
