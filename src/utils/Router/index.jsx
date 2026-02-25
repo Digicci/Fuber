@@ -15,6 +15,7 @@ import PrivateRouteDriver from "./Routes/privateRoute/Partner";
 import AccountDash from "../../pages/Partner/AccountDash";
 import ForgotPasswordClient from '../../pages/Client/ForgotPasswordClient'
 import ForgotPasswordPartner from '../../pages/Partner/ForgotPasswordPartner'
+import PasswordReset from '../../pages/ResetPassword'
 
 function Router() {
     
@@ -44,6 +45,11 @@ function Router() {
                     path: "/forgot-password",
                     element: <ForgotPasswordClient/>
                     
+                },
+                {
+                    path: "/reset-password",
+                    element: <PasswordReset/>
+
                 },
                 {
                     path: "account/:page",
@@ -88,8 +94,12 @@ function Router() {
                     path: "/partner/forgot-password",
                     element: <ForgotPasswordPartner/>
 
-                }
-                
+                },
+                {
+                    path: "/partner/reset-password",
+                    element: <PasswordReset/>
+
+                },
             ]
 
         }

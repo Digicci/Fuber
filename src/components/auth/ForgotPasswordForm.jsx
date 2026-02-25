@@ -42,7 +42,6 @@ function ForgotPasswordForm({userType}){
     );
   }
   return (
-    <>
       <ContainerForm>
         <h2> Mot de passe oublié</h2>
 
@@ -60,7 +59,6 @@ function ForgotPasswordForm({userType}){
           {error && <Error>{error}</Error>}
         </Button>
       </ContainerForm>
-    </>
   );
 }
 

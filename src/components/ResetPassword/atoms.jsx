@@ -1,14 +1,10 @@
-import styled from "styled-components";
-import colors from "../../colors";
+import colors from '../../colors'
+import styled from 'styled-components'
 
-export const Message = styled.p`
-  width: 300px;
-  color: ${colors.seventh};
-`
-
-export const ContainerForm = styled.div`
+export const ContainerForm = styled.form`
     display: flex;
     flex-direction: column;
+    
     height: fit-content;
     align-items: center;
     background: ${colors.primary};
@@ -27,10 +23,18 @@ export const ContainerForm = styled.div`
     }
 `
 
+export const ContainerInput = styled.div`
+  margin: 2.5rem 0;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+  width: 60%;
+`
+
 export const Input = styled.input`
     width: 50%;
     padding: .5rem .3rem;
-    margin: 2.5rem 0;
+    margin-bottom: 1rem;
     font-size: .97rem;
     border: 2px solid ${colors.shade};
     border-radius: 5px;
