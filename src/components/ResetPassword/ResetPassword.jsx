@@ -6,8 +6,8 @@ import { Button, ContainerForm, ContainerInput, Input } from './atoms'
 function ResetPassword() {
   const [params] = useSearchParams();
   const navigate = useNavigate();
-
-  const token = decodeURIComponent(params.get('token'));
+  
+  const token = params.get("token");
   const email = decodeURIComponent(params.get('email'));
 
   const [password, setPassword] = useState('');
@@ -16,7 +16,7 @@ function ResetPassword() {
   const [message, setMessage] = useState(null);
   const [error, setError] = useState(null);
 
-  const {resetPassword} = useAxios()
+  const axios = useAxios()
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -29,12 +29,15 @@ function ResetPassword() {
     setError(null);
 
     try {
-      await resetPassword({ token, password, email});
-      setMessage('Mot de passe modifié avec succès');
-
-      // redirection après 2s vers login
-      setTimeout(() => navigate('/login'), 2000);
-
+      const success = await axios.post("/user/reset-password", {token, email, password});
+      if (success.data.valid && success.data.reset) {
+        setMessage('Mot de passe modifié avec succès');
+        // redirection après 2s vers login
+        setTimeout(() => navigate('/login'), 2000);
+      }
+      else {
+        setMessage("Une erreur est survenue lors de la modification de votre mot de passe.")
+      }
     } catch (err) {
       setError('Lien invalide ou expiré');
     } finally {
@@ -47,7 +50,7 @@ function ResetPassword() {
   }
 
   if (!email) {
-    return <p>email invalide.</p>;
+    return <p>Email invalide.</p>;
   }
 
   return (

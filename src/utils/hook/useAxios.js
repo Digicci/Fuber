@@ -62,10 +62,6 @@ function useProvideAxios() {
         return api.delete(`${path}`, config)
     };
 
-    const resetPassword = ({ token, password,email }) =>{
-      return api.post('/reset-password', { token, password, email });
-    };
-
     return {
         get,
         post,
@@ -73,7 +69,6 @@ function useProvideAxios() {
         del,
         getAdress,
         getAdressByCoord,
-        resetPassword,
         api
     };
 }
