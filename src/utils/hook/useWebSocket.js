@@ -1,5 +1,6 @@
 import {Manager} from 'socket.io-client';
 import {createContext, useContext} from "react";
+import {toast} from "react-toastify";
 import {useSelector} from "react-redux";
 import { getDriverId } from "../store/Partner/selectors/AuthSelectors";
 
@@ -66,6 +67,10 @@ const useProvideSocket = () => {
     const requestRace = (raceInfo) => {
         userSocket.emit('race:request', {raceInfo}, (data) => {
           console.log(data)
+        })
+        userSocket.once("race:refused", (data) => {
+            toast.error("La course à été refusée par le chauffeur et une demande de remboursement à été émise.")
+            userSocket.disconnect()
         })
     }
 

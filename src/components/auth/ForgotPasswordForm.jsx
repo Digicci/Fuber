@@ -28,7 +28,7 @@ function ForgotPasswordForm({userType}){
         setSuccess(false)
       }
     } catch (err){
-      setError(err.message('Une erreur est survenue'));
+      setError(err.response.data.reason === "Unknown email" ? "Email inconnu." : "Une erreur s'est produite.");
     } finally {
       setLoading(false);
     }
@@ -55,9 +55,8 @@ function ForgotPasswordForm({userType}){
 
         <Button type="submit" disabled={loading} onClick={handleSubmit}>
           {loading ? 'Envoi...' : 'Réinitialiser'}
-
-          {error && <Error>{error}</Error>}
         </Button>
+        {error && <p style={{color: "red"}}>{error}</p>}
       </ContainerForm>
   );
 }
