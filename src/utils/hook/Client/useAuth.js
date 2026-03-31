@@ -1,6 +1,8 @@
 import React,{ useContext, createContext, useState } from 'react';
 import { useAxios } from "../useAxios";
 import {useLocation, useNavigate} from "react-router-dom";
+import { clearNotifications } from '../../store/Partner/reducers/NotifReducer'
+import store from '../../store/Partner'
 
 
 const authContext = createContext();
@@ -136,7 +138,10 @@ function useProvideAuth() {
             localStorage.clear();
             setUser(null);
             navigate("/login", { replace: true });
+        }).finally(() => {
+             store.dispatch(clearNotifications())
         })
+
     };
 
     return {

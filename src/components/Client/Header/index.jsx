@@ -11,6 +11,8 @@ import {
 import Logo from '../../../assets/logo.webp';
 import { useAuth } from "../../../utils/hook/Client/useAuth";
 import { useTranslation } from 'react-i18next';
+import NotifBell from '../NotifBell'
+import NotifPanel from '../NotifPanel'
 
 function Header({toggle}) {
 
@@ -19,6 +21,8 @@ function Header({toggle}) {
     const {user, signout, isConnected} = useAuth()
 
     const [connected, setConnected] = useState(false)
+
+    const [showNotifications, setShowNotifications] = useState(false);
 
     useEffect( () => {
         setConnected(isConnected())
@@ -40,8 +44,11 @@ function Header({toggle}) {
                         {t('global.partner')}
                     </StyledLink>
                     <StyledNavGroup>
+
                         {connected ? (
                             <>
+                                <NotifBell onClick={() => setShowNotifications((prev) => !prev)}/>
+                                { showNotifications &&  <NotifPanel/>}
                                 <StyledLink to="/account/profile" $disappear>
                                     {user?.nom} {user?.prenom}
                                 </StyledLink>

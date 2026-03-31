@@ -18,7 +18,7 @@ function CarCard({id, entrepriseId, places, prix, model, marque, distance, commi
     const race = useRace()
     const driverId = race.raceInfo.driverId
     const driverPrice = dist * prix
-    const driverCommission = driverPrice * commission
+    const driverCommission = (driverPrice * commission) / 100
     const driverTotal = driverPrice + driverCommission
     const imgInfo = Driver.find((d) => {
         console.log(type, d)

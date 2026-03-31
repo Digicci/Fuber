@@ -22,7 +22,6 @@ const authSlice = createSlice({
             state.auth = action.payload !== null
         },
         toggleOnline(state, action) {
-            // TODO voir pour ajouter une popup expliquant pourquoi on ne laisse pas le driver se connecter
             if (state.user.prix && state.user.vehicule) {
                 state.online = !state.online
             }

@@ -1,8 +1,11 @@
 import {Manager} from 'socket.io-client';
 import {createContext, useContext} from "react";
 import {toast} from "react-toastify";
+import store from "../../utils/store/Partner"
 import {useSelector} from "react-redux";
 import { getDriverId } from "../store/Partner/selectors/AuthSelectors";
+import { addNotification } from '../store/Partner/reducers/NotifReducer'
+import error from '../../components/Error'
 
 const socketManager = new Manager('http://localhost:1000', {
     autoConnect: false,
@@ -69,7 +72,14 @@ const useProvideSocket = () => {
           console.log(data)
         })
         userSocket.once("race:refused", (data) => {
-            toast.error("La course à été refusée par le chauffeur et une demande de remboursement à été émise.")
+            const message = "La course à été refusée par le chauffeur et une demande de remboursement à été émise."
+            toast.error(message)
+            console.log(message)
+            store.dispatch(addNotification({
+                title: 'Course refusée',
+                message,
+                type: 'error',
+            }));
             userSocket.disconnect()
         })
     }

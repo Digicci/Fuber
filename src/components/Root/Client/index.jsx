@@ -14,6 +14,7 @@ import {ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {SocketProvider} from "../../../utils/hook/useWebSocket";
 
+
 function Client() {
     const [isOpen, setIsOpen] = useState(false)
     const toggleIsOpen = () => {
