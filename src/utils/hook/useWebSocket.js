@@ -72,13 +72,13 @@ const useProvideSocket = () => {
           console.log(data)
         })
         userSocket.once("race:refused", (data) => {
-            const message = "La course à été refusée par le chauffeur et une demande de remboursement à été émise."
+            const {message, title, type} = data;
             toast.error(message)
             console.log(message)
             store.dispatch(addNotification({
-                title: 'Course refusée',
+                title,
                 message,
-                type: 'error',
+                type,
             }));
             userSocket.disconnect()
         })
