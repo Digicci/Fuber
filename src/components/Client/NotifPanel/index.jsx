@@ -1,6 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { getNotifications } from '../../../utils/store/Partner/selectors/NotifSelectors'
-import { clearNotifications, markAsRead, removeNotification } from '../../../utils/store/Partner/reducers/NotifReducer'
+import {
+  clearNotifications,
+  markAsRead,
+  removeNotification
+} from '../../../utils/store/Partner/reducers/NotifReducer'
 import {
   NotificationPanelContainer,
   NotificationPanelHeader,
@@ -15,12 +19,38 @@ import {
   NotificationDeleteButton,
   NotificationEmpty,
 } from './atoms'
+import {useAxios} from "../../../utils/hook/useAxios";
 
 
 function NotifPanel(){
   const dispatch = useDispatch();
+  const axios = useAxios()
   const notifications = useSelector(getNotifications);
-  const clear = () => dispatch(clearNotifications());
+  const clear = () => {
+    axios.del("/user/notification/delete")
+     .then(data => {
+       if (data.data === "done") {
+         dispatch(clearNotifications());
+       }
+     })
+  }
+  const handleReadClick = (id) => {
+    axios.put(`/user/notification/${id}/markAsRead`)
+     .then((data) => {
+       if (data.data.read) {
+         dispatch(markAsRead(id))
+       }
+     })
+  }
+  
+  const handleDeleteNotification = (id) => {
+    axios.del(`/user/notification/${id}/delete`)
+     .then(data => {
+       if (data.data) {
+         dispatch(removeNotification(data.data))
+       }
+     })
+  }
 
   return (
     <NotificationPanelContainer>
@@ -42,7 +72,7 @@ function NotifPanel(){
             <NotificationItem
               key={notif.id}
               $read={notif.read}
-              onClick={() => dispatch(markAsRead(notif.id))}
+              onClick={() => handleReadClick(notif.id)}
             >
               <NotificationContent>
                 <NotificationItemTitle>{notif.title}</NotificationItemTitle>
@@ -55,7 +85,7 @@ function NotifPanel(){
               <NotificationDeleteButton
                 onClick={(e) => {
                   e.stopPropagation();
-                  dispatch(removeNotification(notif.id));
+                  handleDeleteNotification(notif.id)
                 }}
               >
                 Supprimer

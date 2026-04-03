@@ -72,13 +72,15 @@ const useProvideSocket = () => {
           console.log(data)
         })
         userSocket.once("race:refused", (data) => {
-            const {message, title, type} = data;
+            const {message, title, type, id, createdAt} = data;
             toast.error(message)
             console.log(message)
             store.dispatch(addNotification({
+                id,
                 title,
                 message,
                 type,
+                createdAt
             }));
             userSocket.disconnect()
         })

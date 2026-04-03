@@ -10,12 +10,12 @@ const notificationSlice = createSlice({
   reducers: {
     addNotification: (state, action) => {
       state.items.unshift({
-        id: Date.now().toString() + Math.random().toString(36).slice(2),
-        title: action.payload.title || 'Notifaction',
+        id: action.payload.id,
+        title: action.payload.title || 'Notification',
         message: action.payload.message || '' ,
         type: action.payload.type || 'info',
         read: false,
-        createdAt: new Date().toISOString(),
+        createdAt: action.payload.createdAt,
       });
     },
     removeNotification: (state,action) => {
@@ -37,6 +37,9 @@ const notificationSlice = createSlice({
         read: true,
       }));
     },
+    setNotifications: (state, action) => {
+      state.items = action.payload
+    }
   }
 });
 
@@ -46,6 +49,7 @@ export const {
   clearNotifications,
   markAsRead,
   markAllAsRead,
+ setNotifications
 } = notificationSlice.actions;
 
 export default notificationSlice.reducer;
