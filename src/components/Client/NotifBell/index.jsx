@@ -1,19 +1,21 @@
 import { useSelector } from 'react-redux';
 import { getUnreadNotificationsCount } from '../../../utils/store/Partner/selectors/NotifSelectors'
+import {
+  NotificationBellButton,
+  NotificationBadge,
+} from './atoms'
 
 
 function NotificationBell({ onClick }) {
   const unreadCount = useSelector(getUnreadNotificationsCount);
 
   return (
-    <button onClick={onClick} className="notification-bell">
+    <NotificationBellButton type="button" onClick={onClick}>
       <i className="ph-bold ph-bell" />
       {unreadCount > 0 && (
-        <span className="notification-badge">
-          {unreadCount}
-        </span>
+        <NotificationBadge>{unreadCount}</NotificationBadge>
       )}
-    </button>
+    </NotificationBellButton>
   );
 };
 
