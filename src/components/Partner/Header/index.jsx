@@ -11,6 +11,9 @@ import { useSelector } from "react-redux";
 import Logo from "../../../assets/driver/logodriver.webp"
 import { useAuthEntreprise } from "../../../utils/hook/Partner/useAuthEntreprise";
 import {getAuth} from "../../../utils/store/Partner/selectors/AuthSelectors";
+import NotifBell from '../../Client/NotifBell'
+import NotifPanel from '../../Client/NotifPanel'
+import { USER_TYPES } from '../../../utils/constants/userTypes'
 
 
 function Header(){
@@ -19,6 +22,8 @@ function Header(){
     const auth = useSelector(getAuth)
 
     const [connected, setConnected] = useState(false)
+
+    const [showNotifications, setShowNotifications] = useState(false);
 
     useEffect( () => {
         setConnected(isConnected())
@@ -35,6 +40,8 @@ function Header(){
                 <StyledNav $navDriver>
                     {connected ? (
                         <>
+                            <NotifBell dark={true} onClick={() => setShowNotifications((prev) => !prev)} userType={USER_TYPES.PARTNER}/>
+                            { showNotifications &&  <NotifPanel/>}
                             <ButtonLogout $buttonRadius $logoutDisappear onClick={signout}>
                                 Déconnexion
                             </ButtonLogout>

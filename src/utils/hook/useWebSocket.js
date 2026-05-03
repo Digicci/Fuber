@@ -40,6 +40,14 @@ const useProvideSocket = () => {
                 console.log(connectionStatus)
             })
         })
+        driverSocket.on('race:abort',(data) => {
+            toast.error("Le client a annulé la course")
+            store.dispatch(addNotification({
+                title: 'Course annulée',
+                message:'Le client a annulé la course',
+                type:'error',
+            }));
+        })
     }
 
     const disconnectDriver = () => {

@@ -21,6 +21,13 @@ export const NotificationBellButton = styled.button`
     font-size: 1.35rem;
     color: #000000;
   }
+  ${(props) =>
+          props.$dark &&
+          `i {
+            color:#ffffff;          
+          }
+            `
+  }
 `;
 
 export const NotificationBadge = styled.span`
