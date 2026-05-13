@@ -36,10 +36,10 @@ function Footer() {
             </ContainerLogo>
             <ContainerWrapper>
                 <ContainerLink>
-                    <StyledLink $footerLink>
+                    <StyledLink $footerLink to={'/order'}>
                         {t('global.race')}
                     </StyledLink>
-                    <StyledLink $footerLink>
+                    <StyledLink $footerLink to={'/partner/login'}>
                         {t('global.partner')}
                     </StyledLink>
                     <StyledLink $footerLink>
