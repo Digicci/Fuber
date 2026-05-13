@@ -16,6 +16,7 @@ import AccountDash from "../../pages/Partner/AccountDash";
 import ForgotPasswordClient from '../../pages/Client/ForgotPasswordClient'
 import ForgotPasswordPartner from '../../pages/Partner/ForgotPasswordPartner'
 import PasswordReset from '../../pages/ResetPassword'
+import ValidationEmail from '../../components/ValidationEmail'
 
 function Router() {
     
@@ -62,6 +63,10 @@ function Router() {
                     element: <PrivateRoute>
                                 <Account/>
                             </PrivateRoute>
+                },
+                {
+                    path: '/validation/:email/:validationCode',
+                    element: <ValidationEmail/>
                 }
             ]
         },
@@ -100,6 +105,10 @@ function Router() {
                     element: <PasswordReset/>
 
                 },
+                {
+                    path: '/partner/validation/:email/:validationCode',
+                    element: <ValidationEmail/>
+                }
             ]
 
         }
