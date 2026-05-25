@@ -3,12 +3,35 @@ import InputWrapper from "../InputWrapper";
 import { useAxios } from "../../../utils/hook/useAxios";
 import { useLocation } from "../../../utils/hook/useLocation";
 import { useRace } from "../../../utils/hook/Client/useRace";
+import { useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
 
 function RaceState(){
+    const [searchParams] = useSearchParams();
 
     const location = useLocation()
     const axios = useAxios()
     const {raceInfo, setRace, setRaceInfo} = useRace()
+
+    useEffect(() => {
+        const start = searchParams.get("start") || "";
+        const end = searchParams.get("end") || "";
+
+        if (!start && !end) return;
+
+        setRaceInfo((prev) => {
+            if (prev.start === start && prev.end === end) return prev;
+
+            return {
+                ...prev,
+                start,
+                end,
+            };
+        });
+    }, [searchParams.toString()]);
+
+    console.log("raceInfo actuel :", raceInfo);
+
     const [suggest, setSuggest] = useState({
         start: false,
         end: false

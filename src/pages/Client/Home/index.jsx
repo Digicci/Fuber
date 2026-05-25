@@ -22,11 +22,35 @@ import {
   CCM,
   SpanStep,
 } from "./atoms"
-
+import {useState} from 'react'
+import {useNavigate} from 'react-router-dom'
+import { useRace } from "../../../utils/hook/Client/useRace";
 
 
 function Home() {
   const {t, i18n} = useTranslation('translation', {keyPrefix: ''});
+  const navigate = useNavigate();
+  const [start, setStart] = useState("");
+  const [end, setEnd] = useState("");
+  const { setRaceInfo } = useRace();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+
+    if (!start.trim() || !end.trim()) return;
+
+    setRaceInfo((prev) => ({
+      ...prev,
+      start,
+      end,
+    }));
+
+    localStorage.setItem("raceStart", start);
+    localStorage.setItem("raceEnd", end);
+
+    navigate(`/order?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`);
+  };
+
   return(
     <>
       <ContainerWrapper $cover>
@@ -34,12 +58,12 @@ function Home() {
           <h2>
             {t('home.welcome')}
           </h2>
-          <Form>
+          <Form onSubmit={handleSearch}>
             <DivInput>
-              <Input type="text" placeholder={t('home.premises')}></Input>
+              <Input type="text" placeholder={t('home.premises')} value={start} onChange={(e) =>{setStart(e.target.value)}}/>
             </DivInput>
             <DivInput>
-              <Input type="text" placeholder={t('home.destination')}></Input>
+              <Input type="text" placeholder={t('home.destination')} value={end} onChange={(e) =>{setEnd(e.target.value)}}/>
             </DivInput>
             <Button type="submit">
               <i className="ph-bold ph-magnifying-glass"></i>

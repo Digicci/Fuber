@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from "react";
+import React, { createContext, useContext, useState } from 'react'
 import {useAxios} from "../useAxios";
 
 const raceContext = createContext();
@@ -41,10 +41,10 @@ function useProvideRace() {
     });
 
     const setRace = (field, value) => {
-        setRaceInfo({
-            ...raceInfo,
-            [field]: value
-        })
+        setRaceInfo((prev) => ({
+            ...prev,
+            [field]: value,
+        }));
         console.log(field, value)
         console.log(raceInfo)
         localStorage.setItem(`race${field.charAt(0).toUpperCase() + field.slice(1)}`, value)
