@@ -17,17 +17,12 @@ function RaceState(){
         const start = searchParams.get("start") || "";
         const end = searchParams.get("end") || "";
 
-        if (!start && !end) return;
-
-        setRaceInfo((prev) => {
-            if (prev.start === start && prev.end === end) return prev;
-
-            return {
-                ...prev,
-                start,
-                end,
-            };
-        });
+        if (start){
+            setRace("start", start)
+        }
+        if(end){
+            setRace("end", end)
+        }
     }, [searchParams.toString()]);
 
     console.log("raceInfo actuel :", raceInfo);

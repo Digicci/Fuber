@@ -32,21 +32,12 @@ function Home() {
   const navigate = useNavigate();
   const [start, setStart] = useState("");
   const [end, setEnd] = useState("");
-  const { setRaceInfo } = useRace();
+  const { setRace } = useRace();
 
   const handleSearch = (e) => {
     e.preventDefault();
 
     if (!start.trim() || !end.trim()) return;
-
-    setRaceInfo((prev) => ({
-      ...prev,
-      start,
-      end,
-    }));
-
-    localStorage.setItem("raceStart", start);
-    localStorage.setItem("raceEnd", end);
 
     navigate(`/order?start=${encodeURIComponent(start)}&end=${encodeURIComponent(end)}`);
   };
@@ -60,10 +51,16 @@ function Home() {
           </h2>
           <Form onSubmit={handleSearch}>
             <DivInput>
-              <Input type="text" placeholder={t('home.premises')} value={start} onChange={(e) =>{setStart(e.target.value)}}/>
+              <Input type="text" placeholder={t('home.premises')} value={start} onChange={(e) => {
+                setStart(e.target.value);
+                setRace("start", e.target.value);
+              }}/>
             </DivInput>
             <DivInput>
-              <Input type="text" placeholder={t('home.destination')} value={end} onChange={(e) =>{setEnd(e.target.value)}}/>
+              <Input type="text" placeholder={t('home.destination')} value={end} onChange={(e) => {
+                setEnd(e.target.value);
+                setRace("end", e.target.value);
+              }}/>
             </DivInput>
             <Button type="submit">
               <i className="ph-bold ph-magnifying-glass"></i>
