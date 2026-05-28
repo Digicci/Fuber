@@ -1,18 +1,28 @@
 import React from 'react'
 import {Select} from './atoms'
-import {UseSelector, useDispatch} from 'react-redux'
 
-function SelectPeriod(){
-  return(
-    <>
-      <Select>
-        <option value="0">Toutes les périodes</option>
-        {
+function SelectPeriod({ period, setPeriod }) {
+  const periods = [
+    { label: "Tout", value: "all" },
+    { label: "Mois en cours", value: "current_month" },
+    { label: "7 derniers jours", value: "last_7_days" },
+    { label: "Semaine en cours", value: "current_week" },
+    { label: "6 mois", value: "six_months" },
+    { label: "1 an", value: "one_year" },
+  ];
 
-        }
-      </Select>
-    </>
-  )
+  return (
+    <Select
+      value={period}
+      onChange={(e) => setPeriod(e.target.value)}
+    >
+      {periods.map((p) => (
+        <option key={p.value} value={p.value}>
+          {p.label}
+        </option>
+      ))}
+    </Select>
+  );
 }
 
-export default SelectPeriod
+export default SelectPeriod;

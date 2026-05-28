@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import {
     Container,
     Title,
@@ -13,6 +13,7 @@ import SelectDriver from '../../../components/Partner/SelectDriver'
 import SelectPeriod from '../../../components/Partner/SelectPeriode'
 
 function Finance() {
+  const [period, setPeriod] = useState("all");
   return (
     <>
         <Container>
@@ -21,7 +22,7 @@ function Finance() {
             </Title>
             <ContainerSelect>
               <SelectDriver/>
-              <SelectPeriod/>
+              <SelectPeriod period={period} setPeriod={setPeriod} />
             </ContainerSelect>
             <FinanceCard/>
             <Div>
@@ -29,7 +30,7 @@ function Finance() {
                     <H4>
                         Tous les clients
                     </H4>
-                    <ClientList/>
+                    <ClientList period={period} />
                 </List>
             </Div>
         </Container>
