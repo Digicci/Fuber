@@ -6,20 +6,42 @@ import  {
 import ClientLists from "../ClientLists";
 import { useSelector} from 'react-redux'
 import { getSelectedEmployee} from '../../../utils/store/Partner/selectors/AuthSelectors'
+import { getPeriodDates } from '../../../utils/Data/Partner/getPeriodDates'
 
 
-function ClientList() {
+function ClientList({period}) {
 
     const drivers = useSelector(getSelectedEmployee)
-    const copyDrivers = [...drivers]
-    copyDrivers.forEach((driver) => {
-        return driver.courses.map((course) => {
-            return course.driver = driver
-        })
-    })
-    const races = copyDrivers.reduce((acc, driver) => {
-        return  acc.concat(driver.courses)
-    }, [])
+    const races = drivers.reduce((acc, driver) => {
+        const coursesWithDriver = driver.courses.map((course) => ({
+            ...course,
+            driver,
+        }));
+
+        return acc.concat(coursesWithDriver);
+    }, []);
+
+    const { start, end } = getPeriodDates(period);
+
+    const startTime = new Date(start).getTime();
+    const endTime = new Date(end).getTime();
+
+    const filteredRaces =
+      period === "all"
+        ? races
+        : races.filter((race) => {
+            const dateValue =
+              race.createdAt ||
+              race.updatedAt ||
+              race.date ||
+              race.created_at;
+
+            if (!dateValue) return false;
+
+            const raceTime = new Date(dateValue).getTime();
+
+            return raceTime >= startTime && raceTime <= endTime;
+        });
 
     return (
         <>
@@ -30,7 +52,7 @@ function ClientList() {
             <p>Prix</p>
             </Div>
             {
-                races.map((race) => {
+                filteredRaces.map((race) => {
                     return (
                         <ClientLists key={race.id} {...race} />
                     )
