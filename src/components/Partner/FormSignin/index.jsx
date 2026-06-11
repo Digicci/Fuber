@@ -8,6 +8,7 @@ import { toast } from 'react-toastify';
 import { ContainerForm,
     Error,
 } from "./atoms";
+import { USER_TYPES } from '../../../utils/constants/userTypes'
 
 function FormSignin(){
 
@@ -205,7 +206,7 @@ function FormSignin(){
                         icon: '👌',
                     })
                     setTimeout(() => {
-                        navigate('/partner/login',{replace: true})
+                        navigate(`partner/check-email/${USER_TYPES.PARTNER}`,{replace: true})
                     }, toastTimer)
                 }
             })

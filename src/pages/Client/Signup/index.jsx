@@ -17,6 +17,7 @@ import {useCsrf} from "../../../utils/hook/useCsrf";
 import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useTranslation } from 'react-i18next';
+import { USER_TYPES } from '../../../utils/constants/userTypes'
 
 const StyledError = styled.span`
   color: red;
@@ -171,7 +172,7 @@ function Signup() {
                         icon: '👌'
                     })
                     setTimeout(() => {
-                        navigate('/login', {replace: true})
+                        navigate(`/check-email/${USER_TYPES.CLIENT}`, {replace: true})
                     }, toastTimer);
                 }
             }).catch((error) => {

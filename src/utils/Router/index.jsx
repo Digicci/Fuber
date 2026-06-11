@@ -16,6 +16,10 @@ import AccountDash from "../../pages/Partner/AccountDash";
 import ForgotPasswordClient from '../../pages/Client/ForgotPasswordClient'
 import ForgotPasswordPartner from '../../pages/Partner/ForgotPasswordPartner'
 import PasswordReset from '../../pages/ResetPassword'
+import CheckEmailClient from '../../pages/Client/CheckEmailClient'
+import CheckEmailPartner from '../../pages/Partner/CheckEmailPartner'
+import ValidationAccountClient from '../../pages/Client/ValidationAccountClient'
+import ValidationAccountPartner from '../../pages/Partner/ValidationAccountPartner'
 
 function Router() {
     
@@ -50,6 +54,14 @@ function Router() {
                     path: "/reset-password",
                     element: <PasswordReset/>
 
+                },
+                {
+                    path:"/check-email",
+                    element: <CheckEmailClient/>
+                },
+                {
+                    path:"/validation/:validationCode",
+                    element: <ValidationAccountClient/>
                 },
                 {
                     path: "account/:page",
@@ -99,6 +111,14 @@ function Router() {
                     path: "/partner/reset-password",
                     element: <PasswordReset/>
 
+                },
+                {
+                    path:"/partner/check-email",
+                    element: <CheckEmailPartner/>
+                },
+                {
+                    path: "/partner/validation/:validationCode",
+                    element: <ValidationAccountPartner />
                 },
             ]
 
