@@ -22,13 +22,12 @@ const useProvideDriverLocation = () => {
         const tracker = navigator.geolocation.watchPosition(
             trackerCallback,
             (error) => {
-                console.log(error)
                 if(error.code === 1) {
                     alert('Merci d\'activer la localisation pour utiliser l\'application')
                 } else if(error.code === 2) {
                     alert('La localisation n\'est pas disponible')
                 } else if(error.code === 3) {
-                    console.log('La localisation a pris trop de temps')
+                    alert('La localisation a expiré, merci de réessayer')
                 }
             },
             {

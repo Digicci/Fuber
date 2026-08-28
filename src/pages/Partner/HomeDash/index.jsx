@@ -20,7 +20,7 @@ function HomeDash() {
                             <p>
                                 Attention, votre compte ne vous permet pas de passer en ligne.
                                 <br/>
-                                Afin de passer en ligne merci de renseigner un prix au kilomètre, ainsi qu'un véhicule dans la section profile.
+                                Afin de passer en ligne merci de renseigner un prix au kilomètre, ainsi qu&apos;un véhicule dans la section profile.
                             </p>
                         </Alert>
                 }

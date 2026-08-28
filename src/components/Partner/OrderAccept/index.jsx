@@ -31,7 +31,6 @@ function OrderAccept() {
   const {api} = useAxios()
   
   driverSocket.on("race:request", (data) => {
-    console.log(data)
     setHasNewOrder(true)
     setIsOpen(true)
     setOrder(data)
@@ -39,7 +38,6 @@ function OrderAccept() {
   
   const acceptOrder = () => {
     driverSocket.emit('race:accept', order, (data) => {
-      console.log(data)
     })
     raceIsViewed()
     dispatch(fetchRaces(api))
@@ -47,7 +45,6 @@ function OrderAccept() {
   
   const refuseOrder = () => {
     driverSocket.emit("race:refuse", order, (data) => {
-      console.log(data)
     })
     raceIsViewed()
   }

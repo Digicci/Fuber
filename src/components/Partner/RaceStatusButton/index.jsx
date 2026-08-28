@@ -58,7 +58,6 @@ const RaceStatusButton = ({raceId}) => {
     })
    })
    .catch((e) => {
-    console.log(e)
     toast.update(id, {
      render: e.response.data,
      type: "error",

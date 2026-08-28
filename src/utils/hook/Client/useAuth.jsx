@@ -51,7 +51,9 @@ function useProvideAuth() {
     // reempile a chaque rendu. Il est desormais monte une seule fois et
     // retire au demontage.
     const signoutRef = useRef(signout);
-    signoutRef.current = signout;
+    useEffect(() => {
+        signoutRef.current = signout;
+    }, [signout]);
 
     useEffect(() => {
         const interceptorId = axios.api.interceptors.response.use(

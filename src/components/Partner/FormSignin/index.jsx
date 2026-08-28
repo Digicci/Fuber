@@ -69,7 +69,7 @@ function FormSignin(){
                 required: true,
                 minLength: 3,
                 maxLength: 25,
-                pattern: /^[A-Za-z][A-Za-z\d\-]+$/,
+                pattern: /^[A-Za-z][A-Za-z\d-]+$/,
             }
         },
         cp: {

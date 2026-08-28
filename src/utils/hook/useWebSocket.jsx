@@ -45,7 +45,6 @@ const useProvideSocket = () => {
         driverSocket.on('connect', () => {
             // Plus besoin de transmettre driverId : le serveur le lit dans le token.
             driverSocket.emit('getOnline', {}, (connectionStatus) => {
-                console.log(connectionStatus)
             })
         })
     }
@@ -53,20 +52,17 @@ const useProvideSocket = () => {
     const disconnectDriver = () => {
         driverSocket.disconnect()
         driverSocket.on('disconnect', () => {
-            console.log('driver disconnected')
         })
     }
 
     const driverUpdateLocation = (location) => {
         driverSocket.emit('location:change', {location}, (data) => {
-            console.log(data)
         })
     }
 
     const connectUser = () => {
         userSocket.connect()
         userSocket.on('connect', () => {
-            console.log('user connected')
         })
     }
     
@@ -77,7 +73,6 @@ const useProvideSocket = () => {
      */
     const requestRace = (raceInfo) => {
         userSocket.emit('race:request', {raceInfo}, (data) => {
-          console.log(data)
         })
     }
 

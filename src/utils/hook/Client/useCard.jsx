@@ -23,14 +23,6 @@ function useProvideCard() {
         return axios.get(`${basePath}/addCardIntent`, { withCredentials: true })
     }
 
-    const saveIntent = () => {
-        return axios.get(`${basePath}/saveCardIntent`, { withCredentials: true })
-    }
-
-    const addCard = (data) => {
-        return axios.post(`${basePath}/addCard`, data, { withCredentials: true })
-    }
-
     const getCards = async () => {
         const res = await axios.get(`${basePath}/cards`, { withCredentials: true })
         setCard(res.data)
@@ -58,8 +50,6 @@ function useProvideCard() {
         defaultCard,
         getUserToken,
         getCards,
-        saveIntent,
-        addCard,
         setDefault,
         deleteCard
     };

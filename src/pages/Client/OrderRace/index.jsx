@@ -21,7 +21,7 @@ import LoginPopUp from "../../../components/Client/LoginPopUp";
 import {useNavigate} from "react-router-dom";
 
 
-function OrderRace({}){
+function OrderRace(){
 
     const auth = useAuth()
 

@@ -51,7 +51,6 @@ function RaceByStatus({status}){
     
     const addConnectedDriverRaces = () => {
         if (copyDriver.courses?.length > 0) {
-            console.log('driver races add')
             const raceTab = []
             copyDriver.courses?.forEach(course => {
                 const c = {...course}
@@ -60,7 +59,6 @@ function RaceByStatus({status}){
             })
             setRaces(races.concat(raceTab))
         }
-        console.log(races)
     }
     
     useEffect(() => {
@@ -86,7 +84,7 @@ function RaceByStatus({status}){
                 {
                   races?.filter(race => race.state === status).length === 0 &&
                   <H3>
-                      Il semble que vous n'avez pas encore{status === 'done' ? ' effectué de course.' : ' de courses en cours'}
+                      Il semble que vous n&apos;avez pas encore{status === 'done' ? ' effectué de course.' : ' de courses en cours'}
                   </H3>
                 }
                 <InProgress>
@@ -95,7 +93,6 @@ function RaceByStatus({status}){
                 {
                     races?.length > 0 &&
                     races?.map((race)=> {
-                        console.log(race)
                         return race.state === status && (selectedDriverId === 0 || selectedDriverId === race.driver.id) ? <RaceStatusInfo key={race?.id} {...race} /> : null
                     })
                 }

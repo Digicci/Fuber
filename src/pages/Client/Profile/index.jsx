@@ -38,7 +38,11 @@ function Profil()
 
     const csrf = useCsrf()
     const toggleUpdate = (e) => {
-        const field = e.target.attributes.datafield.value
+        // L'attribut est declare `data-field` en JSX : `dataField` en camelCase
+        // n'etait pas rendu dans le DOM, et la lecture echouait donc ici.
+        const target = e.target.closest('[data-field]')
+        const field = target && target.dataset.field
+        if (!field) return
         let state =  {...update}
         state[field] = !state[field] 
         setUpdate(state)
@@ -120,7 +124,7 @@ function Profil()
                                         onChange={handleChange}
                                     />
                                     <ButtonUpdate>
-                                        <i className="ph-bold ph-x" dataField='nom' onClick={toggleUpdate}></i>
+                                        <i className="ph-bold ph-x" data-field='nom' onClick={toggleUpdate}></i>
                                     </ButtonUpdate>
                                 </>
                             ) : (
@@ -129,7 +133,7 @@ function Profil()
                                         {user?.nom} {user?.prenom}
                                     </UserName>
                                     <ButtonUpdate>
-                                        <i className="ph-bold ph-pencil" dataField='nom' onClick={toggleUpdate}></i>
+                                        <i className="ph-bold ph-pencil" data-field='nom' onClick={toggleUpdate}></i>
                                     </ButtonUpdate>
                                 </>
                             )
@@ -151,7 +155,7 @@ function Profil()
                                     onChange={handleChange}
                                 />
                                 <ButtonUpdate>
-                                    <i className="ph-bold ph-x" dataField='num' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-x" data-field='num' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 
@@ -161,7 +165,7 @@ function Profil()
                                     {user?.num}
                                 </Number>
                                 <ButtonUpdate>
-                                    <i className="ph-bold ph-pencil" dataField='num' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-pencil" data-field='num' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 
@@ -186,7 +190,7 @@ function Profil()
                                     onChange={handleChange}
                                 />
                                 <ButtonUpdate>
-                                    <i className="ph-bold ph-x" dataField='mail' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-x" data-field='mail' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 
@@ -196,7 +200,7 @@ function Profil()
                                     {user?.mail}
                                 </Email>
                                 <ButtonUpdate>
-                                    <i className="ph-bold ph-pencil" dataField='mail' onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-pencil" data-field='mail' onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
 

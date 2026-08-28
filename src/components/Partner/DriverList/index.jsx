@@ -24,7 +24,7 @@ function DriverList() {
                         return (
                             <DriverItem key={index} item={item}/>
                         )
-                    }): <p>Vous n'avez pas encore d'équipe</p>}
+                    }): <p>Vous n&apos;avez pas encore d&apos;équipe</p>}
                 </Div>
             </List>
         </>

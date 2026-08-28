@@ -19,6 +19,7 @@ function CarCards(){
     const location = useLocation()
     const csrf = useCsrf()
     const auth = useAuth()
+    const [data, setData] = useState([])
 
     useEffect(() => {
         axios.post('user/getNearDrivers', {
@@ -45,10 +46,7 @@ function CarCards(){
             driverSurname: prenom,
             type
         })
-        console.log({total, driverPrice, enterprise, id, race: race.raceInfo}, type)
     }
-
-    const [data,setData] = useState([])
 
     return(
         <>
@@ -60,7 +58,7 @@ function CarCards(){
                         })
                     ) : (
                         <NoDriver>
-                            Veuillez nous excuser, aucun chauffeur n'est disponible pour le moment sur votre secteur.
+                            Veuillez nous excuser, aucun chauffeur n&apos;est disponible pour le moment sur votre secteur.
                         </NoDriver>
                     )
                 }

@@ -38,7 +38,6 @@ function RaceDetails({isOpenDetails, toggle}) {
 
     useEffect(() => {
         setDriverInfo(Driver.find((d) => {
-            console.log(d, race.raceInfo)
             if (d.id === parseInt(race.raceInfo.type)) {
                 return d
             }
@@ -75,6 +74,21 @@ function RaceDetails({isOpenDetails, toggle}) {
                 })
             }
         }).catch(e => {
+            // L'API renvoie desormais 402 quand le paiement est refuse par
+            // Stripe : axios traite ce code comme une erreur, il faut donc le
+            // distinguer ici pour conserver le message d'origine.
+            if (e.response && e.response.status === 402) {
+                toast.error("Une erreur est survenue, merci de changer de carte et de réessayer", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    icon: "🤔"
+                })
+                return
+            }
             toast.error("Une erreur est survenue, merci de réessayer.", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 5000,
@@ -110,7 +124,7 @@ function RaceDetails({isOpenDetails, toggle}) {
                                 <Span $spanRight>{race.raceInfo.start ?? ''}</Span>
                             </InfoAdresse>
                             <InfoAdresse>
-                                <Span $spanLeft>Adresse de d'arrivée </Span>
+                                <Span $spanLeft>Adresse de d&apos;arrivée </Span>
                                 <Span $spanRight>: {race.raceInfo.end ?? ''}</Span>
                             </InfoAdresse>
                         </Details>

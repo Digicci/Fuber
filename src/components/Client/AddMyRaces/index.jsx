@@ -55,7 +55,6 @@ function AddMyRace() {
                   })
               }
           }).catch(e => {
-              console.log("catch",e.response)
               toast.update(id, {
                   type: "error",
                   render: e.response.data,
@@ -70,7 +69,7 @@ function AddMyRace() {
             <ContainerMyRaces>
                 {data.length <= 0 ? (
                     <MyRaceH3>
-                        Il semble que vous n'avez pas de course en cours.
+                        Il semble que vous n&apos;avez pas de course en cours.
                     </MyRaceH3>
                 ) : (
                     <>

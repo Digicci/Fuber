@@ -52,17 +52,14 @@ function useProvideLocation() {
   //Fonction de tracking de la localisation de l'utilisateur
   const setTrack = () => {
     //console log
-    console.log("try to access position")
     const id = navigator.geolocation.watchPosition((position) => {
-        console.log("Start watching position");
-        setLocation({
+            setLocation({
           lat: position.coords.latitude,
           lng: position.coords.longitude
         })
         setLocationLoad(false)
       },
       (positionError) => {
-        console.log(positionError)
       })
     setTrackerId(id)
     setMap(null)
@@ -70,16 +67,13 @@ function useProvideLocation() {
   
   //Fonction de déstruction de la map
   const destroyMap = () => {
-    console.log(map, "map before destroy")
     map?.off()
     map?.remove()
-    console.log(map, "map after destroy")
     setMap(null)
   }
   
   //Arrêt du tracking
   const unsetTrack = () => {
-    console.log("Stop watching position")
     navigator.geolocation.clearWatch(trackerId)
   }
   
@@ -92,7 +86,6 @@ function useProvideLocation() {
     if (id && !map) {
       const mapInstance = L.map(id).setView([location.lat, location.lng], 13);
       setMap(mapInstance)
-      console.log(map, mapInstance, "map instance created")
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors'
       }).addTo(mapInstance);

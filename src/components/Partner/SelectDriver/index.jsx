@@ -18,7 +18,6 @@ function SelectDriver() {
                   <option value="0">Tous les Chauffeurs</option>
                   {
                       team.map((driver) => {
-                          console.log(driver)
                           return <OptionDriver key={driver.id} {...driver} />
                       })
                   }

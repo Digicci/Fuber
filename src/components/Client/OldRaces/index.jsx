@@ -26,7 +26,6 @@ function OldRaces(){
     useEffect(() => {
         axios.get('race/getAllDone').then((res) => {
             setOldRaces(res.data)
-            console.log(res.data)
             setIsLoading(false)
         }).catch((err) => {
             setError(err)
@@ -88,7 +87,7 @@ function OldRaces(){
                             </>
                         ) : (
                             <MyRaceH3>
-                                Il semble que vous n'avez pas de course archivée.
+                                Il semble que vous n&apos;avez pas de course archivée.
                             </MyRaceH3>
                         )}
                     </>

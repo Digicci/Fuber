@@ -73,7 +73,7 @@ function FormLogin() {
                         closeOnClick: true
                     })
                     localStorage.setItem('driver_token', res.data.token)
-                    console.log(res.data.driver)
+                    localStorage.setItem('driver_refresh_token', res.data.refreshToken)
                     dispatch(setAuth(res.data.driver))
                     setTimeout(() => {
                         navigate('/partner/account/home', { replace: true })
@@ -151,7 +151,7 @@ function FormLogin() {
                 </Button>
                 <DivSignin>
                     <StyledLink to="/partner/signin" $signinEntreprise>
-                        Pas encore inscrit ? S'incrire
+                        Pas encore inscrit ? S&apos;incrire
                     </StyledLink>
                 </DivSignin>
             </Form>

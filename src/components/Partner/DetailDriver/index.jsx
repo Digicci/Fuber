@@ -5,10 +5,6 @@ import {
     DivProfil,
     Modal,
     DivText,
-    Cards,
-    Card,
-    TopCard,
-    BottomCard,
     Delete,
     DivDelete,
 
@@ -68,7 +64,7 @@ function DetailDriver({toggle, isOpen, driver}) {
                                             </p>
                                         </>
                                     ) : (
-                                        <p>Ce chauffeur n'a pas de véhicule.</p>
+                                        <p>Ce chauffeur n&apos;a pas de véhicule.</p>
                                     )
                                 }
                             </DivText>

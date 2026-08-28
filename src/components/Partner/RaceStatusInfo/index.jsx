@@ -4,7 +4,6 @@ import CarType from '../../../utils/Data/Partner/CarType'
 import RaceStatusButton from "../RaceStatusButton";
 
 function RaceStatusInfo({ id, state, driverPrice, start, end, createdAt,driver, utilisateur  }) {
-    console.log(id)
     const type = CarType.find((car) => car.value === driver?.vehicule.type)?.type
     const [date, hour] = createdAt?.split('T') || ['','']
     const displayHour = hour?.split('.')[0]

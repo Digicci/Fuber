@@ -191,7 +191,7 @@ function FormAddDriver() {
                 {
                     Object.entries(part1).map((value, index) => {
                         return (
-                            <DivInput>
+                            <DivInput key={value[0] ?? index}>
                                 <Input
                                     type={value[1].type}
                                     placeholder={value[1].placeholder}

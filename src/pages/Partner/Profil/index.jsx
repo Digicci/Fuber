@@ -57,7 +57,11 @@ function Profil() {
     }, [])
 
     const toggleUpdate = (e) => {
-        const field = e.target.attributes.datafield.value
+        // L'attribut est declare `data-field` en JSX : `dataField` en camelCase
+        // n'etait pas rendu dans le DOM, et la lecture echouait donc ici.
+        const target = e.target.closest('[data-field]')
+        const field = target && target.dataset.field
+        if (!field) return
         let state =  {...update}
         state[field] = !state[field]
         setUpdate(state)
@@ -117,7 +121,6 @@ function Profil() {
     const toggleIsOpen = () => {
         setIsOpen(!isOpen)
     }
-    console.log(entreprise)
     return (
         <div style={{display: "flex", width: "100%", marginBottom: "1rem"}}>
             <ContainerInfo>
@@ -153,7 +156,7 @@ function Profil() {
                                         onChange={handleChange}
                                     />
                                     <ButtonUpdate>
-                                        <i className="ph-bold ph-x" datafield="nom" onClick={toggleUpdate}></i>
+                                        <i className="ph-bold ph-x" data-field="nom" onClick={toggleUpdate}></i>
                                     </ButtonUpdate>
                                 </>
                             ) : (
@@ -162,7 +165,7 @@ function Profil() {
                                         {entreprise.nom} {entreprise.prenom}
                                     </UserName>
                                     <ButtonUpdate>
-                                        <i className="ph-bold ph-pencil" datafield="nom" onClick={toggleUpdate}></i>
+                                        <i className="ph-bold ph-pencil" data-field="nom" onClick={toggleUpdate}></i>
                                     </ButtonUpdate>
                                 </>
                             )
@@ -186,7 +189,7 @@ function Profil() {
                                     onChange={handleChange}
                                 />
                                 <ButtonUpdate>
-                                    <i className="ph-bold ph-x" datafield="num" onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-x" data-field="num" onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
                         ) : (
@@ -195,7 +198,7 @@ function Profil() {
                                     {entreprise.num}
                                 </Number>
                                 <ButtonUpdate>
-                                    <i className="ph-bold ph-pencil" datafield="num" onClick={toggleUpdate}></i>
+                                    <i className="ph-bold ph-pencil" data-field="num" onClick={toggleUpdate}></i>
                                 </ButtonUpdate>
                             </>
                         )
@@ -218,7 +221,7 @@ function Profil() {
                                 onChange={handleChange}
                               />
                               <ButtonUpdate>
-                                  <i className="ph-bold ph-x" datafield="prix" onClick={toggleUpdate}></i>
+                                  <i className="ph-bold ph-x" data-field="prix" onClick={toggleUpdate}></i>
                               </ButtonUpdate>
                           </>
                         ) : (
@@ -227,7 +230,7 @@ function Profil() {
                                   {entreprise.prix} €/km
                               </Number>
                               <ButtonUpdate>
-                                  <i className="ph-bold ph-pencil" datafield="prix" onClick={toggleUpdate}></i>
+                                  <i className="ph-bold ph-pencil" data-field="prix" onClick={toggleUpdate}></i>
                               </ButtonUpdate>
                           </>
                         )

@@ -26,7 +26,7 @@ export const useValidator = () => {
         if(!form[name] || !form[name].rules || value === '') {
             setErrors({...errors, [name]: error});
             return true
-        };
+        }
         if (form[name].rules.required && !value) {
             isSafe = false;
             error = 'Ce champ est obligatoire'

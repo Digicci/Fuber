@@ -6,7 +6,7 @@
  */
 
 function required(name) {
-    const value = process.env[name];
+    const value = import.meta.env[name];
     if (!value) {
         throw new Error(
             `Variable d'environnement manquante : ${name}. ` +
@@ -16,7 +16,7 @@ function required(name) {
     return value;
 }
 
-export const API_BASE_URL = required('REACT_APP_API_BASE_URL');
-export const SOCKET_URL = required('REACT_APP_SOCKET_URL');
-export const STRIPE_PUBLIC_KEY = required('REACT_APP_STRIPE_PK');
-export const PUBLIC_APP_URL = (process.env.REACT_APP_PUBLIC_URL || window.location.origin).replace(/\/$/, '');
+export const API_BASE_URL = required('VITE_API_BASE_URL');
+export const SOCKET_URL = required('VITE_SOCKET_URL');
+export const STRIPE_PUBLIC_KEY = required('VITE_STRIPE_PK');
+export const PUBLIC_APP_URL = (import.meta.env.VITE_PUBLIC_URL || window.location.origin).replace(/\/$/, '');

@@ -45,8 +45,6 @@ function useProvideRace() {
             ...raceInfo,
             [field]: value
         })
-        console.log(field, value)
-        console.log(raceInfo)
         localStorage.setItem(`race${field.charAt(0).toUpperCase() + field.slice(1)}`, value)
     }
 

@@ -21,7 +21,6 @@ function CarCard({id, entrepriseId, places, prix, model, marque, distance, commi
     const driverCommission = driverPrice * commission
     const driverTotal = driverPrice + driverCommission
     const imgInfo = Driver.find((d) => {
-        console.log(type, d)
         if (d.id === parseInt(type)) {
             return true
         }

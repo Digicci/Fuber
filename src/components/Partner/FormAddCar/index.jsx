@@ -82,7 +82,6 @@ function FormAddCar({toggle}) {
             }
           })
           .catch((error) => {
-            console.log(error, "error catch")
             toast.update(toastId, {
               render: error.response.data,
               type: toast.TYPE.ERROR,

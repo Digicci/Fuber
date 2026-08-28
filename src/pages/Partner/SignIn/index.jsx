@@ -66,16 +66,16 @@ function SignIn(){
                 <ContainerSignup>
                     <Title>
                         <h2>Devenez partenaire</h2>
-                        <p>La plateforme dedié 100% au taxis vous offre la flexibilité, la visibilité et les données nécessaires pour vous mettre en relation avec davantage de clients. Devenez partenaire dès aujourd'hui.</p>
+                        <p>La plateforme dedié 100% au taxis vous offre la flexibilité, la visibilité et les données nécessaires pour vous mettre en relation avec davantage de clients. Devenez partenaire dès aujourd&apos;hui.</p>
                     </Title>
                 </ContainerSignup>
                 <Cover>
                     <div></div>
-                    <Button>Démarrer l'expérience</Button>
+                    <Button>Démarrer l&apos;expérience</Button>
                 </Cover>
                 <Form>
                     <DivInfo>
-                        <h3> C'est facile de se lancer</h3>
+                        <h3> C&apos;est facile de se lancer</h3>
                         <p>1. Lorem ipsum dolor sit amet consectetur adipisicing elit. In fuga nisi, repellendus sed odio cupiditate.</p>
                         <p>2. Lorem ipsum dolor sit amet consectetur adipisicing elit. In fuga nisi, repellendus sed odio cupiditate.</p>
                         <p>3. Lorem ipsum dolor sit amet consectetur adipisicing elit. In fuga nisi, repellendus sed odio cupiditate.</p>

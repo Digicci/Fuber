@@ -30,9 +30,7 @@ function Map() {
 
     useEffect(() => {
         location.setTrack()
-        console.log("mount map")
         return () => {
-            console.log("unmount map")
             location.unsetTrack()
             location.destroyMap()
         }
@@ -42,10 +40,8 @@ function Map() {
         const mapContainer = document.getElementById('map')
 
         if (mapContainer && !location.map && !location.locationLoad) {
-            console.log("launch map creation", location.map)
             location.getMap('map')
         }
-        console.log(location)
     }, [location.locationLoad, location.location])
 
     return (
