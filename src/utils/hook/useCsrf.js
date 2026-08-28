@@ -1,7 +1,6 @@
 import React, { useContext, useState, createContext } from "react";
 import axios from "axios";
-
-const apiPath = "http://localhost:8000/api";
+import { API_BASE_URL } from "../../config";
 
 const csrfContext = createContext();
 
@@ -18,7 +17,7 @@ function useProvideCsrf() {
     const [token, setToken] = useState(null);
 
     const getCsrfToken = () => {
-        axios.get(`${apiPath}/security/csrf/form`, { withCredentials: true }).then((res) => {
+        axios.get(`${API_BASE_URL}/security/csrf/form`, { withCredentials: true }).then((res) => {
             setToken(res.data.csrfToken);
             return true
         })

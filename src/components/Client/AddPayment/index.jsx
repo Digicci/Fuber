@@ -13,9 +13,10 @@ import {Elements} from "@stripe/react-stripe-js";
 import {loadStripe} from "@stripe/stripe-js";
 import {useCard} from "../../../utils/hook/Client/useCard";
 import { useCsrf } from "../../../utils/hook/useCsrf";
+import { STRIPE_PUBLIC_KEY } from "../../../config";
 
 
-const stripePromise = loadStripe('pk_test_51MP9laGtIjyGGRoGpaBalxu4QM8MJnTztna8yCbYAdiO8ffs8VCVjVtcu1kAUzAF0xQnCjQlmb2ajQrQVB92QXd500UbrRxxFH')
+const stripePromise = loadStripe(STRIPE_PUBLIC_KEY)
 
 
 

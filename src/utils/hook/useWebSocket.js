@@ -1,16 +1,27 @@
 import {Manager} from 'socket.io-client';
 import {createContext, useContext} from "react";
-import {useSelector} from "react-redux";
-import { getDriverId } from "../store/Partner/selectors/AuthSelectors";
+import { SOCKET_URL } from "../../config";
 
-const socketManager = new Manager('http://localhost:1000', {
+const socketManager = new Manager(SOCKET_URL, {
     autoConnect: false,
     reconnection: true,
     reconnectionDelayMax: 10000,
 })
 
-const driverSocket = socketManager.socket('/driver')
-const userSocket = socketManager.socket('/user')
+// Les namespaces exigent desormais un JWT : l'identite du chauffeur et du
+// client est derivee du token cote serveur, plus du payload des evenements.
+const withAuth = (namespace, tokenKey) => {
+    const socket = socketManager.socket(namespace)
+    socket.on('connect_error', (err) => {
+        console.error(`socket ${namespace}:`, err.message)
+    })
+    // Le token est relu a chaque (re)connexion, pour suivre les rafraichissements.
+    socket.auth = (cb) => cb({token: localStorage.getItem(tokenKey)})
+    return socket
+}
+
+const driverSocket = withAuth('/driver', 'driver_token')
+const userSocket = withAuth('/user', 'user_token')
 
 const SocketContext = createContext({})
 
@@ -29,10 +40,11 @@ export const useSocket = () => {
 
 const useProvideSocket = () => {
 
-    const connectDriver = (driverId) => {
+    const connectDriver = () => {
         driverSocket.connect()
         driverSocket.on('connect', () => {
-            driverSocket.emit('getOnline', {driverId}, (connectionStatus) => {
+            // Plus besoin de transmettre driverId : le serveur le lit dans le token.
+            driverSocket.emit('getOnline', {}, (connectionStatus) => {
                 console.log(connectionStatus)
             })
         })

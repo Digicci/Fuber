@@ -33,17 +33,19 @@ function OrderRace({}){
 
     const navigate = useNavigate()
 
-    // Si l'utilisateur est connecté, on récupère ses cartes de paiement
+    // Si l'utilisateur est connecté, on récupère ses cartes de paiement.
+    // La dependance sur auth.user est necessaire : au montage la session n'est
+    // pas encore verifiee, isConnected() renvoie donc false.
     useEffect(() => {
         if (auth.isConnected()) {
             card.getCards().catch((err) => {
                 if(err.code === 401) {
                     auth.signout()
-                    navigate('/login', {replace: true})
                 }
             })
         }
-    }, [])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [auth.user])
 
 
     const [isOpenWallet,setIsOpenWallet] = useState(false)

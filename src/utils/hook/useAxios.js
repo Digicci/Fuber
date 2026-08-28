@@ -1,11 +1,11 @@
 import React,{ useContext, createContext } from 'react';
 import { useCsrf } from "./useCsrf";
 import axios from "axios";
+import { API_BASE_URL } from "../../config";
 
 const axiosContext = createContext();
-const apiPath = "http://localhost:8000/api";
 const api = axios.create({
-    baseURL: apiPath
+    baseURL: API_BASE_URL
 })
 
 export function ProvideAxios({ children }) {
@@ -27,7 +27,8 @@ function useProvideAxios() {
             :
             localStorage.getItem("user_token");
         api.defaults.headers.common['Authorization'] = JWT ? `Bearer ${JWT}` : null;
-        api.defaults.headers.post['X-CSRF-TOKEN'] = csrf.token;
+        // Sur `common` et non `post` : les PUT et DELETE partaient sans token CSRF.
+        api.defaults.headers.common['X-CSRF-TOKEN'] = csrf.token;
         api.defaults.withCredentials = true;
     }
 

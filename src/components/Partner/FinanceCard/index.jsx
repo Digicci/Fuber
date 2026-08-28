@@ -5,11 +5,11 @@ import {
 import FinanceCards from "../FinanceCards";
 import {useSelector} from 'react-redux'
 import {getNbDriver, getSelectedEmployee} from '../../../utils/store/Partner/selectors/AuthSelectors'
+import {formatCents} from '../../../utils/money'
 
 function FinanceCard() {
 
     const drivers = useSelector(getSelectedEmployee)
-    console.log(drivers)
     const nbDriver = useSelector(getNbDriver)
     const nbCourse = drivers.reduce((acc, driver) => acc + driver.courses.length, 0)
     const totalRevenu = drivers.reduce((acc, driver) => acc + driver.courses.reduce((ac, course) => ac + course.driverPrice, 0), 0);
@@ -30,7 +30,7 @@ function FinanceCard() {
         {
             id: 2,
             title: "Total des revenus",
-            info: totalRevenu + "€",
+            info: formatCents(totalRevenu),
             icon: "ph ph-bank",
         },
         {

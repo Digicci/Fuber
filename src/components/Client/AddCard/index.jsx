@@ -11,6 +11,7 @@ import {
 import Success from "../Success";
 import {useCard} from "../../../utils/hook/Client/useCard";
 import {toast} from "react-toastify";
+import { PUBLIC_APP_URL } from "../../../config";
 
 function AddCard({ update, loading, close, updateSecret }){
     const stripe = useStripe()
@@ -28,7 +29,7 @@ function AddCard({ update, loading, close, updateSecret }){
         stripe.confirmSetup({
             elements,
             confirmParams: {
-                return_url: 'http://localhost:3000/account/wallet/'
+                return_url: `${PUBLIC_APP_URL}/account/wallet/`
             },
             redirect: 'if_required'
         }).then((res) => {

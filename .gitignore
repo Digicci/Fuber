@@ -105,3 +105,6 @@ dist
 
 # InteliJ workspace folder
 .idea/
+
+# artefacts de build
+/build

@@ -83,6 +83,9 @@ function useProvideRace() {
     }
 
     function commandRace(pm, csrf) {
+        // Les montants ne sont plus transmis : le serveur recalcule le prix a
+        // partir du tarif du chauffeur. On envoie la distance routiere affichee,
+        // que le serveur borne par rapport a la distance geodesique.
         const body = {
             destination: {
                 start: raceInfo.start,
@@ -92,11 +95,9 @@ function useProvideRace() {
                 endLng: raceInfo.endLngLat.lng,
                 endLat: raceInfo.endLngLat.lat
             },
-            driverPrice: parseInt((raceInfo.driverPrice * 100).toFixed(0)),
-            commissionPrice: parseInt((raceInfo.commissionPrice * 100).toFixed(0)),
+            dist: raceInfo.dist,
             promo: raceInfo.promo.id,
             driverId: raceInfo.driverId,
-            total: parseInt((raceInfo.total * 100).toFixed(0)),
             pm,
             _csrf: csrf
         }

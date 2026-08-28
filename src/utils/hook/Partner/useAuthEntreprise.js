@@ -1,4 +1,4 @@
-import React, {createContext, useContext, useState} from "react";
+import React, {createContext, useContext, useState, useEffect} from "react";
 import {useAxios} from "../useAxios";
 import {useNavigate} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
@@ -60,7 +60,6 @@ function useProvideAuthEntreprise() {
         }
         if(localStorage.getItem("driver_token")) {
             axios.get(`${basePath}/get`).then((res) => {
-                console.log(res)
                 if(res.status === 401) {
                     dispatch(setAuth(null));
                     localStorage.removeItem("driver_token");
@@ -71,9 +70,7 @@ function useProvideAuthEntreprise() {
                     dispatch(setAuth(null));
                     localStorage.removeItem("driver_token");
                 }
-            }).catch((err) => {
-                console.log(err)
-                console.log("error")
+            }).catch(() => {
                 dispatch(setAuth(null));
                 localStorage.removeItem("driver_token");
             })
@@ -87,10 +84,14 @@ function useProvideAuthEntreprise() {
         return await axios.get(`${basePath}/team`, {withCredentials: true});
     }
 
-    const isConnected = () => {
+    // Verification de session au montage uniquement : isConnected() declenchait
+    // un dispatch Redux pendant le rendu a chaque appel.
+    useEffect(() => {
         getEntreprise()
-        return auth.auth;
-    }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const isConnected = () => auth.auth;
 
     const updateEntreprise = (entreprise) => {
         return axios.put(`${basePath}/update`, normalizeEntrepriseWithCSRF(entreprise), {withCredentials: true})
